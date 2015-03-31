@@ -100,7 +100,7 @@ public class CalendarEntry implements java.io.Serializable {
 		_end = end;
 	}
 
-	@OneToOne(fetch = FetchType.LAZY, mappedBy = "calendarentry")
+	@OneToOne(fetch = FetchType.LAZY, mappedBy = "calendarEntry")
 	public Appointment getAppointment() {
 		return _appointment;
 	}

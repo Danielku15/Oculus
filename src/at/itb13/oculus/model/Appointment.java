@@ -58,7 +58,7 @@ public class Appointment implements java.io.Serializable {
 		return _calendarEntryId;
 	}
 
-	public void setCalendarentryId(int calendarEntryId) {
+	public void setCalendarEntryId(int calendarEntryId) {
 		_calendarEntryId = calendarEntryId;
 	}
 
@@ -114,7 +114,7 @@ public class Appointment implements java.io.Serializable {
 		return _diagnoses;
 	}
 
-	public void setDiagnoses(Set<Diagnosis> diagnoses) {
+	public void setDiagnosises(Set<Diagnosis> diagnoses) {
 		_diagnoses = diagnoses;
 	}
 
@@ -123,7 +123,7 @@ public class Appointment implements java.io.Serializable {
 		return _queueEntries;
 	}
 
-	public void setQueueentries(Set<QueueEntry> queueEntries) {
+	public void setQueueEntries(Set<QueueEntry> queueEntries) {
 		_queueEntries = queueEntries;
 	}
 }
