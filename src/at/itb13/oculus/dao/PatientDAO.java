@@ -20,7 +20,7 @@ import at.itb13.oculus.model.Patient;
 public class PatientDAO extends AbstractDAO<Patient> {
 
 	/**
-	 * @param tableName
+	 * @param tableName 
 	 */
 	public PatientDAO() {
 		super("at.itb13.oculus.model.Patient");
