@@ -3,6 +3,6 @@ Team C
 Mitglieder:
 - Carlos Rodriguez
 - Patrick Schedler
-- Manuela Ljublicic
+- Manuela Ljubicic
 - Carola Nagel
 - Dominik Karl Blaser
