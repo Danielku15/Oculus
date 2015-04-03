@@ -71,6 +71,7 @@ public class Main {
 //				session.close();
 //			}
 //		}
+		
 		try(DBFacade facade = new DBFacade()) {
 			facade.beginTransaction();
 			List<Patient> patients = facade.getAll(Patient.class);
@@ -79,11 +80,11 @@ public class Main {
 			}
 			facade.commitTransaction();
 			
-			facade.beginTransaction();
-			Drug drug = facade.get(Drug.class, "965b0461-b8e9-44aa-b9ca-77ab605cd77b");
-			drug.setDescription("Neue Droge");
-			facade.update(drug);
-			facade.commitTransaction();
+//			facade.beginTransaction();
+//			Drug drug = facade.get(Drug.class, "965b0461-b8e9-44aa-b9ca-77ab605cd77b");
+//			drug.setDescription("Neue Droge");
+//			facade.update(drug);
+//			facade.commitTransaction();
 		}
 	}
 }
