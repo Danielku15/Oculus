@@ -1,55 +1,37 @@
 package at.itb13.oculus.model;
 
-import static javax.persistence.GenerationType.IDENTITY;
-
 import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import at.itb13.oculus.database.PersistentObjectImpl;
+
 @Entity
 @Table(name = "calendarentry", catalog = "oculusdb")
-public class CalendarEntry implements java.io.Serializable {
+public class CalendarEntry extends PersistentObjectImpl implements java.io.Serializable {
 	private static final long serialVersionUID = 5792674371320855705L;
 	
-	private Integer _id;
 	private Employee _employee;
 	private String _title;
 	private String _description;
 	private Date _start;
 	private Date _end;
-	private Appointment _appointment;
 
 	public CalendarEntry() {}
 
-	public CalendarEntry(Employee employee, String title, String description,
-			Date start, Date end, Appointment appointment) {
+	public CalendarEntry(Employee employee, String title, String description, Date start, Date end) {
 		_employee = employee;
 		_title = title;
 		_description = description;
 		_start = start;
 		_end = end;
-		_appointment = appointment;
-	}
-
-	@Id
-	@GeneratedValue(strategy = IDENTITY)
-	@Column(name = "id", unique = true, nullable = false)
-	public Integer getId() {
-		return _id;
-	}
-
-	public void setId(Integer id) {
-		_id = id;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -98,14 +80,5 @@ public class CalendarEntry implements java.io.Serializable {
 
 	public void setEnd(Date end) {
 		_end = end;
-	}
-
-	@OneToOne(fetch = FetchType.LAZY, mappedBy = "calendarEntry")
-	public Appointment getAppointment() {
-		return _appointment;
-	}
-
-	public void setAppointment(Appointment appointment) {
-		_appointment = appointment;
 	}
 }

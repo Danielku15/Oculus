@@ -1,26 +1,23 @@
 package at.itb13.oculus.model;
 
-import static javax.persistence.GenerationType.IDENTITY;
-
 import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import at.itb13.oculus.database.PersistentObjectImpl;
+
 @Entity
 @Table(name = "userright", catalog = "oculusdb")
-public class UserRight implements java.io.Serializable {
+public class UserRight extends PersistentObjectImpl implements java.io.Serializable {
 	private static final long serialVersionUID = 7257411442780582444L;
 	
-	private Integer _id;
 	private String _name;
 	private String _description;
 	private Set<UserRole> _userRoles = new HashSet<UserRole>(0);
@@ -31,17 +28,6 @@ public class UserRight implements java.io.Serializable {
 		_name = name;
 		_description = description;
 		_userRoles = userRoles;
-	}
-
-	@Id
-	@GeneratedValue(strategy = IDENTITY)
-	@Column(name = "id", unique = true, nullable = false)
-	public Integer getId() {
-		return _id;
-	}
-
-	public void setId(Integer id) {
-		_id = id;
 	}
 
 	@Column(name = "name")

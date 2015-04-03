@@ -1,54 +1,47 @@
 package at.itb13.oculus.model;
 
-import static javax.persistence.GenerationType.IDENTITY;
-
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import at.itb13.oculus.database.PersistentObjectImpl;
 
 @Entity
 @Table(name = "employee", catalog = "oculusdb")
-public class Employee implements java.io.Serializable {
+public class Employee extends PersistentObjectImpl implements java.io.Serializable {
 	private static final long serialVersionUID = -1684256194909712599L;
 	
-	private Integer _id;
 	private String _firstname;
 	private String _lastname;
-	private String _birthday;
-	private Integer _gender;
+	private Date _birthday;
+	private String _gender;
 	private String _phoneNumber;
 	private String _email;
 	private String _zip;
 	private String _country;
 	private String _street;
 	private String _streetNumber;
+	private String _city;
 	private String _socialSecurityNumber;
-	private Receptionist _receptionist;
-	private Doctor _doctor;
 	private Set<Queue> _queues = new HashSet<Queue>(0);
 	private Set<CalendarEntry> _calendarEntries = new HashSet<CalendarEntry>(0);
-	private Orthoptist _orthoptist;
 	private Set<User> _users = new HashSet<User>(0);
 
 	public Employee() {}
 
-	public Employee(String firstname, String lastname, String birthday,
-			Integer gender, String phoneNumber, String email, String zip,
-			String country, String street, String streetNumber,
-			String socialSecurityNumber, Receptionist receptionist,
-			Doctor doctor, Set<Queue> queues, Set<CalendarEntry> calendarEntries,
-			Orthoptist orthoptist, Set<User> users) {
+	public Employee(String firstname, String lastname, Date birthday,
+			String gender, String phoneNumber, String email, String zip,
+			String country, String street, String streetNumber, String city,
+			String socialSecurityNumber, Set<Queue> queues, Set<CalendarEntry> calendarEntries,	Set<User> users) {
 		_firstname = firstname;
 		_lastname = lastname;
 		_birthday = birthday;
@@ -59,24 +52,11 @@ public class Employee implements java.io.Serializable {
 		_country = country;
 		_street = street;
 		_streetNumber = streetNumber;
+		_city = city;
 		_socialSecurityNumber = socialSecurityNumber;
-		_receptionist = receptionist;
-		_doctor = doctor;
 		_queues = queues;
 		_calendarEntries = calendarEntries;
-		_orthoptist = orthoptist;
 		_users = users;
-	}
-
-	@Id
-	@GeneratedValue(strategy = IDENTITY)
-	@Column(name = "id", unique = true, nullable = false)
-	public Integer getId() {
-		return _id;
-	}
-
-	public void setId(Integer id) {
-		_id = id;
 	}
 
 	@Column(name = "firstname")
@@ -98,20 +78,20 @@ public class Employee implements java.io.Serializable {
 	}
 
 	@Column(name = "birthday")
-	public String getBirthday() {
+	public Date getBirthday() {
 		return _birthday;
 	}
 
-	public void setBirthday(String birthday) {
+	public void setBirthday(Date birthday) {
 		_birthday = birthday;
 	}
 
 	@Column(name = "gender")
-	public Integer getGender() {
+	public String getGender() {
 		return _gender;
 	}
 
-	public void setGender(Integer gender) {
+	public void setGender(String gender) {
 		_gender = gender;
 	}
 
@@ -168,6 +148,15 @@ public class Employee implements java.io.Serializable {
 	public void setStreetNumber(String streetNumber) {
 		_streetNumber = streetNumber;
 	}
+	
+	@Column(name = "city")
+	public String getCity() {
+		return _city;
+	}
+
+	public void setCity(String city) {
+		_city = city;
+	}
 
 	@Column(name = "socialsecuritynumber")
 	public String getSocialSecurityNumber() {
@@ -176,24 +165,6 @@ public class Employee implements java.io.Serializable {
 
 	public void setSocialSecurityNumber(String socialSecurityNumber) {
 		_socialSecurityNumber = socialSecurityNumber;
-	}
-
-	@OneToOne(fetch = FetchType.LAZY, mappedBy = "employee")
-	public Receptionist getReceptionist() {
-		return _receptionist;
-	}
-
-	public void setReceptionist(Receptionist receptionist) {
-		_receptionist = receptionist;
-	}
-
-	@OneToOne(fetch = FetchType.LAZY, mappedBy = "employee")
-	public Doctor getDoctor() {
-		return _doctor;
-	}
-
-	public void setDoctor(Doctor doctor) {
-		_doctor = doctor;
 	}
 
 	@ManyToMany(fetch = FetchType.LAZY)
@@ -213,15 +184,6 @@ public class Employee implements java.io.Serializable {
 
 	public void setCalendarEntries(Set<CalendarEntry> calendarEntries) {
 		_calendarEntries = calendarEntries;
-	}
-
-	@OneToOne(fetch = FetchType.LAZY, mappedBy = "employee")
-	public Orthoptist getOrthoptist() {
-		return _orthoptist;
-	}
-
-	public void setOrthoptist(Orthoptist orthoptist) {
-		_orthoptist = orthoptist;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "employee")

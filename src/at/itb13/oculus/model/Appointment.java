@@ -6,70 +6,34 @@ import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Parameter;
-
 @Entity
 @Table(name = "appointment", catalog = "oculusdb")
-public class Appointment implements java.io.Serializable {
+@PrimaryKeyJoinColumn(name = "calendarentry")
+public class Appointment extends CalendarEntry implements java.io.Serializable {
 	private static final long serialVersionUID = -2707317958842910903L;
 	
-	private int _calendarEntryId;
-	private CalendarEntry _calendarEntry;
 	private Patient _patient;
-	private Integer _status;
+	private String _status;
 	private Set<Referral> _referrals = new HashSet<Referral>(0);
-	private Set<Measurements> _measurements = new HashSet<Measurements>(0);
+	private Set<Measurement> _measurements = new HashSet<Measurement>(0);
 	private Set<Diagnosis> _diagnoses = new HashSet<Diagnosis>(0);
 	private Set<QueueEntry> _queueEntries = new HashSet<QueueEntry>(0);
 
 	public Appointment() {}
 
-	public Appointment(CalendarEntry calendarEntry) {
-		_calendarEntry = calendarEntry;
-	}
-
-	public Appointment(CalendarEntry calendarEntry, Patient patient,
-			Integer status, Set<Referral> referrals, Set<Measurements> measurements, Set<Diagnosis> diagnoses,
-			Set<QueueEntry> queueEntries) {
-		_calendarEntry = calendarEntry;
+	public Appointment(Patient patient, String status, Set<Referral> referrals, Set<Measurement> measurements, Set<Diagnosis> diagnoses, Set<QueueEntry> queueEntries) {
 		_patient = patient;
 		_status = status;
 		_referrals = referrals;
 		_measurements = measurements;
 		_diagnoses = diagnoses;
 		_queueEntries = queueEntries;
-	}
-
-	@GenericGenerator(name = "generator", strategy = "foreign", parameters = @Parameter(name = "property", value = "calendarentry"))
-	@Id
-	@GeneratedValue(generator = "generator")
-	@Column(name = "calendarentry", unique = true, nullable = false)
-	public int getCalendarEntryId() {
-		return _calendarEntryId;
-	}
-
-	public void setCalendarEntryId(int calendarEntryId) {
-		_calendarEntryId = calendarEntryId;
-	}
-
-	@OneToOne(fetch = FetchType.LAZY)
-	@PrimaryKeyJoinColumn
-	public CalendarEntry getCalendarEntry() {
-		return _calendarEntry;
-	}
-
-	public void setCalendarEntry(CalendarEntry calendarEntry) {
-		_calendarEntry = calendarEntry;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -83,11 +47,11 @@ public class Appointment implements java.io.Serializable {
 	}
 
 	@Column(name = "status")
-	public Integer getStatus() {
+	public String getStatus() {
 		return _status;
 	}
 
-	public void setStatus(Integer status) {
+	public void setStatus(String status) {
 		_status = status;
 	}
 
@@ -101,11 +65,11 @@ public class Appointment implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "appointment")
-	public Set<Measurements> getMeasurements() {
+	public Set<Measurement> getMeasurements() {
 		return _measurements;
 	}
 
-	public void setMeasurements(Set<Measurements> measurements) {
+	public void setMeasurements(Set<Measurement> measurements) {
 		_measurements = measurements;
 	}
 

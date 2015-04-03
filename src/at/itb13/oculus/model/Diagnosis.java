@@ -1,26 +1,23 @@
 package at.itb13.oculus.model;
 
-import static javax.persistence.GenerationType.IDENTITY;
-
 import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import at.itb13.oculus.database.PersistentObjectImpl;
+
 @Entity
 @Table(name = "diagnosis", catalog = "oculusdb")
-public class Diagnosis implements java.io.Serializable {
+public class Diagnosis extends PersistentObjectImpl implements java.io.Serializable {
 	private static final long serialVersionUID = 3427544654363398598L;
 	
-	private Integer _id;
 	private Appointment _appointment;
 	private String _name;
 	private Set<EyePrescription> _eyePrescriptions = new HashSet<EyePrescription>(0);
@@ -36,17 +33,6 @@ public class Diagnosis implements java.io.Serializable {
 		_eyePrescriptions = eyePrescriptions;
 		_prescriptions = prescriptions;
 		_sickNotes = sickNotes;
-	}
-
-	@Id
-	@GeneratedValue(strategy = IDENTITY)
-	@Column(name = "id", unique = true, nullable = false)
-	public Integer getId() {
-		return _id;
-	}
-
-	public void setId(Integer id) {
-		_id = id;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)

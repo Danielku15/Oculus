@@ -1,24 +1,23 @@
 package at.itb13.oculus.model;
 
 import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import static javax.persistence.GenerationType.IDENTITY;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import at.itb13.oculus.database.PersistentObjectImpl;
+
 @Entity
 @Table(name = "sicknote", catalog = "oculusdb")
-public class SickNote implements java.io.Serializable {
+public class SickNote extends PersistentObjectImpl implements java.io.Serializable {
 	private static final long serialVersionUID = -1307790026476198047L;
 	
-	private Integer _id;
 	private Diagnosis _diagnosis;
 	private Date _start;
 	private Date _end;
@@ -34,17 +33,6 @@ public class SickNote implements java.io.Serializable {
 		_end = end;
 		_insurance = insurance;
 		_description = description;
-	}
-
-	@Id
-	@GeneratedValue(strategy = IDENTITY)
-	@Column(name = "id", unique = true, nullable = false)
-	public Integer getId() {
-		return _id;
-	}
-
-	public void setId(Integer id) {
-		_id = id;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)

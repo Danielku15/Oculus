@@ -4,10 +4,33 @@
 		"http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
     <session-factory>
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
         <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
         <property name="connection.url">jdbc:mysql://localhost/oculusdb</property>
         <property name="connection.username">root</property>
         <property name="connection.password"></property>
-        <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+        
+       	<mapping class="at.itb13.oculus.model.Anamnesis" />
+		<mapping class="at.itb13.oculus.model.Appointment" />
+		<mapping class="at.itb13.oculus.model.CalendarEntry" />
+		<mapping class="at.itb13.oculus.model.Diagnosis" />
+		<mapping class="at.itb13.oculus.model.Doctor" />
+		<mapping class="at.itb13.oculus.model.Drug" />
+		<mapping class="at.itb13.oculus.model.Employee" />
+		<mapping class="at.itb13.oculus.model.EyePrescription" />
+		<mapping class="at.itb13.oculus.model.Insurance" />
+		<mapping class="at.itb13.oculus.model.Measurement" />
+		<mapping class="at.itb13.oculus.model.Orthoptist" />
+		<mapping class="at.itb13.oculus.model.Patient" />
+		<mapping class="at.itb13.oculus.model.Prescription" />
+		<mapping class="at.itb13.oculus.model.PrescriptionEntry" />
+		<mapping class="at.itb13.oculus.model.Queue" />
+		<mapping class="at.itb13.oculus.model.QueueEntry" />
+		<mapping class="at.itb13.oculus.model.Receptionist" />
+		<mapping class="at.itb13.oculus.model.Referral" />
+		<mapping class="at.itb13.oculus.model.SickNote" />
+		<mapping class="at.itb13.oculus.model.User" />
+		<mapping class="at.itb13.oculus.model.UserRight" />
+		<mapping class="at.itb13.oculus.model.UserRole" />
     </session-factory>
 </hibernate-configuration>

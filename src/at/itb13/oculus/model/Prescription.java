@@ -3,12 +3,10 @@ package at.itb13.oculus.model;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import static javax.persistence.GenerationType.IDENTITY;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -16,12 +14,13 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import at.itb13.oculus.database.PersistentObjectImpl;
+
 @Entity
 @Table(name = "prescription", catalog = "oculusdb")
-public class Prescription implements java.io.Serializable {
+public class Prescription extends PersistentObjectImpl implements java.io.Serializable {
 	private static final long serialVersionUID = -7409504092922866644L;
 	
-	private Integer _id;
 	private Diagnosis _diagnosis;
 	private Date _created;
 	private Date _expired;
@@ -38,18 +37,7 @@ public class Prescription implements java.io.Serializable {
 		_insurance = insurance;
 		_prescriptionEntries = prescriptionEntries;
 	}
-
-	@Id
-	@GeneratedValue(strategy = IDENTITY)
-	@Column(name = "id", unique = true, nullable = false)
-	public Integer getId() {
-		return _id;
-	}
-
-	public void setId(Integer id) {
-		_id = id;
-	}
-
+	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "diagnosis")
 	public Diagnosis getDiagnosis() {

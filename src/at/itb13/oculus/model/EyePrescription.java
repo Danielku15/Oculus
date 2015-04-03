@@ -1,25 +1,21 @@
 package at.itb13.oculus.model;
 
-import static javax.persistence.GenerationType.IDENTITY;
-
 import java.math.BigDecimal;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import at.itb13.oculus.database.PersistentObjectImpl;
 
 @Entity
 @Table(name = "eyeprescription", catalog = "oculusdb")
-public class EyePrescription implements java.io.Serializable {
+public class EyePrescription extends PersistentObjectImpl implements java.io.Serializable {
 	private static final long serialVersionUID = 842598488776707292L;
 	
-	private Integer _id;
 	private Diagnosis _diagnosis;
 	private BigDecimal _ldiopter;
 	private BigDecimal _rdiopter;
@@ -31,17 +27,6 @@ public class EyePrescription implements java.io.Serializable {
 		_diagnosis = diagnosis;
 		_ldiopter = ldiopter;
 		_rdiopter = rdiopter;
-	}
-
-	@Id
-	@GeneratedValue(strategy = IDENTITY)
-	@Column(name = "id", unique = true, nullable = false)
-	public Integer getId() {
-		return _id;
-	}
-
-	public void setId(Integer id) {
-		_id = id;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
