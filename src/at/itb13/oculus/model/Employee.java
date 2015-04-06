@@ -7,6 +7,8 @@ import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -24,7 +26,7 @@ public abstract class Employee extends PersistentObjectImpl implements java.io.S
 	private String _firstname;
 	private String _lastname;
 	private Date _birthday;
-	private String _gender;
+	private Gender _gender;
 	private String _phoneNumber;
 	private String _email;
 	private Address _address;
@@ -36,7 +38,7 @@ public abstract class Employee extends PersistentObjectImpl implements java.io.S
 	public Employee() {}
 
 	public Employee(String firstname, String lastname, Date birthday,
-			String gender, String phoneNumber, String email, Address address,
+			Gender gender, String phoneNumber, String email, Address address,
 			String socialSecurityNumber, Set<Queue> queues, Set<CalendarEntry> calendarEntries,	Set<User> users) {
 		_firstname = firstname;
 		_lastname = lastname;
@@ -79,11 +81,12 @@ public abstract class Employee extends PersistentObjectImpl implements java.io.S
 	}
 
 	@Column(name = "gender")
-	public String getGender() {
+	@Enumerated(EnumType.STRING)
+	public Gender getGender() {
 		return _gender;
 	}
 
-	public void setGender(String gender) {
+	public void setGender(Gender gender) {
 		_gender = gender;
 	}
 

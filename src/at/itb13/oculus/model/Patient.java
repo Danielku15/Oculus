@@ -6,6 +6,8 @@ import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -20,7 +22,7 @@ public class Patient extends PersistentObjectImpl implements java.io.Serializabl
 	private String _firstname;
 	private String _lastname;
 	private String _birthday;
-	private String _gender;
+	private Gender _gender;
 	private String _phoneNumber;
 	private String _email;
 	private Address _address;
@@ -32,7 +34,7 @@ public class Patient extends PersistentObjectImpl implements java.io.Serializabl
 	public Patient() {}
 
 	public Patient(String firstname, String lastname, String birthday,
-			String gender, String phoneNumber, String email, Address address, String socialSecurityNumber,
+			Gender gender, String phoneNumber, String email, Address address, String socialSecurityNumber,
 			String employer, Set<Anamnesis> anamneses,
 			Set<Appointment> appointments) {
 		_firstname = firstname;
@@ -76,11 +78,12 @@ public class Patient extends PersistentObjectImpl implements java.io.Serializabl
 	}
 
 	@Column(name = "gender")
-	public String getGender() {
+	@Enumerated(EnumType.STRING)
+	public Gender getGender() {
 		return _gender;
 	}
 
-	public void setGender(String gender) {
+	public void setGender(Gender gender) {
 		_gender = gender;
 	}
 
