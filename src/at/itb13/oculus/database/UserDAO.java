@@ -17,5 +17,4 @@ class UserDAO extends GenericDAOImpl<User, String>{
 	public UserDAO(Session session) {
 		super(User.class, session);
 	}
-
 }

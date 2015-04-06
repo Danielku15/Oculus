@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
@@ -22,11 +23,7 @@ public class Patient extends PersistentObjectImpl implements java.io.Serializabl
 	private String _gender;
 	private String _phoneNumber;
 	private String _email;
-	private String _zip;
-	private String _country;
-	private String _street;
-	private String _streetNumber;
-	private String _city;
+	private Address _address;
 	private String _socialSecurityNumber;
 	private String _employer;
 	private Set<Anamnesis> _anamneses = new HashSet<Anamnesis>(0);
@@ -35,9 +32,8 @@ public class Patient extends PersistentObjectImpl implements java.io.Serializabl
 	public Patient() {}
 
 	public Patient(String firstname, String lastname, String birthday,
-			String gender, String phoneNumber, String email, String zip,
-			String country, String street, String streetNumber, String city,
-			String socialSecurityNumber, String employer, Set<Anamnesis> anamneses,
+			String gender, String phoneNumber, String email, Address address, String socialSecurityNumber,
+			String employer, Set<Anamnesis> anamneses,
 			Set<Appointment> appointments) {
 		_firstname = firstname;
 		_lastname = lastname;
@@ -45,11 +41,7 @@ public class Patient extends PersistentObjectImpl implements java.io.Serializabl
 		_gender = gender;
 		_phoneNumber = phoneNumber;
 		_email = email;
-		_zip = zip;
-		_country = country;
-		_street = street;
-		_streetNumber = streetNumber;
-		_city = city;
+		_address = address;
 		_socialSecurityNumber = socialSecurityNumber;
 		_employer = employer;
 		_anamneses = anamneses;
@@ -109,50 +101,14 @@ public class Patient extends PersistentObjectImpl implements java.io.Serializabl
 	public void setEmail(String email) {
 		_email = email;
 	}
-
-	@Column(name = "zip")
-	public String getZip() {
-		return _zip;
-	}
-
-	public void setZip(String zip) {
-		_zip = zip;
-	}
-
-	@Column(name = "country")
-	public String getCountry() {
-		return _country;
-	}
-
-	public void setCountry(String country) {
-		_country = country;
-	}
-
-	@Column(name = "street")
-	public String getStreet() {
-		return _street;
-	}
-
-	public void setStreet(String street) {
-		_street = street;
-	}
-
-	@Column(name = "streetnumber")
-	public String getStreetNumber() {
-		return _streetNumber;
-	}
-
-	public void setStreetNumber(String streetNumber) {
-		_streetNumber = streetNumber;
-	}
 	
-	@Column(name = "city")
-	public String getCity() {
-		return _city;
+	@Embedded
+	public Address getAddress() {
+		return _address;
 	}
 
-	public void setCity(String city) {
-		_city = city;
+	public void setAddress(Address address) {
+		_address = address;
 	}
 
 	@Column(name = "socialsecuritynumber")

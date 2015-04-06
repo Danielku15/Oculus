@@ -16,7 +16,5 @@ class SickNoteDAO extends GenericDAOImpl<SickNote, String> {
 
 	public SickNoteDAO(Session session) {
 		super(SickNote.class, session);
-
 	}
-	
 }

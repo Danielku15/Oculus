@@ -8,7 +8,8 @@ import at.itb13.oculus.config.ConfigFacade;
 import at.itb13.oculus.database.DBFacade;
 import at.itb13.oculus.lang.LangFacade;
 import at.itb13.oculus.lang.LangKey;
-import at.itb13.oculus.model.Drug;
+import at.itb13.oculus.model.Address;
+import at.itb13.oculus.model.Doctor;
 import at.itb13.oculus.model.Patient;
 
 public class Main {
@@ -78,6 +79,11 @@ public class Main {
 			for(Patient patient : patients) {
 				System.out.println(patient.getFirstname());
 			}
+			Doctor test = new Doctor();
+			test.setFirstname("Chuck");
+			test.setLastname("Norris");
+			test.setAddress(new Address("Hof", "1104", "6861", "Alberschwende", "Österreich"));
+			facade.create(test);
 			facade.commitTransaction();
 			
 //			facade.beginTransaction();

@@ -14,10 +14,7 @@ import at.itb13.oculus.model.Measurement;
  */
 class MeasurementDAO extends GenericDAOImpl<Measurement, String> {
 
-
 	public MeasurementDAO(Session session) {
 		super(Measurement.class, session);
-
 	}
-
 }

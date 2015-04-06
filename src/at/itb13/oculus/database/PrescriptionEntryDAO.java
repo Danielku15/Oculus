@@ -16,7 +16,5 @@ class PrescriptionEntryDAO extends GenericDAOImpl<PrescriptionEntry, String>{
 
 	public PrescriptionEntryDAO(Session session) {
 		super(PrescriptionEntry.class, session);
-
 	}
-
 }

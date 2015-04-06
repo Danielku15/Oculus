@@ -14,9 +14,7 @@ import at.itb13.oculus.model.Referral;
  */
 class ReferralDAO extends GenericDAOImpl<Referral, String> {
 
-
 	public ReferralDAO(Session session) {
 		super(Referral.class, session);
 	}
-
 }

@@ -16,7 +16,5 @@ class InsuranceDAO extends GenericDAOImpl<Insurance, String> {
 
 	public InsuranceDAO(Session session) {
 		super(Insurance.class, session);
-
 	}
-
 }

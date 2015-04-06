@@ -5,7 +5,6 @@
  */
 package at.itb13.oculus.database;
 
-
 import org.hibernate.Session;
 import at.itb13.oculus.model.Appointment;
 
@@ -15,11 +14,7 @@ import at.itb13.oculus.model.Appointment;
  */
 class AppointmentDAO extends GenericDAOImpl<Appointment, String> {
 
-
 	public AppointmentDAO(Session session) {
 		super(Appointment.class, session);
-
 	}
-
-
 }

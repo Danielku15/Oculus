@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
@@ -17,7 +18,7 @@ import at.itb13.oculus.database.PersistentObjectImpl;
 
 @Entity
 @Table(name = "employee", catalog = "oculusdb")
-public class Employee extends PersistentObjectImpl implements java.io.Serializable {
+public abstract class Employee extends PersistentObjectImpl implements java.io.Serializable {
 	private static final long serialVersionUID = -1684256194909712599L;
 	
 	private String _firstname;
@@ -26,11 +27,7 @@ public class Employee extends PersistentObjectImpl implements java.io.Serializab
 	private String _gender;
 	private String _phoneNumber;
 	private String _email;
-	private String _zip;
-	private String _country;
-	private String _street;
-	private String _streetNumber;
-	private String _city;
+	private Address _address;
 	private String _socialSecurityNumber;
 	private Set<Queue> _queues = new HashSet<Queue>(0);
 	private Set<CalendarEntry> _calendarEntries = new HashSet<CalendarEntry>(0);
@@ -39,8 +36,7 @@ public class Employee extends PersistentObjectImpl implements java.io.Serializab
 	public Employee() {}
 
 	public Employee(String firstname, String lastname, Date birthday,
-			String gender, String phoneNumber, String email, String zip,
-			String country, String street, String streetNumber, String city,
+			String gender, String phoneNumber, String email, Address address,
 			String socialSecurityNumber, Set<Queue> queues, Set<CalendarEntry> calendarEntries,	Set<User> users) {
 		_firstname = firstname;
 		_lastname = lastname;
@@ -48,11 +44,7 @@ public class Employee extends PersistentObjectImpl implements java.io.Serializab
 		_gender = gender;
 		_phoneNumber = phoneNumber;
 		_email = email;
-		_zip = zip;
-		_country = country;
-		_street = street;
-		_streetNumber = streetNumber;
-		_city = city;
+		_address = address;
 		_socialSecurityNumber = socialSecurityNumber;
 		_queues = queues;
 		_calendarEntries = calendarEntries;
@@ -112,50 +104,14 @@ public class Employee extends PersistentObjectImpl implements java.io.Serializab
 	public void setEmail(String email) {
 		_email = email;
 	}
-
-	@Column(name = "zip")
-	public String getZip() {
-		return _zip;
-	}
-
-	public void setZip(String zip) {
-		_zip = zip;
-	}
-
-	@Column(name = "country")
-	public String getCountry() {
-		return _country;
-	}
-
-	public void setCountry(String country) {
-		_country = country;
-	}
-
-	@Column(name = "street")
-	public String getStreet() {
-		return _street;
-	}
-
-	public void setStreet(String street) {
-		_street = street;
-	}
-
-	@Column(name = "streetnumber")
-	public String getStreetNumber() {
-		return _streetNumber;
-	}
-
-	public void setStreetNumber(String streetNumber) {
-		_streetNumber = streetNumber;
-	}
 	
-	@Column(name = "city")
-	public String getCity() {
-		return _city;
+	@Embedded
+	public Address getAddress() {
+		return _address;
 	}
 
-	public void setCity(String city) {
-		_city = city;
+	public void setAddress(Address address) {
+		_address = address;
 	}
 
 	@Column(name = "socialsecuritynumber")

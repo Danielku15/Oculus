@@ -17,8 +17,5 @@ class CalendarEntryDAO extends GenericDAOImpl<CalendarEntry, String> {
 
 	public CalendarEntryDAO(Session session) {
 		super(CalendarEntry.class, session);
-		// TODO Auto-generated constructor stub
 	}
-
-	
 }

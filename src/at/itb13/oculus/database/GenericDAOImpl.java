@@ -26,8 +26,7 @@ class GenericDAOImpl<T extends PersistentObject, PK extends Serializable> implem
 	@Override
 	@SuppressWarnings("unchecked")
 	public T get(PK id) {
-		T object = (T) _session.get(_type, id);
-		return object;
+		return (T) _session.get(_type, id);
 	}
 	
 	@Override
@@ -43,8 +42,7 @@ class GenericDAOImpl<T extends PersistentObject, PK extends Serializable> implem
 	@Override
 	@SuppressWarnings("unchecked")
 	public List<T> getAll() {
-        Criteria crit = _session.createCriteria(_type);
-        return crit.list();
+        return _session.createCriteria(_type).list();
 	}
 	
 	@Override

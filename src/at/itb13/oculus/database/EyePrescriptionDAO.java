@@ -15,10 +15,7 @@ import at.itb13.oculus.model.EyePrescription;
  */
 class EyePrescriptionDAO extends GenericDAOImpl<EyePrescription, String> {
 
-
 	public EyePrescriptionDAO(Session session) {
 		super(EyePrescription.class, session);
-		// TODO Auto-generated constructor stub
 	}
-
 }

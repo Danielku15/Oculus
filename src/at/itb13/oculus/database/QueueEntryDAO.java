@@ -14,10 +14,7 @@ import at.itb13.oculus.model.QueueEntry;
  */
 class QueueEntryDAO extends GenericDAOImpl<QueueEntry, String> {
 
-
 	public QueueEntryDAO(Session session) {
 		super(QueueEntry.class, session);
-
 	}
-
 }

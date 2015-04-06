@@ -16,7 +16,5 @@ class ReceptionistDAO extends GenericDAOImpl<Receptionist, String> {
 
 	public ReceptionistDAO(Session session) {
 		super(Receptionist.class, session);
-
 	}
-
 }

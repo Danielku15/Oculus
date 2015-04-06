@@ -1,6 +1,5 @@
 package at.itb13.oculus.database;
 
-import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,6 +10,7 @@ import at.itb13.oculus.model.Anamnesis;
 import at.itb13.oculus.model.Appointment;
 import at.itb13.oculus.model.CalendarEntry;
 import at.itb13.oculus.model.Diagnosis;
+import at.itb13.oculus.model.Doctor;
 import at.itb13.oculus.model.Drug;
 import at.itb13.oculus.model.Employee;
 import at.itb13.oculus.model.EyePrescription;
@@ -33,55 +33,37 @@ public class DBFacade implements AutoCloseable {
 	
 	private Session _session;
 	@SuppressWarnings("rawtypes")
-	private GenericDAO _anamnesisDAO;
-	@SuppressWarnings("rawtypes")
-	private GenericDAO _appointmentDAO;
-	@SuppressWarnings("rawtypes")
-	private GenericDAO _calendarEntryDAO;
-	@SuppressWarnings("rawtypes")
-	private GenericDAO _diagnosisDAO;
-	@SuppressWarnings("rawtypes")
-	private GenericDAO _doctorDAO;
-	@SuppressWarnings("rawtypes")
-	private GenericDAO _drugDAO;
-	@SuppressWarnings("rawtypes")
-	private GenericDAO _employeeDAO;
-	@SuppressWarnings("rawtypes")
-	private GenericDAO _eyePrescriptionDAO;
-	@SuppressWarnings("rawtypes")
-	private GenericDAO _insuranceDAO;
-	@SuppressWarnings("rawtypes")
-	private GenericDAO _measurementDAO;
-	@SuppressWarnings("rawtypes")
-	private GenericDAO _orthoptistDAO;
-	@SuppressWarnings("rawtypes")
-	private GenericDAO _patientDAO;
-	@SuppressWarnings("rawtypes")
-	private GenericDAO _prescriptionDAO;
-	@SuppressWarnings("rawtypes")
-	private GenericDAO _prescriptionEntryDAO;
-	@SuppressWarnings("rawtypes")
-	private GenericDAO _queueDAO;
-	@SuppressWarnings("rawtypes")
-	private GenericDAO _queueEntryDAO;
-	@SuppressWarnings("rawtypes")
-	private GenericDAO _receptionistDAO;
-	@SuppressWarnings("rawtypes")
-	private GenericDAO _referralDAO;
-	@SuppressWarnings("rawtypes")
-	private GenericDAO _sickNoteDAO;
-	@SuppressWarnings("rawtypes")
-	private GenericDAO _userDAO;
-	@SuppressWarnings("rawtypes")
-	private GenericDAO _userRightDAO;
-	@SuppressWarnings("rawtypes")
-	private GenericDAO _userRoleDAO;
+	private Map<Class<? extends PersistentObject>, GenericDAO> _daoMap;
+
+	private GenericDAO<Anamnesis, String> _anamnesisDAO;
+	private GenericDAO<Appointment, String> _appointmentDAO;
+	private GenericDAO<CalendarEntry, String> _calendarEntryDAO;
+	private GenericDAO<Diagnosis, String> _diagnosisDAO;
+	private GenericDAO<Doctor, String> _doctorDAO;
+	private GenericDAO<Drug, String> _drugDAO;
+	private GenericDAO<Employee, String> _employeeDAO;
+	private GenericDAO<EyePrescription, String> _eyePrescriptionDAO;
+	private GenericDAO<Insurance, String> _insuranceDAO;
+	private GenericDAO<Measurement, String> _measurementDAO;
+	private GenericDAO<Orthoptist, String> _orthoptistDAO;
+	private GenericDAO<Patient, String> _patientDAO;
+	private GenericDAO<Prescription, String> _prescriptionDAO;
+	private GenericDAO<PrescriptionEntry, String> _prescriptionEntryDAO;
+	private GenericDAO<Queue, String> _queueDAO;
+	private GenericDAO<QueueEntry, String> _queueEntryDAO;
+	private GenericDAO<Receptionist, String> _receptionistDAO;
+	private GenericDAO<Referral, String> _referralDAO;
+	private GenericDAO<SickNote, String> _sickNoteDAO;
+	private GenericDAO<User, String> _userDAO;
+	private GenericDAO<UserRight, String> _userRightDAO;
+	private GenericDAO<UserRole, String> _userRoleDAO;
 	
-	private Map<Class<?>, GenericDAO<PersistentObject, Serializable>> _daoMap;
-	
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings("rawtypes")
 	public DBFacade() {
+		// open new session
 		_session = HibernateUtil.openSession();
+		
+		// initialize DAO objects
 		_anamnesisDAO = new AnamnesisDAO(_session);
 		_appointmentDAO = new AppointmentDAO(_session);
 		_calendarEntryDAO = new CalendarEntryDAO(_session);
@@ -105,13 +87,13 @@ public class DBFacade implements AutoCloseable {
 		_userRightDAO = new UserRightDAO(_session);
 		_userRoleDAO = new UserRoleDAO(_session);
 		
-		
-		_daoMap = new HashMap<Class<?>, GenericDAO<PersistentObject, Serializable>>();
+		// add DAO objects to hash map
+		_daoMap = new HashMap<Class<? extends PersistentObject>, GenericDAO>();
 		_daoMap.put(Anamnesis.class, _anamnesisDAO);
 		_daoMap.put(Appointment.class, _appointmentDAO);
 		_daoMap.put(CalendarEntry.class, _calendarEntryDAO);
 		_daoMap.put(Diagnosis.class, _diagnosisDAO);
-		_daoMap.put(Patient.class, _patientDAO);
+		_daoMap.put(Doctor.class, _doctorDAO);
 		_daoMap.put(Drug.class, _drugDAO);
 		_daoMap.put(Employee.class, _employeeDAO);
 		_daoMap.put(EyePrescription.class, _eyePrescriptionDAO);
@@ -129,7 +111,6 @@ public class DBFacade implements AutoCloseable {
 		_daoMap.put(User.class, _userDAO);
 		_daoMap.put(UserRight.class, _userRightDAO);
 		_daoMap.put(UserRole.class, _userRoleDAO);
-		
 	}
 	
 	public void beginTransaction() {
@@ -140,8 +121,13 @@ public class DBFacade implements AutoCloseable {
 		_session.getTransaction().commit();
 	}
 	
+	public void rollbackTransaction() {
+		_session.getTransaction().rollback();
+	}
+	
+	@SuppressWarnings("unchecked")
 	public <T extends PersistentObject> T get(Class<T> type, String id) {		
-		return type.cast(_daoMap.get(type).get(id));
+		return (T) _daoMap.get(type).get(id);
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -149,24 +135,26 @@ public class DBFacade implements AutoCloseable {
 		return (List<T>) _daoMap.get(type).getAll();
 	}
 
+	@SuppressWarnings("unchecked")
 	public <T extends PersistentObject> String create(T object) {
 		return (String) _daoMap.get(object.getClass()).create(object);
 	}
 
+	@SuppressWarnings("unchecked")
 	public <T extends PersistentObject> void createOrUpdate(T object) {
 		_daoMap.get(object.getClass()).createOrUpdate(object);		
 	}
 	
+	@SuppressWarnings("unchecked")
 	public <T extends PersistentObject> void update(T object) {
 		_daoMap.get(object.getClass()).update(object);
 	}
-
+	
 	/**
 	 * @see PatientDAO#getByName(String)
 	 * @param name of patients to search for
 	 * @return list of patients
 	 */
-	
 	public List<Patient> getPatientsByName(String name) {
 		return ((PatientDAO) _patientDAO).getByName(name);
 	}
