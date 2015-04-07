@@ -5,8 +5,11 @@ package at.itb13.oculus.config;
  * @author Patrick
  */
 public enum Config {
-	LANGUAGE("language"),
-	COUNTRY("country");
+	LANGUAGE_EN("language_en"),
+	COUNTRY_US("country_US"),
+	
+	LANGUAGE_DE("language_de"),
+	COUNTRY_DE("country_DE");
 	
 	private String _key;
 	

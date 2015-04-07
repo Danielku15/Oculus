@@ -7,7 +7,30 @@ package at.itb13.oculus.lang;
 public enum LangKey {
 	DOCTOR("doctor"),
 	RECEPTIONIST("receptionist"),
-	ORTHOPTIST("orthoptist");
+	ORTHOPTIST("orthoptist"),
+	FIRSTNAME("firstname"),
+	LASTNAME("lastname"),
+	BIRTHDAY("birthday"),
+	GENDER("gender"),
+	MALE("male"),
+	FEMALE("female"),
+	PHONENUMBER("phonenumber"),
+	EMAIL("email"),
+	ZIPCODE("zip"),
+	COUNTRY("country"),
+	STREET("street"),
+	STREETNUMBER("streetnumber"),
+	SOCIALSECURITYNUMBER("socialsecuritynumber"),
+	EMPLOYER("employer"),
+	SAVE("save"),
+	CLEAR("clear"),
+	ENGLISH("english"),
+	GERMAN("german"),
+	LANGUAGE("language"),
+	HELP("help"),
+	ABOUT("about"),
+	FILE("file"),
+	EXIT("exit");
 	
 	private String _key;
 	

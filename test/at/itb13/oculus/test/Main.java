@@ -3,33 +3,30 @@ package at.itb13.oculus.test;
 import java.io.IOException;
 import java.util.List;
 
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 import at.itb13.oculus.config.Config;
 import at.itb13.oculus.config.ConfigFacade;
 import at.itb13.oculus.database.DBFacade;
+import at.itb13.oculus.lang.Lang;
 import at.itb13.oculus.lang.LangFacade;
 import at.itb13.oculus.lang.LangKey;
 import at.itb13.oculus.model.Address;
 import at.itb13.oculus.model.Gender;
 import at.itb13.oculus.model.Patient;
+import at.itb13.oculus.presentation.CreateNewPatientGUIController;
+import at.itb13.oculus.presentation.GUIApplication;
 
 public class Main {
-
+	
 	public static void main(String[] args) {
-		try {
-			ConfigFacade.load();
-			ConfigFacade configFacade = ConfigFacade.getInstance();
-			System.out.println(configFacade.getProperty(Config.LANGUAGE));
-			System.out.println(configFacade.getProperty(Config.COUNTRY));
-			
-			LangFacade.load();
-			LangFacade langFacade = LangFacade.getInstance();
-			System.out.println(langFacade.getString(LangKey.DOCTOR));
-			System.out.println(langFacade.getString(LangKey.ORTHOPTIST));
-			System.out.println(langFacade.getString(LangKey.RECEPTIONIST));			
-			
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		
+		GUIApplication.main(args);
+		
+		//launch(args);
 		
 //		TESTED
 //		Anamnesis test = new Anamnesis();
@@ -73,6 +70,7 @@ public class Main {
 //			}
 //		}
 		
+		/*
 		try(DBFacade facade = new DBFacade()) {
 			facade.beginTransaction();
 			List<Patient> patients = facade.getAll(Patient.class);
@@ -92,6 +90,13 @@ public class Main {
 //			drug.setDescription("Neue Droge");
 //			facade.update(drug);
 //			facade.commitTransaction();
-		}
+ 		*/
+		
 	}
+	
+	
+
+  
+    
+
 }
