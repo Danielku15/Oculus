@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.effect.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="550.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8">
+   <children>
+      <Pane layoutY="-1.0" prefHeight="40.0" prefWidth="550.0">
+         <children>
+            <Label layoutX="7.0" layoutY="13.0" text="_patientSearch" />
+            <TextField layoutX="105.0" layoutY="8.0" prefHeight="26.0" prefWidth="320.0" text="_patientSearchField" />
+            <Button layoutX="458.0" layoutY="8.0" mnemonicParsing="false" text="Search" />
+         </children>
+      </Pane>
+      <ScrollPane layoutY="40.0" prefViewportHeight="400.0" prefViewportWidth="550.0">
+         <content>
+            <TableView editable="true" layoutY="40.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="400.0" prefWidth="550.0" tableMenuButtonVisible="true">
+              <columns>
+                  <TableColumn editable="false" prefWidth="75.0" sortable="false" text="\\\%idLbl" visible="false" />
+                <TableColumn fx:id="_firstnameLbl" prefWidth="75.0" text="\%firstname" />
+                <TableColumn prefWidth="75.0" text="_lastNameCol" />
+                  <TableColumn prefWidth="75.0" text="_bdayCol" />
+                  <TableColumn prefWidth="75.0" text="_genderCol" />
+                  <TableColumn prefWidth="75.0" text="_phoneCol" />
+                  <TableColumn prefWidth="75.0" text="_eMailCol" />
+                  <TableColumn prefWidth="75.0" text="_zipCol" />
+                  <TableColumn prefWidth="75.0" text="_countryCol" />
+                  <TableColumn prefWidth="75.0" text="_streetCol" />
+                  <TableColumn prefWidth="75.0" text="_streetNoCol" />
+                  <TableColumn prefWidth="75.0" text="_ssnCol" />
+              </columns>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <effect>
+                  <Blend />
+               </effect>
+            </TableView>
+         </content>
+      </ScrollPane>
+   </children>
+</AnchorPane>
