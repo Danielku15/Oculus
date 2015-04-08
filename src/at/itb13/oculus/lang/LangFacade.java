@@ -30,22 +30,14 @@ public class LangFacade {
 		return _langFacade;
 	}
 	
-	public static void load(Lang lang) throws IOException {
-		_langFacade.load(BASENAME, lang);
+	public static void load() throws IOException {
+		_langFacade.load(BASENAME);
 	}
 	
-	private void load(String fileName, Lang lang) {
+	private void load(String fileName) {
 		ConfigFacade configFacade = ConfigFacade.getInstance();
-		String language;
-		String country;
-		if (lang == Lang.GERMAN){
-			language = configFacade.getProperty(Config.LANGUAGE_DE);
-			country = configFacade.getProperty(Config.COUNTRY_DE);	
-		}
-		else {
-			language = configFacade.getProperty(Config.LANGUAGE_EN);
-			country = configFacade.getProperty(Config.COUNTRY_US);			
-		}
+		String language = configFacade.getProperty(Config.LANGUAGE);
+		String country = configFacade.getProperty(Config.COUNTRY);
 		_locale = new Locale(language, country);
 		_resourceBundle = ResourceBundle.getBundle(fileName, _locale);
 	}
@@ -56,6 +48,5 @@ public class LangFacade {
     
     public ResourceBundle getResourceBundle(){
 		return _resourceBundle;
-    	
     }
 }

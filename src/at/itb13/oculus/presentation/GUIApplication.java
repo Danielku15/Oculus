@@ -1,38 +1,41 @@
 package at.itb13.oculus.presentation;
 
 import java.io.IOException;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import at.itb13.oculus.config.ConfigFacade;
-import at.itb13.oculus.lang.*;
+import at.itb13.oculus.lang.LangFacade;
 
 public class GUIApplication extends Application {
 	    
+	public static final String PATIENTVIEWXML = "CreateNewPatientGUI.fxml";
+	
 	private static Stage _stage;
+	
+    public static void main(String[] args) {
+        launch(args);
+    }
 	
 	@Override
 	public void start(Stage stage) throws Exception {
 		_stage = stage;
-	    
-	    viewApplication(Lang.ENGLISH);
-	    
+	    viewApplication();
 	}
 	
-	
-    public void viewApplication(Lang lang){
+    public void viewApplication(){
     	
     	try {
     		ConfigFacade.load();
-
-    		LangFacade.load(lang);
+    		
+    		LangFacade.load();
     		LangFacade facade = LangFacade.getInstance();
 			
-	    	Parent root = FXMLLoader.load(GUIApplication.class.getResource("CreateNewPatientGUI.fxml"), facade.getResourceBundle());
+	    	Parent root = FXMLLoader.load(GUIApplication.class.getResource(PATIENTVIEWXML), facade.getResourceBundle());
 			Scene scene = new Scene(root);
-			scene.setRoot(root);
 			_stage.setScene(scene);
 			_stage.show();
 	    	
@@ -41,14 +44,8 @@ public class GUIApplication extends Application {
 		}
     	
     }
-    public static void main(String[] args) {
-        launch(args);
-    }
-
     
     public void changeView(){
-    	
-    	
     }
 }
 
