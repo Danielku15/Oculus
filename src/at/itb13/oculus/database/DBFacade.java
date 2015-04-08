@@ -1,10 +1,10 @@
 package at.itb13.oculus.database;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
 
 import at.itb13.oculus.model.Anamnesis;
 import at.itb13.oculus.model.Appointment;
@@ -157,6 +157,10 @@ public class DBFacade implements AutoCloseable {
 	 */
 	public List<Patient> getPatientsByName(String name) {
 		return ((PatientDAO) _patientDAO).getByName(name);
+	}
+	
+	public List<Patient> getSearchedPatient(String name){
+		return ((PatientDAO) _patientDAO).getSearchedPatient(name);
 	}
 	
 	@Override
