@@ -13,7 +13,7 @@ import at.itb13.oculus.config.ConfigFacade;
  */
 public class LangFacade {
 	
-	private static final String BASENAME = "bundle.lang";
+	private static final String BASENAME = "lang";
 	
 	private static LangFacade _langFacade;
 	

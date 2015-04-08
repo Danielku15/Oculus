@@ -25,12 +25,6 @@ public class PatientView implements Initializable {
 	@FXML
 	private MenuItem _close;
 	@FXML
-	private Menu _language;
-	@FXML
-	private MenuItem _english;
-	@FXML
-	private MenuItem _german;
-	@FXML
 	private Menu _help;
 	@FXML
 	private MenuItem _about;

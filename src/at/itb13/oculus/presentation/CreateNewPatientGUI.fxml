@@ -7,19 +7,13 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="at.itb13.oculus.presentation.CreateNewPatientGUIController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="at.itb13.oculus.presentation.PatientView">
    <children>
       <MenuBar>
         <menus>
           <Menu fx:id="_file" mnemonicParsing="false" text="%file">
             <items>
               <MenuItem fx:id="_close" mnemonicParsing="false" onAction="#close" text="\%exit" />
-            </items>
-          </Menu>
-          <Menu fx:id="_language" mnemonicParsing="false" text="%language">
-            <items>
-              <MenuItem fx:id="_english" mnemonicParsing="false" onAction="#changeToEnglish" text="%english" />
-                  <MenuItem fx:id="_german" mnemonicParsing="false" onAction="#changeToGerman" text="%german" />
             </items>
           </Menu>
           <Menu fx:id="_help" mnemonicParsing="false" text="%help">
