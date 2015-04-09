@@ -4,25 +4,31 @@ import java.util.regex.PatternSyntaxException;
 
 import org.hibernate.HibernateException;
 
+import at.itb13.oculus.lang.LangFacade;
+import at.itb13.oculus.lang.LangKey;
 import at.itb13.oculus.model.Patient;
 
 public class PatientViewControllerImpl extends Controller implements PatientViewController {
 	
 	@Override
-	public String createPatient(Patient patient) {
+	public String createPatient(Patient patient) throws RegExpException{
 		//Regular Expression
-		String name = "[-A-Za-z ]";
-		String svn = "";
-		try{
-			name.matches(patient.getFirstname());
-			name.matches(patient.getLastname());
-			svn.matches(patient.getSocialSecurityNumber());
-		}catch(PatternSyntaxException e){
-			throw e;
+		String name = "^[A-Za-z -]*$";
+		String svn = "^[0-9]{10}$";
+		LangFacade langFacade = LangFacade.getInstance();
+		
+		if(!patient.getFirstname().matches(name)){
+			throw new RegExpException(langFacade.getString(LangKey.FIRSTNAME), patient.getFirstname());
+		}
+		if(!patient.getLastname().matches(name)){
+			throw new RegExpException(langFacade.getString(LangKey.LASTNAME), patient.getLastname());
+		}
+		if(!patient.getSocialSecurityNumber().matches(svn)){
+			throw new RegExpException(langFacade.getString(LangKey.SOCIALSECURITYNUMBER), patient.getSocialSecurityNumber());
 		}
 		//Transaction
 		String id;
-		/*try {
+		try {
 			_database.beginTransaction();
 			id = _database.create(patient);
 			_database.commitTransaction();
@@ -30,30 +36,34 @@ public class PatientViewControllerImpl extends Controller implements PatientView
 			_database.rollbackTransaction();
 			throw e;
 		}
-		return id;*/return "12";
+		return id;
 	}
 
 	@Override
-	public void updatePatient(Patient patient) {
+	public void updatePatient(Patient patient) throws RegExpException {
 		//Regular Expression 
-		String name = "[-A-Za-z ]";
-		String svn = "";
-		try{
-			name.matches(patient.getFirstname());
-			name.matches(patient.getLastname());
-			svn.matches(patient.getSocialSecurityNumber());
-		}catch(PatternSyntaxException e){
-			throw e;
+		String name = "^[A-Za-z -]*$";
+		String svn = "^[0-9]{10}$";
+		LangFacade langFacade = LangFacade.getInstance();
+		
+		if(!patient.getFirstname().matches(name)){
+			throw new RegExpException(langFacade.getString(LangKey.FIRSTNAME), patient.getFirstname());
+		}
+		if(!patient.getLastname().matches(name)){
+			throw new RegExpException(langFacade.getString(LangKey.LASTNAME), patient.getLastname());
+		}
+		if(!patient.getSocialSecurityNumber().matches(svn)){
+			throw new RegExpException(langFacade.getString(LangKey.SOCIALSECURITYNUMBER), patient.getSocialSecurityNumber());
 		}
 		//Transaction
-		/*try{
+		try{
 			_database.beginTransaction();
 			_database.update(patient);
 			_database.commitTransaction();
 		} catch(HibernateException e){
 			_database.rollbackTransaction();
 			throw e;
-		}*/
+		}
 	}
 
 	@Override

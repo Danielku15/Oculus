@@ -4,3 +4,4 @@
 .settings/*
 bin/*
 /bin/
+test/at/itb13/oculus/test/Main.java
