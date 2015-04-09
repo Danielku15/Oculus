@@ -22,7 +22,7 @@ public class IndexService extends Thread {
 	
 	public IndexService() {
 		_configFacade = ConfigFacade.getInstance();
-		_dbFacade = new DBFacade();;
+		_dbFacade = new DBFacade();
 		_running = true;
 		_curNumber = Integer.valueOf(_configFacade.getProperty(Config.INDEX_NUMBER));
 	}

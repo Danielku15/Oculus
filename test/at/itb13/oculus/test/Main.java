@@ -1,7 +1,7 @@
 package at.itb13.oculus.test;
 
-<<<<<<< HEAD
 import java.io.IOException;
+import java.util.List;
 
 import at.itb13.oculus.config.ConfigFacade;
 import at.itb13.oculus.database.DBFacade;
@@ -9,21 +9,11 @@ import at.itb13.oculus.lang.LangFacade;
 import at.itb13.oculus.model.Patient;
 import at.itb13.oculus.service.IndexService;
 
-=======
-import java.util.List;
-
-import at.itb13.oculus.database.DBFacade;
-import at.itb13.oculus.model.Address;
-import at.itb13.oculus.model.Gender;
-import at.itb13.oculus.model.Patient;
-import at.itb13.oculus.presentation.GUIApplication;
->>>>>>> 0424daf3c1cafa7be70b4412391b70d0f7997c94
 
 public class Main {
 	
 	public static void main(String[] args) {
 		
-<<<<<<< HEAD
 		//GUIApplication.main(args);		
 
 		try {
@@ -45,9 +35,8 @@ public class Main {
 		for(Patient patient : dbFacade.searchPatient("Ljubicic")) {
 			System.out.println(patient.getFirstname());
 		}
-=======
+		
 //		GUIApplication.main(args);
->>>>>>> 0424daf3c1cafa7be70b4412391b70d0f7997c94
 		
 		//launch(args);
 		

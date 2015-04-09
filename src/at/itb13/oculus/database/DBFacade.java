@@ -4,12 +4,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.hibernate.Session;
-<<<<<<< HEAD
 import org.hibernate.search.FullTextSession;
 import org.hibernate.search.Search;
-=======
-import org.hibernate.criterion.Restrictions;
->>>>>>> 0424daf3c1cafa7be70b4412391b70d0f7997c94
 
 import at.itb13.oculus.model.Anamnesis;
 import at.itb13.oculus.model.Appointment;
@@ -186,7 +182,6 @@ public class DBFacade implements AutoCloseable {
 		return ((PatientDAO) _patientDAO).getByName(name);
 	}
 	
-<<<<<<< HEAD
 	public List<Patient> searchPatient(String criteria) {		
 		return ((PatientDAO) _patientDAO).search(criteria);
 	}
@@ -195,7 +190,6 @@ public class DBFacade implements AutoCloseable {
 		return ((ChangeLogDAO) _changeLogDAO).getGreaterThan(number, maxResults);
 	}
 	
-=======
 	public List<Patient> getSearchedPatient(String name){
 		return ((PatientDAO) _patientDAO).getSearchedPatient(name);
 	}
@@ -204,7 +198,6 @@ public class DBFacade implements AutoCloseable {
 		return ((PatientDAO) _patientDAO).getBySocialSecurityNumber(name);
 	}
 		
->>>>>>> 0424daf3c1cafa7be70b4412391b70d0f7997c94
 	@Override
 	public void close() {
 		_session.close();
