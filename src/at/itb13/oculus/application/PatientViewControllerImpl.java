@@ -25,7 +25,7 @@ public class PatientViewControllerImpl extends Controller implements PatientView
 			throw new RegExpException(langFacade.getString(LangKey.SOCIALSECURITYNUMBER), patient.getSocialSecurityNumber());
 		}else{
 			Patient tmpPatient = _database.getbySocialSecurityNumber(patient.getSocialSecurityNumber());
-			if( tmpPatient == patient || tmpPatient != null){
+			if( tmpPatient != null){
 				throw new UniqueConstraintException(langFacade.getString(LangKey.SOCIALSECURITYNUMBER), patient, tmpPatient);
 			}
 		}
@@ -59,7 +59,7 @@ public class PatientViewControllerImpl extends Controller implements PatientView
 			throw new RegExpException(langFacade.getString(LangKey.SOCIALSECURITYNUMBER), patient.getSocialSecurityNumber());
 		}else{
 			Patient tmpPatient = _database.getbySocialSecurityNumber(patient.getSocialSecurityNumber());
-			if( tmpPatient == patient || tmpPatient != null){
+			if( tmpPatient != patient || tmpPatient != null){
 				throw new UniqueConstraintException(langFacade.getString(LangKey.SOCIALSECURITYNUMBER), patient, tmpPatient);
 			}
 		}
