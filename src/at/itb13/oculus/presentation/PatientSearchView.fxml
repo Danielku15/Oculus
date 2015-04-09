@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.effect.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="400.0" prefWidth="550.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Pane layoutY="-1.0" prefHeight="40.0" prefWidth="550.0">
+         <children>
+            <Label fx:id="_patientsearchLbl" layoutX="7.0" layoutY="13.0" text="\%patientsearchLbl" />
+            <TextField fx:id="_patientsearchInput" layoutX="181.0" layoutY="8.0" prefHeight="26.0" prefWidth="278.0" />
+            <Button fx:id="_patientsearchButton" layoutX="479.0" layoutY="7.0" mnemonicParsing="false" text="Search" />
+            <ChoiceBox fx:id="_patientsearchChoicebox" layoutX="14.0" layoutY="7.0" prefWidth="150.0" />
+         </children>
+      </Pane>
+      <ScrollPane layoutY="40.0" minHeight="400.0" minWidth="550.0" prefViewportHeight="400.0" prefViewportWidth="550.0">
+         <content>
+            <TableView editable="true" layoutY="40.0" minHeight="400.0" minWidth="550.0" tableMenuButtonVisible="true">
+              <columns>
+                  <TableColumn fx:id="_idLbl" editable="false" prefWidth="75.0" sortable="false" text="\%idLbl" visible="false" />
+                <TableColumn fx:id="_firstnameLbl" prefWidth="75.0" text="\%firstname" />
+                <TableColumn fx:id="_lastnameLbl" prefWidth="75.0" text="\%lastnameLbl" />
+                  <TableColumn fx:id="_birthdayLbl" prefWidth="75.0" text="\%birthdayLbl" />
+                  <TableColumn fx:id="_genderLbl" prefWidth="75.0" text="\%genderLbl" />
+                  <TableColumn fx:id="_phonenumberLbl" prefWidth="75.0" text="\%phonenumberLbl" />
+                  <TableColumn fx:id="_emailLbl" prefWidth="75.0" text="\%emailLbl" />
+                  <TableColumn fx:id="_zipLbl" prefWidth="75.0" text="\%zipLbl" />
+                  <TableColumn fx:id="_countryLbl" prefWidth="75.0" text="\%countryLbl" />
+                  <TableColumn fx:id="_streetLbl" prefWidth="75.0" text="\%streetLbl" />
+                  <TableColumn fx:id="_streetnumberLbl" prefWidth="75.0" text="\%streetnumberLbl" />
+                  <TableColumn fx:id="_socialsecuritynumberLbl" prefWidth="75.0" text="\%socialsecuritynumberLbl" />
+              </columns>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <effect>
+                  <Blend />
+               </effect>
+            </TableView>
+         </content>
+      </ScrollPane>
+   </children>
+</AnchorPane>

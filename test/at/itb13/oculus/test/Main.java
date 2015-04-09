@@ -1,5 +1,6 @@
 package at.itb13.oculus.test;
 
+<<<<<<< HEAD
 import java.io.IOException;
 
 import at.itb13.oculus.config.ConfigFacade;
@@ -8,11 +9,21 @@ import at.itb13.oculus.lang.LangFacade;
 import at.itb13.oculus.model.Patient;
 import at.itb13.oculus.service.IndexService;
 
+=======
+import java.util.List;
+
+import at.itb13.oculus.database.DBFacade;
+import at.itb13.oculus.model.Address;
+import at.itb13.oculus.model.Gender;
+import at.itb13.oculus.model.Patient;
+import at.itb13.oculus.presentation.GUIApplication;
+>>>>>>> 0424daf3c1cafa7be70b4412391b70d0f7997c94
 
 public class Main {
 	
 	public static void main(String[] args) {
 		
+<<<<<<< HEAD
 		//GUIApplication.main(args);		
 
 		try {
@@ -34,6 +45,9 @@ public class Main {
 		for(Patient patient : dbFacade.searchPatient("Ljubicic")) {
 			System.out.println(patient.getFirstname());
 		}
+=======
+//		GUIApplication.main(args);
+>>>>>>> 0424daf3c1cafa7be70b4412391b70d0f7997c94
 		
 		//launch(args);
 		
@@ -79,33 +93,44 @@ public class Main {
 //			}
 //		}
 		
-		/*
+		
 		try(DBFacade facade = new DBFacade()) {
+//			facade.beginTransaction();
+//			List<Patient> patients = facade.getAll(Patient.class);
+//			for(Patient patient : patients) {
+//				System.out.println(patient.getFirstname());
+//			}
+//			
 			facade.beginTransaction();
-			List<Patient> patients = facade.getAll(Patient.class);
-			for(Patient patient : patients) {
-				System.out.println(patient.getFirstname());
+			
+			List<Patient> patients2 = facade.getSearchedPatient("303013111987");
+			for(Patient patient : patients2) {
+				System.out.println(patient.getFirstname() + " " + patient.getLastname());
 			}
-			Patient test = new Patient();
-			test.setFirstname("Max");
-			test.setLastname("Mustermann");
-			test.setGender(Gender.MALE);
-			test.setAddress(new Address("Hof", "1104", "6861", "Alberschwende", "Österreich"));
-			facade.create(test);
 			facade.commitTransaction();
+			
+			
+			
+//			Patient test = new Patient();
+//			test.setFirstname("Max");
+//			test.setLastname("Mustermann");
+//			test.setGender(Gender.MALE);
+//			test.setAddress(new Address("Hof", "1104", "6861", "Alberschwende", "Österreich"));
+//			facade.create(test);
+//			facade.commitTransaction();
 			
 //			facade.beginTransaction();
 //			Drug drug = facade.get(Drug.class, "965b0461-b8e9-44aa-b9ca-77ab605cd77b");
 //			drug.setDescription("Neue Droge");
 //			facade.update(drug);
 //			facade.commitTransaction();
- 		*/
+ 		
 		
 	}
 	
 	
 
-  
+	}
     
 
 }
