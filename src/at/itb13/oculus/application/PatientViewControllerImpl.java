@@ -1,7 +1,5 @@
 package at.itb13.oculus.application;
 
-import java.util.regex.PatternSyntaxException;
-
 import org.hibernate.HibernateException;
 
 import at.itb13.oculus.lang.LangFacade;
@@ -11,7 +9,7 @@ import at.itb13.oculus.model.Patient;
 public class PatientViewControllerImpl extends Controller implements PatientViewController {
 	
 	@Override
-	public String createPatient(Patient patient) throws RegExpException{
+	public String createPatient(Patient patient) throws RegExpException, UniqueConstraintException{
 		//Regular Expression
 		String name = "^[A-Za-z -]*$";
 		String svn = "^[0-9]{10}$";
@@ -25,6 +23,11 @@ public class PatientViewControllerImpl extends Controller implements PatientView
 		}
 		if(!patient.getSocialSecurityNumber().matches(svn)){
 			throw new RegExpException(langFacade.getString(LangKey.SOCIALSECURITYNUMBER), patient.getSocialSecurityNumber());
+		}else{
+			Patient tmpPatient = _database.getbySocialSecurityNumber(patient.getSocialSecurityNumber());
+			if( tmpPatient == patient || tmpPatient != null){
+				throw new UniqueConstraintException(langFacade.getString(LangKey.SOCIALSECURITYNUMBER), patient, tmpPatient);
+			}
 		}
 		//Transaction
 		String id;
@@ -40,7 +43,7 @@ public class PatientViewControllerImpl extends Controller implements PatientView
 	}
 
 	@Override
-	public void updatePatient(Patient patient) throws RegExpException {
+	public void updatePatient(Patient patient) throws RegExpException, UniqueConstraintException {
 		//Regular Expression 
 		String name = "^[A-Za-z -]*$";
 		String svn = "^[0-9]{10}$";
@@ -54,6 +57,11 @@ public class PatientViewControllerImpl extends Controller implements PatientView
 		}
 		if(!patient.getSocialSecurityNumber().matches(svn)){
 			throw new RegExpException(langFacade.getString(LangKey.SOCIALSECURITYNUMBER), patient.getSocialSecurityNumber());
+		}else{
+			Patient tmpPatient = _database.getbySocialSecurityNumber(patient.getSocialSecurityNumber());
+			if( tmpPatient == patient || tmpPatient != null){
+				throw new UniqueConstraintException(langFacade.getString(LangKey.SOCIALSECURITYNUMBER), patient, tmpPatient);
+			}
 		}
 		//Transaction
 		try{

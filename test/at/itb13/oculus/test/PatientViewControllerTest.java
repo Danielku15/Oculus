@@ -33,7 +33,7 @@ public class PatientViewControllerTest {
 		try{
 			String id = patientController.createPatient(patient);
 			patient.setID(id);
-		}catch(NullPointerException e){
+		}catch(UniqueConstraintException e){
 			fail(e.toString());
 		}catch(RegExpException e){
 			fail(e.toString());

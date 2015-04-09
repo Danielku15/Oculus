@@ -31,7 +31,8 @@ public enum LangKey {
 	ABOUT("about"),
 	FILE("file"),
 	EXIT("exit"),
-	REGEXPERROR("regexperror");
+	REGEXPERROR("regexperror"),
+	ENTITYEXISTS("entityexists");
 	
 	private String _key;
 	
