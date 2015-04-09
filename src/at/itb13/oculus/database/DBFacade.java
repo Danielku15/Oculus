@@ -148,6 +148,10 @@ public class DBFacade implements AutoCloseable {
 		_fullTextSession.index(object);
 	}
 	
+	public void indexAll() throws InterruptedException {
+		_fullTextSession.createIndexer().startAndWait();
+	}
+	
 	@SuppressWarnings("unchecked")
 	public <T extends PersistentObject> T get(Class<T> type, String id) {		
 		return (T) _daoMap.get(type).get(id);

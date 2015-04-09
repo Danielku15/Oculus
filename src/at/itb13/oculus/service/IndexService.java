@@ -94,11 +94,13 @@ public class IndexService extends Thread {
 		_configFacade.save();
 	}
 	
-	public boolean isRunning() {
-		return _running;
+	@Override
+	public void start() {
+		super.start();
+		_running = true;
 	}
 	
-	public void kill() {
-		_running = false;
+	public boolean isRunning() {
+		return _running;
 	}
 }

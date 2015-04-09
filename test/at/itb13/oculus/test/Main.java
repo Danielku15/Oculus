@@ -14,7 +14,7 @@ public class Main {
 	
 	public static void main(String[] args) {
 		
-		//GUIApplication.main(args);		
+//		GUIApplication.main(args);		
 
 		try {
 			ConfigFacade.load();
@@ -32,7 +32,7 @@ public class Main {
 		indexService.start();
 		
 		DBFacade dbFacade = new DBFacade();
-		for(Patient patient : dbFacade.searchPatient("Ljubicic")) {
+		for(Patient patient : dbFacade.searchPatient("6861")) {
 			System.out.println(patient.getFirstname());
 		}
 		
