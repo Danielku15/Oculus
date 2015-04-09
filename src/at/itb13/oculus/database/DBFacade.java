@@ -163,6 +163,10 @@ public class DBFacade implements AutoCloseable {
 		return ((PatientDAO) _patientDAO).getSearchedPatient(name);
 	}
 	
+	public Patient getbySocialSecurityNumber(String name){
+		return ((PatientDAO) _patientDAO).getBySocialSecurityNumber(name);
+	}
+		
 	@Override
 	public void close() {
 		_session.close();
