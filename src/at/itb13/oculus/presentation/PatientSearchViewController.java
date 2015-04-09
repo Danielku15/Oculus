@@ -3,6 +3,7 @@ package at.itb13.oculus.presentation;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -51,30 +52,8 @@ public class PatientSearchViewController implements Initializable {
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		// TODO Auto-generated method stub
-		/*
-		 * 2. In your controller's initialize method, initialize the content of your choice box.
-
-package myexample;
-import ...
-
-public class MyController implements Initializable {
-
-@FXML // fx:id="myChoices"
-private ChoiceBox<?> myChoices; // Value injected by FXMLLoader
-
-@Override // This method is called by the FXMLLoader when initialization is complete
-public void initialize(URL fxmlFileLocation, ResourceBundle resources) {
-assert myChoices != null : "fx:id=\"myChoices\" was not injected: check your FXML file 'foo.fxml'.";
-
-// initialize your logic here: all @FXML variables will have been injected
-// => you can add items to "myChoices" here:
-// 
-myChoices.setItems(FXCollections.observableArrayList());
-myChoices.getItems().add(...);
-
-		 * */
-		
+		// TODO change choice box options to fit selected language
+		_patientsearchChoicebox = new ChoiceBox<String>(FXCollections.observableArrayList("Vorname", "Nachname", "SVN"));
 	}
 
 }
