@@ -5,6 +5,8 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
+import org.hibernate.search.annotations.Field;
+
 @Embeddable
 public class Address implements Serializable {
 	private static final long serialVersionUID = -3958731646759638837L;
@@ -26,6 +28,7 @@ public class Address implements Serializable {
 	}
 	
 	@Column(name = "street")
+	@Field
 	public String getStreet() {
 		return _street;
 	}
@@ -35,6 +38,7 @@ public class Address implements Serializable {
 	}
 
 	@Column(name = "streetnumber")
+	@Field
 	public String getStreetNumber() {
 		return _streetNumber;
 	}
@@ -44,6 +48,7 @@ public class Address implements Serializable {
 	}
 	
 	@Column(name = "zip")
+	@Field
 	public String getZip() {
 		return _zip;
 	}
@@ -53,6 +58,7 @@ public class Address implements Serializable {
 	}
 	
 	@Column(name = "city")
+	@Field
 	public String getCity() {
 		return _city;
 	}
@@ -62,6 +68,7 @@ public class Address implements Serializable {
 	}
 	
 	@Column(name = "country")
+	@Field
 	public String getCountry() {
 		return _country;
 	}

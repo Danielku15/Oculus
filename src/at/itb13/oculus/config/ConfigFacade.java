@@ -1,7 +1,11 @@
 package at.itb13.oculus.config;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.Properties;
 
 /**
@@ -39,12 +43,24 @@ public class ConfigFacade {
 	private void load(String fileName) throws IOException {
 		InputStream in = null;
 		try {
-			in = getClass().getClassLoader().getResourceAsStream(fileName);
+			in = new FileInputStream(new File(CONFIGFILE));
 			_configProperties.load(in);
 			_loaded = true;
 		} finally {
 			if(in != null) {
 				in.close();
+			}
+		}
+	}
+	
+	public void save() throws IOException {
+		OutputStream out = null;
+		try {
+			out = new FileOutputStream(new File(CONFIGFILE));
+			_configProperties.store(out, null);
+		} finally {
+			if(out != null) {
+				out.close();
 			}
 		}
 	}
@@ -55,5 +71,9 @@ public class ConfigFacade {
 	
 	public String getProperty(Config key, String defaultValue) {
 		return _configProperties.getProperty(key.getKey(), defaultValue);
+	}
+	
+	public void setProperty(Config key, String value) {
+		_configProperties.setProperty(key.getKey(), value);
 	}
 }

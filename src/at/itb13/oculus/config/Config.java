@@ -6,7 +6,9 @@ package at.itb13.oculus.config;
  */
 public enum Config {
 	LANGUAGE("language"),
-	COUNTRY("country");
+	COUNTRY("country"),
+	INDEX_INTERVAL("index_interval"),
+	INDEX_NUMBER("index_number");
 	
 	private String _key;
 	

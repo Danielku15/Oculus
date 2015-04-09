@@ -6,6 +6,10 @@ import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.Property;
+import org.hibernate.search.FullTextSession;
+import org.hibernate.search.Search;
+import org.hibernate.search.query.dsl.QueryBuilder;
 
 class GenericDAOImpl<T extends PersistentObject, PK extends Serializable> implements GenericDAO<T, PK> {
 
@@ -30,13 +34,43 @@ class GenericDAOImpl<T extends PersistentObject, PK extends Serializable> implem
 	}
 	
 	@Override
-	@SuppressWarnings("unchecked")
 	public List<T> getByCriterion(Criterion... criterions) {
+		return getByCriterion(null, null, null, criterions);
+	}
+	
+	@Override
+	public List<T> getByCriterion(String orderBy, Boolean asc, Criterion... criterions) {
+        return getByCriterion(orderBy, asc, null, criterions);
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<T> getByCriterion(String orderBy, Boolean asc, Integer maxResults, Criterion... criterions) {
 		Criteria crit = _session.createCriteria(_type);
 		for(Criterion criterion : criterions) {
 			crit.add(criterion);
 		}
+		if((orderBy != null) && (orderBy.length()) > 0 && (asc != null)) {
+			Property prop = Property.forName(orderBy);
+			if(asc) {
+				crit.addOrder(prop.asc());
+			} else {
+				crit.addOrder(prop.desc());
+			}
+		}
+		if((maxResults != null) && (maxResults > 0)) {
+			crit.setMaxResults(maxResults);
+		}
         return crit.list();
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<T> search(String criteria, String... fields) {
+		FullTextSession fullTextSession = Search.getFullTextSession(_session);
+		QueryBuilder queryBuilder = fullTextSession.getSearchFactory().buildQueryBuilder().forEntity(_type).get();
+		org.apache.lucene.search.Query luceneQuery = queryBuilder.keyword().onFields(fields).matching(criteria).createQuery();
+		org.hibernate.Query fullTextQuery = fullTextSession.createFullTextQuery(luceneQuery);
+		return (List<T>) fullTextQuery.list();
 	}
 
 	@Override

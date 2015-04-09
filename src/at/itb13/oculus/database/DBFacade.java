@@ -5,10 +5,13 @@ import java.util.List;
 import java.util.Map;
 
 import org.hibernate.Session;
+import org.hibernate.search.FullTextSession;
+import org.hibernate.search.Search;
 
 import at.itb13.oculus.model.Anamnesis;
 import at.itb13.oculus.model.Appointment;
 import at.itb13.oculus.model.CalendarEntry;
+import at.itb13.oculus.model.ChangeLog;
 import at.itb13.oculus.model.Diagnosis;
 import at.itb13.oculus.model.Doctor;
 import at.itb13.oculus.model.Drug;
@@ -32,12 +35,14 @@ import at.itb13.oculus.model.UserRole;
 public class DBFacade implements AutoCloseable {
 	
 	private Session _session;
+	private FullTextSession _fullTextSession;
 	@SuppressWarnings("rawtypes")
 	private Map<Class<? extends PersistentObject>, GenericDAO> _daoMap;
 
 	private GenericDAO<Anamnesis, String> _anamnesisDAO;
 	private GenericDAO<Appointment, String> _appointmentDAO;
 	private GenericDAO<CalendarEntry, String> _calendarEntryDAO;
+	private GenericDAO<ChangeLog, String> _changeLogDAO;
 	private GenericDAO<Diagnosis, String> _diagnosisDAO;
 	private GenericDAO<Doctor, String> _doctorDAO;
 	private GenericDAO<Drug, String> _drugDAO;
@@ -62,11 +67,13 @@ public class DBFacade implements AutoCloseable {
 	public DBFacade() {
 		// open new session
 		_session = HibernateUtil.openSession();
+		_fullTextSession = Search.getFullTextSession(_session);
 		
 		// initialize DAO objects
 		_anamnesisDAO = new AnamnesisDAO(_session);
 		_appointmentDAO = new AppointmentDAO(_session);
 		_calendarEntryDAO = new CalendarEntryDAO(_session);
+		_changeLogDAO = new ChangeLogDAO(_session);
 		_diagnosisDAO = new DiagnosisDAO(_session);
 		_doctorDAO = new DoctorDAO(_session);
 		_drugDAO = new DrugDAO(_session);
@@ -92,6 +99,7 @@ public class DBFacade implements AutoCloseable {
 		_daoMap.put(Anamnesis.class, _anamnesisDAO);
 		_daoMap.put(Appointment.class, _appointmentDAO);
 		_daoMap.put(CalendarEntry.class, _calendarEntryDAO);
+		_daoMap.put(ChangeLog.class, _changeLogDAO);
 		_daoMap.put(Diagnosis.class, _diagnosisDAO);
 		_daoMap.put(Doctor.class, _doctorDAO);
 		_daoMap.put(Drug.class, _drugDAO);
@@ -123,6 +131,22 @@ public class DBFacade implements AutoCloseable {
 	
 	public void rollbackTransaction() {
 		_session.getTransaction().rollback();
+	}
+	
+	public void beginTransactionFulltext() {
+		_fullTextSession.beginTransaction();
+	}
+	
+	public void commitTransactionFulltext() {
+		_fullTextSession.getTransaction().commit();
+	}
+	
+	public void rollbackTransactionFulltext() {
+		_fullTextSession.getTransaction().rollback();
+	}
+	
+	public <T extends PersistentObject> void index(T object) {
+		_fullTextSession.index(object);
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -157,6 +181,14 @@ public class DBFacade implements AutoCloseable {
 	 */
 	public List<Patient> getPatientsByName(String name) {
 		return ((PatientDAO) _patientDAO).getByName(name);
+	}
+	
+	public List<Patient> searchPatient(String criteria) {		
+		return ((PatientDAO) _patientDAO).search(criteria);
+	}
+	
+	public List<ChangeLog> getChangeLogsGreaterThan(int number, int maxResults) {
+		return ((ChangeLogDAO) _changeLogDAO).getGreaterThan(number, maxResults);
 	}
 	
 	@Override

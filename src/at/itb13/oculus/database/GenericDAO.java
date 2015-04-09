@@ -19,6 +19,12 @@ interface GenericDAO<T extends PersistentObject, PK extends Serializable> {
 	
 	List<T> getByCriterion(Criterion... criterions);
 	
+	List<T> getByCriterion(String orderBy, Boolean asc, Criterion... criterions);
+	
+	List<T> getByCriterion(String orderBy, Boolean asc, Integer maxResults, Criterion... criterions);
+	
+	List<T> search(String criteria, String... fields);
+	
 	List<T> getAll();
 	
 	void createOrUpdate(T object);

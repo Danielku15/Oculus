@@ -1,12 +1,39 @@
 package at.itb13.oculus.test;
 
-import at.itb13.oculus.presentation.GUIApplication;
+import java.io.IOException;
+
+import at.itb13.oculus.config.ConfigFacade;
+import at.itb13.oculus.database.DBFacade;
+import at.itb13.oculus.lang.LangFacade;
+import at.itb13.oculus.model.Patient;
+import at.itb13.oculus.service.IndexService;
+
 
 public class Main {
 	
 	public static void main(String[] args) {
 		
-		GUIApplication.main(args);
+		//GUIApplication.main(args);		
+
+		try {
+			ConfigFacade.load();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		try {
+			LangFacade.load();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		Thread indexService = new IndexService();
+		indexService.start();
+		
+		DBFacade dbFacade = new DBFacade();
+		for(Patient patient : dbFacade.searchPatient("Ljubicic")) {
+			System.out.println(patient.getFirstname());
+		}
 		
 		//launch(args);
 		

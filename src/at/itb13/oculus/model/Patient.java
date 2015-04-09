@@ -12,9 +12,14 @@ import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.search.annotations.Field;
+import org.hibernate.search.annotations.Indexed;
+import org.hibernate.search.annotations.IndexedEmbedded;
+
 import at.itb13.oculus.database.PersistentObjectImpl;
 
 @Entity
+@Indexed
 @Table(name = "patient", catalog = "oculusdb")
 public class Patient extends PersistentObjectImpl implements java.io.Serializable {
 	private static final long serialVersionUID = -7225613928118556705L;
@@ -51,6 +56,7 @@ public class Patient extends PersistentObjectImpl implements java.io.Serializabl
 	}
 
 	@Column(name = "firstname")
+	@Field
 	public String getFirstname() {
 		return _firstname;
 	}
@@ -60,6 +66,7 @@ public class Patient extends PersistentObjectImpl implements java.io.Serializabl
 	}
 
 	@Column(name = "lastname")
+	@Field
 	public String getLastname() {
 		return _lastname;
 	}
@@ -69,6 +76,7 @@ public class Patient extends PersistentObjectImpl implements java.io.Serializabl
 	}
 
 	@Column(name = "birthday")
+	@Field
 	public String getBirthday() {
 		return _birthday;
 	}
@@ -106,6 +114,7 @@ public class Patient extends PersistentObjectImpl implements java.io.Serializabl
 	}
 	
 	@Embedded
+	@IndexedEmbedded	
 	public Address getAddress() {
 		return _address;
 	}
