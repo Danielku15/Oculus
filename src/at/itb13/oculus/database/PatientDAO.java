@@ -35,7 +35,6 @@ class PatientDAO extends GenericDAOImpl<Patient, String> {
 		return search(criteria,
 				"firstname",
 				"lastname",
-				"birthday",
 				"address.street",
 				"address.streetNumber",
 				"address.zip",

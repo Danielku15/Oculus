@@ -7,7 +7,6 @@ import at.itb13.oculus.config.ConfigFacade;
 import at.itb13.oculus.database.DBFacade;
 import at.itb13.oculus.lang.LangFacade;
 import at.itb13.oculus.model.Patient;
-import at.itb13.oculus.service.IndexService;
 
 
 public class Main {
@@ -28,14 +27,21 @@ public class Main {
 			e.printStackTrace();
 		}
 		
-		Thread indexService = new IndexService();
-		indexService.start();
-		
 		DBFacade dbFacade = new DBFacade();
-		for(Patient patient : dbFacade.searchPatient("6861")) {
+//		try {
+//			dbFacade.indexAll();
+//		} catch (InterruptedException e) {
+//			e.printStackTrace();
+//		}
+//		dbFacade.close();
+		
+//		Thread indexService = new IndexService();
+//		indexService.start();
+		for(Patient patient : dbFacade.searchPatient("pat sch")) {
 			System.out.println(patient.getFirstname());
 		}
-		
+		dbFacade.close();
+	
 //		GUIApplication.main(args);
 		
 		//launch(args);

@@ -1,5 +1,6 @@
 package at.itb13.oculus.model;
 
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -26,7 +27,7 @@ public class Patient extends PersistentObjectImpl implements java.io.Serializabl
 	
 	private String _firstname;
 	private String _lastname;
-	private String _birthday;
+	private Date _birthday;
 	private Gender _gender;
 	private String _phoneNumber;
 	private String _email;
@@ -38,7 +39,7 @@ public class Patient extends PersistentObjectImpl implements java.io.Serializabl
 
 	public Patient() {}
 
-	public Patient(String firstname, String lastname, String birthday,
+	public Patient(String firstname, String lastname, Date birthday,
 			Gender gender, String phoneNumber, String email, Address address, String socialSecurityNumber,
 			String employer, Set<Anamnesis> anamneses,
 			Set<Appointment> appointments) {
@@ -76,12 +77,11 @@ public class Patient extends PersistentObjectImpl implements java.io.Serializabl
 	}
 
 	@Column(name = "birthday")
-	@Field
-	public String getBirthday() {
+	public Date getBirthday() {
 		return _birthday;
 	}
 
-	public void setBirthday(String birthday) {
+	public void setBirthday(Date birthday) {
 		_birthday = birthday;
 	}
 
