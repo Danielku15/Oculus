@@ -81,7 +81,7 @@ public class PatientView implements Initializable {
 	// Event Listener on Button[#_saveButton].onAction
 	@FXML
 	public void save(ActionEvent event) {
-		new Thread(new CreatePatientTask(getPatientFromView())).start();
+		//new Thread(new CreatePatientTask(getPatientFromView())).start();
 	}
 	
 	// Event Listener on Button[#_clearButton].onAction
@@ -95,6 +95,7 @@ public class PatientView implements Initializable {
 		// TODO Auto-generated method stub
 	}
 	
+	/*
 	class CreatePatientTask extends Task<Patient> {
 		
 		private Patient _patient;
@@ -118,5 +119,5 @@ public class PatientView implements Initializable {
 	    @Override protected void failed() {
 	    	
 	    }
-	}
+	}*/
 }
