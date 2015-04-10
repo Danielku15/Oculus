@@ -36,6 +36,7 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Menu;
 import javafx.scene.control.TabPane;
+import javafx.scene.control.TitledPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -121,12 +122,12 @@ public class PatientView implements Initializable {
     private AnchorPane _patientFormular;
 	@FXML
 	private Button _createNewPatientButton;
-
     @FXML
     private ScrollPane _patientFormulatScrollPane;
     @FXML
     private TabPane _tabPane;
-    
+    @FXML
+    private TitledPane _patientMasterData;
    
     
 	public PatientView() {
@@ -139,6 +140,61 @@ public class PatientView implements Initializable {
 		_patientController.close();
 		System.exit(1);
 	}
+	
+	@FXML
+    void getFirstname(ActionEvent event) {
+		System.out.println("Firstname eingegeben");
+    }
+
+    @FXML
+    void getLastname(ActionEvent event) {
+    	System.out.println("Lastname eingegeben");
+    }
+
+    @FXML
+    void getBirthday(ActionEvent event) {
+
+    }
+    
+    @FXML
+    void getPhonenumber(ActionEvent event) {
+
+    }
+
+    @FXML
+    void getEmail(ActionEvent event) {
+
+    }
+
+    @FXML
+    void getZip(ActionEvent event) {
+
+    }
+
+    @FXML
+    void getCountry(ActionEvent event) {
+
+    }
+
+    @FXML
+    void getStreet(ActionEvent event) {
+
+    }
+
+    @FXML
+    void getStreetnumber(ActionEvent event) {
+
+    }
+
+    @FXML
+    void getSocialSecurityNumber(ActionEvent event) {
+
+    }
+
+    @FXML
+    void getEmployer(ActionEvent event) {
+
+    }
 	
 	public Patient getPatientFromView() {
 		Patient patient = new Patient();
@@ -220,7 +276,7 @@ public class PatientView implements Initializable {
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		// TODO Auto-generated method stub
+		
 	}
 	
 }
