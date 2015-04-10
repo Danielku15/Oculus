@@ -322,13 +322,13 @@ class CreatePatientTask extends Task<String> {
 	}
 	
     @Override public String call() {
-    	try {
-			return _patientController.createPatient(_patient);
-		} catch (RegExpException e) {
-			e.printStackTrace();
-		} catch (UniqueConstraintException e) {
-			e.printStackTrace();
-		}
+//    	try {
+////			return _patientController.createPatient(_patient);
+//		} catch (RegExpException e) {
+//			e.printStackTrace();
+//		} catch (UniqueConstraintException e) {
+//			e.printStackTrace();
+//		}
 		return null;
     }
     

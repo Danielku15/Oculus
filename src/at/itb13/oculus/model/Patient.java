@@ -4,6 +4,9 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
@@ -158,4 +161,5 @@ public class Patient extends PersistentObjectImpl implements java.io.Serializabl
 	public void setAppointments(Set<Appointment> appointments) {
 		_appointments = appointments;
 	}
+
 }

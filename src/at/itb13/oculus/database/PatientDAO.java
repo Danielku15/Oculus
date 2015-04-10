@@ -43,7 +43,9 @@ class PatientDAO extends GenericDAOImpl<Patient, String> {
 	}
 
 	public List<Patient> getSearchedPatient(String name) {
-		return getByCriterion(Restrictions.or(Restrictions.like("firstname", name), Restrictions.like("lastname", name), Restrictions.like("socialSecurityNumber", name)));
+		List<Patient> list = getByCriterion(Restrictions.or(Restrictions.like("firstname", name), Restrictions.like("lastname", name), Restrictions.like("socialSecurityNumber", name)));
+		return list;
+//				return getByCriterion(Restrictions.or(Restrictions.like("firstname", name), Restrictions.like("lastname", name), Restrictions.like("socialSecurityNumber", name)));
 	}
 	
 	public Patient getBySocialSecurityNumber(String name) {
