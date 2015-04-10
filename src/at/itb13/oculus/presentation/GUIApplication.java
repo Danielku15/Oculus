@@ -9,7 +9,6 @@ import javafx.geometry.Orientation;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-<<<<<<< HEAD
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
@@ -19,11 +18,10 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-=======
 import javafx.stage.Screen;
->>>>>>> dde4d7217372dbb6499cb576fa4cf450c983a9e1
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+import at.itb13.oculus.config.ConfigFacade;
 import at.itb13.oculus.lang.LangFacade;
 
 public class GUIApplication extends Application {
@@ -56,13 +54,12 @@ public class GUIApplication extends Application {
     public void viewApplication(){
     	
     	try {
-<<<<<<< HEAD
+
     		
     		ConfigFacade.load();
     		
     		LangFacade.load();
-=======
->>>>>>> dde4d7217372dbb6499cb576fa4cf450c983a9e1
+
     		LangFacade facade = LangFacade.getInstance();
 		
     		final Menu menu1 = new Menu("File");
@@ -76,9 +73,11 @@ public class GUIApplication extends Application {
     		
     		Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
     		
-	    	//Parent root = FXMLLoader.load(GUIApplication.class.getResource(PATIENTVIEWXML), facade.getResourceBundle());
-			//Scene scene = new Scene(root);
+	    	Parent root = FXMLLoader.load(GUIApplication.class.getResource(PATIENTVIEWXML), facade.getResourceBundle());
+			Scene scene = new Scene(root);
 		
+    		
+    		/*
 			Scene scene = new Scene(new VBox(), 400, 350);
 	        scene.setFill(Color.OLDLACE);
 	 
@@ -99,7 +98,7 @@ public class GUIApplication extends Application {
 	        
 	        splitPane.setOrientation(Orientation.HORIZONTAL);
 	      
-	        /*
+	        
 	        splitPane.setPrefSize(primaryScreenBounds.getWidth(), primaryScreenBounds.getHeight());
 	        final Pane pane = new Pane();
 	        pane.setPrefSize(600,primaryScreenBounds.getHeight());
@@ -111,7 +110,7 @@ public class GUIApplication extends Application {
 	        
 	        
 	        splitPane.getItems().addAll(pane, anchorPane);
-	        */
+	        
 	        
 	        splitPane.getStylesheets().add("splitPane.css");
 	        
@@ -120,6 +119,7 @@ public class GUIApplication extends Application {
 	     
 	        
 			scene.getStylesheets().add(STYLESHEETFONT);
+			*/
 			_stage.setScene(scene);
 		    _stage.setX(primaryScreenBounds.getMinX());
 		    _stage.setY(primaryScreenBounds.getMinY());
