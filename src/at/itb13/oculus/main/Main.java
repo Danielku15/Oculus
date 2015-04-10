@@ -17,12 +17,14 @@ public class Main {
 			ConfigFacade.load();
 		} catch (IOException e) {
 			e.printStackTrace();
+			return;
 		}
 		
 		try {
 			LangFacade.load();
 		} catch (IOException e) {
 			e.printStackTrace();
+			return;
 		}
 		
 		GUIApplication.main(args);

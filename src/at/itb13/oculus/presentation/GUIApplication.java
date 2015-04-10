@@ -3,12 +3,14 @@ package at.itb13.oculus.presentation;
 import java.io.IOException;
 
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import at.itb13.oculus.lang.LangFacade;
 
 public class GUIApplication extends Application {
@@ -25,11 +27,17 @@ public class GUIApplication extends Application {
 	@Override
 	public void start(Stage stage) throws Exception {
 		_stage = stage;
+		_stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+			@Override
+			public void handle(WindowEvent e) {
+				onClose();
+			}
+		});
 	    viewApplication();
 	}
 	
-	public void close() {
-		
+	private void onClose() {
+		System.out.println("Stage closing");
 	}
 	
     public void viewApplication(){

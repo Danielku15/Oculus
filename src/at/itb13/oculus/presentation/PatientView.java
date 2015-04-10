@@ -7,7 +7,7 @@ import java.time.LocalDate;
 import java.util.Date;
 import java.util.ResourceBundle;
 
-import at.itb13.oculus.application.PatientViewControllerImpl;
+import at.itb13.oculus.application.PatientViewControllerImpl_old;
 import at.itb13.oculus.application.RegExpException;
 import at.itb13.oculus.application.UniqueConstraintException;
 import at.itb13.oculus.lang.LangFacade;
@@ -43,7 +43,7 @@ import javafx.stage.StageStyle;
 
 public class PatientView implements Initializable {
 	
-	private PatientViewControllerImpl _patientController;
+	private PatientViewControllerImpl_old _patientController;
 	
 	@FXML
 	private Menu _fileLbl;
@@ -130,14 +130,13 @@ public class PatientView implements Initializable {
    
     
 	public PatientView() {
-		_patientController = new PatientViewControllerImpl();
+		_patientController = new PatientViewControllerImpl_old();
 	}
 
 	// Event Listener on MenuItem[#_close].onAction
 	@FXML
 	public void close(ActionEvent event) {
 		_patientController.close();
-		System.exit(1);
 	}
 	
 	public Patient getPatientFromView() {
@@ -228,10 +227,10 @@ public class PatientView implements Initializable {
 
 class CreatePatientTask extends Task<String> {
 	
-	PatientViewControllerImpl _patientController;
+	PatientViewControllerImpl_old _patientController;
 	private Patient _patient;
 	
-	public CreatePatientTask(Patient patient, PatientViewControllerImpl patientController) {
+	public CreatePatientTask(Patient patient, PatientViewControllerImpl_old patientController) {
 		_patient = patient;
 		_patientController = patientController;
 	}

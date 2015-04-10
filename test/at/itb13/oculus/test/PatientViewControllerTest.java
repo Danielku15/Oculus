@@ -17,7 +17,7 @@ public class PatientViewControllerTest {
 	Patient patient;
 	
 	@Before public void setUp() {
-		patientController = new PatientViewControllerImpl();
+		patientController = new PatientViewControllerImpl_old();
 		patient = new Patient("Carlos Gabriel","Rodriguez-Lopez", null, null, null, null, null, "0123456789",null,null,null);
 		try{
 			ConfigFacade.load();
