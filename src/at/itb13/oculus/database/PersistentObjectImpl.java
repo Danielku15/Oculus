@@ -56,7 +56,7 @@ import at.itb13.oculus.util.IdGenerator;
 
 @MappedSuperclass
 @Inheritance(strategy=InheritanceType.JOINED)
-@Analyzer(definition="AutoCompleteAnalyzer")
+@Analyzer(definition="NGramAnalyzer")
 public abstract class PersistentObjectImpl implements PersistentObject {
 	
     private String _id = IdGenerator.createId();

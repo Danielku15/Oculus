@@ -37,7 +37,7 @@ public class Main {
 		
 //		Thread indexService = new IndexService();
 //		indexService.start();
-		for(Patient patient : dbFacade.searchPatient("pat sch")) {
+		for(Patient patient : dbFacade.searchPatient("sch")) {
 			System.out.println(patient.getFirstname());
 		}
 		dbFacade.close();
