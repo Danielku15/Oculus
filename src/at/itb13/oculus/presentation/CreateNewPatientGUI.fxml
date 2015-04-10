@@ -7,220 +7,346 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="at.itb13.oculus.presentation.PatientView">
+<VBox prefWidth="1200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="at.itb13.oculus.presentation.PatientView">
    <children>
       <MenuBar>
         <menus>
-          <Menu fx:id="_file" mnemonicParsing="false" text="%file">
+          <Menu fx:id="_fileLbl" mnemonicParsing="false" text="%file">
             <items>
-              <MenuItem fx:id="_close" mnemonicParsing="false" onAction="#close" text="\%exit" />
+              <MenuItem fx:id="_closeLbl" mnemonicParsing="false" onAction="#close" text="%close" />
             </items>
           </Menu>
-          <Menu fx:id="_help" mnemonicParsing="false" text="%help">
+          <Menu fx:id="_editLbl" mnemonicParsing="false" text="%edit">
             <items>
-              <MenuItem fx:id="_about" mnemonicParsing="false" text="%about" />
+              <MenuItem mnemonicParsing="false" text="Delete" />
+            </items>
+          </Menu>
+          <Menu fx:id="_helpLbl" mnemonicParsing="false" text="%help">
+            <items>
+              <MenuItem mnemonicParsing="false" text="About" />
             </items>
           </Menu>
         </menus>
-         <VBox.margin>
-            <Insets />
-         </VBox.margin>
       </MenuBar>
-      <ToolBar prefHeight="40.0" prefWidth="200.0">
-        <items>
-          <Button mnemonicParsing="false" text="Button" />
-        </items>
-         <opaqueInsets>
-            <Insets />
-         </opaqueInsets>
-         <VBox.margin>
-            <Insets bottom="30.0" top="10.0" />
-         </VBox.margin>
-      </ToolBar>
-      <SplitPane dividerPositions="0.26169265033407574" prefHeight="700.0" prefWidth="1000.0">
-         <items>
-            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" />
-            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
-               <children>
-                  <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="654.0">
+      <AnchorPane>
+         <children>
+            <SplitPane dividerPositions="0.2" maxWidth="1200.0" minWidth="600.0" prefWidth="1000.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+              <items>
+                <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="400.0" minWidth="400.0" prefHeight="1158.0" prefWidth="400.0" />
+                  <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
                      <children>
-                        <Group>
-                           <VBox.margin>
-                              <Insets />
-                           </VBox.margin>
-                        </Group>
-                        <GridPane hgap="10.0" vgap="10.0">
-                           <children>
-                              <Label fx:id="_firstname" layoutX="69.0" layoutY="46.0" text="%firstname">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                                 <GridPane.margin>
-                                    <Insets />
-                                 </GridPane.margin>
-                              </Label>
-                              <Label fx:id="_gender" layoutX="69.0" layoutY="201.0" text="%gender" GridPane.rowIndex="3">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                              </Label>
-                              <Label fx:id="_country" layoutX="75.0" layoutY="418.0" text="%country" GridPane.rowIndex="7">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                              </Label>
-                              <TextField layoutX="207.0" layoutY="240.0" prefHeight="36.0" prefWidth="396.0" snapToPixel="false" GridPane.columnIndex="1" GridPane.rowIndex="4">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                              </TextField>
-                              <Label fx:id="_socialsecuritynumber" layoutX="75.0" layoutY="579.0" text="%socialsecuritynumber" GridPane.rowIndex="10">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                              </Label>
-                              <Label fx:id="_street" layoutX="75.0" layoutY="462.0" text="%street" GridPane.rowIndex="8">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                              </Label>
-                              <TextField layoutX="207.0" layoutY="513.0" prefHeight="36.0" prefWidth="396.0" snapToPixel="false" GridPane.columnIndex="1" GridPane.rowIndex="9">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                              </TextField>
-                              <TextField layoutX="201.0" layoutY="92.0" prefHeight="36.0" prefWidth="396.0" snapToPixel="false" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                              </TextField>
-                              <TextField layoutX="207.0" layoutY="404.0" prefHeight="36.0" prefWidth="396.0" snapToPixel="false" GridPane.columnIndex="1" GridPane.rowIndex="7">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                              </TextField>
-                              <Label fx:id="_birthday" layoutX="69.0" layoutY="149.0" text="%birthday" GridPane.rowIndex="2">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                              </Label>
-                              <Label fx:id="_zip" layoutX="75.0" layoutY="355.0" text="%zip" GridPane.rowIndex="6">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                              </Label>
-                              <TextField layoutX="207.0" layoutY="565.0" prefHeight="36.0" prefWidth="396.0" snapToPixel="false" GridPane.columnIndex="1" GridPane.rowIndex="10">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                              </TextField>
-                              <Label fx:id="_streetnumber" layoutX="75.0" layoutY="519.0" text="%streetnumber" GridPane.rowIndex="9">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                              </Label>
-                              <Group GridPane.columnIndex="1" GridPane.rowIndex="3">
+                        <BorderPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <center>
+                              <TabPane fx:id="_tabPane" cache="true" focusTraversable="false">
+                                <tabs>
+                                  <Tab fx:id="_patienttabLbl" closable="false" text="%lastname">
+                                    <content>
+                                      <AnchorPane fx:id="_patientFormular">
+                                             <children>
+                                                <ScrollPane fx:id="_patientFormulatScrollPane" fitToHeight="true" fitToWidth="true" pannable="true" prefHeight="1064.0" prefViewportHeight="160.0" prefViewportWidth="142.0" prefWidth="655.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                   <content>
+                                                    <AnchorPane>
+                                                         <children>
+                                                            <GridPane alignment="TOP_CENTER">
+                                                               <columnConstraints>
+                                                                  <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" />
+                                                               </columnConstraints>
+                                                               <rowConstraints>
+                                                                  <RowConstraints valignment="TOP" vgrow="ALWAYS" />
+                                                                  <RowConstraints minHeight="10.0" valignment="TOP" vgrow="ALWAYS" />
+                                                               </rowConstraints>
+                                                               <children>
+                                                                  <VBox alignment="CENTER" spacing="30.0">
+                                                                     <children>
+                                                                        <AnchorPane>
+                                                                           <children>
+                                                                              <GridPane hgap="50.0" vgap="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="157.0" AnchorPane.topAnchor="0.0">
+                                                                                 <children>
+                                                                                    <Label fx:id="_firstnameLblTop" minWidth="100.0" text="%birthday" GridPane.columnIndex="2">
+                                                                                       <font>
+                                                                                          <Font size="18.0" />
+                                                                                       </font>
+                                                                                    </Label>
+                                                                                    <Label fx:id="_firstnameLblTop1" minWidth="100.0" text="%lastname" GridPane.columnIndex="1">
+                                                                                       <font>
+                                                                                          <Font size="18.0" />
+                                                                                       </font>
+                                                                                    </Label>
+                                                                                    <Label fx:id="_firstnameLblTop2" minWidth="100.0" text="%firstname">
+                                                                                       <font>
+                                                                                          <Font size="18.0" />
+                                                                                       </font>
+                                                                                    </Label>
+                                                                                 </children>
+                                                                                 <columnConstraints>
+                                                                                    <ColumnConstraints halignment="LEFT" hgrow="ALWAYS" />
+                                                                                    <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" />
+                                                                                    <ColumnConstraints halignment="RIGHT" hgrow="ALWAYS" />
+                                                                                 </columnConstraints>
+                                                                                 <rowConstraints>
+                                                                                    <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                                                                                 </rowConstraints>
+                                                                                 <padding>
+                                                                                    <Insets left="20.0" top="20.0" />
+                                                                                 </padding>
+                                                                              </GridPane>
+                                                                           </children>
+                                                                           <opaqueInsets>
+                                                                              <Insets />
+                                                                           </opaqueInsets>
+                                                                        </AnchorPane>
+                                                                        <VBox alignment="CENTER" spacing="50.0">
+                                                                           <children>
+                                                                              <AnchorPane>
+                                                                                 <children>
+                                                                                    <Accordion minWidth="500.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                                                       <panes>
+                                                                                          <TitledPane animated="false" text="%patientmasterdata">
+                                                                                             <content>
+                                                                                                <AnchorPane stylesheets="font.css">
+                                                                                                   <children>
+                                                                                                      <GridPane hgap="50.0" vgap="10.0">
+                                                                                                         <children>
+                                                                                                            <Label fx:id="_firstnameLbl" text="%firstname">
+                                                                                                               <font>
+                                                                                                                  <Font size="18.0" />
+                                                                                                               </font>
+                                                                                                            </Label>
+                                                                                                            <TextField fx:id="_firstnameInput" GridPane.columnIndex="1">
+                                                                                                               <font>
+                                                                                                                  <Font size="18.0" />
+                                                                                                               </font>
+                                                                                                            </TextField>
+                                                                                                            <Label fx:id="_secondnameLbl" text="%lastname" GridPane.rowIndex="1">
+                                                                                                               <font>
+                                                                                                                  <Font size="18.0" />
+                                                                                                               </font>
+                                                                                                            </Label>
+                                                                                                            <TextField fx:id="_lastnameInput" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                                                                                               <font>
+                                                                                                                  <Font size="18.0" />
+                                                                                                               </font>
+                                                                                                            </TextField>
+                                                                                                            <Label fx:id="_birthdayLbl" text="%birthday" GridPane.rowIndex="2">
+                                                                                                               <font>
+                                                                                                                  <Font size="18.0" />
+                                                                                                               </font>
+                                                                                                            </Label>
+                                                                                                            <Label fx:id="_genderLbl" text="%gender" GridPane.rowIndex="3">
+                                                                                                               <font>
+                                                                                                                  <Font size="18.0" />
+                                                                                                               </font>
+                                                                                                            </Label>
+                                                                                                            <Group GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                                                                                               <children>
+                                                                                                                  <RadioButton fx:id="_maleInput" layoutX="156.0" layoutY="71.0" mnemonicParsing="false" selected="true" text="%male" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                                                                                                     <font>
+                                                                                                                        <Font size="18.0" />
+                                                                                                                     </font>
+                                                                                                                     <toggleGroup>
+                                                                                                                        <ToggleGroup fx:id="_genderToggleGroup" />
+                                                                                                                     </toggleGroup>
+                                                                                                                  </RadioButton>
+                                                                                                                  <RadioButton fx:id="_femaleInput" layoutX="324.0" layoutY="71.0" mnemonicParsing="false" selected="true" text="\%female" toggleGroup="$_genderToggleGroup" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                                                                                                     <font>
+                                                                                                                        <Font size="18.0" />
+                                                                                                                     </font>
+                                                                                                                  </RadioButton>
+                                                                                                               </children>
+                                                                                                            </Group>
+                                                                                                            <Label fx:id="_phonenumberLbl" text="%phonenumber" GridPane.rowIndex="4">
+                                                                                                               <font>
+                                                                                                                  <Font size="18.0" />
+                                                                                                               </font>
+                                                                                                            </Label>
+                                                                                                            <TextField fx:id="_phonenumberInput" layoutX="156.0" layoutY="115.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                                                                                                               <font>
+                                                                                                                  <Font size="18.0" />
+                                                                                                               </font>
+                                                                                                            </TextField>
+                                                                                                            <Label fx:id="_emailLbl" text="%email" GridPane.rowIndex="5">
+                                                                                                               <font>
+                                                                                                                  <Font size="18.0" />
+                                                                                                               </font>
+                                                                                                            </Label>
+                                                                                                            <TextField fx:id="_emailInput" layoutX="165.0" layoutY="146.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                                                                                                               <font>
+                                                                                                                  <Font size="18.0" />
+                                                                                                               </font>
+                                                                                                            </TextField>
+                                                                                                            <Label fx:id="_zipLbl" text="%zip" GridPane.rowIndex="6">
+                                                                                                               <font>
+                                                                                                                  <Font size="18.0" />
+                                                                                                               </font>
+                                                                                                            </Label>
+                                                                                                            <TextField fx:id="_zipInput" GridPane.columnIndex="1" GridPane.rowIndex="6">
+                                                                                                               <font>
+                                                                                                                  <Font size="18.0" />
+                                                                                                               </font>
+                                                                                                            </TextField>
+                                                                                                            <Label fx:id="_countryLbl" text="%country" GridPane.rowIndex="7">
+                                                                                                               <font>
+                                                                                                                  <Font size="18.0" />
+                                                                                                               </font>
+                                                                                                            </Label>
+                                                                                                            <TextField fx:id="_countryInput" layoutX="162.0" layoutY="226.0" GridPane.columnIndex="1" GridPane.rowIndex="7">
+                                                                                                               <font>
+                                                                                                                  <Font size="18.0" />
+                                                                                                               </font>
+                                                                                                            </TextField>
+                                                                                                            <Label fx:id="_streetLbl" text="%street" GridPane.rowIndex="8">
+                                                                                                               <font>
+                                                                                                                  <Font size="18.0" />
+                                                                                                               </font>
+                                                                                                            </Label>
+                                                                                                            <TextField fx:id="_streetInput" layoutX="171.0" layoutY="257.0" GridPane.columnIndex="1" GridPane.rowIndex="8">
+                                                                                                               <font>
+                                                                                                                  <Font size="18.0" />
+                                                                                                               </font>
+                                                                                                            </TextField>
+                                                                                                            <Label fx:id="_streetnumberLbl" text="%streetnumber" GridPane.rowIndex="9">
+                                                                                                               <font>
+                                                                                                                  <Font size="18.0" />
+                                                                                                               </font>
+                                                                                                            </Label>
+                                                                                                            <TextField fx:id="_streetnumberInput" layoutX="156.0" layoutY="302.0" GridPane.columnIndex="1" GridPane.rowIndex="9">
+                                                                                                               <font>
+                                                                                                                  <Font size="18.0" />
+                                                                                                               </font>
+                                                                                                            </TextField>
+                                                                                                            <Label fx:id="_socialsecuritynumberLbl" text="%socialsecuritynumber" GridPane.rowIndex="10">
+                                                                                                               <font>
+                                                                                                                  <Font size="18.0" />
+                                                                                                               </font>
+                                                                                                            </Label>
+                                                                                                            <TextField fx:id="_socialsecuritynumberInput" layoutX="142.0" layoutY="182.0" GridPane.columnIndex="1" GridPane.rowIndex="10">
+                                                                                                               <font>
+                                                                                                                  <Font size="18.0" />
+                                                                                                               </font>
+                                                                                                            </TextField>
+                                                                                                            <Label fx:id="_employerLbl" text="%employer" GridPane.rowIndex="11">
+                                                                                                               <font>
+                                                                                                                  <Font size="18.0" />
+                                                                                                               </font>
+                                                                                                            </Label>
+                                                                                                            <TextField fx:id="_employerInput" layoutX="165.0" layoutY="372.0" GridPane.columnIndex="1" GridPane.rowIndex="11">
+                                                                                                               <font>
+                                                                                                                  <Font size="18.0" />
+                                                                                                               </font>
+                                                                                                            </TextField>
+                                                                                                            <Button fx:id="_clearButton" mnemonicParsing="false" onAction="#clear" text="%clear" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="13">
+                                                                                                               <font>
+                                                                                                                  <Font size="18.0" />
+                                                                                                               </font>
+                                                                                                               <opaqueInsets>
+                                                                                                                  <Insets left="50.0" />
+                                                                                                               </opaqueInsets>
+                                                                                                            </Button>
+                                                                                                            <Button fx:id="_saveButton" mnemonicParsing="false" onAction="#save" text="%save" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="13">
+                                                                                                               <font>
+                                                                                                                  <Font size="18.0" />
+                                                                                                               </font>
+                                                                                                               <opaqueInsets>
+                                                                                                                  <Insets right="200.0" />
+                                                                                                               </opaqueInsets>
+                                                                                                            </Button>
+                                                                                                            <DatePicker fx:id="_birthdayInput" showWeekNumbers="true" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
+                                                                                                         </children>
+                                                                                                         <columnConstraints>
+                                                                                                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="200.0" minWidth="200.0" prefWidth="200.0" />
+                                                                                                            <ColumnConstraints halignment="LEFT" hgrow="ALWAYS" minWidth="550.0" />
+                                                                                                         </columnConstraints>
+                                                                                                         <rowConstraints>
+                                                                                                            <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                                                                                                            <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                                                                                                            <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                                                                                                            <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                                                                                                            <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                                                                                                            <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                                                                                                            <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                                                                                                            <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                                                                                                            <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                                                                                                            <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                                                                                                            <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                                                                                                            <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                                                                                                            <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                                                                                                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                                                         </rowConstraints>
+                                                                                                         <padding>
+                                                                                                            <Insets left="20.0" top="30.0" />
+                                                                                                         </padding>
+                                                                                                      </GridPane>
+                                                                                                   </children>
+                                                                                                </AnchorPane>
+                                                                                             </content>
+                                                                                             <opaqueInsets>
+                                                                                                <Insets />
+                                                                                             </opaqueInsets>
+                                                                                             <font>
+                                                                                                <Font size="18.0" />
+                                                                                             </font>
+                                                                                          </TitledPane>
+                                                                                          <TitledPane animated="false" text="%anamnesisdata">
+                                                                                            <content>
+                                                                                              <AnchorPane minHeight="0.0" minWidth="0.0" />
+                                                                                            </content>
+                                                                                             <font>
+                                                                                                <Font size="18.0" />
+                                                                                             </font>
+                                                                                          </TitledPane>
+                                                                                       </panes>
+                                                                                    </Accordion>
+                                                                                 </children>
+                                                                                 <opaqueInsets>
+                                                                                    <Insets />
+                                                                                 </opaqueInsets>
+                                                                              </AnchorPane>
+                                                                           </children>
+                                                                        </VBox>
+                                                                     </children>
+                                                                  </VBox>
+                                                               </children>
+                                                            </GridPane>
+                                                         </children>
+                                                      </AnchorPane>
+                                                   </content>
+                                                </ScrollPane>
+                                             </children>
+                                          </AnchorPane>
+                                    </content>
+                                  </Tab>
+                                </tabs>
+                              </TabPane>
+                           </center>
+                           <left>
+                              <AnchorPane maxWidth="300.0" minWidth="100.0" prefWidth="150.0" />
+                           </left>
+                           <right>
+                              <AnchorPane maxWidth="300.0" minWidth="100.0" prefWidth="150.0" />
+                           </right>
+                           <top>
+                              <AnchorPane BorderPane.alignment="CENTER">
                                  <children>
-                                    <RadioButton fx:id="_female" layoutX="338.0" layoutY="206.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="197.0" text="%female" />
-                                    <RadioButton fx:id="_male" layoutX="201.0" layoutY="206.0" mnemonicParsing="false" text="%male" />
+                                    <HBox />
+                                    <ToolBar layoutX="770.0" layoutY="-4.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="55.0">
+                                      <items>
+                                        <Button fx:id="_createNewPatientButton" mnemonicParsing="false" onAction="#createTab" text="%createnewpatient">
+                                             <font>
+                                                <Font size="18.0" />
+                                             </font></Button>
+                                      </items>
+                                    </ToolBar>
                                  </children>
-                              </Group>
-                              <Label fx:id="_email" layoutX="75.0" layoutY="298.0" text="%email" GridPane.rowIndex="5">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                              </Label>
-                              <Label fx:id="_employer" layoutX="75.0" layoutY="623.0" text="%employer" GridPane.rowIndex="11">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                              </Label>
-                              <TextField layoutX="207.0" layoutY="292.0" prefHeight="36.0" prefWidth="396.0" snapToPixel="false" GridPane.columnIndex="1" GridPane.rowIndex="5">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                              </TextField>
-                              <TextField layoutX="207.0" layoutY="617.0" prefHeight="36.0" prefWidth="396.0" snapToPixel="false" GridPane.columnIndex="1" GridPane.rowIndex="11">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                              </TextField>
-                              <Label fx:id="_phonenumber" layoutX="75.0" layoutY="254.0" text="%phonenumber" GridPane.rowIndex="4">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                              </Label>
-                              <TextField layoutX="207.0" layoutY="456.0" prefHeight="36.0" prefWidth="396.0" snapToPixel="false" GridPane.columnIndex="1" GridPane.rowIndex="8">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                              </TextField>
-                              <TextField layoutX="201.0" layoutY="34.0" prefHeight="36.0" prefWidth="474.0" snapToPixel="false" GridPane.columnIndex="1">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                              </TextField>
-                              <TextField layoutX="201.0" layoutY="143.0" prefHeight="36.0" prefWidth="396.0" snapToPixel="false" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                              </TextField>
-                              <Label fx:id="_lastname" layoutX="69.0" layoutY="104.0" text="%lastname" GridPane.rowIndex="1">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                              </Label>
-                              <TextField layoutX="207.0" layoutY="349.0" prefHeight="36.0" prefWidth="396.0" snapToPixel="false" GridPane.columnIndex="1" GridPane.rowIndex="6">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                              </TextField>
-                              <Button fx:id="_saveButton" mnemonicParsing="false" onAction="#save" text="%save" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="13">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                                 <opaqueInsets>
-                                    <Insets right="200.0" />
-                                 </opaqueInsets>
-                              </Button>
-                              <Button fx:id="_clearButton" mnemonicParsing="false" onAction="#clear" text="%clear" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="13">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                                 <opaqueInsets>
-                                    <Insets left="50.0" />
-                                 </opaqueInsets>
-                              </Button>
-                           </children>
-                           <columnConstraints>
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="250.0" minWidth="250.0" prefWidth="81.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="260.0" prefWidth="357.0" />
-                           </columnConstraints>
-                           <padding>
-                              <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
-                           </padding>
-                           <rowConstraints>
-                              <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                           </rowConstraints>
-                        </GridPane>
+                                 <BorderPane.margin>
+                                    <Insets bottom="30.0" />
+                                 </BorderPane.margin>
+                              </AnchorPane>
+                           </top>
+                        </BorderPane>
                      </children>
-                  </VBox>
-               </children>
-            </AnchorPane>
-         </items>
-      </SplitPane>
+                  </AnchorPane>
+              </items>
+            </SplitPane>
+         </children></AnchorPane>
    </children>
 </VBox>
