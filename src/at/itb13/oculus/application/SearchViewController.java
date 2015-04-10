@@ -8,5 +8,5 @@ public interface SearchViewController extends AutoCloseable {
 	
 	void close();
 	
-	List<Patient> search(String criteria);
+	String[][] search(String criteria);
 }

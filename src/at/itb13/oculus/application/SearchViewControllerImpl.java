@@ -15,9 +15,19 @@ public class SearchViewControllerImpl<T> extends Controller implements SearchVie
 	 * @see at.itb13.oculus.application.SearchViewController#search(java.lang.String)
 	 */	
 	@Override
-	public List<Patient> search(String criteria) {
+	public String[][] search(String criteria) {
 		
-		return _database.getSearchedPatient(criteria);
+		List<Patient> list =  _database.getSearchedPatient(criteria);
+		
+		String[][] array = new String[list.size()][];
+		
+		for(int i = 0; i < list.size(); i++) {
+			Patient p = list.get(i);
+			String[] row = new String[] {p.getFirstname(), p.getLastname(), null, p.getSocialSecurityNumber()};
+			array[i] = row;
+		}
+		
+		return array;
 	}
 
 }

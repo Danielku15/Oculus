@@ -5,6 +5,7 @@
  */
 package at.itb13.oculus.presentation;
 
+import java.util.Arrays;
 import java.util.List;
 
 import at.itb13.oculus.application.SearchViewControllerImpl;
@@ -30,7 +31,7 @@ import javafx.util.Callback;
  */
 public class PatientSearchView {
 
-	private List<Patient> _patientsList;
+	private String[][] _patientsList;
 	private SearchViewControllerImpl<Patient> _searchViewController;
 
 	public PatientSearchView() {
@@ -40,17 +41,15 @@ public class PatientSearchView {
 	@FXML
 	private TextField _patientsearchInput;
 	@FXML
-	private TableView<Patient> _tableView;
+	private TableView<String[]> _tableView;
 	@FXML
-	private TableColumn<Patient, String> _firstname;
+	private TableColumn<String[], String> _firstname;
 	@FXML
-	private TableColumn<Patient, String> _lastname;
+	private TableColumn<String[], String> _lastname;
 	@FXML
-	private TableColumn<Patient, String> _birthday;
+	private TableColumn<String[], String> _address;
 	@FXML
-	private TableColumn<Patient, String> _address;
-	@FXML
-	private TableColumn<Patient, String> _socialsecuritynumber;
+	private TableColumn<String[], String> _socialsecuritynumber;
 	@FXML
 	private Button _patientsearchButton;
 
@@ -58,33 +57,44 @@ public class PatientSearchView {
 	// für string array: http://stackoverflow.com/questions/20769723/populate-tableview-with-two-dimensional-array <3
 	@FXML
 	private void initialize() {
-		_firstname.setCellValueFactory(new Callback<CellDataFeatures<Patient, String>, ObservableValue<String>>() {
+		_firstname.setCellValueFactory(new Callback<CellDataFeatures<String[], String>, ObservableValue<String>>() {
 
-					public javafx.beans.value.ObservableValue<String> call(TableColumn.CellDataFeatures<Patient, String> param) {
-						if (param.getValue().getFirstname() != null) {
-							return new SimpleStringProperty(param.getValue().getFirstname());
+					public javafx.beans.value.ObservableValue<String> call(TableColumn.CellDataFeatures<String[], String> param) {
+						if (param.getValue()[0] != null) {
+							return new SimpleStringProperty(param.getValue()[0]);
 						} else {
 							return new SimpleStringProperty("");
 						}
 					}
 				});
 		
-		_lastname.setCellValueFactory(new Callback<CellDataFeatures<Patient, String>, ObservableValue<String>>() {
+		_lastname.setCellValueFactory(new Callback<CellDataFeatures<String[], String>, ObservableValue<String>>() {
 
-			public javafx.beans.value.ObservableValue<String> call(TableColumn.CellDataFeatures<Patient, String> param) {
-				if (param.getValue().getFirstname() != null) {
-					return new SimpleStringProperty(param.getValue().getLastname());
+			public javafx.beans.value.ObservableValue<String> call(TableColumn.CellDataFeatures<String[], String> param) {
+				if (param.getValue()[1] != null) {
+					return new SimpleStringProperty(param.getValue()[1]);
 				} else {
 					return new SimpleStringProperty("");
 				}
 			}
 		});
 		
-		_socialsecuritynumber.setCellValueFactory(new Callback<CellDataFeatures<Patient, String>, ObservableValue<String>>() {
+		_address.setCellValueFactory(new Callback<CellDataFeatures<String[], String>, ObservableValue<String>>() {
 
-			public javafx.beans.value.ObservableValue<String> call(TableColumn.CellDataFeatures<Patient, String> param) {
-				if (param.getValue().getFirstname() != null) {
-					return new SimpleStringProperty(param.getValue().getSocialSecurityNumber());
+			public javafx.beans.value.ObservableValue<String> call(TableColumn.CellDataFeatures<String[], String> param) {
+				if (param.getValue()[2] != null) {
+					return new SimpleStringProperty(param.getValue()[2]);
+				} else {
+					return new SimpleStringProperty("");
+				}
+			}
+		});
+		
+		_socialsecuritynumber.setCellValueFactory(new Callback<CellDataFeatures<String[], String>, ObservableValue<String>>() {
+
+			public javafx.beans.value.ObservableValue<String> call(TableColumn.CellDataFeatures<String[], String> param) {
+				if (param.getValue()[3] != null) {
+					return new SimpleStringProperty(param.getValue()[3]);
 				} else {
 					return new SimpleStringProperty("");
 				}
@@ -96,8 +106,8 @@ public class PatientSearchView {
 	public void showAllPatientsInTable(ActionEvent e) {
 		_patientsList = _searchViewController.search(_patientsearchInput
 				.getText());
-		ObservableList<Patient> patients = FXCollections
-				.observableList(_patientsList);
+		ObservableList<String[]> patients = FXCollections
+				.observableList(Arrays.asList(_patientsList));
 		_tableView.setItems(patients);
 	}
 

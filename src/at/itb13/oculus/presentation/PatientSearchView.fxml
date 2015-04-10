@@ -21,7 +21,6 @@
               <columns>
                 <TableColumn fx:id="_firstname" prefWidth="94.0" text="%firstname" />
                 <TableColumn fx:id="_lastname" prefWidth="91.0" text="%lastname" />
-                  <TableColumn fx:id="_birthday" prefWidth="82.0" text="%birthday" />
                   <TableColumn fx:id="_address" prefWidth="100.0" text="%address" />
                   <TableColumn fx:id="_socialsecuritynumber" prefWidth="168.0" text="%socialsecuritynumber" />
               </columns>
