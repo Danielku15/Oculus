@@ -1,7 +1,7 @@
 package at.itb13.oculus.lang;
 
-import java.io.IOException;
 import java.util.Locale;
+import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
 import at.itb13.oculus.config.Config;
@@ -30,11 +30,11 @@ public class LangFacade {
 		return _langFacade;
 	}
 	
-	public static void load() throws IOException {
+	public static void load() throws MissingResourceException {
 		_langFacade.load(BASENAME);
 	}
 	
-	private void load(String fileName) {
+	private void load(String fileName) throws MissingResourceException {
 		ConfigFacade configFacade = ConfigFacade.getInstance();
 		String language = configFacade.getProperty(Config.LANGUAGE);
 		String country = configFacade.getProperty(Config.COUNTRY);

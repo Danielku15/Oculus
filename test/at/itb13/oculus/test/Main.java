@@ -7,6 +7,7 @@ import at.itb13.oculus.config.ConfigFacade;
 import at.itb13.oculus.database.DBFacade;
 import at.itb13.oculus.lang.LangFacade;
 import at.itb13.oculus.model.Patient;
+import at.itb13.oculus.util.LoggerUtil;
 
 
 public class Main {
@@ -23,9 +24,13 @@ public class Main {
 		
 		try {
 			LangFacade.load();
+		
+		try {
+			LoggerUtil.setup();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		LoggerUtil.close();
 		
 		DBFacade dbFacade = new DBFacade();
 //		try {
