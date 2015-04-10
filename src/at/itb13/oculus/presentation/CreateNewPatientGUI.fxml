@@ -101,7 +101,7 @@
                                                                                  <children>
                                                                                     <Accordion minWidth="500.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                                                        <panes>
-                                                                                          <TitledPane animated="false" text="%patientmasterdata">
+                                                                                          <TitledPane fx:id="_patientMasterData" text="%patientmasterdata">
                                                                                              <content>
                                                                                                 <AnchorPane stylesheets="font.css">
                                                                                                    <children>
@@ -112,7 +112,7 @@
                                                                                                                   <Font size="18.0" />
                                                                                                                </font>
                                                                                                             </Label>
-                                                                                                            <TextField fx:id="_firstnameInput" GridPane.columnIndex="1">
+                                                                                                            <TextField fx:id="_firstnameInput" onAction="#getFirstname" GridPane.columnIndex="1">
                                                                                                                <font>
                                                                                                                   <Font size="18.0" />
                                                                                                                </font>
@@ -122,7 +122,7 @@
                                                                                                                   <Font size="18.0" />
                                                                                                                </font>
                                                                                                             </Label>
-                                                                                                            <TextField fx:id="_lastnameInput" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                                                                                            <TextField fx:id="_lastnameInput" onAction="#getLastname" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                                                                                                <font>
                                                                                                                   <Font size="18.0" />
                                                                                                                </font>
@@ -159,7 +159,7 @@
                                                                                                                   <Font size="18.0" />
                                                                                                                </font>
                                                                                                             </Label>
-                                                                                                            <TextField fx:id="_phonenumberInput" layoutX="156.0" layoutY="115.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                                                                                                            <TextField fx:id="_phonenumberInput" layoutX="156.0" layoutY="115.0" onAction="#getPhonenumber" GridPane.columnIndex="1" GridPane.rowIndex="4">
                                                                                                                <font>
                                                                                                                   <Font size="18.0" />
                                                                                                                </font>
@@ -169,7 +169,7 @@
                                                                                                                   <Font size="18.0" />
                                                                                                                </font>
                                                                                                             </Label>
-                                                                                                            <TextField fx:id="_emailInput" layoutX="165.0" layoutY="146.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                                                                                                            <TextField fx:id="_emailInput" layoutX="165.0" layoutY="146.0" onAction="#getEmail" GridPane.columnIndex="1" GridPane.rowIndex="5">
                                                                                                                <font>
                                                                                                                   <Font size="18.0" />
                                                                                                                </font>
@@ -179,7 +179,7 @@
                                                                                                                   <Font size="18.0" />
                                                                                                                </font>
                                                                                                             </Label>
-                                                                                                            <TextField fx:id="_zipInput" GridPane.columnIndex="1" GridPane.rowIndex="6">
+                                                                                                            <TextField fx:id="_zipInput" onAction="#getZip" GridPane.columnIndex="1" GridPane.rowIndex="6">
                                                                                                                <font>
                                                                                                                   <Font size="18.0" />
                                                                                                                </font>
@@ -189,7 +189,7 @@
                                                                                                                   <Font size="18.0" />
                                                                                                                </font>
                                                                                                             </Label>
-                                                                                                            <TextField fx:id="_countryInput" layoutX="162.0" layoutY="226.0" GridPane.columnIndex="1" GridPane.rowIndex="7">
+                                                                                                            <TextField fx:id="_countryInput" layoutX="162.0" layoutY="226.0" onAction="#getCountry" GridPane.columnIndex="1" GridPane.rowIndex="7">
                                                                                                                <font>
                                                                                                                   <Font size="18.0" />
                                                                                                                </font>
@@ -199,7 +199,7 @@
                                                                                                                   <Font size="18.0" />
                                                                                                                </font>
                                                                                                             </Label>
-                                                                                                            <TextField fx:id="_streetInput" layoutX="171.0" layoutY="257.0" GridPane.columnIndex="1" GridPane.rowIndex="8">
+                                                                                                            <TextField fx:id="_streetInput" layoutX="171.0" layoutY="257.0" onAction="#getStreet" GridPane.columnIndex="1" GridPane.rowIndex="8">
                                                                                                                <font>
                                                                                                                   <Font size="18.0" />
                                                                                                                </font>
@@ -209,7 +209,7 @@
                                                                                                                   <Font size="18.0" />
                                                                                                                </font>
                                                                                                             </Label>
-                                                                                                            <TextField fx:id="_streetnumberInput" layoutX="156.0" layoutY="302.0" GridPane.columnIndex="1" GridPane.rowIndex="9">
+                                                                                                            <TextField fx:id="_streetnumberInput" layoutX="156.0" layoutY="302.0" onAction="#getStreetnumber" GridPane.columnIndex="1" GridPane.rowIndex="9">
                                                                                                                <font>
                                                                                                                   <Font size="18.0" />
                                                                                                                </font>
@@ -219,7 +219,7 @@
                                                                                                                   <Font size="18.0" />
                                                                                                                </font>
                                                                                                             </Label>
-                                                                                                            <TextField fx:id="_socialsecuritynumberInput" layoutX="142.0" layoutY="182.0" GridPane.columnIndex="1" GridPane.rowIndex="10">
+                                                                                                            <TextField fx:id="_socialsecuritynumberInput" layoutX="142.0" layoutY="182.0" onAction="#getSocialSecurityNumber" GridPane.columnIndex="1" GridPane.rowIndex="10">
                                                                                                                <font>
                                                                                                                   <Font size="18.0" />
                                                                                                                </font>
@@ -229,7 +229,7 @@
                                                                                                                   <Font size="18.0" />
                                                                                                                </font>
                                                                                                             </Label>
-                                                                                                            <TextField fx:id="_employerInput" layoutX="165.0" layoutY="372.0" GridPane.columnIndex="1" GridPane.rowIndex="11">
+                                                                                                            <TextField fx:id="_employerInput" layoutX="165.0" layoutY="372.0" onAction="#getEmployer" GridPane.columnIndex="1" GridPane.rowIndex="11">
                                                                                                                <font>
                                                                                                                   <Font size="18.0" />
                                                                                                                </font>
@@ -250,7 +250,7 @@
                                                                                                                   <Insets right="200.0" />
                                                                                                                </opaqueInsets>
                                                                                                             </Button>
-                                                                                                            <DatePicker fx:id="_birthdayInput" showWeekNumbers="true" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
+                                                                                                            <DatePicker fx:id="_birthdayInput" onAction="#getBirthday" showWeekNumbers="true" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
                                                                                                          </children>
                                                                                                          <columnConstraints>
                                                                                                             <ColumnConstraints hgrow="SOMETIMES" maxWidth="200.0" minWidth="200.0" prefWidth="200.0" />

@@ -10,8 +10,6 @@ public class MainPresentation {
 		GUIApplication.main(args);
 		
 		//launch(args);
-		
-		
-		
+			
 	}
 }

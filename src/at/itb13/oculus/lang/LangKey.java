@@ -32,7 +32,8 @@ public enum LangKey {
 	FILE("file"),
 	EXIT("exit"),
 	REGEXPERROR("regexperror"),
-	ENTITYEXISTS("entityexists");
+	ENTITYEXISTS("entityexists"),
+	CREATENEWPATIENT("createnewpatient");
 	
 	private String _key;
 	
