@@ -1,50 +1,43 @@
 package at.itb13.oculus.presentation;
 
-import java.io.IOException;
 import java.net.URL;
-import java.time.Instant;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.ResourceBundle;
 
-import at.itb13.oculus.application.PatientViewControllerImpl_old;
-import at.itb13.oculus.application.RegExpException;
-import at.itb13.oculus.application.UniqueConstraintException;
-import at.itb13.oculus.lang.LangFacade;
-import at.itb13.oculus.lang.LangKey;
-import at.itb13.oculus.model.Address;
-import at.itb13.oculus.model.Gender;
-import at.itb13.oculus.model.Patient;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
-import javafx.scene.Group;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
-import javafx.scene.control.ToggleGroup;
-import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
-import javafx.scene.control.MenuItem;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.Group;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tab;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.Menu;
 import javafx.scene.control.TabPane;
+import javafx.scene.control.TextField;
 import javafx.scene.control.TitledPane;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import at.itb13.oculus.application.PatientViewControllerImpl;
+import at.itb13.oculus.application.RegExpException;
+import at.itb13.oculus.application.UniqueConstraintException;
+import at.itb13.oculus.model.Address;
+import at.itb13.oculus.model.Gender;
+import at.itb13.oculus.model.Patient;
 
 public class PatientView implements Initializable {
 	
-	private PatientViewControllerImpl_old _patientController;
+	private PatientViewControllerImpl _patientController;
 	
 	@FXML
 	private Menu _fileLbl;
@@ -129,9 +122,8 @@ public class PatientView implements Initializable {
     @FXML
     private TitledPane _patientMasterData;
    
-    
 	public PatientView() {
-		_patientController = new PatientViewControllerImpl_old();
+		_patientController = new PatientViewControllerImpl();
 	}
 
 	// Event Listener on MenuItem[#_close].onAction
@@ -142,7 +134,9 @@ public class PatientView implements Initializable {
 	
 	@FXML
     void getFirstname(ActionEvent event) {
-		System.out.println("Firstname eingegeben");
+		if(!_patientController.setFirstname(_firstnameInput.getText())) {
+			_firstnameLbl.setTextFill(Color.RED);
+		}
     }
 
     @FXML
@@ -283,10 +277,10 @@ public class PatientView implements Initializable {
 
 class CreatePatientTask extends Task<String> {
 	
-	PatientViewControllerImpl_old _patientController;
+	PatientViewControllerImpl _patientController;
 	private Patient _patient;
 	
-	public CreatePatientTask(Patient patient, PatientViewControllerImpl_old patientController) {
+	public CreatePatientTask(Patient patient, PatientViewControllerImpl patientController) {
 		_patient = patient;
 		_patientController = patientController;
 	}
