@@ -9,11 +9,8 @@ import javafx.geometry.Orientation;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-<<<<<<< HEAD
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-=======
->>>>>>> fecbc02794a786f77f6b53e67e86997e7d60ca02
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.SplitPane;
@@ -55,10 +52,6 @@ public class GUIApplication extends Application {
     public void viewApplication(){
     	
     	try {
-<<<<<<< HEAD
-
-=======
->>>>>>> fecbc02794a786f77f6b53e67e86997e7d60ca02
     		
     		ConfigFacade.load();
     		
@@ -80,7 +73,6 @@ public class GUIApplication extends Application {
 	    	Parent root = FXMLLoader.load(GUIApplication.class.getResource(PATIENTVIEWXML), facade.getResourceBundle());
 			Scene scene = new Scene(root);
 		
-<<<<<<< HEAD
     		
     		/*
 			Scene scene = new Scene(new VBox(), 400, 350);

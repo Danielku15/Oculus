@@ -5,6 +5,8 @@ import java.time.LocalDate;
 import java.util.Date;
 import java.util.ResourceBundle;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -37,6 +39,9 @@ import at.itb13.oculus.model.Patient;
 
 public class PatientView implements Initializable {
 	
+	private static final Color COLOR_FAIL = Color.RED;
+	private static final Color COLOR_SUCCESS = Color.BLACK;
+	
 	private PatientViewControllerImpl _patientController;
 	
 	@FXML
@@ -60,7 +65,7 @@ public class PatientView implements Initializable {
 	@FXML
 	private TextField _firstnameInput;
 	@FXML
-	private Label _secondnameLbl;
+	private Label _lastnameLbl;
 	@FXML
 	private TextField _lastnameInput;
 	@FXML
@@ -132,8 +137,25 @@ public class PatientView implements Initializable {
 		_patientController.close();
 	}
 	
+    void setFirstname(String firstname) {
+		if(!_patientController.setFirstname(firstname)) {
+			_firstnameLbl.setTextFill(COLOR_FAIL);
+		} else {
+			_firstnameLbl.setTextFill(COLOR_SUCCESS);
+		}
+    }
+	
+    void setLastname(String lastname) {
+		if(!_patientController.setLastname(lastname)) {
+			_lastnameLbl.setTextFill(COLOR_FAIL);
+		} else {
+			_lastnameLbl.setTextFill(COLOR_SUCCESS);
+		}
+    }
+    
 	@FXML
     void getFirstname(ActionEvent event) {
+		System.out.println("Firstname");
 		if(!_patientController.setFirstname(_firstnameInput.getText())) {
 			_firstnameLbl.setTextFill(Color.RED);
 		}
@@ -257,7 +279,6 @@ public class PatientView implements Initializable {
 	// Event Listener on Button[#_saveButton].onAction
 	@FXML
 	public void save(ActionEvent event) {
-		System.out.println("tttt");
 		new Thread(new CreatePatientTask(getPatientFromView(), _patientController));
 	}
 	
@@ -269,7 +290,22 @@ public class PatientView implements Initializable {
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		
+		_firstnameInput.focusedProperty().addListener(new ChangeListener<Boolean>() {
+			@Override
+			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+				if(!newValue) {
+					setFirstname(_firstnameInput.getText());
+				}
+			}
+		});
+		_lastnameInput.focusedProperty().addListener(new ChangeListener<Boolean>() {
+			@Override
+			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+				if(!newValue) {
+					setLastname(_lastnameInput.getText());
+				}
+			}
+		});
 	}
 	
 }
