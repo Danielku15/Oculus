@@ -9,9 +9,5 @@ public class MainPresentation {
 		GUIApplication.main(args);
 		
 		//launch(args);
-<<<<<<< HEAD
-			
-=======
->>>>>>> dde4d7217372dbb6499cb576fa4cf450c983a9e1
 	}
 }
