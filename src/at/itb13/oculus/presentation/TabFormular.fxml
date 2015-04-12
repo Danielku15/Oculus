@@ -12,7 +12,7 @@
    <children>
       <ToolBar nodeOrientation="RIGHT_TO_LEFT">
         <items>
-          <Button fx:id="_searchPatient" mnemonicParsing="false" onAction="#searchPatient" text="%createnewpatient">
+          <Button fx:id="_createNewPatient" mnemonicParsing="false" onAction="#createNewTab" text="%createnewpatient">
                <font>
                   <Font size="18.0" />
                </font></Button>
