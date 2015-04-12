@@ -124,8 +124,7 @@ public class FormularView implements Initializable{
 	// Event Listener on Button[#_saveButton].onAction
 	@FXML
 	public void save(ActionEvent event) {
-		_patientController.createPatient();
-		_femaleInput.setSelected(true);
+		//TODO change label name when patient is saved
 		new Thread(new CreatePatientTask(_patientController)).start();
 	}
 	
@@ -230,6 +229,9 @@ public class FormularView implements Initializable{
 			
 		_accordion.setExpandedPane(_patientMasterData);
 		
+		_femaleInput.setSelected(false);
+		_maleInput.setSelected(false);
+		
 		_firstnameInput.focusedProperty().addListener(new ChangeListener<Boolean>() {
 			@Override
 			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
@@ -266,6 +268,7 @@ public class FormularView implements Initializable{
 			@Override
 			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
 				if(!newValue) {
+					//TODO upper case in application layer
 					setGender(_maleInput.getText().toUpperCase());
 				}
 			}
@@ -275,6 +278,8 @@ public class FormularView implements Initializable{
 			@Override
 			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
 				if(!newValue) {
+					System.out.println("dfgh");
+					//TODO upper case in application layer
 					setGender(_femaleInput.getText().toUpperCase());
 				}
 			}
@@ -362,6 +367,7 @@ class CreatePatientTask extends Task<String> {
 	
 	public CreatePatientTask(PatientViewControllerImpl patientController) {
 		_patientController = patientController;	
+		_patientController.createPatient();
 	}
 	
     @Override public String call() {
