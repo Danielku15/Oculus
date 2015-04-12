@@ -8,14 +8,19 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox minWidth="520.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="at.itb13.oculus.presentation.TabFormularView">
+<VBox fx:id="_vBox" minWidth="520.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="at.itb13.oculus.presentation.TabFormularView">
    <children>
       <ToolBar nodeOrientation="RIGHT_TO_LEFT">
         <items>
-          <Button fx:id="_createTabButton" mnemonicParsing="false" onAction="#createNewTab" text="%createnewpatient">
+          <Button fx:id="_searchPatient" mnemonicParsing="false" onAction="#searchPatient" text="%createnewpatient">
                <font>
                   <Font size="18.0" />
                </font></Button>
+            <Button fx:id="_searchPatient" mnemonicParsing="false" onAction="#searchPatient" text="%searchpatient">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Button>
         </items>
          <VBox.margin>
             <Insets />
