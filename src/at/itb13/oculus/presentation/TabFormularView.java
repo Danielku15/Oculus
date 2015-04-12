@@ -1,11 +1,14 @@
 package at.itb13.oculus.presentation;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
 import at.itb13.oculus.lang.LangFacade;
 import at.itb13.oculus.lang.LangKey;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.collections.ObservableList;
@@ -18,7 +21,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-public class TabFormularView {
+public class TabFormularView implements Initializable {
 	
 	public static final String FORMULARVIEWXML = "Formular.fxml";
 	public static final String PATIENTSEARCHVIEW = "PatientSearchView.fxml";
@@ -77,13 +80,9 @@ public class TabFormularView {
 	        
 	        for (int i = 0; i < tabs.size(); i++){
 	        	tabs.get(i).setClosable(true);
-	        	
-	        	if (_tabPane.getTabs().size() < 1){
-	        		
-	        		tabs.get(i).setClosable(false);
-	        	}
 	        }
 	        
+	        // check if only one tab is shown and setCloseable to false
 	        tab.setOnClosed(new EventHandler<javafx.event.Event>() {
                 public void handle(javafx.event.Event e) {             
                 	if (tabs.size() <= 1){
@@ -91,5 +90,21 @@ public class TabFormularView {
         	        }
                 }
 	        });
+	}
+
+	@Override
+	public void initialize(URL arg0, ResourceBundle arg1) {
+		
+		ObservableList<Tab> tabs = _tabPane.getTabs();
+		
+		 // check if only one tab is shown and setCloseable to false
+		_newPatient.setOnClosed(new EventHandler<javafx.event.Event>() {    
+			public void handle(javafx.event.Event e) {             
+            	if (tabs.size() <= 1){
+    	        	tabs.get(0).setClosable(false);
+    	        }
+            }
+        });
+		
 	}
 }
