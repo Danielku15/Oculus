@@ -59,9 +59,9 @@ public class FormularView implements Initializable{
 	@FXML
 	private RadioButton _femaleInput;
 	@FXML
-	private Label _phonenumberLabel;
+	private Label _phoneNumberLabel;
 	@FXML
-	private TextField _phonenumberInput;
+	private TextField _phoneNumberInput;
 	@FXML
 	private Label _emailLabel;
 	@FXML
@@ -79,13 +79,13 @@ public class FormularView implements Initializable{
 	@FXML
 	private TextField _streetInput;
 	@FXML
-	private Label _streetnumberLabel;
+	private Label _streetNumberLabel;
 	@FXML
-	private TextField _streetnumberInput;
+	private TextField _streetNumberInput;
 	@FXML
-	private Label _socialsecuritynumberLabel;
+	private Label _socialSecurityNumberLabel;
 	@FXML
-	private TextField _socialsecuritynumberInput;
+	private TextField _socialSecurityNumberInput;
 	@FXML
 	private Label _employerLabel;
 	@FXML
@@ -111,19 +111,21 @@ public class FormularView implements Initializable{
 		_birthdayInput.setValue(null);
 		_maleInput.setSelected(false);
 		_femaleInput.setSelected(true);
-		_phonenumberInput.setText("");
+		_phoneNumberInput.setText("");
 		_emailInput.setText("");
 		_zipInput.setText("");
 		_countryInput.setText("");
 		_streetInput.setText("");
-		_socialsecuritynumberInput.setText("");
+		_streetNumberInput.setText("");
+		_socialSecurityNumberInput.setText("");
 		_employerInput.setText("");
-		
 	}
 	
 	// Event Listener on Button[#_saveButton].onAction
 	@FXML
 	public void save(ActionEvent event) {
+		_patientController.createPatient();
+		_femaleInput.setSelected(true);
 		new Thread(new CreatePatientTask(_patientController)).start();
 	}
 	
@@ -145,87 +147,87 @@ public class FormularView implements Initializable{
 
 	void setBirthday(Date birthday) {
 		if (!_patientController.setBirthday(birthday)) {
-			_firstnameLabel.setTextFill(COLOR_FAIL);
+			_birthdayLabel.setTextFill(COLOR_FAIL);
 		} else {
-			_firstnameLabel.setTextFill(COLOR_SUCCESS);
+			_birthdayLabel.setTextFill(COLOR_SUCCESS);
 		}
 	}
 
 	void setGender(String gender) {
 		if (!_patientController.setGender(gender)) {
-			_lastnameLabel.setTextFill(COLOR_FAIL);
+			_genderLabel.setTextFill(COLOR_FAIL);
 		} else {
-			_lastnameLabel.setTextFill(COLOR_SUCCESS);
+			_genderLabel.setTextFill(COLOR_SUCCESS);
 		}
 	}
 
 	void setPhoneNumber(String phonenumber) {
 		if (!_patientController.setPhoneNumber(phonenumber)) {
-			_firstnameLabel.setTextFill(COLOR_FAIL);
+			_phoneNumberLabel.setTextFill(COLOR_FAIL);
 		} else {
-			_firstnameLabel.setTextFill(COLOR_SUCCESS);
+			_phoneNumberLabel.setTextFill(COLOR_SUCCESS);
 		}
 	}
 
 	void setEmail(String email) {
 		if (!_patientController.setEmail(email)) {
-			_lastnameLabel.setTextFill(COLOR_FAIL);
+			_emailLabel.setTextFill(COLOR_FAIL);
 		} else {
-			_lastnameLabel.setTextFill(COLOR_SUCCESS);
+			_emailLabel.setTextFill(COLOR_SUCCESS);
 		}
 	}
 
 	void setZip(String zip) {
 		if (!_patientController.setZip(zip)) {
-			_lastnameLabel.setTextFill(COLOR_FAIL);
+			_zipLabel.setTextFill(COLOR_FAIL);
 		} else {
-			_lastnameLabel.setTextFill(COLOR_SUCCESS);
+			_zipLabel.setTextFill(COLOR_SUCCESS);
 		}
 	}
 
 	void setCountry(String country) {
 		if (!_patientController.setCountry(country)) {
-			_lastnameLabel.setTextFill(COLOR_FAIL);
+			_countryLabel.setTextFill(COLOR_FAIL);
 		} else {
-			_lastnameLabel.setTextFill(COLOR_SUCCESS);
+			_countryLabel.setTextFill(COLOR_SUCCESS);
 		}
 	}
 
 	void setStreet(String street) {
 		if (!_patientController.setStreet(street)) {
-			_lastnameLabel.setTextFill(COLOR_FAIL);
+			_streetLabel.setTextFill(COLOR_FAIL);
 		} else {
-			_lastnameLabel.setTextFill(COLOR_SUCCESS);
+			_streetLabel.setTextFill(COLOR_SUCCESS);
 		}
 	}
 
 	void setStreetNumber(String streetnumber) {
 		if (!_patientController.setStreetNumber(streetnumber)) {
-			_lastnameLabel.setTextFill(COLOR_FAIL);
+			_streetNumberLabel.setTextFill(COLOR_FAIL);
 		} else {
-			_lastnameLabel.setTextFill(COLOR_SUCCESS);
+			_streetNumberLabel.setTextFill(COLOR_SUCCESS);
 		}
 	}
 
 	void setSocialSecurityNumber(String socialsecuritynumber) {
 		if (!_patientController.setSocialSecurityNumber(socialsecuritynumber)) {
-			_lastnameLabel.setTextFill(COLOR_FAIL);
+			_socialSecurityNumberLabel.setTextFill(COLOR_FAIL);
 		} else {
-			_lastnameLabel.setTextFill(COLOR_SUCCESS);
+			_socialSecurityNumberLabel.setTextFill(COLOR_SUCCESS);
 		}
 	}
 
 	void setEmployer(String employer) {
 		if (!_patientController.setEmployer(employer)) {
-			_lastnameLabel.setTextFill(COLOR_FAIL);
+			_employerLabel.setTextFill(COLOR_FAIL);
 		} else {
-			_lastnameLabel.setTextFill(COLOR_SUCCESS);
+			_employerLabel.setTextFill(COLOR_SUCCESS);
 		}
 	}
         
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		
+			
 		_accordion.setExpandedPane(_patientMasterData);
 		
 		_firstnameInput.focusedProperty().addListener(new ChangeListener<Boolean>() {
@@ -249,9 +251,13 @@ public class FormularView implements Initializable{
 			@Override
 			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
 				if(!newValue) {
-					LocalDate lDate = _birthdayInput.getValue();
-					Date date = java.sql.Date.valueOf(lDate);				
-					setBirthday(date);
+					if (_birthdayInput.getValue() != null){
+						//TODO has to be implemented in application layer
+						LocalDate lDate = _birthdayInput.getValue();
+						Date date = java.sql.Date.valueOf(lDate);	
+						
+						setBirthday(date);
+					}
 				}
 			}
 		});
@@ -274,11 +280,11 @@ public class FormularView implements Initializable{
 			}
 		});
 		
-		_phonenumberInput.focusedProperty().addListener(new ChangeListener<Boolean>() {
+		_phoneNumberInput.focusedProperty().addListener(new ChangeListener<Boolean>() {
 			@Override
 			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
 				if(!newValue) {
-					setPhoneNumber(_phonenumberInput.getText());
+					setPhoneNumber(_phoneNumberInput.getText());
 				}
 			}
 		});
@@ -320,20 +326,20 @@ public class FormularView implements Initializable{
 			}
 		});
 		
-		_streetnumberInput.focusedProperty().addListener(new ChangeListener<Boolean>() {
+		_streetNumberInput.focusedProperty().addListener(new ChangeListener<Boolean>() {
 			@Override
 			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
 				if(!newValue) {
-					setStreetNumber(_streetnumberInput.getText());
+					setStreetNumber(_streetNumberInput.getText());
 				}
 			}
 		});
 		
-		_socialsecuritynumberInput.focusedProperty().addListener(new ChangeListener<Boolean>() {
+		_socialSecurityNumberInput.focusedProperty().addListener(new ChangeListener<Boolean>() {
 			@Override
 			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
 				if(!newValue) {
-					setSocialSecurityNumber(_socialsecuritynumberInput.getText());
+					setSocialSecurityNumber(_socialSecurityNumberInput.getText());
 				}
 			}
 		});
@@ -355,8 +361,7 @@ class CreatePatientTask extends Task<String> {
 	PatientViewControllerImpl _patientController;
 	
 	public CreatePatientTask(PatientViewControllerImpl patientController) {
-		_patientController = patientController;
-		_patientController.createPatient();
+		_patientController = patientController;	
 	}
 	
     @Override public String call() {

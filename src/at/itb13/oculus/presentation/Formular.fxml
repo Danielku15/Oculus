@@ -75,12 +75,12 @@
                                                       </RadioButton>
                                                    </children>
                                                 </Group>
-                                                <Label fx:id="_phonenumberLabel" text="%phonenumber" GridPane.rowIndex="4">
+                                                <Label fx:id="_phoneNumberLabel" text="%phonenumber" GridPane.rowIndex="4">
                                                    <font>
                                                       <Font size="14.0" />
                                                    </font>
                                                 </Label>
-                                                <TextField fx:id="_phonenumberInput" layoutX="156.0" layoutY="115.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                                                <TextField fx:id="_phoneNumberInput" layoutX="156.0" layoutY="115.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
                                                    <font>
                                                       <Font size="14.0" />
                                                    </font>
@@ -125,22 +125,22 @@
                                                       <Font size="14.0" />
                                                    </font>
                                                 </TextField>
-                                                <Label fx:id="_streetnumberLabel" text="%streetnumber" GridPane.rowIndex="9">
+                                                <Label fx:id="_streetNumberLabel" text="%streetnumber" GridPane.rowIndex="9">
                                                    <font>
                                                       <Font size="14.0" />
                                                    </font>
                                                 </Label>
-                                                <TextField fx:id="_streetnumberInput" layoutX="156.0" layoutY="302.0" GridPane.columnIndex="1" GridPane.rowIndex="9">
+                                                <TextField fx:id="_streetNumberInput" layoutX="156.0" layoutY="302.0" GridPane.columnIndex="1" GridPane.rowIndex="9">
                                                    <font>
                                                       <Font size="14.0" />
                                                    </font>
                                                 </TextField>
-                                                <Label fx:id="_socialsecuritynumberLabel" text="%socialsecuritynumber" GridPane.rowIndex="10">
+                                                <Label fx:id="_socialSecurityNumberLabel" text="%socialsecuritynumber" GridPane.rowIndex="10">
                                                    <font>
                                                       <Font size="14.0" />
                                                    </font>
                                                 </Label>
-                                                <TextField fx:id="_socialsecuritynumberInput" layoutX="142.0" layoutY="182.0" GridPane.columnIndex="1" GridPane.rowIndex="10">
+                                                <TextField fx:id="_socialSecurityNumberInput" layoutX="142.0" layoutY="182.0" GridPane.columnIndex="1" GridPane.rowIndex="10">
                                                    <font>
                                                       <Font size="14.0" />
                                                    </font>
