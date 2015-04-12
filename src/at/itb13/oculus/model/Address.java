@@ -7,8 +7,10 @@ import javax.persistence.Embeddable;
 
 import org.hibernate.search.annotations.Field;
 
+import at.itb13.oculus.application.Searchable;
+
 @Embeddable
-public class Address implements Serializable {
+public class Address implements Serializable, Searchable {
 	private static final long serialVersionUID = -3958731646759638837L;
 	
 	private String _street;

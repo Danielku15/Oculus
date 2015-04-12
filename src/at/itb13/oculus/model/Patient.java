@@ -4,9 +4,6 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
-
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
@@ -20,14 +17,15 @@ import org.hibernate.search.annotations.Field;
 import org.hibernate.search.annotations.Indexed;
 import org.hibernate.search.annotations.IndexedEmbedded;
 
+import at.itb13.oculus.application.Searchable;
 import at.itb13.oculus.database.PersistentObjectImpl;
 
 @Entity
 @Indexed
 @Table(name = "patient", catalog = "oculusdb")
-public class Patient extends PersistentObjectImpl implements java.io.Serializable {
+public class Patient extends PersistentObjectImpl implements java.io.Serializable, Searchable {
 	private static final long serialVersionUID = -7225613928118556705L;
-	
+
 	private String _firstname;
 	private String _lastname;
 	private Date _birthday;
@@ -161,5 +159,4 @@ public class Patient extends PersistentObjectImpl implements java.io.Serializabl
 	public void setAppointments(Set<Appointment> appointments) {
 		_appointments = appointments;
 	}
-
 }

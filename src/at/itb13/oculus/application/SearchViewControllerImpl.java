@@ -6,7 +6,6 @@ import at.itb13.oculus.model.Patient;
 
 public class SearchViewControllerImpl<T> extends Controller implements SearchViewController {
 
-
 	public SearchViewControllerImpl() {
 		super();
 	}

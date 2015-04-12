@@ -31,6 +31,7 @@ class PatientDAO extends GenericDAOImpl<Patient, String> {
 		return getByCriterion(Restrictions.or(Restrictions.like("firstname", name), Restrictions.like("lastname", name)));
 	}
 	
+	@Override
 	public List<Patient> search(String criteria) {		
 		return search(criteria,
 				"firstname",

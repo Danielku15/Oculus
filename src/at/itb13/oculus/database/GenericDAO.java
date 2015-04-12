@@ -25,6 +25,8 @@ interface GenericDAO<T extends PersistentObject, PK extends Serializable> {
 	
 	List<T> search(String criteria, String... fields);
 	
+	List<T> search(String criteria);
+	
 	List<T> getAll();
 	
 	void createOrUpdate(T object);

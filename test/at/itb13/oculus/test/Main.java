@@ -1,27 +1,34 @@
-//package at.itb13.oculus.test;
-//
-//import java.io.IOException;
-//import java.util.List;
-//
-//import at.itb13.oculus.config.ConfigFacade;
-//import at.itb13.oculus.database.DBFacade;
-//import at.itb13.oculus.lang.LangFacade;
-//import at.itb13.oculus.model.Patient;
-//import at.itb13.oculus.util.LoggerUtil;
-//
-//
-//public class Main {
-//	
-//	public static void main(String[] args) {
-//		
+package at.itb13.oculus.test;
+
+import java.io.IOException;
+import java.util.List;
+
+import at.itb13.oculus.application.SearchResult;
+import at.itb13.oculus.config.ConfigFacade;
+import at.itb13.oculus.database.DBFacade;
+import at.itb13.oculus.model.Patient;
+
+public class Main {
+	
+	public static void main(String[] args) {
+		
 ////		GUIApplication.main(args);		
 //
-//		try {
-//			ConfigFacade.load();
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
-//		
+		try {
+			ConfigFacade.load();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		DBFacade dbFacade = new DBFacade();
+
+		SearchResult<Patient> searchResult = dbFacade.search(Patient.class, "Pat");
+		System.out.println(searchResult.getFieldNames());
+		for(List<String> res : searchResult.getResults()) {
+			System.out.println(res);
+		};
+		dbFacade.close();
+		
 //		try {
 //			LangFacade.load();
 //		
@@ -42,7 +49,7 @@
 //		
 ////		Thread indexService = new IndexService();
 ////		indexService.start();
-//		for(Patient patient : dbFacade.searchPatient("sch")) {
+//		for(Patient patient : dbFacade.searchPatient("ika sch")) {
 //			System.out.println(patient.getFirstname());
 //		}
 //		dbFacade.close();
@@ -126,11 +133,5 @@
 ////			facade.commitTransaction();
 // 		
 //		
-////	}
-////	
-////	
-////
-//	}
-////    
-//
-//}
+	}
+}

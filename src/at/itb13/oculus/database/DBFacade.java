@@ -7,6 +7,8 @@ import org.hibernate.Session;
 import org.hibernate.search.FullTextSession;
 import org.hibernate.search.Search;
 
+import at.itb13.oculus.application.SearchResult;
+import at.itb13.oculus.application.Searchable;
 import at.itb13.oculus.model.Anamnesis;
 import at.itb13.oculus.model.Appointment;
 import at.itb13.oculus.model.CalendarEntry;
@@ -186,8 +188,10 @@ public class DBFacade implements AutoCloseable {
 		return ((PatientDAO) _patientDAO).getByName(name);
 	}
 	
-	public List<Patient> searchPatient(String criteria) {		
-		return ((PatientDAO) _patientDAO).search(criteria);
+	@SuppressWarnings("unchecked")
+	public <T extends PersistentObject & Searchable> SearchResult<T> search(Class<T> type, String criteria) {	
+		List<T> result = (List<T>) _daoMap.get(type).search(criteria);
+		return new SearchResult<T>(type, result);
 	}
 	
 	public List<ChangeLog> getChangeLogsGreaterThan(int number, int maxResults) {
