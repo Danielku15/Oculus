@@ -12,6 +12,6 @@ public interface SearchViewController {
 	
 	// operations
 	void search();
-	List<List<String>> getResults();	
+	List<String[]> getResults();	
 	List<String> getFieldNames();
 }

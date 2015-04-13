@@ -5,13 +5,10 @@
  */
 package at.itb13.oculus.presentation;
 
-import java.util.Arrays;
-
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -32,7 +29,6 @@ import at.itb13.oculus.model.Patient;
  */
 public class PatientSearchView {
 
-	private String[][] _patientsList;
 	private SearchViewControllerImpl<Patient> _searchViewController;
 
 	@FXML
@@ -44,6 +40,19 @@ public class PatientSearchView {
 	@FXML
 	private TableColumn<String[], String> _lastname;
 	@FXML
+<<<<<<< HEAD
+=======
+	private TableColumn<String[], String> _street;
+	@FXML
+	private TableColumn<String[], String> _streetnumber;
+	@FXML
+	private TableColumn<String[], String> _zip;
+	@FXML
+	private TableColumn<String[], String> _city;
+	@FXML
+	private TableColumn<String[], String> _country;
+	@FXML
+>>>>>>> origin/master
 	private TableColumn<String[], String> _socialsecuritynumber;
 	@FXML
 	private Button _patientsearchButton;
@@ -87,17 +96,6 @@ public class PatientSearchView {
 			}
 		});
 		
-		_address.setCellValueFactory(new Callback<CellDataFeatures<String[], String>, ObservableValue<String>>() {
-
-			public javafx.beans.value.ObservableValue<String> call(TableColumn.CellDataFeatures<String[], String> param) {
-				if (param.getValue()[2] != null) {
-					return new SimpleStringProperty(param.getValue()[2]);
-				} else {
-					return new SimpleStringProperty("");
-				}
-			}
-		});
-		
 		_socialsecuritynumber.setCellValueFactory(new Callback<CellDataFeatures<String[], String>, ObservableValue<String>>() {
 
 			public javafx.beans.value.ObservableValue<String> call(TableColumn.CellDataFeatures<String[], String> param) {
@@ -123,18 +121,9 @@ public class PatientSearchView {
 		}
 	}
 	
-	public void search() {
+	@FXML
+	public void search(ActionEvent event) {
 		new Thread(new SearchTask()).start();
-	}
-	
-	
-	
-	public void showAllPatientsInTable(ActionEvent e) {
-		_patientsList = _searchViewController.search(_patientsearchInput
-				.getText());
-		ObservableList<String[]> patients = FXCollections
-				.observableList(Arrays.asList(_patientsList));
-		_tableView.setItems(patients);
 	}
 	
 	private class SearchTask extends Task<Void> {
@@ -145,8 +134,7 @@ public class PatientSearchView {
 	    }
 	    
 	    @Override protected void succeeded() {
-	    	ObservableList<String[]> results = FXCollections.observableList(_searchViewController.getResults());
-	    	_tableView.setItems(results);
+	    	_tableView.setItems(FXCollections.observableList(_searchViewController.getResults()));
 	    }
 	}
 }

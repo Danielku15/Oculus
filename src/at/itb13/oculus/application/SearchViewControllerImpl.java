@@ -39,7 +39,7 @@ public class SearchViewControllerImpl<T extends PersistentObject & Searchable> e
 	}
 
 	@Override
-	public List<List<String>> getResults() {
+	public List<String[]> getResults() {
 		if(_searchResult != null) {
 			return _searchResult.getResults();
 		}
