@@ -98,7 +98,11 @@ public class PatientFormularView implements Initializable{
 	private Accordion _accordion;
 	@FXML
     private Tab _newPatient;
-	
+    @FXML
+    private Label _cityLabel;
+    @FXML
+    private TextField _cityInput;
+    
 	public PatientFormularView() {
 		_patientController = new PatientViewControllerImpl();		
 	}	
@@ -144,7 +148,7 @@ public class PatientFormularView implements Initializable{
 		}
 	}
 
-	void setBirthday(Date birthday) {
+	void setBirthday(LocalDate birthday) {
 		if (!_patientController.setBirthday(birthday)) {
 			_birthdayLabel.setTextFill(COLOR_FAIL);
 		} else {
@@ -207,6 +211,14 @@ public class PatientFormularView implements Initializable{
 			_streetNumberLabel.setTextFill(COLOR_SUCCESS);
 		}
 	}
+	
+	void setCity(String city) {
+		if (!_patientController.setCity(city)) {
+			_streetNumberLabel.setTextFill(COLOR_FAIL);
+		} else {
+			_streetNumberLabel.setTextFill(COLOR_SUCCESS);
+		}
+	}
 
 	void setSocialSecurityNumber(String socialsecuritynumber) {
 		if (!_patientController.setSocialSecurityNumber(socialsecuritynumber)) {
@@ -253,14 +265,8 @@ public class PatientFormularView implements Initializable{
 		_birthdayInput.focusedProperty().addListener(new ChangeListener<Boolean>() {
 			@Override
 			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-				if(!newValue) {
-					if (_birthdayInput.getValue() != null){
-						//TODO has to be implemented in application layer
-						LocalDate lDate = _birthdayInput.getValue();
-						Date date = java.sql.Date.valueOf(lDate);	
-						
-						setBirthday(date);
-					}
+				if(!newValue) {	
+					setBirthday(_birthdayInput.getValue());			
 				}
 			}
 		});
@@ -336,6 +342,15 @@ public class PatientFormularView implements Initializable{
 			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
 				if(!newValue) {
 					setStreetNumber(_streetNumberInput.getText());
+				}
+			}
+		});
+		
+		_cityInput.focusedProperty().addListener(new ChangeListener<Boolean>() {
+			@Override
+			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+				if(!newValue) {
+					setCity(_cityInput.getText());
 				}
 			}
 		});
