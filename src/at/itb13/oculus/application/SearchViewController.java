@@ -1,8 +1,17 @@
 package at.itb13.oculus.application;
 
-public interface SearchViewController extends AutoCloseable {
+import java.util.List;
+
+public interface SearchViewController {
 	
-	void close();
+	// getter
+	String getCriteria();
 	
-	String[][] search(String criteria);
+	// setter
+	boolean setCriteria(String criteria);
+	
+	// operations
+	void search();
+	List<List<String>> getResults();	
+	List<String> getFieldNames();
 }

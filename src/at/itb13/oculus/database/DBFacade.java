@@ -7,8 +7,6 @@ import org.hibernate.Session;
 import org.hibernate.search.FullTextSession;
 import org.hibernate.search.Search;
 
-import at.itb13.oculus.application.SearchResult;
-import at.itb13.oculus.application.Searchable;
 import at.itb13.oculus.model.Anamnesis;
 import at.itb13.oculus.model.Appointment;
 import at.itb13.oculus.model.CalendarEntry;
@@ -28,6 +26,8 @@ import at.itb13.oculus.model.Queue;
 import at.itb13.oculus.model.QueueEntry;
 import at.itb13.oculus.model.Receptionist;
 import at.itb13.oculus.model.Referral;
+import at.itb13.oculus.model.SearchResult;
+import at.itb13.oculus.model.Searchable;
 import at.itb13.oculus.model.SickNote;
 import at.itb13.oculus.model.User;
 import at.itb13.oculus.model.UserRight;

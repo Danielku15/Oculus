@@ -3,10 +3,10 @@ package at.itb13.oculus.test;
 import java.io.IOException;
 import java.util.List;
 
-import at.itb13.oculus.application.SearchResult;
 import at.itb13.oculus.config.ConfigFacade;
 import at.itb13.oculus.database.DBFacade;
 import at.itb13.oculus.model.Patient;
+import at.itb13.oculus.model.SearchResult;
 
 public class Main {
 	

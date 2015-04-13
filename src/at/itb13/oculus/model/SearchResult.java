@@ -1,4 +1,4 @@
-package at.itb13.oculus.application;
+package at.itb13.oculus.model;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;

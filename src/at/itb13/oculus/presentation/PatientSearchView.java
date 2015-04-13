@@ -6,11 +6,7 @@
 package at.itb13.oculus.presentation;
 
 import java.util.Arrays;
-import java.util.List;
 
-import at.itb13.oculus.application.SearchViewControllerImpl;
-import at.itb13.oculus.model.Patient;
-import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -18,12 +14,15 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellDataFeatures;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.paint.Color;
 import javafx.util.Callback;
+import at.itb13.oculus.application.SearchViewControllerImpl;
+import at.itb13.oculus.model.Patient;
 
 /**
  * @author Manu
@@ -33,10 +32,6 @@ public class PatientSearchView {
 
 	private String[][] _patientsList;
 	private SearchViewControllerImpl<Patient> _searchViewController;
-
-	public PatientSearchView() {
-		_searchViewController = new SearchViewControllerImpl<Patient>();
-	}
 
 	@FXML
 	private TextField _patientsearchInput;
@@ -52,8 +47,11 @@ public class PatientSearchView {
 	private TableColumn<String[], String> _socialsecuritynumber;
 	@FXML
 	private Button _patientsearchButton;
-
 	
+	public PatientSearchView() {
+		_searchViewController = new SearchViewControllerImpl<Patient>(Patient.class);
+	}
+
 	// für string array: http://stackoverflow.com/questions/20769723/populate-tableview-with-two-dimensional-array <3
 	@FXML
 	private void initialize() {
@@ -103,6 +101,18 @@ public class PatientSearchView {
 		
 	}
 
+	public void setCriteria(String criteria) {
+		adjustColor(_patientsearch, _searchViewController.setCriteria(criteria));
+	}
+	
+	public void adjustColor(Label label, boolean valid) {
+		if(valid) {
+			label.setTextFill(Color.BLACK);
+		} else {
+			label.setTextFill(Color.RED);
+		}
+	}
+	
 	public void showAllPatientsInTable(ActionEvent e) {
 		_patientsList = _searchViewController.search(_patientsearchInput
 				.getText());
@@ -110,5 +120,4 @@ public class PatientSearchView {
 				.observableList(Arrays.asList(_patientsList));
 		_tableView.setItems(patients);
 	}
-
 }

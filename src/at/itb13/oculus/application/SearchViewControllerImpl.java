@@ -2,31 +2,56 @@ package at.itb13.oculus.application;
 
 import java.util.List;
 
-import at.itb13.oculus.model.Patient;
+import at.itb13.oculus.database.PersistentObject;
+import at.itb13.oculus.model.SearchResult;
+import at.itb13.oculus.model.Searchable;
 
-public class SearchViewControllerImpl<T> extends Controller implements SearchViewController {
-
-	public SearchViewControllerImpl() {
-		super();
-	}
+public class SearchViewControllerImpl<T extends PersistentObject & Searchable> extends Controller implements SearchViewController {
 	
-	/* (non-Javadoc)
-	 * @see at.itb13.oculus.application.SearchViewController#search(java.lang.String)
-	 */	
+	private Class<T> _type;
+	private String _criteria;
+	private SearchResult<T> _searchResult;
+
+	public SearchViewControllerImpl(Class<T> type) {
+		super();
+		_type = type;
+	}
+
 	@Override
-	public String[][] search(String criteria) {
-		
-		List<Patient> list =  _database.getSearchedPatient(criteria);
-		
-		String[][] array = new String[list.size()][];
-		
-		for(int i = 0; i < list.size(); i++) {
-			Patient p = list.get(i);
-			String[] row = new String[] {p.getFirstname(), p.getLastname(), null, p.getSocialSecurityNumber()};
-			array[i] = row;
+	public String getCriteria() {
+		return _criteria;
+	}
+
+	@Override
+	public boolean setCriteria(String criteria) {
+		if((criteria != null) && (!criteria.trim().isEmpty())) {
+			_criteria = criteria;
+			return true;
 		}
-		
-		return array;
+		return false;
+	}
+
+	@Override
+	public void search() {
+		if(_criteria != null) {
+			_searchResult = _database.search(_type, _criteria);
+		}
+	}
+
+	@Override
+	public List<List<String>> getResults() {
+		if(_searchResult != null) {
+			return _searchResult.getResults();
+		}
+		return null;
+	}
+
+	@Override
+	public List<String> getFieldNames() {
+		if(_searchResult != null) {
+			return _searchResult.getFieldNames();
+		}
+		return null;
 	}
 
 }

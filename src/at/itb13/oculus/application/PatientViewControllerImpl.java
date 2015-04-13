@@ -1,5 +1,8 @@
 package at.itb13.oculus.application;
 
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Date;
 
 import org.hibernate.HibernateException;
@@ -13,6 +16,7 @@ public class PatientViewControllerImpl extends Controller implements PatientView
 	private Patient _patient;
 	
 	public PatientViewControllerImpl() {
+		super();
 		createPatient();
 	}
 
@@ -105,9 +109,11 @@ public class PatientViewControllerImpl extends Controller implements PatientView
 	}
 
 	@Override
-	public boolean setBirthday(Date birthday) {
+	public boolean setBirthday(LocalDate birthday) {
 		if(birthday != null) {
-			_patient.setBirthday(birthday);
+			Instant instant = birthday.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant();
+			Date date = Date.from(instant);
+			_patient.setBirthday(date);
 			return true;
 		}
 		return false;
