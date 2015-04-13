@@ -26,6 +26,7 @@ import at.itb13.oculus.model.Queue;
 import at.itb13.oculus.model.QueueEntry;
 import at.itb13.oculus.model.Receptionist;
 import at.itb13.oculus.model.Referral;
+import at.itb13.oculus.model.SearchMap;
 import at.itb13.oculus.model.SearchResult;
 import at.itb13.oculus.model.Searchable;
 import at.itb13.oculus.model.SickNote;
@@ -189,9 +190,9 @@ public class DBFacade implements AutoCloseable {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public <T extends PersistentObject & Searchable> SearchResult<T> search(Class<T> type, String criteria) {	
+	public <T extends PersistentObject & Searchable> SearchResult<T> search(Class<T> type, SearchMap<T> searchMap, String criteria) {	
 		List<T> result = (List<T>) _daoMap.get(type).search(criteria);
-		return new SearchResult<T>(type, result);
+		return new SearchResult<T>(searchMap, result);
 	}
 	
 	public List<ChangeLog> getChangeLogsGreaterThan(int number, int maxResults) {

@@ -4,18 +4,22 @@ import java.util.List;
 import java.util.Map;
 
 import at.itb13.oculus.database.PersistentObject;
+import at.itb13.oculus.model.SearchMap;
 import at.itb13.oculus.model.SearchResult;
 import at.itb13.oculus.model.Searchable;
 
 public class SearchViewControllerImpl<T extends PersistentObject & Searchable> extends Controller implements SearchViewController {
 	
 	private Class<T> _type;
+	private SearchMap<T> _searchMap;
+	
 	private String _criteria;
 	private SearchResult<T> _searchResult;
 
 	public SearchViewControllerImpl(Class<T> type) {
 		super();
 		_type = type;
+		_searchMap = new SearchMap<T>(type);
 	}
 
 	@Override
@@ -35,7 +39,7 @@ public class SearchViewControllerImpl<T extends PersistentObject & Searchable> e
 	@Override
 	public void search() {
 		if(_criteria != null) {
-			_searchResult = _database.search(_type, _criteria);
+			_searchResult = _database.search(_type, _searchMap, _criteria);
 		}
 	}
 
@@ -49,10 +53,6 @@ public class SearchViewControllerImpl<T extends PersistentObject & Searchable> e
 
 	@Override
 	public Map<String, Integer> getFieldMap() {
-		if(_searchResult != null) {
-			return _searchResult.getFieldMap();
-		}
-		return null;
+		return _searchMap.getFieldMap();
 	}
-
 }

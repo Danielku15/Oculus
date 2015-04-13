@@ -5,6 +5,7 @@ package at.itb13.oculus.lang;
  * @author Patrick
  */
 public enum LangKey {
+	ID("id"),
 	DOCTOR("doctor"),
 	RECEPTIONIST("receptionist"),
 	ORTHOPTIST("orthoptist"),
@@ -16,7 +17,8 @@ public enum LangKey {
 	FEMALE("female"),
 	PHONENUMBER("phonenumber"),
 	EMAIL("email"),
-	ZIPCODE("zip"),
+	ZIP("zip"),
+	CITY("city"),
 	COUNTRY("country"),
 	STREET("street"),
 	STREETNUMBER("streetnumber"),

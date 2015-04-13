@@ -26,16 +26,7 @@
       <ScrollPane layoutY="40.0" minHeight="400.0" minWidth="550.0" prefViewportHeight="400.0" prefViewportWidth="550.0">
          <content>
             <TableView fx:id="_tableView" editable="true" layoutY="40.0" minHeight="400.0" minWidth="550.0" tableMenuButtonVisible="true">
-              <columns>
-                <TableColumn fx:id="_firstname" prefWidth="94.0" text="%firstname" />
-                <TableColumn fx:id="_lastname" prefWidth="91.0" text="%lastname" />
-                  <TableColumn fx:id="_socialsecuritynumber" prefWidth="168.0" text="%socialsecuritynumber" />
-                  <TableColumn fx:id="_street" prefWidth="100.0" text="%street" />
-                  <TableColumn fx:id="_streetnumber" prefWidth="75.0" text="%streetnumber" />
-                  <TableColumn fx:id="_zip" prefWidth="75.0" text="%zip" />
-                  <TableColumn fx:id="_city" prefWidth="75.0" text="%city" />
-                  <TableColumn fx:id="_country" prefWidth="75.0" text="%country" />
-              </columns>
+              <columns />
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
