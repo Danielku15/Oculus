@@ -25,14 +25,13 @@ public class SearchResult<T extends PersistentObject & Searchable> {
 
 	private List<T> _searchables;
 	private Map<String, List<Method>> _methodMap;
-	private List<String> _fieldNames;
+	private Map<String, Integer> _fieldMap;
 	private List<String[]> _results;
 	
 	public SearchResult(Class<T> type, List<T> searchables) {
 		_searchables = searchables;
 		_methodMap = new HashMap<String, List<Method>>();
 		initMethodMap(type, new HashSet<Class<?>>(), null);
-		initResults();
 	}
 	
 	private void initMethodMap(Class<?> type, Set<Class<?>> closeList, List<Method> methodList) {
@@ -97,17 +96,21 @@ public class SearchResult<T extends PersistentObject & Searchable> {
 		return null;
 	}
 	
-	public List<String> getFieldNames() {
-		if(_fieldNames == null) {
-			initFieldNames();
+	public Map<String, Integer> getFieldMap() {
+		if(_fieldMap == null) {
+			initFieldMap();
 		}
-		return _fieldNames;
+		return _fieldMap;
 	}
 	
-	private void initFieldNames() {
-		_fieldNames = new ArrayList<String>();
-		_fieldNames.add("id");
-		_fieldNames.addAll(_methodMap.keySet());
+	private void initFieldMap() {
+		_fieldMap = new HashMap<String, Integer>();
+		
+		int index = 0;
+		_fieldMap.put("id", index++);
+		for(String key : _methodMap.keySet()) {
+			_fieldMap.put(key, index++);
+		}
 	}
 	
 	public List<String[]> getResults() {

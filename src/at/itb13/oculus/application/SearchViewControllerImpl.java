@@ -1,6 +1,7 @@
 package at.itb13.oculus.application;
 
 import java.util.List;
+import java.util.Map;
 
 import at.itb13.oculus.database.PersistentObject;
 import at.itb13.oculus.model.SearchResult;
@@ -47,9 +48,9 @@ public class SearchViewControllerImpl<T extends PersistentObject & Searchable> e
 	}
 
 	@Override
-	public List<String> getFieldNames() {
+	public Map<String, Integer> getFieldMap() {
 		if(_searchResult != null) {
-			return _searchResult.getFieldNames();
+			return _searchResult.getFieldMap();
 		}
 		return null;
 	}

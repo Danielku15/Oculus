@@ -124,6 +124,7 @@ public class Patient extends PersistentObjectImpl implements java.io.Serializabl
 	}
 
 	@Column(name = "socialsecuritynumber")
+	@Field
 	public String getSocialSecurityNumber() {
 		return _socialSecurityNumber;
 	}

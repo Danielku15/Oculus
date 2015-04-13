@@ -5,6 +5,8 @@
  */
 package at.itb13.oculus.presentation;
 
+import java.util.Map;
+
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -56,6 +58,8 @@ public class PatientSearchView {
 	@FXML
 	private Button _searchButton;
 	
+	private Map<String, Integer> _fieldMap; 
+	
 	public PatientSearchView() {
 		_searchViewController = new SearchViewControllerImpl<Patient>(Patient.class);
 	}
@@ -74,40 +78,63 @@ public class PatientSearchView {
 		});
 		
 		_firstname.setCellValueFactory(new Callback<CellDataFeatures<String[], String>, ObservableValue<String>>() {
-
 					public javafx.beans.value.ObservableValue<String> call(TableColumn.CellDataFeatures<String[], String> param) {
-						if (param.getValue()[0] != null) {
-							return new SimpleStringProperty(param.getValue()[0]);
-						} else {
-							return new SimpleStringProperty("");
-						}
+						return mapColumn(param, "firstname");
 					}
 				});
 		
 		_lastname.setCellValueFactory(new Callback<CellDataFeatures<String[], String>, ObservableValue<String>>() {
-
 			public javafx.beans.value.ObservableValue<String> call(TableColumn.CellDataFeatures<String[], String> param) {
-				if (param.getValue()[1] != null) {
-					return new SimpleStringProperty(param.getValue()[1]);
-				} else {
-					return new SimpleStringProperty("");
-				}
+				return mapColumn(param, "lastname");
+			}
+		});
+		
+		_street.setCellValueFactory(new Callback<CellDataFeatures<String[], String>, ObservableValue<String>>() {
+			public javafx.beans.value.ObservableValue<String> call(TableColumn.CellDataFeatures<String[], String> param) {
+				return mapColumn(param, "street");
+			}
+		});
+		
+		_streetnumber.setCellValueFactory(new Callback<CellDataFeatures<String[], String>, ObservableValue<String>>() {
+			public javafx.beans.value.ObservableValue<String> call(TableColumn.CellDataFeatures<String[], String> param) {
+				return mapColumn(param, "streetnumber");
+			}
+		});
+		
+		_zip.setCellValueFactory(new Callback<CellDataFeatures<String[], String>, ObservableValue<String>>() {
+			public javafx.beans.value.ObservableValue<String> call(TableColumn.CellDataFeatures<String[], String> param) {
+				return mapColumn(param, "zip");
+			}
+		});
+		
+		_city.setCellValueFactory(new Callback<CellDataFeatures<String[], String>, ObservableValue<String>>() {
+			public javafx.beans.value.ObservableValue<String> call(TableColumn.CellDataFeatures<String[], String> param) {
+				return mapColumn(param, "city");
+			}
+		});
+		
+		_country.setCellValueFactory(new Callback<CellDataFeatures<String[], String>, ObservableValue<String>>() {
+			public javafx.beans.value.ObservableValue<String> call(TableColumn.CellDataFeatures<String[], String> param) {
+				return mapColumn(param, "country");
 			}
 		});
 		
 		_socialsecuritynumber.setCellValueFactory(new Callback<CellDataFeatures<String[], String>, ObservableValue<String>>() {
-
 			public javafx.beans.value.ObservableValue<String> call(TableColumn.CellDataFeatures<String[], String> param) {
-				if (param.getValue()[3] != null) {
-					return new SimpleStringProperty(param.getValue()[3]);
-				} else {
-					return new SimpleStringProperty("");
-				}
+				return mapColumn(param, "socialsecuritynumber");
 			}
 		});
-		
 	}
 
+	private javafx.beans.value.ObservableValue<String> mapColumn(TableColumn.CellDataFeatures<String[], String> param, String key) {
+		int i = _fieldMap.get(key);
+		if (param.getValue()[i] != null) {
+			return new SimpleStringProperty(param.getValue()[i]);
+		} else {
+			return new SimpleStringProperty("");
+		}
+	}
+	
 	public void setCriteria(String criteria) {
 		adjustColor(_searchTermLabel, _searchViewController.setCriteria(criteria));
 	}
@@ -129,6 +156,7 @@ public class PatientSearchView {
 		
 	    @Override public Void call() {
 	    	_searchViewController.search();
+	    	_fieldMap = _searchViewController.getFieldMap();
 	    	return null;
 	    }
 	    

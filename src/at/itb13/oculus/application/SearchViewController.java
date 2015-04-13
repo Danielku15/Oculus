@@ -1,6 +1,7 @@
 package at.itb13.oculus.application;
 
 import java.util.List;
+import java.util.Map;
 
 public interface SearchViewController {
 	
@@ -13,5 +14,5 @@ public interface SearchViewController {
 	// operations
 	void search();
 	List<String[]> getResults();	
-	List<String> getFieldNames();
+	Map<String, Integer> getFieldMap();
 }
