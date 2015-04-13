@@ -7,9 +7,9 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="400.0" prefWidth="550.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="at.itb13.oculus.presentation.PatientSearchView">
+<AnchorPane fx:id="_anchor" prefHeight="400.0" prefWidth="550.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="at.itb13.oculus.presentation.PatientSearchView">
    <children>
-      <Pane layoutY="-1.0" prefHeight="40.0" prefWidth="550.0">
+      <Pane layoutY="-1.0" prefHeight="40.0" prefWidth="550.0" AnchorPane.topAnchor="0.0" >
          <children>
             <TextField fx:id="_searchInput" layoutX="122.0" layoutY="8.0" prefHeight="26.0" prefWidth="333.0" />
             <Button fx:id="_searchButton" layoutX="465.0" layoutY="8.0" mnemonicParsing="false" onAction="#search" prefHeight="25.0" prefWidth="81.0" text="Search">
@@ -23,9 +23,9 @@
             </Label>
          </children>
       </Pane>
-      <ScrollPane layoutY="40.0" minHeight="400.0" minWidth="550.0" prefViewportHeight="400.0" prefViewportWidth="550.0">
+      <ScrollPane layoutY="40.0" minHeight="400.0" minWidth="550.0" prefViewportHeight="400.0" prefViewportWidth="550.0" AnchorPane.topAnchor="40.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" >
          <content>
-            <TableView fx:id="_tableView" editable="true" layoutY="40.0" minHeight="400.0" minWidth="550.0" tableMenuButtonVisible="true">
+            <TableView fx:id="_tableView" editable="true" layoutY="40.0" minHeight="400.0" minWidth="550.0" tableMenuButtonVisible="true" AnchorPane.topAnchor="40.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" >
               <columns />
                <opaqueInsets>
                   <Insets />
