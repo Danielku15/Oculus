@@ -44,8 +44,6 @@ public class PatientSearchView {
 	@FXML
 	private TableColumn<String[], String> _lastname;
 	@FXML
-	private TableColumn<String[], String> _address;
-	@FXML
 	private TableColumn<String[], String> _socialsecuritynumber;
 	@FXML
 	private Button _patientsearchButton;

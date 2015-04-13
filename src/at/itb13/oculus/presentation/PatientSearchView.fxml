@@ -11,8 +11,8 @@
    <children>
       <Pane layoutY="-1.0" prefHeight="40.0" prefWidth="550.0">
          <children>
-            <TextField fx:id="_patientsearchInput" layoutX="122.0" layoutY="8.0" prefHeight="26.0" prefWidth="333.0" />
-            <Button fx:id="_patientsearchButton" layoutX="465.0" layoutY="8.0" mnemonicParsing="false" onAction="#showAllPatientsInTable" prefHeight="25.0" prefWidth="81.0" text="Search">
+            <TextField fx:id="_searchInput" layoutX="122.0" layoutY="8.0" prefHeight="26.0" prefWidth="333.0" />
+            <Button fx:id="_searchButton" layoutX="465.0" layoutY="8.0" mnemonicParsing="false" onAction="#showAllPatientsInTable" prefHeight="25.0" prefWidth="81.0" text="Search">
                <padding>
                   <Insets left="10.0" right="10.0" />
                </padding></Button>
@@ -34,6 +34,7 @@
                   <TableColumn fx:id="_streetnumber" prefWidth="75.0" text="\%streetnumber" />
                   <TableColumn fx:id="_zip" prefWidth="75.0" text="\%zip" />
                   <TableColumn fx:id="_city" prefWidth="75.0" text="\%city" />
+                  <TableColumn fx:id="_country" prefWidth="75.0" text="\%country" />
               </columns>
                <opaqueInsets>
                   <Insets />
