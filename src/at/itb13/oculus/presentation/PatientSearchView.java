@@ -40,8 +40,6 @@ public class PatientSearchView {
 	@FXML
 	private TableColumn<String[], String> _lastname;
 	@FXML
-<<<<<<< HEAD
-=======
 	private TableColumn<String[], String> _street;
 	@FXML
 	private TableColumn<String[], String> _streetnumber;
@@ -52,7 +50,6 @@ public class PatientSearchView {
 	@FXML
 	private TableColumn<String[], String> _country;
 	@FXML
->>>>>>> origin/master
 	private TableColumn<String[], String> _socialsecuritynumber;
 	@FXML
 	private Button _patientsearchButton;
