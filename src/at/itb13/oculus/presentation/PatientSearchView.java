@@ -8,9 +8,11 @@ package at.itb13.oculus.presentation;
 import java.util.Arrays;
 
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -55,6 +57,16 @@ public class PatientSearchView {
 	// für string array: http://stackoverflow.com/questions/20769723/populate-tableview-with-two-dimensional-array <3
 	@FXML
 	private void initialize() {
+		
+		_patientsearchInput.focusedProperty().addListener(new ChangeListener<Boolean>() {
+			@Override
+			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+				if(!newValue) {
+					setCriteria(_patientsearchInput.getText());
+				}
+			}
+		});
+		
 		_firstname.setCellValueFactory(new Callback<CellDataFeatures<String[], String>, ObservableValue<String>>() {
 
 					public javafx.beans.value.ObservableValue<String> call(TableColumn.CellDataFeatures<String[], String> param) {
@@ -113,11 +125,29 @@ public class PatientSearchView {
 		}
 	}
 	
+	public void search() {
+		new Thread(new SearchTask()).start();
+	}
+	
+	
+	
 	public void showAllPatientsInTable(ActionEvent e) {
 		_patientsList = _searchViewController.search(_patientsearchInput
 				.getText());
 		ObservableList<String[]> patients = FXCollections
 				.observableList(Arrays.asList(_patientsList));
 		_tableView.setItems(patients);
+	}
+	
+	private class SearchTask extends Task<Void> {
+		
+	    @Override public Void call() {
+	    	_searchViewController.search();
+	    	return null;
+	    }
+	    
+	    @Override protected void succeeded() {
+	    	_searchViewController.getResults();
+	    }
 	}
 }
