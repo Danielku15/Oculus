@@ -167,6 +167,7 @@ public class PatientViewControllerImpl extends Controller implements PatientView
 			Address address = _patient.getAddress();
 			if(address != null) {
 				address.setStreet(street);
+				return true;
 			}
 		}
 		return false;
@@ -178,6 +179,7 @@ public class PatientViewControllerImpl extends Controller implements PatientView
 			Address address = _patient.getAddress();
 			if(address != null) {
 				address.setStreetNumber(streetNumber);
+				return true;
 			}
 		}
 		return false;
@@ -189,6 +191,7 @@ public class PatientViewControllerImpl extends Controller implements PatientView
 			Address address = _patient.getAddress();
 			if(address != null) {
 				address.setZip(zip);
+				return true;
 			}
 		}
 		return false;
@@ -200,6 +203,7 @@ public class PatientViewControllerImpl extends Controller implements PatientView
 			Address address = _patient.getAddress();
 			if(address != null) {
 				address.setCity(city);
+				return true;
 			}
 		}
 		return false;
@@ -211,6 +215,7 @@ public class PatientViewControllerImpl extends Controller implements PatientView
 			Address address = _patient.getAddress();
 			if(address != null) {
 				address.setCountry(country);
+				return true;
 			}
 		}
 		return false;
@@ -219,6 +224,7 @@ public class PatientViewControllerImpl extends Controller implements PatientView
 	@Override
 	public void createPatient() {
 		_patient = new Patient();
+		_patient.setAddress(new Address());
 	}
 
 	@Override

@@ -4,26 +4,26 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.ResourceBundle;
-import at.itb13.oculus.application.PatientViewControllerImpl;
-import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
-import javafx.scene.control.ToggleGroup;
+
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.Group;
 import javafx.scene.control.Accordion;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TitledPane;
+import javafx.scene.control.Button;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
-import javafx.scene.control.DatePicker;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TextField;
+import javafx.scene.control.TitledPane;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.paint.Color;
-import javafx.scene.Group;
-
+import at.itb13.oculus.application.PatientViewControllerImpl;
 
 public class FormularView implements Initializable{
 	
@@ -240,6 +240,7 @@ public class FormularView implements Initializable{
 				}
 			}
 		});
+		
 		_lastnameInput.focusedProperty().addListener(new ChangeListener<Boolean>() {
 			@Override
 			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
@@ -278,7 +279,6 @@ public class FormularView implements Initializable{
 			@Override
 			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
 				if(!newValue) {
-					System.out.println("dfgh");
 					//TODO upper case in application layer
 					setGender(_femaleInput.getText().toUpperCase());
 				}
@@ -353,7 +353,7 @@ public class FormularView implements Initializable{
 			@Override
 			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
 				if(!newValue) {
-					setEmployer(_emailInput.getText());
+					setEmployer(_employerInput.getText());
 				}
 			}
 		});
@@ -367,7 +367,6 @@ class CreatePatientTask extends Task<String> {
 	
 	public CreatePatientTask(PatientViewControllerImpl patientController) {
 		_patientController = patientController;	
-		_patientController.createPatient();
 	}
 	
     @Override public String call() {
@@ -376,16 +375,11 @@ class CreatePatientTask extends Task<String> {
     }
     
     @Override protected void succeeded() {
-    	
-    	
     }
     
     @Override protected void cancelled() {
-    	
     }
     
     @Override protected void failed() {
-    	
     }
-
 }
