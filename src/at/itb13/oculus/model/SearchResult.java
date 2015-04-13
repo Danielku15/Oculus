@@ -26,7 +26,7 @@ public class SearchResult<T extends PersistentObject & Searchable> {
 	private List<T> _searchables;
 	private Map<String, List<Method>> _methodMap;
 	private List<String> _fieldNames;
-	private List<List<String>> _results;
+	private List<String[]> _results;
 	
 	public SearchResult(Class<T> type, List<T> searchables) {
 		_searchables = searchables;
@@ -110,7 +110,7 @@ public class SearchResult<T extends PersistentObject & Searchable> {
 		_fieldNames.addAll(_methodMap.keySet());
 	}
 	
-	public List<List<String>> getResults() {
+	public List<String[]> getResults() {
 		if(_results == null) {
 			initResults();
 		}
@@ -118,16 +118,17 @@ public class SearchResult<T extends PersistentObject & Searchable> {
 	}
 	
 	private void initResults() {
-		_results = new ArrayList<List<String>>(_searchables.size());
+		_results = new ArrayList<String[]>(_searchables.size());
 		for(Searchable searchable : _searchables) {
-			List<String> result = new ArrayList<String>(_methodMap.size() + 1);
-			result.add(((PersistentObject) searchable).getID());
+			int i = 0;
+			String[] result = new String[_methodMap.size() + 1]	;
+			result[i++] = ((PersistentObject) searchable).getID();
 			for(List<Method> methodList : _methodMap.values()) {
 				Object object = invokeRecursive(methodList, searchable, 0);
 				if(object != null) {
-					result.add(object.toString());
+					result[i++] = object.toString();
 				} else {
-					result.add("");
+					result[i++] = "";
 				}
 			}
 			_results.add(result);

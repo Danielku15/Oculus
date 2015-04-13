@@ -2,7 +2,6 @@ package at.itb13.oculus.presentation;
 
 import java.net.URL;
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.ResourceBundle;
 
 import javafx.beans.value.ChangeListener;
@@ -266,7 +265,7 @@ public class PatientFormularView implements Initializable{
 			@Override
 			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
 				if(!newValue) {	
-					setBirthday(_birthdayInput.getValue());			
+					setBirthday(_birthdayInput.getValue());
 				}
 			}
 		});

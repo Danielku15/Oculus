@@ -147,7 +147,8 @@ public class PatientSearchView {
 	    }
 	    
 	    @Override protected void succeeded() {
-	    	_searchViewController.getResults();
+	    	ObservableList<String[]> results = FXCollections.observableList(_searchViewController.getResults());
+	    	_tableView.setItems(results);
 	    }
 	}
 }
