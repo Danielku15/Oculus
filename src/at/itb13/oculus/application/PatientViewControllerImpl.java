@@ -13,6 +13,7 @@ public class PatientViewControllerImpl extends Controller implements PatientView
 	private Patient _patient;
 	
 	public PatientViewControllerImpl() {
+		super();
 		createPatient();
 	}
 

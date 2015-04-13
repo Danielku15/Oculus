@@ -4,7 +4,7 @@ import java.util.Date;
 
 public interface PatientViewController {
 
-	// setter
+	// getter
 	String getId();
 	String getFirstname();	
 	String getLastname();
@@ -20,7 +20,7 @@ public interface PatientViewController {
 	String getCity();
 	String getCountry();
 	
-	// getter
+	// setter
 	boolean setFirstname(String firstname);
 	boolean setLastname(String lastname);
 	boolean setBirthday(Date birthday);

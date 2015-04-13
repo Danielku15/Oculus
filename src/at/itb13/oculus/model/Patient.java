@@ -17,7 +17,6 @@ import org.hibernate.search.annotations.Field;
 import org.hibernate.search.annotations.Indexed;
 import org.hibernate.search.annotations.IndexedEmbedded;
 
-import at.itb13.oculus.application.Searchable;
 import at.itb13.oculus.database.PersistentObjectImpl;
 
 @Entity
