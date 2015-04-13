@@ -114,12 +114,13 @@ public class PatientFormularView implements Initializable{
 		_lastnameInput.setText("");
 		_birthdayInput.setValue(null);
 		_maleInput.setSelected(false);
-		_femaleInput.setSelected(true);
+		_femaleInput.setSelected(false);
 		_phoneNumberInput.setText("");
 		_emailInput.setText("");
 		_zipInput.setText("");
 		_countryInput.setText("");
 		_streetInput.setText("");
+		_cityInput.setText("");
 		_streetNumberInput.setText("");
 		_socialSecurityNumberInput.setText("");
 		_employerInput.setText("");
