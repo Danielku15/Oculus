@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.effect.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox fx:id="_vBox" minWidth="520.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="at.itb13.oculus.presentation.TabPatientFormularView">
+   <children>
+      <ToolBar nodeOrientation="RIGHT_TO_LEFT">
+        <items>
+          <Button fx:id="_createNewPatient" mnemonicParsing="false" onAction="#createNewTab" text="%createnewpatient">
+               <font>
+                  <Font size="18.0" />
+               </font></Button>
+            <Button fx:id="_searchPatient" mnemonicParsing="false" onAction="#searchPatient" text="%searchpatient">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Button>
+        </items>
+         <VBox.margin>
+            <Insets />
+         </VBox.margin>
+      </ToolBar>
+      <TabPane fx:id="_tabPane" stylesheets="/font.css">
+        <tabs>
+          <Tab fx:id="_newPatient" closable="false" text="%newpatient">
+               <content>
+                  <fx:include source="PatientFormular.fxml" />
+               </content>
+            </Tab>
+        </tabs>
+         <VBox.margin>
+            <Insets top="50.0" />
+         </VBox.margin>
+      </TabPane>
+   </children>
+</VBox>

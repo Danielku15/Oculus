@@ -28,7 +28,7 @@
       <SplitPane dividerPositions="0.5">
         <items>
           <AnchorPane maxWidth="300.0" minWidth="300.0" prefWidth="300.0" />
-            <fx:include source="TabFormular.fxml" />
+            <fx:include source="TabPatientFormular.fxml" />
         </items>
       </SplitPane>
    </children>
