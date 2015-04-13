@@ -262,12 +262,14 @@ public class PatientFormularView implements Initializable{
 			}
 		});
 		
-		_birthdayInput.focusedProperty().addListener(new ChangeListener<Boolean>() {
+		_birthdayInput.valueProperty().addListener(new ChangeListener<LocalDate>() {
 			@Override
-			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-				if(!newValue) {	
-					setBirthday(_birthdayInput.getValue());
+			public void changed(ObservableValue<? extends LocalDate> arg0,
+					LocalDate oldValue, LocalDate newValue) {
+				if (newValue != null){
+					setBirthday(_birthdayInput.getValue());		
 				}
+				
 			}
 		});
 		
