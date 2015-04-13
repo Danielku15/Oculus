@@ -32,7 +32,9 @@ public class PatientSearchView {
 	private SearchViewControllerImpl<Patient> _searchViewController;
 
 	@FXML
-	private TextField _patientsearchInput;
+	private Label _searchTermLabel;
+	@FXML
+	private TextField _searchInput;
 	@FXML
 	private TableView<String[]> _tableView;
 	@FXML
@@ -52,7 +54,7 @@ public class PatientSearchView {
 	@FXML
 	private TableColumn<String[], String> _socialsecuritynumber;
 	@FXML
-	private Button _patientsearchButton;
+	private Button _searchButton;
 	
 	public PatientSearchView() {
 		_searchViewController = new SearchViewControllerImpl<Patient>(Patient.class);
@@ -62,11 +64,11 @@ public class PatientSearchView {
 	@FXML
 	private void initialize() {
 		
-		_patientsearchInput.focusedProperty().addListener(new ChangeListener<Boolean>() {
+		_searchInput.focusedProperty().addListener(new ChangeListener<Boolean>() {
 			@Override
 			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
 				if(!newValue) {
-					setCriteria(_patientsearchInput.getText());
+					setCriteria(_searchInput.getText());
 				}
 			}
 		});
@@ -107,7 +109,7 @@ public class PatientSearchView {
 	}
 
 	public void setCriteria(String criteria) {
-		adjustColor(_patientsearch, _searchViewController.setCriteria(criteria));
+		adjustColor(_searchTermLabel, _searchViewController.setCriteria(criteria));
 	}
 	
 	public void adjustColor(Label label, boolean valid) {
