@@ -14,7 +14,7 @@ import javax.persistence.Table;
 import at.itb13.oculus.database.PersistentObjectImpl;
 
 @Entity
-@Table(name = "diagnosis", catalog = "oculusdb")
+@Table(name = "diagnosis", catalog = "oculus_c")
 public class Diagnosis extends PersistentObjectImpl implements java.io.Serializable {
 	private static final long serialVersionUID = 3427544654363398598L;
 	

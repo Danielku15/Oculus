@@ -9,7 +9,7 @@ import javax.persistence.Table;
 import at.itb13.oculus.database.PersistentObjectImpl;
 
 @Entity
-@Table(name = "referral", catalog = "oculusdb")
+@Table(name = "referral", catalog = "oculus_c")
 public class Referral extends PersistentObjectImpl implements java.io.Serializable {
 	private static final long serialVersionUID = -3834665321047037012L;
 	

@@ -1,11 +1,11 @@
 package at.itb13.oculus.test;
 
 import java.io.IOException;
-import java.util.List;
 
 import at.itb13.oculus.config.ConfigFacade;
 import at.itb13.oculus.database.DBFacade;
 import at.itb13.oculus.model.Patient;
+import at.itb13.oculus.model.SearchMap;
 import at.itb13.oculus.model.SearchResult;
 
 public class Main {
@@ -21,10 +21,14 @@ public class Main {
 		}
 		
 		DBFacade dbFacade = new DBFacade();
-
-		SearchResult<Patient> searchResult = dbFacade.search(Patient.class, "Pat");
-		System.out.println(searchResult.getFieldNames());
-		for(List<String> res : searchResult.getResults()) {
+		try {
+			dbFacade.indexAll();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		SearchResult<Patient> searchResult = dbFacade.search(Patient.class, new SearchMap<>(Patient.class), "Pat");
+		for(String[] res : searchResult.getResults()) {
 			System.out.println(res);
 		};
 		dbFacade.close();

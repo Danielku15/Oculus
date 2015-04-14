@@ -21,7 +21,7 @@ import at.itb13.oculus.database.PersistentObjectImpl;
 
 @Entity
 @Indexed
-@Table(name = "patient", catalog = "oculusdb")
+@Table(name = "patient", catalog = "oculus_c")
 public class Patient extends PersistentObjectImpl implements java.io.Serializable, Searchable {
 	private static final long serialVersionUID = -7225613928118556705L;
 

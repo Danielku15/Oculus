@@ -15,7 +15,7 @@ import javax.persistence.Table;
 import at.itb13.oculus.database.PersistentObjectImpl;
 
 @Entity
-@Table(name = "queue", catalog = "oculusdb")
+@Table(name = "queue", catalog = "oculus_c")
 public class Queue extends PersistentObjectImpl implements java.io.Serializable {
 	private static final long serialVersionUID = -7295993730546243765L;
 	

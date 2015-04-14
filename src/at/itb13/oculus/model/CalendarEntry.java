@@ -14,7 +14,7 @@ import javax.persistence.TemporalType;
 import at.itb13.oculus.database.PersistentObjectImpl;
 
 @Entity
-@Table(name = "calendarentry", catalog = "oculusdb")
+@Table(name = "calendarentry", catalog = "oculus_c")
 public class CalendarEntry extends PersistentObjectImpl implements java.io.Serializable {
 	private static final long serialVersionUID = 5792674371320855705L;
 	

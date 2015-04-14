@@ -45,8 +45,8 @@ public class TabPatientFormularView implements Initializable {
 		Pane pane = null;
 		
 	        try {
-	            pane = FXMLLoader.<Pane>load(this.getClass().getResource(PATIENTSEARCHVIEW),facade.getResourceBundle());
-	        } catch (IOException ex) {
+	        	pane = FXMLLoader.<Pane>load(this.getClass().getResource(PATIENTSEARCHVIEW),facade.getResourceBundle());
+	        } catch(IOException ex) {
 	            ex.printStackTrace();
 	        }
 	     
@@ -59,18 +59,24 @@ public class TabPatientFormularView implements Initializable {
 	@FXML
 	public void createNewTab(ActionEvent event) {
 		LangFacade facade = LangFacade.getInstance();
+		
+        Tab tab = new Tab();
 		 
-		 Pane pane = null;
+		VBox vbox = null;
 	        try {
-	            pane = FXMLLoader.<Pane>load(this.getClass().getResource(FORMULARVIEWXML),facade.getResourceBundle());
+	        	vbox = FXMLLoader.<VBox>load(this.getClass().getResource(FORMULARVIEWXML),facade.getResourceBundle());
+	            vbox.addEventFilter(TitleChangeEvent.TITLE_CHANGE_EVENT, new EventHandler<TitleChangeEvent>() {
+	    			@Override
+	    			public void handle(TitleChangeEvent titleChangeEvent) {
+	    				tab.setText(titleChangeEvent.getTitle());
+	    			}
+	    		});
 	        } catch (IOException ex) {
 	            ex.printStackTrace();
 	        }
-	        Tab tab = new Tab(); 
 	        
 	        tab.setText(facade.getString(LangKey.NEWPATIENT));        
- 
-	        tab.setContent(pane);
+	        tab.setContent(vbox);
 	        tab.setClosable(true);
 	        _tabPane.getTabs().add(tab);
 	        _tabPane.getSelectionModel().select(tab);

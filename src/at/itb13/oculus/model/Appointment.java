@@ -13,7 +13,7 @@ import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "appointment", catalog = "oculusdb")
+@Table(name = "appointment", catalog = "oculus_c")
 @PrimaryKeyJoinColumn(name = "calendarentry")
 public class Appointment extends CalendarEntry implements java.io.Serializable {
 	private static final long serialVersionUID = -2707317958842910903L;

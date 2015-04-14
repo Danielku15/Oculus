@@ -21,10 +21,11 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TitledPane;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import at.itb13.oculus.application.PatientViewControllerImpl;
 
-public class PatientFormularView implements Initializable{
+public class PatientFormularView extends VBox implements Initializable{
 	
 	private static final Color COLOR_FAIL = Color.RED;
 	private static final Color COLOR_SUCCESS = Color.BLACK;
@@ -104,7 +105,7 @@ public class PatientFormularView implements Initializable{
     
 	public PatientFormularView() {
 		_patientController = new PatientViewControllerImpl();		
-	}	
+	}
 
 	// Event Listener on Button[#_clearButton].onAction
 	@FXML
@@ -129,7 +130,7 @@ public class PatientFormularView implements Initializable{
 	@FXML
 	public void save(ActionEvent event) {
 		//TODO change label name when patient is saved
-		new Thread(new CreatePatientTask(_patientController)).start();
+		new Thread(new CreatePatientTask()).start();
 	}
 	
 	void setFirstname(String firstname) {
@@ -376,27 +377,21 @@ public class PatientFormularView implements Initializable{
 		});
 	}
 	
-}
+	private class CreatePatientTask extends Task<String> {
 
-class CreatePatientTask extends Task<String> {
-	
-	PatientViewControllerImpl _patientController;
-	
-	public CreatePatientTask(PatientViewControllerImpl patientController) {
-		_patientController = patientController;	
+	    @Override public String call() {
+	    	_patientController.savePatient();	
+	    	return _patientController.getId();
+	    }
+	    
+	    @Override protected void succeeded() {
+	    	get.fireEvent(new TitleChangeEvent(TitleChangeEvent.TITLE_CHANGE_EVENT, (_patientController.getFirstname() + " " + _patientController.getLastname())));
+	    }
+	    
+	    @Override protected void cancelled() {
+	    }
+	    
+	    @Override protected void failed() {
+	    }
 	}
-	
-    @Override public String call() {
-    	_patientController.savePatient();	
-    	return _patientController.getId();
-    }
-    
-    @Override protected void succeeded() {
-    }
-    
-    @Override protected void cancelled() {
-    }
-    
-    @Override protected void failed() {
-    }
 }

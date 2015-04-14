@@ -17,7 +17,7 @@ import javax.persistence.TemporalType;
 import at.itb13.oculus.database.PersistentObjectImpl;
 
 @Entity
-@Table(name = "prescription", catalog = "oculusdb")
+@Table(name = "prescription", catalog = "oculus_c")
 public class Prescription extends PersistentObjectImpl implements java.io.Serializable {
 	private static final long serialVersionUID = -7409504092922866644L;
 	

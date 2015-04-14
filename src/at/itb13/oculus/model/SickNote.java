@@ -14,7 +14,7 @@ import javax.persistence.TemporalType;
 import at.itb13.oculus.database.PersistentObjectImpl;
 
 @Entity
-@Table(name = "sicknote", catalog = "oculusdb")
+@Table(name = "sicknote", catalog = "oculus_c")
 public class SickNote extends PersistentObjectImpl implements java.io.Serializable {
 	private static final long serialVersionUID = -1307790026476198047L;
 	
