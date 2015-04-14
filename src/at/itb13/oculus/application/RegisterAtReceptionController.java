@@ -13,9 +13,9 @@ public interface RegisterAtReceptionController {
 	
 	public Queue loadQueue();
 	
-	public QueueEntry addQueueEntry(Appointment appointment );
+	public QueueEntry createQueueEntry(Appointment appointment );
 	
-	public void saveEntry(QueueEntry entry);
+	public void addEntryToQueue(QueueEntry entry);
 	
 	public void close();
 	
