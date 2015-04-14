@@ -7,11 +7,11 @@ import at.itb13.oculus.model.QueueEntry;
 
 public interface RegisterAtReceptionController {
 	
-	public Patient getPatient();
+	public Patient getPatient(String id);
 	
-	public boolean acceptPatient();
+	public void updatePatient(/*Patientendaten*/);
 	
-	public Queue loadQueue();
+	public Appointment loadAppointment();
 	
 	public QueueEntry createQueueEntry(Appointment appointment );
 	
