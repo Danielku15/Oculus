@@ -10,7 +10,7 @@ import java.util.logging.SimpleFormatter;
 
 public final class LoggerUtil {
 	
-	private static final String LOGFILE = "log.txt";
+	private static final String LOGFILE = "log/log.txt";
 	
 	private static Handler _fileHandler;
 	private static Formatter _simpleFormatter;
