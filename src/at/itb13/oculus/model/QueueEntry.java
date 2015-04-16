@@ -37,7 +37,11 @@ public class QueueEntry extends PersistentObjectImpl implements java.io.Serializ
 	}
 
 	public void setQueue(Queue queue) {
+		if(_queue != null) {
+			_queue.removeQueueEntry(this);
+		}
 		_queue = queue;
+		_queue.addQueueEntry(this);
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -47,7 +51,11 @@ public class QueueEntry extends PersistentObjectImpl implements java.io.Serializ
 	}
 
 	public void setAppointment(Appointment appointment) {
+		if(_appointment != null) {
+			_appointment.removeQueueEntry(this);
+		}
 		_appointment = appointment;
+		_appointment.addQueueEntry(this);
 	}
 
 	@Temporal(TemporalType.TIMESTAMP)

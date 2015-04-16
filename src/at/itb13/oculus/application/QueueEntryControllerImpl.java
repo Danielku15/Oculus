@@ -15,92 +15,84 @@ import at.itb13.oculus.model.QueueEntry;
 public class QueueEntryControllerImpl extends Controller implements QueueEntryController {
 
 	private Patient _patient;
-	private Appointment _appointment;
-	private Queue _queue;
+	private QueueEntry _queueEntry;
+
+	public QueueEntryControllerImpl() {
+		super();
+		createQueueEntry();
+	}
 	
 	@Override
-	public void fetchPatient(String patientId) throws ObjectNotFoundException {
-		try {
-			_database.beginTransaction();
-			_patient = _database.get(Patient.class, patientId);
-			_database.commitTransaction();
-		} catch(HibernateException e) {
-			_database.rollbackTransaction();
-			throw new ObjectNotFoundException(Patient.class, patientId);
-		}
-	}
-
-	@Override
 	public String getPatientFirstname() {
-		return _patient.getFirstname();
+		if(_patient != null) {
+			return _patient.getFirstname();
+		}
+		return null;
 	}
 
 	@Override
 	public String getPatientLastname() {
-		return _patient.getLastname();
-	}
-
-	@Override
-	public void fetchAppointment(String appointmentId) throws ObjectNotFoundException {
-		try {
-			_database.beginTransaction();
-			_appointment = _database.get(Appointment.class, appointmentId);
-			_database.commitTransaction();
-		} catch(HibernateException e) {
-			_database.rollbackTransaction();
-			throw new ObjectNotFoundException(Appointment.class, appointmentId);
+		if(_patient != null) {
+			return _patient.getLastname();
 		}
+		return null;
 	}
 
 	@Override
 	public Date getAppointmentStart() {
-		return _appointment.getStart();
+		Appointment appointment = _queueEntry.getAppointment();
+		if(appointment != null) {
+			return appointment.getStart();
+		}
+		return null;
 	}
 
 	@Override
 	public Date getAppointmentEnd() {
-		return _appointment.getEnd();
+		Appointment appointment = _queueEntry.getAppointment();
+		if(appointment != null) {
+			return appointment.getEnd();
+		}
+		return null;
 	}
 
 	@Override
 	public String getAppointmentTitle() {
-		return _appointment.getTitle();
+		Appointment appointment = _queueEntry.getAppointment();
+		if(appointment != null) {
+			return appointment.getTitle();
+		}
+		return null;
 	}
 
 	@Override
 	public String getEmployeeFirstname() {
-		Employee employee = _appointment.getEmployee();
-		if(employee != null) {
-			return employee.getFirstname();
+		Appointment appointment = _queueEntry.getAppointment();
+		if(appointment != null) {
+			Employee employee = appointment.getEmployee();
+			if(employee != null) {
+				return employee.getFirstname();
+			}
 		}
 		return null;
 	}
 
 	@Override
 	public String getEmployeeLastname() {
-		Employee employee = _appointment.getEmployee();
-		if(employee != null) {
-			return employee.getLastname();
+		Appointment appointment = _queueEntry.getAppointment();
+		if(appointment != null) {
+			Employee employee = appointment.getEmployee();
+			if(employee != null) {
+				return employee.getLastname();
+			}
 		}
 		return null;
 	}
 
 	@Override
-	public void fetchQueue(String queueId) throws ObjectNotFoundException {
-		try {
-			_database.beginTransaction();
-			_queue = _database.get(Queue.class, queueId);
-			_database.commitTransaction();
-		} catch(HibernateException e) {
-			_database.rollbackTransaction();
-			throw new ObjectNotFoundException(Queue.class, queueId);
-		}
-	}
-
-	@Override
-	public List<String[]> getQueues() throws HibernateException {
-		List<Queue> queuesObj = new ArrayList<Queue>();
+	public synchronized List<String[]> getQueues() {
 		List<String[]> queuesStr = new ArrayList<String[]>();
+		List<Queue> queuesObj = new ArrayList<Queue>();
 		try {
 			_database.beginTransaction();
 			queuesObj = _database.getAll(Queue.class);
@@ -117,17 +109,91 @@ public class QueueEntryControllerImpl extends Controller implements QueueEntryCo
 		}
 		return queuesStr;
 	}
-
+	
 	@Override
-	public void createQueueEntry() throws HibernateException {
-		QueueEntry queueEntry = new QueueEntry(_queue, _appointment, new Date());
+	public void createQueueEntry() {
+		_queueEntry = new QueueEntry();
+	}
+	
+	@Override
+	public synchronized void fetchPatient(String patientId) throws ObjectNotFoundException {
 		try {
 			_database.beginTransaction();
-			_database.create(queueEntry);
+			Patient patient = _database.get(Patient.class, patientId);
 			_database.commitTransaction();
+			if(_patient != null) {
+				_patient = patient;
+			} else {
+				throw new ObjectNotFoundException(Patient.class, patientId);
+			}
 		} catch(HibernateException e) {
 			_database.rollbackTransaction();
 			throw e;
 		}
+	}
+	
+	@Override
+	public synchronized void fetchAppointment(String appointmentId) throws ObjectNotFoundException {
+		try {
+			_database.beginTransaction();
+			Appointment appointment = _database.get(Appointment.class, appointmentId);
+			_database.commitTransaction();
+			if(appointment != null) {
+				_queueEntry.setAppointment(appointment);
+			} else {
+				throw new ObjectNotFoundException(Patient.class, appointmentId);
+			}
+		} catch(HibernateException e) {
+			_database.rollbackTransaction();
+			throw e;
+		}
+	}	
+	
+	@Override
+	public synchronized void fetchQueue(String queueId) throws ObjectNotFoundException {
+		try {
+			_database.beginTransaction();
+			Queue queue = _database.get(Queue.class, queueId);
+			_database.commitTransaction();
+			if(queue != null) {
+				_queueEntry.setQueue(queue);
+			} else {
+				throw new ObjectNotFoundException(Queue.class, queueId);
+			}
+		} catch(HibernateException e) {
+			_database.rollbackTransaction();
+			throw e;
+		}
+	}
+	
+	@Override
+	public synchronized boolean saveQueueEntry() throws DataMismatchException, ObjectNotSavedException {
+		if(validateData()) {
+			try {
+				_database.beginTransaction();
+				_database.createOrUpdate(_queueEntry);
+				_database.commitTransaction();
+			} catch(HibernateException e) {
+				_database.rollbackTransaction();
+				throw new ObjectNotSavedException(_queueEntry);
+			}
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public boolean validateData() throws DataMismatchException {
+		if((_patient != null) && (_queueEntry.getAppointment() != null) && (_queueEntry.getQueue() != null)) {
+			Appointment appointment = _queueEntry.getAppointment();
+			if((appointment.getPatient() == null) || (_patient.equals(appointment.getPatient()))) {
+				// set patient of appointment
+				appointment.setPatient(_patient);
+			} else {
+				throw new DataMismatchException(appointment.getPatient(), _patient);
+			}
+			return true;
+		}
+		return false;
 	}
 }

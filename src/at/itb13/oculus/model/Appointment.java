@@ -43,7 +43,11 @@ public class Appointment extends CalendarEntry implements java.io.Serializable {
 	}
 
 	public void setPatient(Patient patient) {
+		if(_patient != null) {
+			_patient.removeAppointment(this);
+		}
 		_patient = patient;
+		_patient.addAppointment(this);
 	}
 
 	@Column(name = "status")
@@ -89,5 +93,13 @@ public class Appointment extends CalendarEntry implements java.io.Serializable {
 
 	public void setQueueEntries(Set<QueueEntry> queueEntries) {
 		_queueEntries = queueEntries;
+	}
+	
+	public void addQueueEntry(QueueEntry queueEntry) {
+		_queueEntries.add(queueEntry);
+	}
+	
+	public void removeQueueEntry(QueueEntry queueEntry) {
+		_queueEntries.remove(queueEntry);
 	}
 }

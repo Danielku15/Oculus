@@ -159,4 +159,12 @@ public class Patient extends PersistentObjectImpl implements java.io.Serializabl
 	public void setAppointments(Set<Appointment> appointments) {
 		_appointments = appointments;
 	}
+	
+	public void addAppointment(Appointment appointment) {
+		_appointments.add(appointment);
+	}
+	
+	public void removeAppointment(Appointment appointment) {
+		_appointments.remove(appointment);
+	}
 }

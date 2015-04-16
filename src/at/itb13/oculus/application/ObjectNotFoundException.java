@@ -7,6 +7,7 @@ public class ObjectNotFoundException extends Exception {
 	private String _id;
 	
 	public ObjectNotFoundException(Class<?> type, String id) {
+		_type = type;
 		_id = id;
 	}
 	
@@ -14,12 +15,12 @@ public class ObjectNotFoundException extends Exception {
 		return _type.getName();
 	}
 	
-	public String getId() {
+	public String getID() {
 		return _id;
 	}
 	
 	@Override
 	public String toString() {
-		return "Object of class " + getClassName() + " with ID " + getId() + " not found!";
+		return "Object of class " + getClassName() + " with ID " + getID() + " not found!";
 	}
 }

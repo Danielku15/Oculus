@@ -58,4 +58,12 @@ public class Queue extends PersistentObjectImpl implements java.io.Serializable 
 	public void setQueueEntries(Set<QueueEntry> queueEntries) {
 		_queueEntries = queueEntries;
 	}
+	
+	public void addQueueEntry(QueueEntry queueEntry) {
+		_queueEntries.add(queueEntry);
+	}
+	
+	public void removeQueueEntry(QueueEntry queueEntry) {
+		_queueEntries.remove(queueEntry);
+	}
 }
