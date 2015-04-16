@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.effect.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
@@ -25,9 +29,67 @@
           </Menu>
         </menus>
       </MenuBar>
-      <SplitPane dividerPositions="0.5">
+      <SplitPane dividerPositions="0.5" minWidth="-Infinity">
         <items>
-          <AnchorPane maxWidth="300.0" minWidth="300.0" prefWidth="300.0" />
+            <BorderPane maxWidth="400.0" minWidth="400.0" prefWidth="400.0">
+               <top>
+                  <AnchorPane BorderPane.alignment="CENTER">
+                     <children>
+                        <ToolBar prefHeight="49.0" prefWidth="400.0">
+                          <items>
+                              <AnchorPane>
+                                 <children>
+                                    <HBox alignment="CENTER" focusTraversable="true" spacing="110.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                                       <children>
+                                        <Button fx:id="_treatmentButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#openTreatmentView">
+                                             <graphic>
+                                                <ImageView fitHeight="27.0" fitWidth="27.0">
+                                                   <image>
+                                                      <Image url="@../../../../../pic/eye.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </graphic>
+                                             <font>
+                                                <Font size="18.0" />
+                                             </font>
+                                             <opaqueInsets>
+                                                <Insets />
+                                             </opaqueInsets>
+                                          </Button>
+                                          <Button mnemonicParsing="false">
+                                             <graphic>
+                                                <ImageView fx:id="_calendarButton" fitHeight="27.0" fitWidth="27.0" onDragDetected="#openCalendarView">
+                                                   <image>
+                                                      <Image url="@../../../../../pic/calendar.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </graphic>
+                                             <font>
+                                                <Font size="18.0" />
+                                             </font>
+                                          </Button>
+                                          <Button fx:id="_patientView" mnemonicParsing="false" onAction="#openPatientView">
+                                             <graphic>
+                                                <ImageView fitHeight="27.0" fitWidth="27.0">
+                                                   <image>
+                                                      <Image url="@../../../../../pic//patient.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </graphic>
+                                             <font>
+                                                <Font size="18.0" />
+                                             </font>
+                                          </Button>
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </AnchorPane>
+                          </items>
+                        </ToolBar>
+                     </children>
+                  </AnchorPane>
+               </top>
+            </BorderPane>
             <fx:include fx:id="_patientTabView" source="PatientTabView.fxml" />
         </items>
       </SplitPane>

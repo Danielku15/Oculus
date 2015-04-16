@@ -1,8 +1,3 @@
-/**
- * Autor: Manu Ljubicic
- * Projekt: Oculus
- * Datum: 10.04.2015
- */
 package at.itb13.oculus.presentation;
 
 import java.util.ArrayList;
@@ -10,46 +5,37 @@ import java.util.List;
 import java.util.Map;
 
 import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellDataFeatures;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
-import javafx.scene.paint.Color;
+import javafx.scene.input.MouseEvent;
 import javafx.util.Callback;
 import at.itb13.oculus.application.SearchControllerImpl;
 import at.itb13.oculus.lang.LangFacade;
 import at.itb13.oculus.lang.LangKey;
 import at.itb13.oculus.model.Patient;
 
-/**
- * @author Manu
- *
- */
 public class PatientSearchViewController {
 
-	private SearchControllerImpl<Patient> _searchViewController;
-	private Map<String, Integer> _fieldMap;
 
-	@FXML
-	private Label _searchTermLabel;
-	@FXML
-	private TextField _searchInput;
+	//application - SearchViewControllerImpl
+	private SearchControllerImpl<Patient> _searchController;
+
+	private Map<String, Integer> _fieldMap;
+	
 	@FXML
 	private TableView<String[]> _tableView;
-	@FXML
-	private Button _searchButton;
 	
 	public PatientSearchViewController() {
-		_searchViewController = new SearchControllerImpl<Patient>(Patient.class);
-		_fieldMap = _searchViewController.getFieldMap();
+		_searchController = new SearchControllerImpl<Patient>(Patient.class);
+		_fieldMap = _searchController.getFieldMap();
 	}
 
 	// für string array: http://stackoverflow.com/questions/20769723/populate-tableview-with-two-dimensional-array <3
@@ -72,16 +58,29 @@ public class PatientSearchViewController {
 		}
 		_tableView.getColumns().addAll(tableColumns);
 		
-		_searchInput.focusedProperty().addListener(new ChangeListener<Boolean>() {
+		_tableView.setRowFactory(new Callback<TableView<String[]>, TableRow<String[]>>() {
 			@Override
-			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-				if(!newValue) {
-					setCriteria(_searchInput.getText());
-				}
+			public TableRow<String[]> call(TableView<String[]> arg0) {
+				final TableRow<String[]> row = new TableRow<String[]>();
+				row.setOnMousePressed(new EventHandler<MouseEvent>() {
+					@Override
+					public void handle(MouseEvent t) {
+						if(t.getClickCount() >= 2) {
+							String[] result = row.getItem();
+							System.out.println(result[_fieldMap.get("id")]);			
+						}
+					}
+				});
+				return row;
 			}
 		});
 	}
 
+	@FXML
+	public void search(ActionEvent event) {
+		new Thread(new SearchTask()).start();
+	}
+	
 	private ObservableValue<String> mapColumn(TableColumn.CellDataFeatures<String[], String> param, String key) {
 		int i = _fieldMap.get(key);
 		if (param.getValue()[i] != null) {
@@ -91,33 +90,19 @@ public class PatientSearchViewController {
 		}
 	}
 	
-	public void setCriteria(String criteria) {
-		adjustColor(_searchTermLabel, _searchViewController.setCriteria(criteria));
+	public boolean setCriteria(String criteria) {
+		return _searchController.setCriteria(criteria);
 	}
 	
-	public void adjustColor(Label label, boolean valid) {
-		if(valid) {
-			label.setTextFill(Color.BLACK);
-		} else {
-			label.setTextFill(Color.RED);
-		}
-	}
-	
-	@FXML
-	public void search(ActionEvent event) {
-		new Thread(new SearchTask()).start();
-	}
-	
-	private class SearchTask extends Task<Void> {
-		
+	private class SearchTask extends Task<Void> {	
 	    @Override public Void call() {
-	    	_searchViewController.search();
-	    	_fieldMap = _searchViewController.getFieldMap();
+	    	_searchController.search();
+	    	_fieldMap = _searchController.getFieldMap();
 	    	return null;
 	    }
 	    
 	    @Override protected void succeeded() {
-	    	_tableView.setItems(FXCollections.observableList(_searchViewController.getResults()));
+	    	_tableView.setItems(FXCollections.observableList(_searchController.getResults()));
 	    }
 	}
 }

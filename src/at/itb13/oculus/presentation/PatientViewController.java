@@ -16,28 +16,26 @@ import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TitledPane;
 import javafx.scene.control.ToggleGroup;
-import javafx.scene.layout.VBox;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
 import at.itb13.oculus.application.PatientControllerImpl;
 
-public class PatientViewController extends VBox implements Initializable{
+
+public class PatientViewController implements Initializable{
 	
 	private static final Color COLOR_FAIL = Color.RED;
 	private static final Color COLOR_SUCCESS = Color.BLACK;
 	
+	//application - PatientViewControllerImpl
 	private PatientControllerImpl _patientController;
-	
-	//parent
-	private PatientTabViewController _patientTabViewController;
 
-	
+	//parent - PatientTabViewController
 	@FXML
-	private ScrollPane _patientFormulatScrollPane1;
+	private PatientTabViewController _patientTabViewController;
 	@FXML
 	private TitledPane _patientMasterData;
 	@FXML
@@ -111,6 +109,151 @@ public class PatientViewController extends VBox implements Initializable{
 		_patientController = new PatientControllerImpl();		
 	}
 
+	@Override
+	public void initialize(URL arg0, ResourceBundle arg1) {
+		if (_patientTabViewController == null) {
+			_patientTabViewController = PatientTabViewController.getInstance();
+		}
+			
+		_accordion.setExpandedPane(_patientMasterData);
+		
+		_femaleInput.setSelected(false);
+		_maleInput.setSelected(false);
+		
+		_firstnameInput.focusedProperty().addListener(new ChangeListener<Boolean>() {
+			@Override
+			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+				if(!newValue) {
+					setFirstname(_firstnameInput.getText());
+				}
+			}
+		});
+		
+		_lastnameInput.textProperty().addListener(new ChangeListener<String>() {
+		    @Override
+		    public void changed(final ObservableValue<? extends String> observable, final String oldValue, final String newValue) {
+		    	System.out.println(_lastnameInput.getText());
+		    	setLastname(_lastnameInput.getText());
+				if (_patientTabViewController != null){
+					_patientTabViewController.setTabLabelName(_lastnameInput.getText());
+				}
+		    }
+		});
+		
+		_birthdayInput.valueProperty().addListener(new ChangeListener<LocalDate>() {
+			@Override
+			public void changed(ObservableValue<? extends LocalDate> arg0,
+					LocalDate oldValue, LocalDate newValue) {
+				if (newValue != null){
+					setBirthday(_birthdayInput.getValue());		
+				}
+				
+			}
+		});
+		
+		_maleInput.focusedProperty().addListener(new ChangeListener<Boolean>() {
+			@Override
+			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+				if(!newValue) {
+					//TODO upper case in application layer
+					setGender(_maleInput.getText().toUpperCase());
+				}
+			}
+		});
+		
+		_femaleInput.focusedProperty().addListener(new ChangeListener<Boolean>() {
+			@Override
+			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+				if(!newValue) {
+					//TODO upper case in application layer
+					setGender(_femaleInput.getText().toUpperCase());
+				}
+			}
+		});
+		
+		_phoneNumberInput.focusedProperty().addListener(new ChangeListener<Boolean>() {
+			@Override
+			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+				if(!newValue) {
+					setPhoneNumber(_phoneNumberInput.getText());
+				}
+			}
+		});
+		
+		_emailInput.focusedProperty().addListener(new ChangeListener<Boolean>() {
+			@Override
+			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+				if(!newValue) {
+					setEmail(_emailInput.getText());
+				}
+			}
+		});
+		
+		
+		_zipInput.focusedProperty().addListener(new ChangeListener<Boolean>() {
+			@Override
+			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+				if(!newValue) {
+					setZip(_zipInput.getText());
+				}
+			}
+		});
+		
+		_countryInput.focusedProperty().addListener(new ChangeListener<Boolean>() {
+			@Override
+			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+				if(!newValue) {
+					setCountry(_countryInput.getText());
+				}
+			}
+		});
+		
+		_streetInput.focusedProperty().addListener(new ChangeListener<Boolean>() {
+			@Override
+			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+				if(!newValue) {
+					setStreet(_streetInput.getText());
+				}
+			}
+		});
+		
+		_streetNumberInput.focusedProperty().addListener(new ChangeListener<Boolean>() {
+			@Override
+			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+				if(!newValue) {
+					setStreetNumber(_streetNumberInput.getText());
+				}
+			}
+		});
+		
+		_cityInput.focusedProperty().addListener(new ChangeListener<Boolean>() {
+			@Override
+			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+				if(!newValue) {
+					setCity(_cityInput.getText());
+				}
+			}
+		});
+		
+		_socialSecurityNumberInput.focusedProperty().addListener(new ChangeListener<Boolean>() {
+			@Override
+			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+				if(!newValue) {
+					setSocialSecurityNumber(_socialSecurityNumberInput.getText());
+				}
+			}
+		});
+		
+		_employerInput.focusedProperty().addListener(new ChangeListener<Boolean>() {
+			@Override
+			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+				if(!newValue) {
+					setEmployer(_employerInput.getText());
+				}
+			}
+		});
+	}
+	
 	// Event Listener on Button[#_clearButton].onAction
 	@FXML
 	public void clear(ActionEvent event) {
@@ -241,148 +384,6 @@ public class PatientViewController extends VBox implements Initializable{
 		}
 	}
 	
-	
-	@Override
-	public void initialize(URL arg0, ResourceBundle arg1) {
-				
-		_accordion.setExpandedPane(_patientMasterData);
-		
-		_femaleInput.setSelected(false);
-		_maleInput.setSelected(false);
-		
-		_firstnameInput.focusedProperty().addListener(new ChangeListener<Boolean>() {
-			@Override
-			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-				if(!newValue) {
-					setFirstname(_firstnameInput.getText());
-				}
-			}
-		});
-		
-		_lastnameInput.focusedProperty().addListener(new ChangeListener<Boolean>() {
-			@Override
-			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-				if(!newValue) {
-					setLastname(_lastnameInput.getText());
-					_patientTabViewController.setTabLabelName(_lastnameInput.getText());
-				}
-			}
-		});
-		
-		_birthdayInput.valueProperty().addListener(new ChangeListener<LocalDate>() {
-			@Override
-			public void changed(ObservableValue<? extends LocalDate> arg0,
-					LocalDate oldValue, LocalDate newValue) {
-				if (newValue != null){
-					setBirthday(_birthdayInput.getValue());		
-				}
-				
-			}
-		});
-		
-		_maleInput.focusedProperty().addListener(new ChangeListener<Boolean>() {
-			@Override
-			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-				if(!newValue) {
-					//TODO upper case in application layer
-					setGender(_maleInput.getText().toUpperCase());
-				}
-			}
-		});
-		
-		_femaleInput.focusedProperty().addListener(new ChangeListener<Boolean>() {
-			@Override
-			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-				if(!newValue) {
-					//TODO upper case in application layer
-					setGender(_femaleInput.getText().toUpperCase());
-				}
-			}
-		});
-		
-		_phoneNumberInput.focusedProperty().addListener(new ChangeListener<Boolean>() {
-			@Override
-			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-				if(!newValue) {
-					setPhoneNumber(_phoneNumberInput.getText());
-				}
-			}
-		});
-		
-		_emailInput.focusedProperty().addListener(new ChangeListener<Boolean>() {
-			@Override
-			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-				if(!newValue) {
-					setEmail(_emailInput.getText());
-				}
-			}
-		});
-		
-		
-		_zipInput.focusedProperty().addListener(new ChangeListener<Boolean>() {
-			@Override
-			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-				if(!newValue) {
-					setZip(_zipInput.getText());
-				}
-			}
-		});
-		
-		_countryInput.focusedProperty().addListener(new ChangeListener<Boolean>() {
-			@Override
-			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-				if(!newValue) {
-					setCountry(_countryInput.getText());
-				}
-			}
-		});
-		
-		_streetInput.focusedProperty().addListener(new ChangeListener<Boolean>() {
-			@Override
-			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-				if(!newValue) {
-					setStreet(_streetInput.getText());
-				}
-			}
-		});
-		
-		_streetNumberInput.focusedProperty().addListener(new ChangeListener<Boolean>() {
-			@Override
-			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-				if(!newValue) {
-					setStreetNumber(_streetNumberInput.getText());
-				}
-			}
-		});
-		
-		_cityInput.focusedProperty().addListener(new ChangeListener<Boolean>() {
-			@Override
-			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-				if(!newValue) {
-					setCity(_cityInput.getText());
-				}
-			}
-		});
-		
-		_socialSecurityNumberInput.focusedProperty().addListener(new ChangeListener<Boolean>() {
-			@Override
-			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-				if(!newValue) {
-					setSocialSecurityNumber(_socialSecurityNumberInput.getText());
-				}
-			}
-		});
-		
-		_employerInput.focusedProperty().addListener(new ChangeListener<Boolean>() {
-			@Override
-			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-				if(!newValue) {
-					setEmployer(_employerInput.getText());
-				}
-			}
-		});
-	}
-	
 	private class CreatePatientTask extends Task<String> {
 
 	    @Override public String call() {
@@ -402,7 +403,7 @@ public class PatientViewController extends VBox implements Initializable{
 	}
 
 	public void init(PatientTabViewController patientTabViewController) {
-		setPatientTabViewController(patientTabViewController);
+		_patientTabViewController = patientTabViewController;
 	}
 
 	public PatientTabViewController getPatientTabViewController() {

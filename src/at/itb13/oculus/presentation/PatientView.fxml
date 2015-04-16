@@ -11,7 +11,7 @@
    <children>
       <AnchorPane prefHeight="1000.0">
          <children>
-            <ScrollPane fx:id="_patientFormulatScrollPane1" fitToHeight="true" fitToWidth="true" minWidth="520.0" pannable="true" prefViewportHeight="160.0" prefViewportWidth="142.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <ScrollPane fitToHeight="true" fitToWidth="true" minWidth="520.0" pannable="true" prefViewportHeight="160.0" prefViewportWidth="142.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <content>
                   <AnchorPane minWidth="520.0">
                      <children>

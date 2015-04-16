@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
 <?import javafx.scene.effect.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.*?>
@@ -8,23 +9,45 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox fx:id="_vBox" minWidth="520.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="at.itb13.oculus.presentation.PatientTabViewController">
+<VBox minWidth="520.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="at.itb13.oculus.presentation.PatientTabViewController">
    <children>
       <ToolBar nodeOrientation="RIGHT_TO_LEFT">
-        <items>
-          <Button fx:id="_createNewPatient" mnemonicParsing="false" onAction="#createNewTab" text="%createnewpatient">
-               <font>
-                  <Font size="18.0" />
-               </font></Button>
-            <Button fx:id="_searchPatient" mnemonicParsing="false" onAction="#searchPatient" text="%searchpatient">
+         <items>
+            <Button fx:id="_createNewPatientButton" mnemonicParsing="false" onAction="#createNewTab">
                <font>
                   <Font size="18.0" />
                </font>
+               <graphic>
+                  <ImageView fitHeight="27.0" fitWidth="27.0">
+                     <image>
+                        <Image url="@../../../../../pic/addUser.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
             </Button>
-        </items>
-         <VBox.margin>
-            <Insets />
-         </VBox.margin>
+            <Button fx:id="_searchPatientButton" mnemonicParsing="false" onAction="#searchPatient">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="27.0" fitWidth="27.0">
+                     <image>
+                        <Image url="@../../../../../pic/search.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <TextField fx:id="_searchInput">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </TextField>
+            <Label text="%search" fx:id="_searchLabel">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+         </items>
       </ToolBar>
       <TabPane fx:id="_tabPane" stylesheets="/font.css">
         <tabs>
