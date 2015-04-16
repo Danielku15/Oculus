@@ -25,12 +25,16 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import at.itb13.oculus.application.PatientViewControllerImpl;
 
-public class PatientFormularView extends VBox implements Initializable{
+public class PatientViewController extends VBox implements Initializable{
 	
 	private static final Color COLOR_FAIL = Color.RED;
 	private static final Color COLOR_SUCCESS = Color.BLACK;
 	
 	private PatientViewControllerImpl _patientController;
+	
+	//parent
+	private PatientTabViewController _patientTabViewController;
+
 	
 	@FXML
 	private ScrollPane _patientFormulatScrollPane1;
@@ -103,7 +107,7 @@ public class PatientFormularView extends VBox implements Initializable{
     @FXML
     private TextField _cityInput;
     
-	public PatientFormularView() {
+	public PatientViewController() {
 		_patientController = new PatientViewControllerImpl();		
 	}
 
@@ -236,10 +240,11 @@ public class PatientFormularView extends VBox implements Initializable{
 			_employerLabel.setTextFill(COLOR_SUCCESS);
 		}
 	}
-        
+	
+	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-			
+				
 		_accordion.setExpandedPane(_patientMasterData);
 		
 		_femaleInput.setSelected(false);
@@ -259,6 +264,7 @@ public class PatientFormularView extends VBox implements Initializable{
 			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
 				if(!newValue) {
 					setLastname(_lastnameInput.getText());
+					_patientTabViewController.setTabLabelName(_lastnameInput.getText());
 				}
 			}
 		});
@@ -385,7 +391,7 @@ public class PatientFormularView extends VBox implements Initializable{
 	    }
 	    
 	    @Override protected void succeeded() {
-	    	get.fireEvent(new TitleChangeEvent(TitleChangeEvent.TITLE_CHANGE_EVENT, (_patientController.getFirstname() + " " + _patientController.getLastname())));
+	    	
 	    }
 	    
 	    @Override protected void cancelled() {
@@ -393,5 +399,17 @@ public class PatientFormularView extends VBox implements Initializable{
 	    
 	    @Override protected void failed() {
 	    }
+	}
+
+	public void init(PatientTabViewController patientTabViewController) {
+		setPatientTabViewController(patientTabViewController);
+	}
+
+	public PatientTabViewController getPatientTabViewController() {
+		return _patientTabViewController;
+	}
+
+	public void setPatientTabViewController(PatientTabViewController _patientTabViewController) {
+		this._patientTabViewController = _patientTabViewController;
 	}
 }

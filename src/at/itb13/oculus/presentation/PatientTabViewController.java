@@ -20,10 +20,16 @@ import javafx.stage.Stage;
 import at.itb13.oculus.lang.LangFacade;
 import at.itb13.oculus.lang.LangKey;
 
-public class TabPatientFormularView implements Initializable {
+public class PatientTabViewController {
 	
-	public static final String FORMULARVIEWXML = "PatientFormular.fxml";
+	public static final String PATIENTVIEWXML = "PatientView.fxml";
 	public static final String PATIENTSEARCHVIEW = "PatientSearchView.fxml";
+	
+	//parent
+	private PatientMainViewController _patientMainViewController;
+	
+	//child
+	private PatientViewController _patientViewController;
 	
 	@FXML
 	private Button _createTabButton;
@@ -64,13 +70,7 @@ public class TabPatientFormularView implements Initializable {
 		 
 		VBox vbox = null;
 	        try {
-	        	vbox = FXMLLoader.<VBox>load(this.getClass().getResource(FORMULARVIEWXML),facade.getResourceBundle());
-	            vbox.addEventFilter(TitleChangeEvent.TITLE_CHANGE_EVENT, new EventHandler<TitleChangeEvent>() {
-	    			@Override
-	    			public void handle(TitleChangeEvent titleChangeEvent) {
-	    				tab.setText(titleChangeEvent.getTitle());
-	    			}
-	    		});
+	        	vbox = FXMLLoader.<VBox>load(this.getClass().getResource(PATIENTVIEWXML),facade.getResourceBundle());
 	        } catch (IOException ex) {
 	            ex.printStackTrace();
 	        }
@@ -97,19 +97,31 @@ public class TabPatientFormularView implements Initializable {
 	        });
 	}
 
-	@Override
-	public void initialize(URL arg0, ResourceBundle arg1) {
+	
+	@FXML
+	public void initialize(){
+		
+		System.out.println("TABVIEW");
+		//System.out.println(_patientViewController);
 		
 		ObservableList<Tab> tabs = _tabPane.getTabs();
 		
 		 // check if only one tab is shown and setCloseable to false
 		_newPatient.setOnClosed(new EventHandler<javafx.event.Event>() {    
 			public void handle(javafx.event.Event e) {             
-            	if (tabs.size() <= 1){
-    	        	tabs.get(0).setClosable(false);
-    	        }
-            }
-        });
-		
+           	if (tabs.size() <= 1){
+   	        	tabs.get(0).setClosable(false);
+   	        }
+           }
+       });
+	}
+	
+
+	public void init(PatientMainViewController patientMainViewController) {
+		_patientMainViewController = patientMainViewController;
+	}
+	
+	public void setTabLabelName(String name){
+		_tabPane.getSelectionModel().getSelectedItem().setText(name);
 	}
 }

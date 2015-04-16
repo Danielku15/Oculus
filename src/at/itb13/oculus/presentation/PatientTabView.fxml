@@ -8,7 +8,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox fx:id="_vBox" minWidth="520.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="at.itb13.oculus.presentation.TabPatientFormularView">
+<VBox fx:id="_vBox" minWidth="520.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="at.itb13.oculus.presentation.PatientTabViewController">
    <children>
       <ToolBar nodeOrientation="RIGHT_TO_LEFT">
         <items>
@@ -30,7 +30,7 @@
         <tabs>
           <Tab fx:id="_newPatient" closable="false" text="%newpatient">
                <content>
-                  <fx:include source="PatientFormular.fxml" />
+                  <fx:include fx:id="_patientView" source="PatientView.fxml" />
                </content>
             </Tab>
         </tabs>

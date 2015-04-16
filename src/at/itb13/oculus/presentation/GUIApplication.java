@@ -14,7 +14,7 @@ import at.itb13.oculus.lang.LangFacade;
 
 public class GUIApplication extends Application {
 	    
-	public static final String PATIENTVIEWXML = "MainView.fxml";
+	public static final String PATIENTMAINVIEWXML = "PatientMainView.fxml";
 	
 	private static Stage _stage;
 	
@@ -34,7 +34,7 @@ public class GUIApplication extends Application {
 
 		LangFacade facade = LangFacade.getInstance();
     	try {
-    		Parent root = FXMLLoader.load(GUIApplication.class.getResource(PATIENTVIEWXML), facade.getResourceBundle());		 
+    		Parent root = FXMLLoader.load(GUIApplication.class.getResource(PATIENTMAINVIEWXML), facade.getResourceBundle());		 
     		Scene scene = new Scene(root);             
     		_stage.setScene(scene);
 	    	

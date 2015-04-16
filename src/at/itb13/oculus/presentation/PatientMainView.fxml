@@ -4,7 +4,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="at.itb13.oculus.presentation.MainView">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="at.itb13.oculus.presentation.PatientMainViewController">
    <children>
       <MenuBar stylesheets="/font.css">
         <menus>
@@ -28,7 +28,7 @@
       <SplitPane dividerPositions="0.5">
         <items>
           <AnchorPane maxWidth="300.0" minWidth="300.0" prefWidth="300.0" />
-            <fx:include source="TabPatientFormular.fxml" />
+            <fx:include fx:id="_patientTabView" source="PatientTabView.fxml" />
         </items>
       </SplitPane>
    </children>
