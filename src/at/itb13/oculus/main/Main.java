@@ -7,6 +7,7 @@ import java.util.logging.Logger;
 import at.itb13.oculus.config.ConfigFacade;
 import at.itb13.oculus.lang.LangFacade;
 import at.itb13.oculus.presentation.GUIApplication;
+import at.itb13.oculus.service.IndexService;
 import at.itb13.oculus.util.LoggerUtil;
 
 public class Main {
@@ -50,6 +51,9 @@ public class Main {
 			logger.severe(e.getMessage());
 			Main.exit(3);
 		}
+		
+		//start index service
+		new IndexService().start();
 		
 		// start GUI
 		GUIApplication.main(args);

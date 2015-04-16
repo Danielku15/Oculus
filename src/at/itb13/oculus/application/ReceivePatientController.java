@@ -9,5 +9,4 @@ public interface ReceivePatientController {
 	public Patient showNextPatient();
 	
 	public void newUntersuchungsprotokoll();
-	
 }

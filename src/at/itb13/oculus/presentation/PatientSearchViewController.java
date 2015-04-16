@@ -24,7 +24,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 import javafx.util.Callback;
-import at.itb13.oculus.application.SearchViewControllerImpl;
+import at.itb13.oculus.application.SearchControllerImpl;
 import at.itb13.oculus.lang.LangFacade;
 import at.itb13.oculus.lang.LangKey;
 import at.itb13.oculus.model.Patient;
@@ -35,7 +35,7 @@ import at.itb13.oculus.model.Patient;
  */
 public class PatientSearchViewController {
 
-	private SearchViewControllerImpl<Patient> _searchViewController;
+	private SearchControllerImpl<Patient> _searchViewController;
 	private Map<String, Integer> _fieldMap;
 
 	@FXML
@@ -48,7 +48,7 @@ public class PatientSearchViewController {
 	private Button _searchButton;
 	
 	public PatientSearchViewController() {
-		_searchViewController = new SearchViewControllerImpl<Patient>(Patient.class);
+		_searchViewController = new SearchControllerImpl<Patient>(Patient.class);
 		_fieldMap = _searchViewController.getFieldMap();
 	}
 

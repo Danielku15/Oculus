@@ -15,40 +15,36 @@ import at.itb13.oculus.database.PersistentObject;
 import at.itb13.oculus.model.ChangeLog;
 import at.itb13.oculus.model.Patient;
 
-public class IndexService implements AutoCloseable {
+public class IndexService {
 	
 	private static final int BATCHSIZE = 100;
 	
-	private IndexTask _indexTask;
-	private DBFacade _dbFacade;
 	private ConfigFacade _configFacade;
 	private int _curNumber;
+	private IndexTask _indexTask;
 	private Timer _timer;
 	private boolean _running;
 	
 	public IndexService() {
-		_indexTask = new IndexTask();
-		_dbFacade = new DBFacade();
 		_configFacade = ConfigFacade.getInstance();
 		_curNumber = Integer.valueOf(_configFacade.getProperty(Config.INDEX_NUMBER));
 	}
 	
-	@Override
-	public void close() throws Exception {
-		_dbFacade.close();
-	}
-	
-	public void start() {
+	public synchronized void start() {
 		if(!_running) {
+			_indexTask = new IndexTask();
 			_timer = new Timer();
 			_timer.scheduleAtFixedRate(_indexTask, 0, Integer.valueOf(_configFacade.getProperty(Config.INDEX_INTERVAL)));
 			_running = true;
 		}
 	}
 	
-	public void cancel() {
+	public synchronized void cancel() {
 		if(_running) {
 			_timer.cancel();
+			_timer.purge();
+			_indexTask.cancel();
+			_indexTask = null;
 			_running = false;
 		}
 	}
@@ -58,7 +54,20 @@ public class IndexService implements AutoCloseable {
 	}
 	
 	private class IndexTask extends TimerTask {
+		
+		private DBFacade _dbFacade;
 
+		public IndexTask() {
+			_dbFacade = new DBFacade();
+		}
+		
+		@Override
+		public boolean cancel() {
+			boolean result = super.cancel();
+			_dbFacade.close();
+			return result;
+		}
+		
 		@Override
 		public void run() {
 			// process next batch
@@ -88,7 +97,6 @@ public class IndexService implements AutoCloseable {
 						ChangeLog changeLog = iter.next();
 						switch(changeLog.getMutation()) {
 						case D:
-							// TODO add processing for deletions
 							break;
 						case I:
 						case U:

@@ -23,14 +23,14 @@ import javafx.scene.control.TitledPane;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import at.itb13.oculus.application.PatientViewControllerImpl;
+import at.itb13.oculus.application.PatientControllerImpl;
 
 public class PatientViewController extends VBox implements Initializable{
 	
 	private static final Color COLOR_FAIL = Color.RED;
 	private static final Color COLOR_SUCCESS = Color.BLACK;
 	
-	private PatientViewControllerImpl _patientController;
+	private PatientControllerImpl _patientController;
 	
 	//parent
 	private PatientTabViewController _patientTabViewController;
@@ -108,7 +108,7 @@ public class PatientViewController extends VBox implements Initializable{
     private TextField _cityInput;
     
 	public PatientViewController() {
-		_patientController = new PatientViewControllerImpl();		
+		_patientController = new PatientControllerImpl();		
 	}
 
 	// Event Listener on Button[#_clearButton].onAction

@@ -27,5 +27,4 @@ public class RegExpException extends Exception {
 		LangFacade langFacade = LangFacade.getInstance();
 		return langFacade.getString(LangKey.REGEXPERROR) + ": " + _attrName + " = " + _value;
 	}
-	
 }
