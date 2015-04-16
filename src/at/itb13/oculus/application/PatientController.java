@@ -3,7 +3,7 @@ package at.itb13.oculus.application;
 import java.time.LocalDate;
 import java.util.Date;
 
-public interface PatientViewController {
+public interface PatientController extends AutoCloseable {
 
 	// getter
 	String getId();

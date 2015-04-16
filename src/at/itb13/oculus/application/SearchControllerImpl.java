@@ -8,7 +8,7 @@ import at.itb13.oculus.model.SearchMap;
 import at.itb13.oculus.model.SearchResult;
 import at.itb13.oculus.model.Searchable;
 
-public class SearchViewControllerImpl<T extends PersistentObject & Searchable> extends Controller implements SearchViewController {
+public class SearchControllerImpl<T extends PersistentObject & Searchable> extends Controller implements SearchController {
 	
 	private Class<T> _type;
 	private SearchMap<T> _searchMap;
@@ -16,7 +16,7 @@ public class SearchViewControllerImpl<T extends PersistentObject & Searchable> e
 	private String _criteria;
 	private SearchResult<T> _searchResult;
 
-	public SearchViewControllerImpl(Class<T> type) {
+	public SearchControllerImpl(Class<T> type) {
 		super();
 		_type = type;
 		_searchMap = new SearchMap<T>(type);

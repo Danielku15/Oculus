@@ -11,11 +11,11 @@ import at.itb13.oculus.model.Address;
 import at.itb13.oculus.model.Gender;
 import at.itb13.oculus.model.Patient;
 
-public class PatientViewControllerImpl extends Controller implements PatientViewController {
+public class PatientControllerImpl extends Controller implements PatientController {
 	
 	private Patient _patient;
 	
-	public PatientViewControllerImpl() {
+	public PatientControllerImpl() {
 		super();
 		createPatient();
 	}
