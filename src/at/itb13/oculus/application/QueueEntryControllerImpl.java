@@ -185,7 +185,7 @@ public class QueueEntryControllerImpl extends Controller implements QueueEntryCo
 	}
 	
 	@Override
-	public synchronized boolean saveQueueEntry() throws DataMismatchException, ObjectNotSavedException {
+	public synchronized boolean saveQueueEntry() throws IncompleteDataException, DataMismatchException, ObjectNotSavedException {
 		if(validateData()) {
 			try {
 				_database.beginTransaction();
@@ -201,17 +201,28 @@ public class QueueEntryControllerImpl extends Controller implements QueueEntryCo
 	}
 
 	@Override
-	public boolean validateData() throws DataMismatchException {
-		if((_patient != null) && (_queueEntry.getAppointment() != null) && (_queueEntry.getQueue() != null)) {
-			Appointment appointment = _queueEntry.getAppointment();
-			if((appointment.getPatient() == null) || (_patient.equals(appointment.getPatient()))) {
-				// set patient of appointment
-				appointment.setPatient(_patient);
-			} else {
-				throw new DataMismatchException(appointment.getPatient(), _patient);
-			}
-			return true;
+	public boolean validateData() throws IncompleteDataException, DataMismatchException {
+		List<String> fieldNames = new ArrayList<String>();
+		if(_patient == null) {
+			fieldNames.add("patient");
 		}
-		return false;
+		if(_queueEntry.getAppointment() == null) {
+			fieldNames.add("lastname");
+		}
+		if(_queueEntry.getQueue() == null) {
+			fieldNames.add("socialSecurityNumber");
+		}
+		if(!fieldNames.isEmpty()) {
+			throw new IncompleteDataException(fieldNames);
+		}
+		
+		Appointment appointment = _queueEntry.getAppointment();
+		if((appointment.getPatient() == null) || (_patient.equals(appointment.getPatient()))) {
+			// set patient of appointment
+			appointment.setPatient(_patient);
+		} else {
+			throw new DataMismatchException(appointment.getPatient(), _patient);
+		}
+		return true;
 	}
 }

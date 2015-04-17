@@ -247,16 +247,16 @@ public class PatientControllerImpl extends Controller implements PatientControll
 	}
 	
 	@Override
-	public synchronized void loadPatient(String id) throws ObjectNotFoundException {
+	public synchronized void loadPatient(String patientId) throws ObjectNotFoundException {
 		Patient patient = null;
 		try {
 			_database.beginTransaction();
-			patient = _database.get(Patient.class, id);
+			patient = _database.get(Patient.class, patientId);
 			_database.commitTransaction();
 			if(patient != null) {
 				_patient = patient;
 			} else {
-				throw new ObjectNotFoundException(Patient.class, id);
+				throw new ObjectNotFoundException(Patient.class, patientId);
 			}
 		} catch(HibernateException e) {
 			_database.rollbackTransaction();
