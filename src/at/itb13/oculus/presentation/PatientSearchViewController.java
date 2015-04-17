@@ -1,10 +1,10 @@
 package at.itb13.oculus.presentation;
 
-import at.itb13.oculus.model.Appointment;
+import at.itb13.oculus.model.Patient;
 
-public class PatientSearchViewController extends SearchViewController<Appointment> {
+public class PatientSearchViewController extends SearchViewController<Patient> {
 	
 	public PatientSearchViewController() {
-		super(Appointment.class);
+		super(Patient.class);
 	}
 }

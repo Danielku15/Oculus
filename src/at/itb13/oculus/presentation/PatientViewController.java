@@ -2,6 +2,8 @@ package at.itb13.oculus.presentation;
 
 import java.net.URL;
 import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.ResourceBundle;
 
 import javafx.beans.value.ChangeListener;
@@ -22,13 +24,18 @@ import javafx.scene.control.TitledPane;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
+import at.itb13.oculus.application.IncompleteDataException;
+import at.itb13.oculus.application.ObjectNotFoundException;
+import at.itb13.oculus.application.ObjectNotSavedException;
 import at.itb13.oculus.application.PatientControllerImpl;
+import at.itb13.oculus.application.UniqueConstraintException;
 
 
 public class PatientViewController implements Initializable{
 	
 	private static final Color COLOR_FAIL = Color.RED;
 	private static final Color COLOR_SUCCESS = Color.BLACK;
+	private boolean _loading;
 	
 	//application - PatientViewControllerImpl
 	private PatientControllerImpl _patientController;
@@ -107,6 +114,7 @@ public class PatientViewController implements Initializable{
     
 	public PatientViewController() {
 		_patientController = new PatientControllerImpl();		
+		_loading = false;
 	}
 
 	@Override
@@ -132,9 +140,8 @@ public class PatientViewController implements Initializable{
 		_lastnameInput.textProperty().addListener(new ChangeListener<String>() {
 		    @Override
 		    public void changed(final ObservableValue<? extends String> observable, final String oldValue, final String newValue) {
-		    	System.out.println(_lastnameInput.getText());
-		    	setLastname(_lastnameInput.getText());
-				if (_patientTabViewController != null){
+		    	setLastname(_lastnameInput.getText());	    	
+				if (_patientTabViewController != null && _loading == false){
 					_patientTabViewController.setTabLabelName(_lastnameInput.getText());
 				}
 		    }
@@ -280,6 +287,50 @@ public class PatientViewController implements Initializable{
 		new Thread(new CreatePatientTask()).start();
 	}
 	
+	public void loadPatientToFormular(String id){
+		_loading = true;
+		try {
+			_patientController.loadPatient(id);
+		} catch (ObjectNotFoundException e) {
+			e.printStackTrace();
+		}
+		setDataToFormular();
+		_loading = false;
+	}
+	
+	
+	public void setDataToFormular(){
+		_firstnameInput.setText(_patientController.getFirstname());
+		_lastnameInput.setText(_patientController.getLastname());
+		
+		Date input = _patientController.getBirthday();
+		LocalDate date = input.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+		_birthdayInput.setValue(date);
+		
+		if (_patientController.getGender() == "MALE"){
+			_maleInput.setSelected(true);
+		}
+		else{
+			_femaleInput.setSelected(true);
+		}
+		
+		_phoneNumberInput.setText(_patientController.getPhoneNumber());
+		_emailInput.setText(_patientController.getEmail());
+		_streetInput.setText(_patientController.getStreet());
+		_streetNumberInput.setText(_patientController.getStreetNumber());
+		_zipInput.setText(_patientController.getZip());
+		_cityInput.setText(_patientController.getCity());
+		_countryInput.setText(_patientController.getCountry());
+		_socialSecurityNumberInput.setText(_patientController.getSocialSecurityNumber());
+		_employerInput.setText(_patientController.getEmployer());
+				
+	}
+	
+	public String getLabelName(){
+		String string = _lastnameInput.getText();
+		return string;
+	}
+	
 	void setFirstname(String firstname) {
 		if (!_patientController.setFirstname(firstname)) {
 			_firstnameLabel.setTextFill(COLOR_FAIL);
@@ -369,10 +420,14 @@ public class PatientViewController implements Initializable{
 	}
 
 	void setSocialSecurityNumber(String socialsecuritynumber) {
-		if (!_patientController.setSocialSecurityNumber(socialsecuritynumber)) {
-			_socialSecurityNumberLabel.setTextFill(COLOR_FAIL);
-		} else {
-			_socialSecurityNumberLabel.setTextFill(COLOR_SUCCESS);
+		try {
+			if (!_patientController.setSocialSecurityNumber(socialsecuritynumber)) {
+				_socialSecurityNumberLabel.setTextFill(COLOR_FAIL);
+			} else {
+				_socialSecurityNumberLabel.setTextFill(COLOR_SUCCESS);
+			}
+		} catch (UniqueConstraintException e) {
+			e.printStackTrace();
 		}
 	}
 
@@ -387,8 +442,14 @@ public class PatientViewController implements Initializable{
 	private class CreatePatientTask extends Task<String> {
 
 	    @Override public String call() {
-	    	_patientController.savePatient();	
-	    	return _patientController.getId();
+	    	try {
+				_patientController.savePatient();
+			} catch (IncompleteDataException e) {
+				e.printStackTrace();
+			} catch (ObjectNotSavedException e) {
+				e.printStackTrace();
+			}	
+	    	return null;
 	    }
 	    
 	    @Override protected void succeeded() {

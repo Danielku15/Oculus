@@ -38,6 +38,9 @@ public class PatientTabViewController implements Initializable{
 	@FXML
 	private PatientViewController _patientViewController;
 	//window - PatientSearchViewController
+	
+	private Stage _searchViewStage;
+	
 	@SuppressWarnings("unused")
 	private SearchViewController _patientSearchViewController;
 	@FXML
@@ -76,7 +79,7 @@ public class PatientTabViewController implements Initializable{
     void searchPatient(ActionEvent event) {
 		String query = _searchInput.getText();			
 		LangFacade facade = LangFacade.getInstance();
-		Stage stage = new Stage();
+		_searchViewStage = new Stage();
 		FXMLLoader loader = null;
 		Pane pane = null;
 		try {
@@ -93,12 +96,13 @@ public class PatientTabViewController implements Initializable{
 				createFormular(id);
 			}
 		});
+		_patientSearchViewController.init(this);
 		if (_patientSearchViewController.setCriteria(query)) {
 			setSuccessToSearchLabel();
 			_patientSearchViewController.search(event);
 
-			stage.setScene(new Scene(pane));
-			stage.show();
+			_searchViewStage.setScene(new Scene(pane));
+			_searchViewStage.show();
 		} else {
 			setFailToSearchLabel();
 		}
@@ -144,7 +148,49 @@ public class PatientTabViewController implements Initializable{
 		_patientMainViewController = patientMainViewController;
 	}
 	
+	public void createFormular(String id){
+		LangFacade facade = LangFacade.getInstance();
+		FXMLLoader loader = null;
+		Pane pane = null;
+		Tab tab = new Tab();
+		try {
+			loader = new FXMLLoader(this.getClass().getResource(
+					PATIENTVIEWXML), facade.getResourceBundle());
+			pane = (Pane) loader.load();
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		}
+		PatientViewController loadPatient = loader
+				.<PatientViewController> getController();
+		
+		loadPatient.loadPatientToFormular(id);
+		
+		tab.setText("DFSDF");
+		tab.setContent(pane);
+		tab.setClosable(true);
+		_tabPane.getTabs().add(tab);
+		_tabPane.getSelectionModel().select(tab);
+
+		ObservableList<Tab> tabs = _tabPane.getTabs();
+
+		for (int i = 0; i < tabs.size(); i++) {
+			tabs.get(i).setClosable(true);
+		}
+
+		// check if only one tab is shown and setCloseable to false
+		tab.setOnClosed(new EventHandler<javafx.event.Event>() {
+			public void handle(javafx.event.Event e) {
+				if (tabs.size() <= 1) {
+					tabs.get(0).setClosable(false);
+				}
+			}
+		});
+		
+		_searchViewStage.close();
+	}
+	
 	public void setTabLabelName(String name){
+		System.out.println(name);
 		_tabPane.getSelectionModel().getSelectedItem().setText(name);
 	}
 	
