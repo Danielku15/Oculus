@@ -203,8 +203,8 @@ public class DBFacade implements AutoCloseable {
 		return ((PatientDAO) _patientDAO).getSearchedPatient(name);
 	}
 	
-	public Patient getbySocialSecurityNumber(String name){
-		return ((PatientDAO) _patientDAO).getBySocialSecurityNumber(name);
+	public Patient getPatientBySocialSecurityNumber(String socialSecurityNumber){
+		return ((PatientDAO) _patientDAO).getBySocialSecurityNumber(socialSecurityNumber);
 	}
 		
 	@Override

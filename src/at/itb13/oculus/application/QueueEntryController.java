@@ -16,7 +16,8 @@ public interface QueueEntryController extends AutoCloseable {
 	
 	// operations
 	List<String[]> getQueues();
-	void createQueueEntry();	
+	void createQueueEntry();
+	void loadQueueEntry(String queueEntryId) throws ObjectNotFoundException;
 	void fetchPatient(String patientId) throws ObjectNotFoundException;
 	void fetchAppointment(String appointmentId) throws ObjectNotFoundException;
 	void fetchQueue(String queueId) throws ObjectNotFoundException;

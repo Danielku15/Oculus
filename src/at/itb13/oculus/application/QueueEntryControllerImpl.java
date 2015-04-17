@@ -17,7 +17,7 @@ public class QueueEntryControllerImpl extends Controller implements QueueEntryCo
 	private Patient _patient;
 	private QueueEntry _queueEntry;
 
-	public QueueEntryControllerImpl() {
+	public QueueEntryControllerImpl(String queueEntryId) {
 		super();
 		createQueueEntry();
 	}
@@ -97,15 +97,16 @@ public class QueueEntryControllerImpl extends Controller implements QueueEntryCo
 			_database.beginTransaction();
 			queuesObj = _database.getAll(Queue.class);
 			_database.commitTransaction();
+			
+			for(Queue queueObj : queuesObj) {
+				String[] queueStr = new String[2];
+				queueStr[0] = queueObj.getID();
+				queueStr[1] = queueObj.getName();
+				queuesStr.add(queueStr);
+			}
 		} catch(HibernateException e) {
 			_database.rollbackTransaction();
 			throw e;
-		}
-		for(Queue queueObj : queuesObj) {
-			String[] queueStr = new String[2];
-			queueStr[0] = queueObj.getID();
-			queueStr[1] = queueObj.getName();
-			queuesStr.add(queueStr);
 		}
 		return queuesStr;
 	}
@@ -113,6 +114,23 @@ public class QueueEntryControllerImpl extends Controller implements QueueEntryCo
 	@Override
 	public void createQueueEntry() {
 		_queueEntry = new QueueEntry();
+	}
+	
+	@Override
+	public synchronized void loadQueueEntry(String queueEntryId) throws ObjectNotFoundException {
+		try {
+			_database.beginTransaction();
+			QueueEntry queueEntry = _database.get(QueueEntry.class, queueEntryId);
+			_database.commitTransaction();
+			if(queueEntry != null) {
+				_queueEntry = queueEntry;
+			} else {
+				throw new ObjectNotFoundException(QueueEntry.class, queueEntryId);
+			}
+		} catch(HibernateException e) {
+			_database.rollbackTransaction();
+			throw e;
+		}
 	}
 	
 	@Override
@@ -141,7 +159,7 @@ public class QueueEntryControllerImpl extends Controller implements QueueEntryCo
 			if(appointment != null) {
 				_queueEntry.setAppointment(appointment);
 			} else {
-				throw new ObjectNotFoundException(Patient.class, appointmentId);
+				throw new ObjectNotFoundException(Appointment.class, appointmentId);
 			}
 		} catch(HibernateException e) {
 			_database.rollbackTransaction();
