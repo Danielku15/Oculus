@@ -33,7 +33,7 @@
             </VBox>
             <VBox alignment="CENTER_RIGHT" prefHeight="15.0" prefWidth="248.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                <children>
-                  <Button fx:id="_okBtn" mnemonicParsing="false" text="%ok" />
+                  <Button fx:id="_okBtn" mnemonicParsing="false" onAction="#addQueueEntry" text="%ok" />
                </children>
             </VBox>
          </children>

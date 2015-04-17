@@ -35,6 +35,13 @@ public class QueueEntryViewController implements Serializable {
 	@FXML
 	private Button _searchBtn;
 	
+	@FXML
+	private Button _okBtn;
+	
+	
+	public void initialize(){
+		
+	}
 	
 	
 	
