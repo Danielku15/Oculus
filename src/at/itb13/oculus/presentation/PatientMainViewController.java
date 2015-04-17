@@ -54,7 +54,4 @@ public class PatientMainViewController implements Initializable  {
 	public void init(PatientTabViewController patientTabViewController) {
 		_patientTabViewController = patientTabViewController;
 	}
-
-
-	
 }

@@ -3,6 +3,8 @@ package at.itb13.oculus.presentation;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.function.Consumer;
+
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -84,8 +86,13 @@ public class PatientTabViewController implements Initializable{
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		}
-		SearchViewController _patientSearchViewController = loader
-				.<SearchViewController> getController();
+		PatientSearchViewController _patientSearchViewController = loader.<PatientSearchViewController> getController();
+		_patientSearchViewController.addConsumer(new Consumer<String>() {
+			@Override
+			public void accept(String id) {
+				createFormular(id);
+			}
+		});
 		if (_patientSearchViewController.setCriteria(query)) {
 			setSuccessToSearchLabel();
 			_patientSearchViewController.search(event);

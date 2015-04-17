@@ -1,6 +1,7 @@
 package at.itb13.oculus.presentation;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
@@ -29,14 +30,15 @@ public abstract class SearchViewController<T extends PersistentObject & Searchab
 	//application - SearchViewControllerImpl
 	private SearchControllerImpl<T> _searchController;
 	private Map<String, Integer> _fieldMap;
-	private Consumer<String> _consumer;
+	private List<Consumer<String>> _consumers;
 	
 	@FXML
 	private TableView<String[]> _tableView;
 	
-	public SearchViewController(Class<T> type, Consumer<String> consumer) {
+	public SearchViewController(Class<T> type) {
 		_searchController = new SearchControllerImpl<T>(type);
 		_fieldMap = _searchController.getFieldMap();
+		_consumers = new LinkedList<Consumer<String>>();
 	}
 
 	@FXML
@@ -66,7 +68,7 @@ public abstract class SearchViewController<T extends PersistentObject & Searchab
 					public void handle(MouseEvent t) {
 						if(t.getClickCount() >= 2) {
 							String[] result = row.getItem();
-							_consumer.accept(result[_fieldMap.get("id")]);			
+							notifyConsumers(result[_fieldMap.get("id")]);			
 						}
 					}
 				});
@@ -100,6 +102,20 @@ public abstract class SearchViewController<T extends PersistentObject & Searchab
 		} else {
 			return new SimpleStringProperty("");
 		}
+	}
+	
+	private void notifyConsumers(String id) {
+		for(Consumer<String> consumer : _consumers) {
+			consumer.accept(id);
+		}
+	}
+	
+	public void addConsumer(Consumer<String> consumer) {
+		_consumers.add(consumer);
+	}
+	
+	public void removeConsumer(Consumer<String> consumer) {
+		_consumers.remove(consumer);
 	}
 	
 	public boolean setCriteria(String criteria) {
