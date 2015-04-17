@@ -1,36 +1,34 @@
 package at.itb13.oculus.application;
 
-import at.itb13.oculus.lang.LangFacade;
-import at.itb13.oculus.lang.LangKey;
+import at.itb13.oculus.database.PersistentObject;
 
-@SuppressWarnings("serial")
 public class UniqueConstraintException extends Exception {
+	private static final long serialVersionUID = -6157620279567597607L;
 	
 	private String _field;
-	private Object _failedEntity;
-	private Object _existingEntity;
+	private PersistentObject _failedEntity;
+	private PersistentObject _existingEntity;
 
-	public UniqueConstraintException(String field, Object failedEntity, Object existingEntity) {
+	public UniqueConstraintException(String field, PersistentObject failedEntity, PersistentObject existingEntity) {
 		this._field = field;
 		this._failedEntity = failedEntity;
 		this._existingEntity = existingEntity;
 	}
 	
-	public String getField(){
+	public String getField() {
 		return _field;
 	}
 	
-	public Object getFailedEntity(){
-		return _failedEntity;
+	public String getFailedEntityID() {
+		return _failedEntity.getID();
 	}
 	
-	public Object getExistingEntity(){
-		return _existingEntity;
+	public String getExistingEntityID() {
+		return _existingEntity.getID();
 	}
 
 	@Override
-	public String toString(){
-		LangFacade langFacade = LangFacade.getInstance();
-		return _field + " " + langFacade.getString(LangKey.ENTITYEXISTS);
+	public String toString() {
+		return _field + " is a unique field and already exists in the database!";
 	}
 }

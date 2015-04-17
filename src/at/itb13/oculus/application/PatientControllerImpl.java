@@ -3,7 +3,9 @@ package at.itb13.oculus.application;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import org.hibernate.HibernateException;
 
@@ -21,7 +23,7 @@ public class PatientControllerImpl extends Controller implements PatientControll
 	}
 
 	@Override
-	public String getId() {
+	public String getID() {
 		return _patient.getID();
 	}
 
@@ -92,7 +94,7 @@ public class PatientControllerImpl extends Controller implements PatientControll
 
 	@Override
 	public boolean setFirstname(String firstname) {
-		if((firstname != null) && (!firstname.trim().isEmpty())) {
+		if(isFirstnameValid(firstname)) {
 			_patient.setFirstname(firstname);
 			return true;
 		}
@@ -101,7 +103,7 @@ public class PatientControllerImpl extends Controller implements PatientControll
 
 	@Override
 	public boolean setLastname(String lastname) {
-		if((lastname != null) && (!lastname.trim().isEmpty())) {
+		if(isLastnameValid(lastname)) {
 			_patient.setLastname(lastname);
 			return true;
 		}
@@ -150,8 +152,19 @@ public class PatientControllerImpl extends Controller implements PatientControll
 	}
 
 	@Override
-	public boolean setSocialSecurityNumber(String socialSecurityNumber) {
-		if((socialSecurityNumber != null) && (isSocialSecurityNumberValid(socialSecurityNumber))) {
+	public synchronized boolean setSocialSecurityNumber(String socialSecurityNumber) throws UniqueConstraintException {
+		if(isSocialSecurityNumberValid(socialSecurityNumber)) {
+			try {
+				_database.beginTransaction();
+				Patient patient = _database.getPatientBySocialSecurityNumber(socialSecurityNumber);
+				if(patient != null) {
+					throw new UniqueConstraintException("socialSecurityNumber", _patient, patient);
+				}
+				_database.commitTransaction();
+			} catch(HibernateException e) {
+				_database.rollbackTransaction();
+				throw e;
+			}
 			_patient.setSocialSecurityNumber(socialSecurityNumber);
 			return true;
 		}
@@ -232,39 +245,70 @@ public class PatientControllerImpl extends Controller implements PatientControll
 		_patient = new Patient();
 		_patient.setAddress(new Address());
 	}
-
+	
 	@Override
-	public void savePatient() {
-		try {
-			_database.beginTransaction();
-			_database.createOrUpdate(_patient);
-			_database.commitTransaction();
-		} catch(HibernateException e) {
-			_database.rollbackTransaction();
-			throw e;
-		}
-	}
-
-	@Override
-	public void loadPatient(String id) throws ObjectNotFoundException {
+	public synchronized void loadPatient(String patientId) throws ObjectNotFoundException {
 		Patient patient = null;
 		try {
 			_database.beginTransaction();
-			patient = _database.get(Patient.class, id);
+			patient = _database.get(Patient.class, patientId);
 			_database.commitTransaction();
 			if(patient != null) {
 				_patient = patient;
 			} else {
-				throw new ObjectNotFoundException(Patient.class, id);
+				throw new ObjectNotFoundException(Patient.class, patientId);
 			}
 		} catch(HibernateException e) {
 			_database.rollbackTransaction();
 			throw e;
 		}
 	}
+
+	@Override
+	public synchronized void savePatient() throws IncompleteDataException, ObjectNotSavedException {
+		if(validateData()) {
+			try {
+				_database.beginTransaction();
+				_database.createOrUpdate(_patient);
+				_database.commitTransaction();
+			} catch(HibernateException e) {
+				_database.rollbackTransaction();
+				throw new ObjectNotSavedException(_patient);
+			}
+		}
+	}
+	
+	@Override
+	public boolean validateData() throws IncompleteDataException {
+		List<String> fieldNames = new ArrayList<String>();
+		if(!isFirstnameValid(_patient.getFirstname())) {
+			fieldNames.add("firstname");
+		}
+		if(!isLastnameValid(_patient.getLastname())) {
+			fieldNames.add("lastname");
+		}
+		if(!isSocialSecurityNumberValid(_patient.getSocialSecurityNumber())) {
+			fieldNames.add("socialSecurityNumber");
+		}
+		if(!fieldNames.isEmpty()) {
+			throw new IncompleteDataException(fieldNames);
+		}
+		return true;
+	}
+	
+	private boolean isFirstnameValid(String firstname) {
+		return (firstname != null) && (!firstname.trim().isEmpty());
+	}
+	
+	private boolean isLastnameValid(String lastname) {
+		return (lastname != null) && (!lastname.trim().isEmpty());
+	}
 	
 	private boolean isSocialSecurityNumberValid(String socialSecurityNumber) {
-		String svn = "^[0-9]{10}$";
-		return socialSecurityNumber.matches(svn);
+		if(socialSecurityNumber != null) {
+			String regExp = "^[0-9]{10}$";
+			return socialSecurityNumber.matches(regExp);
+		}
+		return false;
 	}
 }

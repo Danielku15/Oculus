@@ -6,7 +6,7 @@ import java.util.Date;
 public interface PatientController extends AutoCloseable {
 
 	// getter
-	String getId();
+	String getID();
 	String getFirstname();	
 	String getLastname();
 	Date getBirthday();
@@ -28,7 +28,7 @@ public interface PatientController extends AutoCloseable {
 	boolean setGender(String gender);
 	boolean setPhoneNumber(String phoneNumber);
 	boolean setEmail(String email);
-	boolean setSocialSecurityNumber(String socialSecurityNumber);
+	boolean setSocialSecurityNumber(String socialSecurityNumber) throws UniqueConstraintException;
 	boolean setEmployer(String employer);
 	boolean setStreet(String street);
 	boolean setStreetNumber(String streetNumber);
@@ -38,6 +38,7 @@ public interface PatientController extends AutoCloseable {
 	
 	// operations
 	void createPatient();
-	void savePatient();
-	void loadPatient(String id) throws ObjectNotFoundException;
+	void loadPatient(String patientId) throws ObjectNotFoundException;
+	void savePatient() throws IncompleteDataException, ObjectNotSavedException;
+	boolean validateData() throws IncompleteDataException;
 }
