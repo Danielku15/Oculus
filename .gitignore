@@ -7,3 +7,4 @@ config.properties
 log*.txt*
 *.lck
 
+/bin/

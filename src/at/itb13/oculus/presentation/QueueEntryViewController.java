@@ -41,7 +41,5 @@ public class QueueEntryViewController implements Serializable {
 	public void initialize(){
 		
 	}
-	
-	
-	
+		
 }

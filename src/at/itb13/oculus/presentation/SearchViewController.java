@@ -59,6 +59,7 @@ public abstract class SearchViewController<T extends PersistentObject & Searchab
 		}
 		_tableView.getColumns().addAll(tableColumns);
 		
+		//doppelklick - landet im anderen fenster
 		_tableView.setRowFactory(new Callback<TableView<String[]>, TableRow<String[]>>() {
 			@Override
 			public TableRow<String[]> call(TableView<String[]> arg0) {
