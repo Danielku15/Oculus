@@ -40,7 +40,7 @@ public class PatientTabViewController implements Initializable{
 	private Stage _searchViewStage;
 	
 	@SuppressWarnings("unused")
-	private PatientSearchViewController _patientSearchViewController;
+	private SearchViewController _patientSearchViewController;
 	@FXML
 	private Button _createNewPatientButton;
 	@FXML
