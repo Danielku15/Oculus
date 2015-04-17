@@ -2,8 +2,6 @@ package at.itb13.oculus.presentation;
 
 import java.net.URL;
 import java.time.LocalDate;
-import java.time.ZoneId;
-import java.util.Date;
 import java.util.ResourceBundle;
 
 import javafx.beans.value.ChangeListener;
@@ -301,11 +299,7 @@ public class PatientViewController implements Initializable{
 		_firstnameInput.setText(_patientController.getFirstname());
 		_lastnameInput.setText(_patientController.getLastname());
 		
-		Date input = _patientController.getBirthday();
-		if(input != null) {
-			LocalDate date = input.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-			_birthdayInput.setValue(date);
-		}
+		_birthdayInput.setValue(_patientController.getBirthday());
 		
 		String gender = _patientController.getGender();
 		if (gender != null) {
