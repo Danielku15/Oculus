@@ -3,6 +3,7 @@ package at.itb13.oculus.presentation;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Consumer;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
@@ -28,11 +29,12 @@ public abstract class SearchViewController<T extends PersistentObject & Searchab
 	//application - SearchViewControllerImpl
 	private SearchControllerImpl<T> _searchController;
 	private Map<String, Integer> _fieldMap;
+	private Consumer<String> _consumer;
 	
 	@FXML
 	private TableView<String[]> _tableView;
 	
-	public SearchViewController(Class<T> type) {
+	public SearchViewController(Class<T> type, Consumer<String> consumer) {
 		_searchController = new SearchControllerImpl<T>(type);
 		_fieldMap = _searchController.getFieldMap();
 	}
@@ -64,7 +66,7 @@ public abstract class SearchViewController<T extends PersistentObject & Searchab
 					public void handle(MouseEvent t) {
 						if(t.getClickCount() >= 2) {
 							String[] result = row.getItem();
-							onSearchableChosen(result[_fieldMap.get("id")]);			
+							_consumer.accept(result[_fieldMap.get("id")]);			
 						}
 					}
 				});
@@ -103,8 +105,6 @@ public abstract class SearchViewController<T extends PersistentObject & Searchab
 	public boolean setCriteria(String criteria) {
 		return _searchController.setCriteria(criteria);
 	}
-	
-	public abstract void onSearchableChosen(String id);
 	
 	private class SearchTask extends Task<Void> {	
 	    @Override public Void call() {
