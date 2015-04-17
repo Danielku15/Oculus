@@ -1,7 +1,6 @@
 package at.itb13.oculus.application;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 public interface PatientController extends AutoCloseable {
 
@@ -9,7 +8,7 @@ public interface PatientController extends AutoCloseable {
 	String getID();
 	String getFirstname();	
 	String getLastname();
-	Date getBirthday();
+	LocalDate getBirthday();
 	String getGender();
 	String getPhoneNumber();
 	String getEmail();

@@ -38,8 +38,12 @@ public class PatientControllerImpl extends Controller implements PatientControll
 	}
 
 	@Override
-	public Date getBirthday() {
-		return _patient.getBirthday();
+	public LocalDate getBirthday() {
+		Date birthday = _patient.getBirthday();
+		if(birthday != null) {
+			return birthday.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+		}
+		return null;
 	}
 
 	@Override
@@ -208,10 +212,12 @@ public class PatientControllerImpl extends Controller implements PatientControll
 	public boolean setStreet(String street) {
 		if(street != null) {
 			Address address = _patient.getAddress();
-			if(address != null) {
-				address.setStreet(street);
-				return true;
+			if(address == null) {
+				address = new Address();
+				_patient.setAddress(address);
 			}
+			address.setStreet(street);
+			return true;
 		}
 		return false;
 	}
@@ -220,10 +226,12 @@ public class PatientControllerImpl extends Controller implements PatientControll
 	public boolean setStreetNumber(String streetNumber) {
 		if(streetNumber != null) {
 			Address address = _patient.getAddress();
-			if(address != null) {
-				address.setStreetNumber(streetNumber);
-				return true;
+			if(address == null) {
+				address = new Address();
+				_patient.setAddress(address);
 			}
+			address.setStreetNumber(streetNumber);
+			return true;
 		}
 		return false;
 	}
@@ -232,10 +240,12 @@ public class PatientControllerImpl extends Controller implements PatientControll
 	public boolean setZip(String zip) {
 		if(zip != null) {
 			Address address = _patient.getAddress();
-			if(address != null) {
-				address.setZip(zip);
-				return true;
+			if(address == null) {
+				address = new Address();
+				_patient.setAddress(address);
 			}
+			address.setZip(zip);
+			return true;
 		}
 		return false;
 	}
@@ -244,10 +254,12 @@ public class PatientControllerImpl extends Controller implements PatientControll
 	public boolean setCity(String city) {
 		if(city != null) {
 			Address address = _patient.getAddress();
-			if(address != null) {
-				address.setCity(city);
-				return true;
+			if(address == null) {
+				address = new Address();
+				_patient.setAddress(address);
 			}
+			address.setCity(city);
+			return true;
 		}
 		return false;
 	}
@@ -256,10 +268,12 @@ public class PatientControllerImpl extends Controller implements PatientControll
 	public boolean setCountry(String country) {
 		if(country != null) {
 			Address address = _patient.getAddress();
-			if(address != null) {
-				address.setCountry(country);
-				return true;
+			if(address == null) {
+				address = new Address();
+				_patient.setAddress(address);
 			}
+			address.setCountry(country);
+			return true;
 		}
 		return false;
 	}
@@ -267,7 +281,6 @@ public class PatientControllerImpl extends Controller implements PatientControll
 	@Override
 	public void createPatient() {
 		_patient = new Patient();
-		_patient.setAddress(new Address());
 	}
 	
 	@Override
