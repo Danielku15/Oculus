@@ -5,13 +5,12 @@
  */
 package at.itb13.oculus.presentation;
 
-import java.awt.Choice;
 import java.io.Serializable;
 
+import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
-import javafx.fxml.FXML;
 import at.itb13.oculus.application.QueueEntryControllerImpl;
 
 /**

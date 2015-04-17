@@ -22,14 +22,12 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TitledPane;
 import javafx.scene.control.ToggleGroup;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
 import at.itb13.oculus.application.IncompleteDataException;
 import at.itb13.oculus.application.ObjectNotFoundException;
 import at.itb13.oculus.application.ObjectNotSavedException;
 import at.itb13.oculus.application.PatientControllerImpl;
 import at.itb13.oculus.application.UniqueConstraintException;
-
 
 public class PatientViewController implements Initializable{
 	
@@ -304,14 +302,18 @@ public class PatientViewController implements Initializable{
 		_lastnameInput.setText(_patientController.getLastname());
 		
 		Date input = _patientController.getBirthday();
-		LocalDate date = input.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-		_birthdayInput.setValue(date);
-		
-		if (_patientController.getGender() == "MALE"){
-			_maleInput.setSelected(true);
+		if(input != null) {
+			LocalDate date = input.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+			_birthdayInput.setValue(date);
 		}
-		else{
-			_femaleInput.setSelected(true);
+		
+		String gender = _patientController.getGender();
+		if (gender != null) {
+			if(gender.equals("MALE")){
+				_maleInput.setSelected(true);
+			} else{
+				_femaleInput.setSelected(true);
+			}
 		}
 		
 		_phoneNumberInput.setText(_patientController.getPhoneNumber());

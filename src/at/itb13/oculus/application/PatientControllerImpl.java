@@ -44,7 +44,11 @@ public class PatientControllerImpl extends Controller implements PatientControll
 
 	@Override
 	public String getGender() {
-		return _patient.getGender().toString();
+		Gender gender = _patient.getGender();
+		if(gender != null) {
+			return gender.toString();	
+		}
+		return null;
 	}
 
 	@Override
@@ -69,27 +73,47 @@ public class PatientControllerImpl extends Controller implements PatientControll
 
 	@Override
 	public String getStreet() {
-		return _patient.getAddress().getStreet();
+		Address address = _patient.getAddress();
+		if(address != null) {
+			return address.getStreet();	
+		}
+		return null;
 	}
 
 	@Override
 	public String getStreetNumber() {
-		return _patient.getAddress().getStreetNumber();
+		Address address = _patient.getAddress();
+		if(address != null) {
+			return address.getStreetNumber();	
+		}
+		return null;
 	}
 
 	@Override
 	public String getZip() {
-		return _patient.getAddress().getZip();
+		Address address = _patient.getAddress();
+		if(address != null) {
+			return address.getZip();	
+		}
+		return null;
 	}
 
 	@Override
 	public String getCity() {
-		return _patient.getAddress().getCity();
+		Address address = _patient.getAddress();
+		if(address != null) {
+			return address.getCity();	
+		}
+		return null;
 	}
 
 	@Override
 	public String getCountry() {
-		return _patient.getAddress().getCountry();
+		Address address = _patient.getAddress();
+		if(address != null) {
+			return address.getCountry();	
+		}
+		return null;
 	}
 
 	@Override

@@ -42,7 +42,7 @@ public class PatientTabViewController implements Initializable{
 	private Stage _searchViewStage;
 	
 	@SuppressWarnings("unused")
-	private SearchViewController _patientSearchViewController;
+	private PatientSearchViewController _patientSearchViewController;
 	@FXML
 	private Button _createNewPatientButton;
 	@FXML
@@ -96,7 +96,6 @@ public class PatientTabViewController implements Initializable{
 				createFormular(id);
 			}
 		});
-		_patientSearchViewController.init(this);
 		if (_patientSearchViewController.setCriteria(query)) {
 			setSuccessToSearchLabel();
 			_patientSearchViewController.search(event);
@@ -165,7 +164,7 @@ public class PatientTabViewController implements Initializable{
 		
 		loadPatient.loadPatientToFormular(id);
 		
-		tab.setText("DFSDF");
+		tab.setText(loadPatient.getLabelName());
 		tab.setContent(pane);
 		tab.setClosable(true);
 		_tabPane.getTabs().add(tab);
