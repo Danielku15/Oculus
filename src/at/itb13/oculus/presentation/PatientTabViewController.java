@@ -37,7 +37,7 @@ public class PatientTabViewController implements Initializable{
 	private PatientViewController _patientViewController;
 	//window - PatientSearchViewController
 	@SuppressWarnings("unused")
-	private PatientSearchViewController _patientSearchViewController;
+	private SearchViewController _patientSearchViewController;
 	@FXML
 	private Button _createNewPatientButton;
 	@FXML
@@ -84,8 +84,8 @@ public class PatientTabViewController implements Initializable{
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		}
-		PatientSearchViewController _patientSearchViewController = loader
-				.<PatientSearchViewController> getController();
+		SearchViewController _patientSearchViewController = loader
+				.<SearchViewController> getController();
 		if (_patientSearchViewController.setCriteria(query)) {
 			setSuccessToSearchLabel();
 			_patientSearchViewController.search(event);
