@@ -42,7 +42,7 @@
                   <Font size="18.0" />
                </font>
             </TextField>
-            <Label text="%search" fx:id="_searchLabel">
+            <Label fx:id="_searchLabel" text="%search">
                <font>
                   <Font size="18.0" />
                </font>
@@ -58,7 +58,7 @@
             </Tab>
         </tabs>
          <VBox.margin>
-            <Insets top="50.0" />
+            <Insets />
          </VBox.margin>
       </TabPane>
    </children>
