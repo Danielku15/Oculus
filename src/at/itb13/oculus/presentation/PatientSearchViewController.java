@@ -28,6 +28,9 @@ public class PatientSearchViewController {
 	//application - SearchViewControllerImpl
 	private SearchControllerImpl<Patient> _searchController;
 
+	//parent - PatientTabViewController
+	private PatientTabViewController _patientTabViewController;
+	
 	private Map<String, Integer> _fieldMap;
 	
 	@FXML
@@ -67,7 +70,9 @@ public class PatientSearchViewController {
 					public void handle(MouseEvent t) {
 						if(t.getClickCount() >= 2) {
 							String[] result = row.getItem();
-							System.out.println(result[_fieldMap.get("id")]);			
+							if (_patientTabViewController != null){
+								_patientTabViewController.createFormular(result[_fieldMap.get("id")]);		
+							}
 						}
 					}
 				});
@@ -79,6 +84,11 @@ public class PatientSearchViewController {
 	@FXML
 	public void search(ActionEvent event) {
 		new Thread(new SearchTask()).start();
+	}
+	
+	//init parent - PatientMainViewController
+	public void init(PatientTabViewController patientTabViewController) {
+		_patientTabViewController = patientTabViewController;
 	}
 	
 	private ObservableValue<String> mapColumn(TableColumn.CellDataFeatures<String[], String> param, String key) {
