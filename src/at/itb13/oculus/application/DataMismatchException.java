@@ -2,6 +2,10 @@ package at.itb13.oculus.application;
 
 import at.itb13.oculus.database.PersistentObject;
 
+/**
+ * @author Patrick
+ *
+ */
 public class DataMismatchException extends Exception {
 	private static final long serialVersionUID = -9077841565433970120L;
 

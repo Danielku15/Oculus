@@ -33,6 +33,11 @@ import at.itb13.oculus.lang.LangFacade;
 import at.itb13.oculus.lang.LangKey;
 import at.itb13.oculus.model.Searchable;
 
+/**
+ * @author Patrick
+ *
+ * @param <T>
+ */
 public abstract class SearchViewController<T extends PersistentObject & Searchable> {
 
 	private static final Logger LOGGER = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);

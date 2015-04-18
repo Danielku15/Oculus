@@ -51,8 +51,10 @@ public class Appointment extends CalendarEntry implements java.io.Serializable, 
 		if(_patient != null) {
 			_patient.removeAppointment(this);
 		}
+		if(patient != null) {
+			patient.addAppointment(this);
+		}
 		_patient = patient;
-		_patient.addAppointment(this);
 	}
 
 	@Column(name = "status")

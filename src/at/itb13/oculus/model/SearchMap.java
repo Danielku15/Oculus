@@ -13,6 +13,11 @@ import org.hibernate.search.annotations.IndexedEmbedded;
 
 import at.itb13.oculus.database.PersistentObject;
 
+/**
+ * @author Patrick
+ *
+ * @param <T>
+ */
 public class SearchMap<T extends PersistentObject & Searchable> {
 	
 	private Map<String, Integer> _fieldMap;

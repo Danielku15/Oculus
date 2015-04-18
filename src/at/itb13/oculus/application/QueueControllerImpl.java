@@ -71,5 +71,4 @@ public class QueueControllerImpl extends Controller implements QueueController {
 
 		return queueEntriesStr;
 	}
-
 }

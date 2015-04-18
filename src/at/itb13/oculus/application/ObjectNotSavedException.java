@@ -2,6 +2,10 @@ package at.itb13.oculus.application;
 
 import at.itb13.oculus.database.PersistentObject;
 
+/**
+ * @author Patrick
+ *
+ */
 public class ObjectNotSavedException extends Exception {
 	private static final long serialVersionUID = -5514904979060339632L;
 	

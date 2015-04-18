@@ -1,7 +1,6 @@
 package at.itb13.oculus.config;
 
-/**
- * represents an entry in the configuration file that can be access with a specified key
+/** Represents an entry in the configuration file that can be access with a specified key
  * @author Patrick
  */
 public enum ConfigKey {

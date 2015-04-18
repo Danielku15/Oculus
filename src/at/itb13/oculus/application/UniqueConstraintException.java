@@ -2,6 +2,10 @@ package at.itb13.oculus.application;
 
 import at.itb13.oculus.database.PersistentObject;
 
+/**
+ * @author Patrick
+ *
+ */
 public class UniqueConstraintException extends Exception {
 	private static final long serialVersionUID = -6157620279567597607L;
 	

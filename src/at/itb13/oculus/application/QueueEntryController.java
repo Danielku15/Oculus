@@ -3,6 +3,10 @@ package at.itb13.oculus.application;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * @author Patrick
+ *
+ */
 public interface QueueEntryController extends AutoCloseable {
 	
 	// getter

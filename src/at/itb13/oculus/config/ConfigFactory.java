@@ -10,6 +10,10 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
+/**
+ * @author Patrick
+ *
+ */
 public class ConfigFactory {
 
 	public static final String CONFIGFILE = "config.properties";

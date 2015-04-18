@@ -1,5 +1,9 @@
 package at.itb13.oculus.application;
 
+/**
+ * @author Patrick
+ *
+ */
 public class ObjectNotFoundException extends Exception {
 	private static final long serialVersionUID = 6134098525702546932L;
 	

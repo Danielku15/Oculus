@@ -3,6 +3,10 @@ package at.itb13.oculus.application;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * @author Patrick
+ *
+ */
 public interface SearchController {
 	
 	// getter

@@ -10,6 +10,10 @@ import javax.persistence.Table;
 
 import at.itb13.oculus.database.PersistentObjectImpl;
 
+/**
+ * @author Patrick
+ *
+ */
 @Entity
 @Table(name = "changelog", catalog = "oculus_c")
 public class ChangeLog extends PersistentObjectImpl implements java.io.Serializable {
