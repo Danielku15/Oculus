@@ -1,6 +1,7 @@
 package at.itb13.oculus.application;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.hibernate.HibernateException;
@@ -38,13 +39,13 @@ public class QueueControllerImpl extends Controller implements QueueController {
 	}
 
 	@Override
-	public synchronized List<String[]> getQueueEntries(String queueId) {
+	public synchronized List<String[]> getQueueEntries(String queueId, Date lowerBound) {
 		List<String[]> queueEntriesStr = new ArrayList<String[]>();
 		List<QueueEntry> queueEntriesObj = new ArrayList<QueueEntry>();
 
 		try {
 			_database.beginTransaction();
-			queueEntriesObj = _database.getQueueEntriesByQueueId(queueId);
+			queueEntriesObj = _database.getQueueEntriesByQueueId(queueId, lowerBound);
 			_database.commitTransaction();
 
 			for (QueueEntry queueEntryObj : queueEntriesObj) {
