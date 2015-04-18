@@ -1,12 +1,7 @@
 package at.itb13.oculus.test;
 
-import java.io.IOException;
-
-import at.itb13.oculus.config.ConfigFacade;
 import at.itb13.oculus.database.DBFacade;
-import at.itb13.oculus.model.Patient;
-import at.itb13.oculus.model.SearchMap;
-import at.itb13.oculus.model.SearchResult;
+import at.itb13.oculus.model.QueueEntry;
 
 public class Main {
 	
@@ -14,23 +9,27 @@ public class Main {
 		
 ////		GUIApplication.main(args);		
 //
-		try {
-			ConfigFacade.load();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+//		try {
+//			ConfigFacade.load();
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
 		
 		DBFacade dbFacade = new DBFacade();
-		try {
-			dbFacade.indexAll();
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+//		try {
+//			dbFacade.indexAll();
+//		} catch (InterruptedException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		SearchResult<Patient> searchResult = dbFacade.search(Patient.class, new SearchMap<>(Patient.class), "Pat");
+//		for(String[] res : searchResult.getResults()) {
+//			System.out.println(res);
+//		};
+		
+		for(QueueEntry entry : dbFacade.getQueueEntriesByQueueId("9de27bff-e5f1-11e4-8f85-f0def1808fa9")) {
+			System.out.println(entry.getCreated());
 		}
-		SearchResult<Patient> searchResult = dbFacade.search(Patient.class, new SearchMap<>(Patient.class), "Pat");
-		for(String[] res : searchResult.getResults()) {
-			System.out.println(res);
-		};
 		dbFacade.close();
 		
 //		try {

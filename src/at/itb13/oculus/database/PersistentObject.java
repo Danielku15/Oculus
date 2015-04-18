@@ -1,5 +1,9 @@
 package at.itb13.oculus.database;
 
+/**
+ * @author Patrick
+ *
+ */
 public interface PersistentObject {
 
 	String getID();

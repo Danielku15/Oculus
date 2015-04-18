@@ -8,7 +8,7 @@ import java.util.logging.Logger;
 
 import at.itb13.oculus.database.PersistentObject;
 
-/** represents the result of a search
+/** Represents the result of a search
  * @author Patrick
  * 
  * @param <T> type of search result

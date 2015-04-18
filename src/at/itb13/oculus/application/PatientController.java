@@ -2,6 +2,10 @@ package at.itb13.oculus.application;
 
 import java.time.LocalDate;
 
+/**
+ * @author Patrick
+ *
+ */
 public interface PatientController extends AutoCloseable {
 
 	// getter

@@ -13,6 +13,10 @@ import at.itb13.oculus.model.Address;
 import at.itb13.oculus.model.Gender;
 import at.itb13.oculus.model.Patient;
 
+/**
+ * @author Patrick
+ *
+ */
 public class PatientControllerImpl extends Controller implements PatientController {
 	
 	private Patient _patient;

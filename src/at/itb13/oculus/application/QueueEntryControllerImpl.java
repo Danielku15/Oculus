@@ -12,6 +12,10 @@ import at.itb13.oculus.model.Patient;
 import at.itb13.oculus.model.Queue;
 import at.itb13.oculus.model.QueueEntry;
 
+/**
+ * @author Patrick
+ *
+ */
 public class QueueEntryControllerImpl extends Controller implements QueueEntryController {
 
 	private Patient _patient;

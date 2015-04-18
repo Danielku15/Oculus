@@ -2,6 +2,10 @@ package at.itb13.oculus.application;
 
 import java.util.List;
 
+/**
+ * @author Patrick
+ *
+ */
 public class IncompleteDataException extends Exception {
 	private static final long serialVersionUID = 4362486823868138704L;
 	

@@ -8,6 +8,11 @@ import at.itb13.oculus.model.SearchMap;
 import at.itb13.oculus.model.SearchResult;
 import at.itb13.oculus.model.Searchable;
 
+/**
+ * @author Patrick
+ *
+ * @param <T>
+ */
 public class SearchControllerImpl<T extends PersistentObject & Searchable> extends Controller implements SearchController {
 	
 	private Class<T> _type;

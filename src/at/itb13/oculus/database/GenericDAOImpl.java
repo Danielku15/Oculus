@@ -11,6 +11,12 @@ import org.hibernate.search.FullTextSession;
 import org.hibernate.search.Search;
 import org.hibernate.search.query.dsl.QueryBuilder;
 
+/**
+ * @author Patrick
+ *
+ * @param <T>
+ * @param <PK>
+ */
 abstract class GenericDAOImpl<T extends PersistentObject, PK extends Serializable> implements GenericDAO<T, PK> {
 
 	private Class<T> _type;
