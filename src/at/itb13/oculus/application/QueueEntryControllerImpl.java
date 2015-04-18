@@ -11,6 +11,7 @@ import at.itb13.oculus.model.Employee;
 import at.itb13.oculus.model.Patient;
 import at.itb13.oculus.model.Queue;
 import at.itb13.oculus.model.QueueEntry;
+import at.itb13.oculus.util.DateUtil;
 
 /**
  * @author Patrick
@@ -113,6 +114,36 @@ public class QueueEntryControllerImpl extends Controller implements QueueEntryCo
 			throw e;
 		}
 		return queuesStr;
+	}
+
+	@Override
+	public synchronized List<String[]> getAppointmentsByPatientId(String patientId) {
+		List<String[]> appointmentsStr = new ArrayList<String[]>();
+		List<Appointment> appointmentsObj = new ArrayList<Appointment>();
+		
+		try {
+			_database.beginTransaction();
+			appointmentsObj = _database.getAppointmentsByPatientId(patientId, DateUtil.truncateHours(new Date()));
+			_database.commitTransaction();
+			
+			for(Appointment appointmentObj : appointmentsObj) {
+				String[] appointmentStr = new String[6];
+				appointmentStr[0] = appointmentObj.getID();
+				appointmentStr[1] = appointmentObj.getTitle();
+				appointmentStr[2] = appointmentObj.getDescription();
+				appointmentStr[3] = DateUtil.format(appointmentObj.getStart());
+				Employee employee = appointmentObj.getEmployee();
+				if(employee != null) {
+					appointmentStr[4] = employee.getFirstname();
+					appointmentStr[5] = employee.getLastname();
+				}
+				appointmentsStr.add(appointmentStr);
+			}
+		} catch(HibernateException e) {
+			_database.rollbackTransaction();
+			throw e;
+		}
+		return appointmentsStr;
 	}
 	
 	@Override

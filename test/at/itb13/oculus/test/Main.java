@@ -1,7 +1,11 @@
 package at.itb13.oculus.test;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import at.itb13.oculus.database.DBFacade;
-import at.itb13.oculus.model.QueueEntry;
+import at.itb13.oculus.model.Appointment;
 
 public class Main {
 	
@@ -27,8 +31,11 @@ public class Main {
 //			System.out.println(res);
 //		};
 		
-		for(QueueEntry entry : dbFacade.getQueueEntriesByQueueId("9de27bff-e5f1-11e4-8f85-f0def1808fa9")) {
-			System.out.println(entry.getCreated());
+		SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss");
+		System.out.println(sdf.format(null));
+		
+		for(Appointment appointment : dbFacade.getAppointmentsByPatientId("1c1312ca-d9de-11e4-97e5-f0def1808fa9", null)) {
+			System.out.println(appointment.getStart());
 		}
 		dbFacade.close();
 		

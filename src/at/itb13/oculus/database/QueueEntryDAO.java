@@ -5,6 +5,7 @@
  */
 package at.itb13.oculus.database;
 
+import java.util.Date;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -22,7 +23,13 @@ class QueueEntryDAO extends GenericDAOImpl<QueueEntry, String> {
 		super(QueueEntry.class, session);
 	}
 	
-	public List<QueueEntry> getByQueueId(String queueId) {
-		return getByCriterion("created", true, Restrictions.eq("queue.id", queueId));
+	public List<QueueEntry> getByQueueId(String queueId, Date lowerBound) {
+		List<QueueEntry> list = null;
+		if(lowerBound != null) {
+			list = getByCriterion("created", true, Restrictions.eq("queue.id", queueId));
+		} else {
+			list = getByCriterion("created", true, Restrictions.and(Restrictions.eq("queue.id", queueId), Restrictions.ge("created", lowerBound)));
+		}
+		return list;
 	}
 }

@@ -1,4 +1,5 @@
 package at.itb13.oculus.database;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -207,8 +208,12 @@ public class DBFacade implements AutoCloseable {
 		return ((PatientDAO) _patientDAO).getBySocialSecurityNumber(socialSecurityNumber);
 	}
 	
-	public List<QueueEntry> getQueueEntriesByQueueId(String queueId) {
-		return ((QueueEntryDAO) _queueEntryDAO).getByQueueId(queueId);
+	public List<QueueEntry> getQueueEntriesByQueueId(String queueId, Date lowerBound) {
+		return ((QueueEntryDAO) _queueEntryDAO).getByQueueId(queueId, lowerBound);
+	}
+	
+	public List<Appointment> getAppointmentsByPatientId(String patientId, Date lowerBound) {
+		return ((AppointmentDAO) _appointmentDAO).getByPatientId(patientId, lowerBound);
 	}
 		
 	@Override
