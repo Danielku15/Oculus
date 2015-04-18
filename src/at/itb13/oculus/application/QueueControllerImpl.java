@@ -9,8 +9,8 @@ import at.itb13.oculus.model.Queue;
 import at.itb13.oculus.model.QueueEntry;
 
 public class QueueControllerImpl extends Controller implements QueueController {
-
-	public QueueControllerImpl(String queueId) {
+	
+	public QueueControllerImpl() {
 		super();
 	}
 
@@ -38,13 +38,13 @@ public class QueueControllerImpl extends Controller implements QueueController {
 	}
 
 	@Override
-	public List<String[]> getQueueEntries(String queueId) {
+	public synchronized List<String[]> getQueueEntries(String queueId) {
 		List<String[]> queueEntriesStr = new ArrayList<String[]>();
 		List<QueueEntry> queueEntriesObj = new ArrayList<QueueEntry>();
 
 		try {
 			_database.beginTransaction();
-			queueEntriesObj = _database.getAll(QueueEntry.class);
+			queueEntriesObj = _database.getQueueEntriesByQueueId(queueId);
 			_database.commitTransaction();
 
 			for (QueueEntry queueEntryObj : queueEntriesObj) {
