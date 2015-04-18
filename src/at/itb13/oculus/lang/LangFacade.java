@@ -4,8 +4,9 @@ import java.util.Locale;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
-import at.itb13.oculus.config.Config;
-import at.itb13.oculus.config.ConfigFacade;
+import at.itb13.oculus.config.ConfigFactory;
+import at.itb13.oculus.config.ConfigFactory.Config;
+import at.itb13.oculus.config.ConfigKey;
 
 /**
  * @author Patrick
@@ -35,9 +36,10 @@ public class LangFacade {
 	}
 	
 	private void load(String fileName) throws MissingResourceException {
-		ConfigFacade configFacade = ConfigFacade.getInstance();
-		String language = configFacade.getProperty(Config.LANGUAGE);
-		String country = configFacade.getProperty(Config.COUNTRY);
+		ConfigFactory configFactory = ConfigFactory.getInstance();
+		Config config = configFactory.getConfig(ConfigFactory.CONFIGFILE);
+		String language = config.getProperty(ConfigKey.LANGUAGE.getKey());
+		String country = config.getProperty(ConfigKey.COUNTRY.getKey());
 		_locale = new Locale(language, country);
 		_resourceBundle = ResourceBundle.getBundle(fileName, _locale);
 	}

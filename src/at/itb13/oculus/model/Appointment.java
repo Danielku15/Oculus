@@ -12,10 +12,14 @@ import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
+import org.hibernate.search.annotations.Indexed;
+import org.hibernate.search.annotations.IndexedEmbedded;
+
 @Entity
+@Indexed
 @Table(name = "appointment", catalog = "oculus_c")
 @PrimaryKeyJoinColumn(name = "calendarentry")
-public class Appointment extends CalendarEntry implements java.io.Serializable {
+public class Appointment extends CalendarEntry implements java.io.Serializable, Searchable {
 	private static final long serialVersionUID = -2707317958842910903L;
 	
 	private Patient _patient;
@@ -38,6 +42,7 @@ public class Appointment extends CalendarEntry implements java.io.Serializable {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "patient")
+	@IndexedEmbedded
 	public Patient getPatient() {
 		return _patient;
 	}

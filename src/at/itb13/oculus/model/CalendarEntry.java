@@ -11,11 +11,15 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.hibernate.search.annotations.Field;
+import org.hibernate.search.annotations.Indexed;
+
 import at.itb13.oculus.database.PersistentObjectImpl;
 
 @Entity
+@Indexed
 @Table(name = "calendarentry", catalog = "oculus_c")
-public class CalendarEntry extends PersistentObjectImpl implements java.io.Serializable {
+public class CalendarEntry extends PersistentObjectImpl implements java.io.Serializable, Searchable {
 	private static final long serialVersionUID = 5792674371320855705L;
 	
 	private Employee _employee;
@@ -45,6 +49,7 @@ public class CalendarEntry extends PersistentObjectImpl implements java.io.Seria
 	}
 
 	@Column(name = "title")
+	@Field
 	public String getTitle() {
 		return _title;
 	}
@@ -54,6 +59,7 @@ public class CalendarEntry extends PersistentObjectImpl implements java.io.Seria
 	}
 
 	@Column(name = "description")
+	@Field
 	public String getDescription() {
 		return _description;
 	}
@@ -64,6 +70,7 @@ public class CalendarEntry extends PersistentObjectImpl implements java.io.Seria
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "start", length = 19)
+	@Field
 	public Date getStart() {
 		return _start;
 	}

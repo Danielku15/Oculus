@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.effect.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="400.0" prefWidth="550.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="at.itb13.oculus.presentation.AppointmentSearchViewController">
+	<ScrollPane layoutY="40.0" minHeight="400.0" minWidth="550.0" prefViewportHeight="400.0" prefViewportWidth="550.0" AnchorPane.topAnchor="40.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+		<content>
+			<TableView fx:id="_tableView" editable="true" layoutY="40.0" minHeight="400.0" minWidth="550.0" tableMenuButtonVisible="true" AnchorPane.topAnchor="40.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+				<columns />
+				<opaqueInsets>
+					<Insets />
+				</opaqueInsets>
+				<effect>
+					<Blend />
+				</effect>
+			</TableView>
+		</content>
+	</ScrollPane>
+</AnchorPane>

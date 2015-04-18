@@ -4,7 +4,8 @@ import java.io.IOException;
 import java.util.MissingResourceException;
 import java.util.logging.Logger;
 
-import at.itb13.oculus.config.ConfigFacade;
+import at.itb13.oculus.config.ConfigFactory;
+import at.itb13.oculus.config.ConfigFactory.Config;
 import at.itb13.oculus.lang.LangFacade;
 import at.itb13.oculus.presentation.GUIApplication;
 import at.itb13.oculus.service.IndexService;
@@ -36,7 +37,9 @@ public class Main {
 		
 		// load configuration
 		try {
-			ConfigFacade.load();
+			ConfigFactory configFactory = ConfigFactory.getInstance();
+			Config config = configFactory.getConfig(ConfigFactory.CONFIGFILE);
+			config.load();
 		} catch (IOException e) {
 			// could not load configuration
 			logger.severe(e.getMessage());

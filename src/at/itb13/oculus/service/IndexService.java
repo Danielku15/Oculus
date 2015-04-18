@@ -8,10 +8,12 @@ import java.util.TimerTask;
 
 import org.hibernate.HibernateException;
 
-import at.itb13.oculus.config.Config;
-import at.itb13.oculus.config.ConfigFacade;
+import at.itb13.oculus.config.ConfigFactory;
+import at.itb13.oculus.config.ConfigFactory.Config;
+import at.itb13.oculus.config.ConfigKey;
 import at.itb13.oculus.database.DBFacade;
 import at.itb13.oculus.database.PersistentObject;
+import at.itb13.oculus.model.Appointment;
 import at.itb13.oculus.model.ChangeLog;
 import at.itb13.oculus.model.Patient;
 
@@ -19,22 +21,22 @@ public class IndexService {
 	
 	private static final int BATCHSIZE = 100;
 	
-	private ConfigFacade _configFacade;
+	private Config _config;
 	private int _curNumber;
 	private IndexTask _indexTask;
 	private Timer _timer;
 	private boolean _running;
 	
 	public IndexService() {
-		_configFacade = ConfigFacade.getInstance();
-		_curNumber = Integer.valueOf(_configFacade.getProperty(Config.INDEX_NUMBER));
+		_config = ConfigFactory.getInstance().getConfig(ConfigFactory.CONFIGFILE);
+		_curNumber = Integer.valueOf(_config.getProperty(ConfigKey.INDEX_NUMBER.getKey()));
 	}
 	
 	public synchronized void start() {
 		if(!_running) {
 			_indexTask = new IndexTask();
 			_timer = new Timer();
-			_timer.scheduleAtFixedRate(_indexTask, 0, Integer.valueOf(_configFacade.getProperty(Config.INDEX_INTERVAL)));
+			_timer.scheduleAtFixedRate(_indexTask, 0, Integer.valueOf(_config.getProperty(ConfigKey.INDEX_INTERVAL.getKey())));
 			_running = true;
 		}
 	}
@@ -126,6 +128,9 @@ public class IndexService {
 			case "patient":
 				object = _dbFacade.get(Patient.class, id);
 				break;
+			case "appointment":
+				object = _dbFacade.get(Appointment.class, id);
+				break;
 			default:
 				throw new InternalError("Undefined table: " + table);
 			}
@@ -133,8 +138,8 @@ public class IndexService {
 		}
 		
 		private void storeCurNumber() throws IOException {
-			_configFacade.setProperty(Config.INDEX_NUMBER, String.valueOf(_curNumber));
-			_configFacade.save();
+			_config.setProperty(ConfigKey.INDEX_NUMBER.getKey(), String.valueOf(_curNumber));
+			_config.save();
 		}
 	}
 }

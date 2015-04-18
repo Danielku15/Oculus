@@ -4,7 +4,7 @@ package at.itb13.oculus.config;
  * represents an entry in the configuration file that can be access with a specified key
  * @author Patrick
  */
-public enum Config {
+public enum ConfigKey {
 	LANGUAGE("language"),
 	COUNTRY("country"),
 	INDEX_INTERVAL("index_interval"),
@@ -12,7 +12,7 @@ public enum Config {
 	
 	private String _key;
 	
-	private Config(String key) {
+	private ConfigKey(String key) {
 		_key = key;
 	}
 	
