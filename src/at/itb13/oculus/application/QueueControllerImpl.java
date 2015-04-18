@@ -48,14 +48,20 @@ public class QueueControllerImpl extends Controller implements QueueController {
 			_database.commitTransaction();
 
 			for (QueueEntry queueEntryObj : queueEntriesObj) {
-				String[] queueEntryStr = new String[5];
-				// queueEntryId,EmployeeId,Patient firstname, Patient lastname,
-				// Appointment start
+				String[] queueEntryStr = new String[9];
+				// queueEntryId
 				queueEntryStr[0] = queueEntryObj.getID();
+				// employee id, firstname, lastname
 				queueEntryStr[1] = queueEntryObj.getAppointment().getEmployee().getID();
-				queueEntryStr[2] = queueEntryObj.getAppointment().getPatient().getFirstname();
-				queueEntryStr[3] = queueEntryObj.getAppointment().getPatient().getLastname();
-				queueEntryStr[4] = queueEntryObj.getAppointment().getStart().toString();
+				queueEntryStr[2] = queueEntryObj.getAppointment().getEmployee().getFirstname();
+				queueEntryStr[3] = queueEntryObj.getAppointment().getEmployee().getLastname();
+				// patient id, firstname, lastname, svn
+				queueEntryStr[4] = queueEntryObj.getAppointment().getPatient().getID();
+				queueEntryStr[5] = queueEntryObj.getAppointment().getPatient().getFirstname();
+				queueEntryStr[6] = queueEntryObj.getAppointment().getPatient().getLastname();
+				queueEntryStr[7] = queueEntryObj.getAppointment().getPatient().getSocialSecurityNumber();
+				// appointment start
+				queueEntryStr[8] = queueEntryObj.getAppointment().getStart().toString();
 				queueEntriesStr.add(queueEntryStr);
 			}
 		} catch (HibernateException e) {
