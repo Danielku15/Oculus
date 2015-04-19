@@ -8,6 +8,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.Pane;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
@@ -50,6 +51,21 @@ public class GUIApplication extends Application {
 	    _stage.setWidth(primaryScreenBounds.getWidth());
 	    _stage.setHeight(primaryScreenBounds.getHeight());
 		_stage.show();
+		
+		
+		Stage _searchViewStage = new Stage();
+		FXMLLoader loader = null;
+		Pane pane = null;
+		try {
+			loader = new FXMLLoader(this.getClass().getResource(
+					"AppointmentSearchView.fxml"), facade.getResourceBundle());
+			pane = (Pane) loader.load();
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		}
+
+		_searchViewStage.setScene(new Scene(pane));
+		_searchViewStage.show();
 	}
 	
 	private void onClose() {
