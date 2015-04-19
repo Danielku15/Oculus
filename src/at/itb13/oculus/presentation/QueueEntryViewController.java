@@ -31,7 +31,8 @@ import at.itb13.oculus.lang.LangFacade;
  * @author Manu
  *
  */
-public class QueueEntryViewController implements Serializable, Initializable, Consumer<String> {
+public class QueueEntryViewController implements Serializable, Initializable,
+		Consumer<String> {
 
 	private static final long serialVersionUID = 1L;
 	public static final String PATIENTSEARCHVIEW = "PatientSearchView.fxml";
@@ -55,29 +56,31 @@ public class QueueEntryViewController implements Serializable, Initializable, Co
 	@FXML
 	private Button _saveBtn;
 
-	/* (non-Javadoc)
-	 * @see javafx.fxml.Initializable#initialize(java.net.URL, java.util.ResourceBundle)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see javafx.fxml.Initializable#initialize(java.net.URL,
+	 * java.util.ResourceBundle)
 	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		_queueEntryController = new QueueEntryControllerImpl();
 		_queuesList = _queueEntryController.getQueues();
 
-		
-		for(String[] array : _queuesList){
+		for (String[] array : _queuesList) {
 			String nameQueue = array[1];
 			_queueCbx.getItems().add(nameQueue);
 		}
 		_queueCbx.getSelectionModel().selectFirst();
-		
+
 	}
-	
+
 	public void addQueueEntry(ActionEvent event) {
-		
+
 	}
 
 	public void queueSelected(ActionEvent event) {
-		
+
 		int index = _queueCbx.getSelectionModel().getSelectedIndex();
 		_queueID = _queuesList.get(index)[0];
 		try {
@@ -87,7 +90,7 @@ public class QueueEntryViewController implements Serializable, Initializable, Co
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void addPatient(ActionEvent event) {
 		String query = _patientTbx.getText();
 		_searchViewStage = new Stage();
@@ -135,12 +138,9 @@ public class QueueEntryViewController implements Serializable, Initializable, Co
 		}
 
 	}
-	
-	public String getQueueID(){
+
+	public String getQueueID() {
 		return _queueID;
 	}
-
-
-
 
 }
