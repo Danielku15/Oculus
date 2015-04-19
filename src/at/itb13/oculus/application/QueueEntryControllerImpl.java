@@ -22,7 +22,7 @@ public class QueueEntryControllerImpl extends Controller implements QueueEntryCo
 	private Patient _patient;
 	private QueueEntry _queueEntry;
 
-	public QueueEntryControllerImpl(String queueEntryId) {
+	public QueueEntryControllerImpl() {
 		super();
 		createQueueEntry();
 	}

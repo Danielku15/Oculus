@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
@@ -21,23 +22,46 @@
         </rowConstraints>
          <children>
             <Label text="%patient" />
-            <TextField fx:id="_patientTbx" disable="true" GridPane.columnIndex="1" />
+            <HBox alignment="CENTER" GridPane.columnIndex="1">
+               <children>
+                  <TextField fx:id="_patientTbx" disable="false" prefHeight="25.0" prefWidth="214.0" GridPane.columnIndex="1" />
+                  <Button fx:id="_searchBtn" mnemonicParsing="false" onAction="#addPatient" prefHeight="24.0" prefWidth="42.0">
+                     <graphic>
+                        <ImageView fitHeight="16.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../../../pic/search.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></Button>
+               </children>
+            </HBox>
             <Label text="%appointment" GridPane.rowIndex="1" />
-            <ChoiceBox fx:id="_appointmentCbx" disable="true" prefHeight="25.0" prefWidth="253.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <ChoiceBox fx:id="_queueCbx" prefHeight="25.0" prefWidth="253.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <HBox alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <children>
+                  <ChoiceBox fx:id="_appointmentCbx" disable="true" prefHeight="25.0" prefWidth="214.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Button mnemonicParsing="false" prefHeight="24.0" prefWidth="42.0">
+                     <graphic>
+                        <ImageView fitHeight="16.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../../../pic/search.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></Button>
+               </children>
+            </HBox>
             <Label text="%queue" GridPane.rowIndex="2" />
             <VBox alignment="CENTER_LEFT" prefHeight="28.0" prefWidth="186.0" GridPane.rowIndex="3">
                <children>
-                  <Button fx:id="cancelBtn" alignment="CENTER_RIGHT" contentDisplay="TOP" mnemonicParsing="false" text="%cancel" textAlignment="RIGHT" />
+                  <Button fx:id="_cancelBtn" alignment="CENTER_RIGHT" contentDisplay="TOP" mnemonicParsing="false" text="%cancel" textAlignment="RIGHT" />
                </children>
             </VBox>
             <VBox alignment="CENTER_RIGHT" prefHeight="15.0" prefWidth="248.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                <children>
-                  <Button fx:id="_okBtn" mnemonicParsing="false" onAction="#addQueueEntry" text="%ok" />
+                  <Button fx:id="_saveBtn" mnemonicParsing="false" onAction="#addQueueEntry" text="%save" />
                </children>
             </VBox>
+            <ComboBox fx:id="_queueCbx" onAction="#queueSelected" prefHeight="25.0" prefWidth="258.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
          </children>
       </GridPane>
-      <Button fx:id="_searchBtn" layoutX="472.0" layoutY="38.0" mnemonicParsing="false" text="%search" />
    </children>
 </AnchorPane>

@@ -5,41 +5,142 @@
  */
 package at.itb13.oculus.presentation;
 
+import java.io.IOException;
 import java.io.Serializable;
+import java.net.URL;
+import java.util.List;
+import java.util.ResourceBundle;
+import java.util.function.Consumer;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
+import at.itb13.oculus.application.ObjectNotFoundException;
 import at.itb13.oculus.application.QueueEntryControllerImpl;
+import at.itb13.oculus.lang.LangFacade;
 
 /**
  * @author Manu
  *
  */
-public class QueueEntryViewController implements Serializable {
+public class QueueEntryViewController implements Serializable, Initializable, Consumer<String> {
 
-	
+	private static final long serialVersionUID = 1L;
+	public static final String PATIENTSEARCHVIEW = "PatientSearchView.fxml";
 	private QueueEntryControllerImpl _queueEntryController;
-	
+	private Stage _searchViewStage;
+	private List<String[]> _queuesList;
+	private String _queueID;
+
 	@FXML
 	private TextField _patientTbx;
-	
+
 	@FXML
 	private ChoiceBox<String> _appointmentCbx;
-	
+
 	@FXML
-	private ChoiceBox<String> _queueCbx;
-	
+	private ComboBox<String> _queueCbx;
+
 	@FXML
 	private Button _searchBtn;
-	
+
 	@FXML
-	private Button _okBtn;
-	
-	
-	public void initialize(){
+	private Button _saveBtn;
+
+	/* (non-Javadoc)
+	 * @see javafx.fxml.Initializable#initialize(java.net.URL, java.util.ResourceBundle)
+	 */
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		_queueEntryController = new QueueEntryControllerImpl();
+		_queuesList = _queueEntryController.getQueues();
+
+		
+		for(String[] array : _queuesList){
+			String nameQueue = array[1];
+			_queueCbx.getItems().add(nameQueue);
+		}
+		_queueCbx.getSelectionModel().selectFirst();
 		
 	}
+	
+	public void addQueueEntry(ActionEvent event) {
 		
+	}
+
+	public void queueSelected(ActionEvent event) {
+		
+		int index = _queueCbx.getSelectionModel().getSelectedIndex();
+		_queueID = _queuesList.get(index)[0];
+		try {
+			_queueEntryController.fetchQueue(_queueID);
+		} catch (ObjectNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void addPatient(ActionEvent event) {
+		String query = _patientTbx.getText();
+		_searchViewStage = new Stage();
+		FXMLLoader loader = null;
+		Pane pane = null;
+		LangFacade facade = LangFacade.getInstance();
+
+		loader = new FXMLLoader(this.getClass().getResource(PATIENTSEARCHVIEW),
+				facade.getResourceBundle());
+
+		try {
+			pane = loader.load();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		PatientSearchViewController _patientSearchViewController = loader
+				.<PatientSearchViewController> getController();
+		_patientSearchViewController.addConsumer(this);
+
+		if (_patientSearchViewController.setCriteria(query)) {
+			_patientSearchViewController.search(event);
+			_searchViewStage.setScene(new Scene(pane));
+			_searchViewStage.show();
+		}
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.util.function.Consumer#accept(java.lang.Object)
+	 */
+	@Override
+	public void accept(String t) {
+		try {
+			_queueEntryController.fetchPatient(t);
+			_patientTbx.setText(_queueEntryController.getPatientFirstname()
+					+ " " + _queueEntryController.getPatientLastname());
+			_searchViewStage.close();
+
+		} catch (ObjectNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+	
+	public String getQueueID(){
+		return _queueID;
+	}
+
+
+
+
 }

@@ -7,7 +7,8 @@ package at.itb13.oculus.test;
 
 import java.io.IOException;
 
-import at.itb13.oculus.config.ConfigFacade;
+import at.itb13.oculus.config.ConfigFactory;
+import at.itb13.oculus.config.ConfigFactory.Config;
 import at.itb13.oculus.lang.LangFacade;
 import at.itb13.oculus.presentation.GUIApplication;
 import javafx.application.Application;
@@ -25,7 +26,7 @@ public class MainManu extends Application{
 	/**
 	 * @param args
 	 */
-	public static final String PATIENTVIEWXML = "PatientSearchView.fxml";
+	public static final String PATIENTVIEWXML = "QueueEntryView.fxml";
 
 		private Stage _stage;
 		
@@ -46,7 +47,9 @@ public class MainManu extends Application{
 	    public void viewApplication(){
 	    	
 	    	try {
-	    		ConfigFacade.load();
+				ConfigFactory configFactory = ConfigFactory.getInstance();
+				Config config = configFactory.getConfig(ConfigFactory.CONFIGFILE);
+				config.load();
 	    		LangFacade.load();
 	    		LangFacade facade = LangFacade.getInstance();
 		    	Parent root = FXMLLoader.load(GUIApplication.class.getResource(PATIENTVIEWXML), facade.getResourceBundle());
