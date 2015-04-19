@@ -6,8 +6,14 @@ import java.util.List;
 
 import org.hibernate.HibernateException;
 
+import at.itb13.oculus.model.Employee;
 import at.itb13.oculus.model.Queue;
 import at.itb13.oculus.model.QueueEntry;
+
+/**
+ * @author Carola
+ *
+ */
 
 public class QueueControllerImpl extends Controller implements QueueController {
 	
@@ -71,5 +77,28 @@ public class QueueControllerImpl extends Controller implements QueueController {
 		}
 
 		return queueEntriesStr;
+	}
+	
+	public synchronized List<String[]> getEmployees() {
+		List<String[]> employeesStr = new ArrayList<String[]>();
+		List<Employee> employeesObj = new ArrayList<Employee>();
+
+		try {
+			_database.beginTransaction();
+			employeesObj = _database.getAll(Employee.class);
+			_database.commitTransaction();
+
+			for (Employee employeeObj : employeesObj) {
+				String[] employeeStr = new String[3];
+				employeeStr[0] = employeeObj.getID();
+				employeeStr[1] = employeeObj.getFirstname();
+				employeeStr[2] = employeeObj.getLastname();
+				employeesStr.add(employeeStr);
+			}
+		} catch (HibernateException e) {
+			_database.rollbackTransaction();
+			throw e;
+		}
+		return employeesStr;
 	}
 }
