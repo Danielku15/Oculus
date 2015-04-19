@@ -34,7 +34,7 @@ public class SearchControllerImpl<T extends PersistentObject & Searchable> exten
 
 	@Override
 	public boolean setCriteria(String criteria) {
-		if((criteria != null) && (!criteria.trim().isEmpty())) {
+		if(criteria != null) {
 			_criteria = criteria;
 			return true;
 		}

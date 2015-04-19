@@ -74,8 +74,13 @@ abstract class GenericDAOImpl<T extends PersistentObject, PK extends Serializabl
 	public List<T> search(String criteria, String... fields) {
 		FullTextSession fullTextSession = Search.getFullTextSession(_session);
 		QueryBuilder queryBuilder = fullTextSession.getSearchFactory().buildQueryBuilder().forEntity(_type).get();
-		org.apache.lucene.search.Query luceneQuery = queryBuilder.keyword().onFields(fields).matching(criteria).createQuery();
-		org.hibernate.Query fullTextQuery = fullTextSession.createFullTextQuery(luceneQuery);
+		org.apache.lucene.search.Query luceneQuery = null;
+		if(criteria.trim().isEmpty()) {
+			luceneQuery = queryBuilder.all().createQuery();
+		} else {
+			luceneQuery = queryBuilder.keyword().onFields(fields).matching(criteria).createQuery();
+		}
+		org.hibernate.Query fullTextQuery = fullTextSession.createFullTextQuery(luceneQuery, _type);
 		return (List<T>) fullTextQuery.list();
 	}
 	

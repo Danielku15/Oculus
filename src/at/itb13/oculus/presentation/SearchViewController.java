@@ -1,7 +1,6 @@
 package at.itb13.oculus.presentation;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -9,7 +8,7 @@ import java.util.Map;
 import java.util.function.Consumer;
 import java.util.logging.Logger;
 
-import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -19,10 +18,14 @@ import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.util.Callback;
 import at.itb13.oculus.application.SearchControllerImpl;
@@ -32,6 +35,7 @@ import at.itb13.oculus.database.PersistentObject;
 import at.itb13.oculus.lang.LangFacade;
 import at.itb13.oculus.lang.LangKey;
 import at.itb13.oculus.model.Searchable;
+import at.itb13.oculus.util.GUIUtil;
 
 /**
  * @author Patrick
@@ -56,6 +60,10 @@ public abstract class SearchViewController<T extends PersistentObject & Searchab
 	// map that maps a unique column name (e.g. "firstname") to its associated column configuration
 	private Map<String, ColumnConfig> _columnConfigMap;
 	
+	@FXML
+	private Label _searchInputLabel;
+	@FXML
+	private TextField _searchInput;
 	@FXML
 	private TableView<String[]> _tableView;
 	
@@ -117,7 +125,7 @@ public abstract class SearchViewController<T extends PersistentObject & Searchab
 	@FXML
 	private void initialize() {
 		// initialize list of table columns
-		List<TableColumn<String[], String>> tableColumns = new ArrayList<TableColumn<String[], String>>(_fieldMap.size());
+		ObservableList<TableColumn<String[], String>> tableColumns = FXCollections.observableArrayList();
 		
 		// fill list with null values
 		for(int i = 0; i < (_fieldMap.size() - 1); ++i) {
@@ -136,8 +144,8 @@ public abstract class SearchViewController<T extends PersistentObject & Searchab
 				
 				// set cell value factory to display the right values in the right columns
 				column.setCellValueFactory(new Callback<CellDataFeatures<String[], String>, ObservableValue<String>>() {
-					public javafx.beans.value.ObservableValue<String> call(TableColumn.CellDataFeatures<String[], String> param) {
-						return mapColumn(param, key);
+					public ObservableValue<String> call(CellDataFeatures<String[], String> cellData) {
+						return mapColumn(cellData, key);
 					}
 				});
 				
@@ -169,11 +177,9 @@ public abstract class SearchViewController<T extends PersistentObject & Searchab
 				tableColumns.set(columnConfig.getIndex(), column);
 			}
 		}
-		// add all columns to the table view
-		_tableView.getColumns().addAll(tableColumns);
 		
 		// add listener to columns to save column positions to search configuration
-		_tableView.getColumns().addListener(new ListChangeListener<TableColumn<String[], ?>>() {
+		tableColumns.addListener(new ListChangeListener<TableColumn<String[], ?>>() {
 			@Override
 			public void onChanged(ListChangeListener.Change<? extends TableColumn<String[], ?>> change) {
 			    while (change.next()) {
@@ -203,6 +209,24 @@ public abstract class SearchViewController<T extends PersistentObject & Searchab
 					}
 				});
 				return row;
+			}
+		});
+		// add all columns to the table view
+		_tableView.getColumns().addAll(tableColumns);
+		
+		_searchInput.textProperty().addListener(new ChangeListener<String>() {
+		    @Override
+		    public void changed(final ObservableValue<? extends String> observable, final String oldValue, final String newValue) {
+		    	GUIUtil.validate(_searchInputLabel, _searchController.setCriteria(newValue));
+		    }
+		});
+		
+		_searchInput.addEventHandler(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
+			@Override
+			public void handle(KeyEvent e) {
+				if(e.getCode().equals(KeyCode.ENTER)) {
+					search(null);
+				}
 			}
 		});
 	}
@@ -238,16 +262,16 @@ public abstract class SearchViewController<T extends PersistentObject & Searchab
 	}
 	
 	/** Maps a unique column key to the associated value in a row 
-	 * @param row represents the current row
+	 * @param cellData represents the current row
 	 * @param key identifies a unique column in the field map
 	 * @return
 	 */
-	private ObservableValue<String> mapColumn(CellDataFeatures<String[], String> row, String key) {
+	private ReadOnlyStringWrapper mapColumn(CellDataFeatures<String[], String> cellData, String key) {
 		int i = _fieldMap.get(key);
-		if (row.getValue()[i] != null) {
-			return new SimpleStringProperty(row.getValue()[i]);
+		if (cellData.getValue()[i] != null) {
+			return new ReadOnlyStringWrapper(cellData.getValue()[i]);
 		} else {
-			return new SimpleStringProperty("");
+			return new ReadOnlyStringWrapper("");
 		}
 	}
 	
@@ -280,6 +304,7 @@ public abstract class SearchViewController<T extends PersistentObject & Searchab
 	 * @return true if the search criteria was valid, false if the search criteria was not valid
 	 */
 	public boolean setCriteria(String criteria) {
+		_searchInput.setText(criteria);
 		return _searchController.setCriteria(criteria);
 	}
 	
@@ -360,14 +385,22 @@ public abstract class SearchViewController<T extends PersistentObject & Searchab
 		}
 	}
 	
-	private class SearchTask extends Task<Void> {	
-	    @Override public Void call() {
+	private class SearchTask extends Task<Void> {
+		
+	    @Override
+	    public Void call() {
 	    	_searchController.search();
 	    	return null;
 	    }
 	    
-	    @Override protected void succeeded() {
-	    	_tableView.setItems(FXCollections.observableList(_searchController.getResults()));
+	    @Override
+	    protected void succeeded() {
+	    	List<String[]> results = _searchController.getResults();
+	    	if((results != null) && (results.isEmpty())) {
+	    		// TODO: indicate that there are no search results
+	    	} else {
+	    		_tableView.setItems(FXCollections.observableList(results));
+	    	}
 	    }
 	}
 }
