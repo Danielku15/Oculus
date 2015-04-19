@@ -55,7 +55,6 @@ public class MainManu extends Application{
 		    	Parent root = FXMLLoader.load(GUIApplication.class.getResource(PATIENTVIEWXML), facade.getResourceBundle());
 				Scene scene = new Scene(root);
 				_stage.setScene(scene);
-			    
 				_stage.show();
 		    	
 			} catch (IOException e) {

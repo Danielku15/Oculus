@@ -149,6 +149,7 @@ public class QueueEntryControllerImpl extends Controller implements QueueEntryCo
 	@Override
 	public void createQueueEntry() {
 		_queueEntry = new QueueEntry();
+		_queueEntry.setCreated(new Date());
 	}
 	
 	@Override
@@ -174,7 +175,7 @@ public class QueueEntryControllerImpl extends Controller implements QueueEntryCo
 			_database.beginTransaction();
 			Patient patient = _database.get(Patient.class, patientId);
 			_database.commitTransaction();
-			if(_patient != null) {
+			if(patient != null) {
 				_patient = patient;
 			} else {
 				throw new ObjectNotFoundException(Patient.class, patientId);
