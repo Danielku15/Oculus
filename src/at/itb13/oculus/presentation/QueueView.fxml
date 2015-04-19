@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane fx:id="_queueViewContainer" minHeight="500.0" minWidth="360.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="at.itb13.oculus.presentation.QueueViewController">
+   <children>
+      <VBox fx:id="_queueViewVbox" prefHeight="500.0" prefWidth="360.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+         <children>
+            <Button fx:id="_queueViewAddQEntryButton" graphicTextGap="0.0" mnemonicParsing="false" text="+" textAlignment="CENTER">
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </Button>
+            <ComboBox fx:id="_queueViewEmployeeSelection" prefHeight="26.0" prefWidth="346.0" promptText="%queueViewEmployeeSelection">
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </ComboBox>
+            <ScrollPane fx:id="_queueViewScrollPane" prefHeight="401.0" prefViewportHeight="400.0" prefViewportWidth="340.0" prefWidth="340.0">
+               <content>
+                  <ListView fx:id="_queueViewListView" minHeight="380.0" minWidth="338.0" prefHeight="398.0" prefWidth="338.0">
+                     <VBox.margin>
+                        <Insets bottom="10.0" top="10.0" />
+                     </VBox.margin>
+                  </ListView>
+               </content>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </ScrollPane>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
