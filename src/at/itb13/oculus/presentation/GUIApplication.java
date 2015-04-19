@@ -51,21 +51,6 @@ public class GUIApplication extends Application {
 	    _stage.setWidth(primaryScreenBounds.getWidth());
 	    _stage.setHeight(primaryScreenBounds.getHeight());
 		_stage.show();
-		
-		
-		Stage _searchViewStage = new Stage();
-		FXMLLoader loader = null;
-		Pane pane = null;
-		try {
-			loader = new FXMLLoader(this.getClass().getResource(
-					"AppointmentSearchView.fxml"), facade.getResourceBundle());
-			pane = (Pane) loader.load();
-		} catch (IOException ex) {
-			ex.printStackTrace();
-		}
-
-		_searchViewStage.setScene(new Scene(pane));
-		_searchViewStage.show();
 	}
 	
 	private void onClose() {
