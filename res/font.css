@@ -1,0 +1,15 @@
+.tab .tab-label{
+    -fx-font-size: 13pt;
+}
+
+.menu-bar {
+	-fx-font-size: 13pt;
+}
+
+.table-view .column-header{
+    -fx-font-size: 13;
+}
+
+.table-cell {
+    -fx-font-size: 13px;
+}

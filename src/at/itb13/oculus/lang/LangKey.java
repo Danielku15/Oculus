@@ -38,7 +38,8 @@ public enum LangKey {
 	NEWPATIENT("newpatient"),
 	DESCRIPTION("description"),
 	TITLE("title"),
-	START("start");
+	START("start"),
+	SEARCH("search");
 	
 	private String _key;
 	

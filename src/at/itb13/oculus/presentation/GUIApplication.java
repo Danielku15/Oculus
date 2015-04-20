@@ -16,7 +16,7 @@ import at.itb13.oculus.lang.LangFacade;
 public class GUIApplication extends Application {
 	    
 	public static final String PATIENTMAINVIEWXML = "PatientMainView.fxml";
-	
+	public static final String OCULUSTITEL = "Oculus";
 	private static Stage _stage;
 	
 	public static void main(String[] args) {
@@ -44,7 +44,7 @@ public class GUIApplication extends Application {
 		}
     		   
         Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
-        	
+        _stage.setTitle(OCULUSTITEL);
 	    _stage.setX(primaryScreenBounds.getMinX());
 	    _stage.setY(primaryScreenBounds.getMinY());
 	    _stage.setWidth(primaryScreenBounds.getWidth());

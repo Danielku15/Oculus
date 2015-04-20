@@ -28,7 +28,8 @@ public class PatientTabViewController implements Initializable{
 	public static final String PATIENTVIEWXML = "PatientView.fxml";
 	public static final String PATIENTSEARCHVIEW = "PatientSearchView.fxml";
 	private static final Color COLOR_FAIL = Color.RED;
-	private static final Color COLOR_SUCCESS = Color.BLACK;
+	private static final Color COLOR_SUCCESS = Color.web("0x333333ff");
+	
 	//instance of PatientTabViewController
 	private static PatientTabViewController _instance;
 	//parent - PatientMainViewController
@@ -99,7 +100,7 @@ public class PatientTabViewController implements Initializable{
 		if (_patientSearchViewController.setCriteria(query)) {
 			setSuccessToSearchLabel();
 			_patientSearchViewController.search(event);
-
+			_searchViewStage.setTitle(facade.getString(LangKey.SEARCH));
 			_searchViewStage.setScene(new Scene(pane));
 			_searchViewStage.show();
 		} else {
@@ -162,14 +163,13 @@ public class PatientTabViewController implements Initializable{
 		PatientViewController loadPatient = loader
 				.<PatientViewController> getController();
 		
-		loadPatient.loadPatientToFormular(id);
-		
-		tab.setText(loadPatient.getLabelName());
 		tab.setContent(pane);
 		tab.setClosable(true);
 		_tabPane.getTabs().add(tab);
 		_tabPane.getSelectionModel().select(tab);
 
+		loadPatient.loadPatientToFormular(id);
+		
 		ObservableList<Tab> tabs = _tabPane.getTabs();
 
 		for (int i = 0; i < tabs.size(); i++) {
@@ -189,7 +189,6 @@ public class PatientTabViewController implements Initializable{
 	}
 	
 	public void setTabLabelName(String name){
-		System.out.println(name);
 		_tabPane.getSelectionModel().getSelectedItem().setText(name);
 	}
 	

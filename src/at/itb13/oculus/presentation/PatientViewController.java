@@ -3,7 +3,6 @@ package at.itb13.oculus.presentation;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
-
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.concurrent.Task;
@@ -26,12 +25,14 @@ import at.itb13.oculus.application.ObjectNotFoundException;
 import at.itb13.oculus.application.ObjectNotSavedException;
 import at.itb13.oculus.application.PatientControllerImpl;
 import at.itb13.oculus.application.UniqueConstraintException;
+import at.itb13.oculus.lang.LangFacade;
+import at.itb13.oculus.lang.LangKey;
 
 public class PatientViewController implements Initializable{
 	
+	public static final String ERRORDIALOGVIEW = "ErrorDialogView.fxml";
 	private static final Color COLOR_FAIL = Color.RED;
-	private static final Color COLOR_SUCCESS = Color.BLACK;
-	private boolean _loading;
+	private static final Color COLOR_SUCCESS = Color.web("0x333333ff");
 	
 	//application - PatientViewControllerImpl
 	private PatientControllerImpl _patientController;
@@ -110,7 +111,6 @@ public class PatientViewController implements Initializable{
     
 	public PatientViewController() {
 		_patientController = new PatientControllerImpl();		
-		_loading = false;
 	}
 
 	@Override
@@ -133,13 +133,20 @@ public class PatientViewController implements Initializable{
 			}
 		});
 		
+		_firstnameInput.textProperty().addListener(new ChangeListener<String>() {
+		    @Override
+		    public void changed(final ObservableValue<? extends String> observable, final String oldValue, final String newValue) {
+		    	setTabLabelNameModified();
+		    }
+		});
+		
 		_lastnameInput.textProperty().addListener(new ChangeListener<String>() {
 		    @Override
 		    public void changed(final ObservableValue<? extends String> observable, final String oldValue, final String newValue) {
-		    	setLastname(_lastnameInput.getText());	    	
-				if (_patientTabViewController != null && _loading == false){
-					_patientTabViewController.setTabLabelName(_lastnameInput.getText());
-				}
+		    	if (!newValue.isEmpty()){
+		    		setLastname(_lastnameInput.getText());
+			    	setTabLabelNameModified();
+		    	}
 		    }
 		});
 		
@@ -148,6 +155,7 @@ public class PatientViewController implements Initializable{
 			public void changed(ObservableValue<? extends LocalDate> arg0,
 					LocalDate oldValue, LocalDate newValue) {
 				if (newValue != null){
+					setTabLabelNameModified();
 					setBirthday(_birthdayInput.getValue());		
 				}
 				
@@ -157,8 +165,8 @@ public class PatientViewController implements Initializable{
 		_maleInput.focusedProperty().addListener(new ChangeListener<Boolean>() {
 			@Override
 			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-				if(!newValue) {
-					//TODO upper case in application layer
+				if (!newValue){
+					setTabLabelNameModified();
 					setGender(_maleInput.getText().toUpperCase());
 				}
 			}
@@ -167,9 +175,9 @@ public class PatientViewController implements Initializable{
 		_femaleInput.focusedProperty().addListener(new ChangeListener<Boolean>() {
 			@Override
 			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-				if(!newValue) {
-					//TODO upper case in application layer
-					setGender(_femaleInput.getText().toUpperCase());
+				if (!newValue){
+					setTabLabelNameModified();
+					setGender(_femaleInput.getText().toUpperCase());			
 				}
 			}
 		});
@@ -183,6 +191,13 @@ public class PatientViewController implements Initializable{
 			}
 		});
 		
+		_phoneNumberInput.textProperty().addListener(new ChangeListener<String>() {
+		    @Override
+		    public void changed(final ObservableValue<? extends String> observable, final String oldValue, final String newValue) {
+		    		setTabLabelNameModified();
+		    }
+		});
+		
 		_emailInput.focusedProperty().addListener(new ChangeListener<Boolean>() {
 			@Override
 			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
@@ -192,6 +207,12 @@ public class PatientViewController implements Initializable{
 			}
 		});
 		
+		_emailInput.textProperty().addListener(new ChangeListener<String>() {
+		    @Override
+		    public void changed(final ObservableValue<? extends String> observable, final String oldValue, final String newValue) {
+		    		setTabLabelNameModified();
+		    }
+		});
 		
 		_zipInput.focusedProperty().addListener(new ChangeListener<Boolean>() {
 			@Override
@@ -200,6 +221,13 @@ public class PatientViewController implements Initializable{
 					setZip(_zipInput.getText());
 				}
 			}
+		});
+		
+		_zipInput.textProperty().addListener(new ChangeListener<String>() {
+		    @Override
+		    public void changed(final ObservableValue<? extends String> observable, final String oldValue, final String newValue) {
+		    		setTabLabelNameModified();
+		    }
 		});
 		
 		_countryInput.focusedProperty().addListener(new ChangeListener<Boolean>() {
@@ -211,6 +239,13 @@ public class PatientViewController implements Initializable{
 			}
 		});
 		
+		_countryInput.textProperty().addListener(new ChangeListener<String>() {
+		    @Override
+		    public void changed(final ObservableValue<? extends String> observable, final String oldValue, final String newValue) {
+		    		setTabLabelNameModified();
+		    }
+		});
+		
 		_streetInput.focusedProperty().addListener(new ChangeListener<Boolean>() {
 			@Override
 			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
@@ -218,6 +253,13 @@ public class PatientViewController implements Initializable{
 					setStreet(_streetInput.getText());
 				}
 			}
+		});
+		
+		_streetInput.textProperty().addListener(new ChangeListener<String>() {
+		    @Override
+		    public void changed(final ObservableValue<? extends String> observable, final String oldValue, final String newValue) {
+		    		setTabLabelNameModified();
+		    }
 		});
 		
 		_streetNumberInput.focusedProperty().addListener(new ChangeListener<Boolean>() {
@@ -229,6 +271,13 @@ public class PatientViewController implements Initializable{
 			}
 		});
 		
+		_streetNumberInput.textProperty().addListener(new ChangeListener<String>() {
+		    @Override
+		    public void changed(final ObservableValue<? extends String> observable, final String oldValue, final String newValue) {
+		    		setTabLabelNameModified();
+		    }
+		});
+		
 		_cityInput.focusedProperty().addListener(new ChangeListener<Boolean>() {
 			@Override
 			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
@@ -238,13 +287,27 @@ public class PatientViewController implements Initializable{
 			}
 		});
 		
+		_cityInput.textProperty().addListener(new ChangeListener<String>() {
+		    @Override
+		    public void changed(final ObservableValue<? extends String> observable, final String oldValue, final String newValue) {
+		    		setTabLabelNameModified();
+		    }
+		});
+		
 		_socialSecurityNumberInput.focusedProperty().addListener(new ChangeListener<Boolean>() {
 			@Override
 			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-				if(!newValue) {
+				if(!newValue ) {
 					setSocialSecurityNumber(_socialSecurityNumberInput.getText());
 				}
 			}
+		});
+		
+		_socialSecurityNumberInput.textProperty().addListener(new ChangeListener<String>() {
+		    @Override
+		    public void changed(final ObservableValue<? extends String> observable, final String oldValue, final String newValue) {	    	
+		    		setTabLabelNameModified();  	
+		    }
 		});
 		
 		_employerInput.focusedProperty().addListener(new ChangeListener<Boolean>() {
@@ -254,6 +317,13 @@ public class PatientViewController implements Initializable{
 					setEmployer(_employerInput.getText());
 				}
 			}
+		});
+		
+		_employerInput.textProperty().addListener(new ChangeListener<String>() {
+		    @Override
+		    public void changed(final ObservableValue<? extends String> observable, final String oldValue, final String newValue) {
+		    		setTabLabelNameModified();
+		    }
 		});
 	}
 	
@@ -279,19 +349,44 @@ public class PatientViewController implements Initializable{
 	// Event Listener on Button[#_saveButton].onAction
 	@FXML
 	public void save(ActionEvent event) {
-		//TODO change label name when patient is saved
 		new Thread(new CreatePatientTask()).start();
 	}
 	
+	private void setTabLabelNameModified(){
+		if (!_firstnameInput.getText().isEmpty() && !_lastnameInput.getText().isEmpty()){
+			_patientTabViewController.setTabLabelName("*" + _firstnameInput.getText().charAt(0) + ". " + _lastnameInput.getText());
+		}
+		else if (!_lastnameInput.getText().isEmpty()){
+			_patientTabViewController.setTabLabelName("*" + _lastnameInput.getText());
+		}
+		else {
+			LangFacade facade = LangFacade.getInstance();
+			_patientTabViewController.setTabLabelName(facade.getString(LangKey.NEWPATIENT));
+		}
+	}
+	
+    private void setTabLabelNameIsUnmodified() {
+    	if (!_firstnameInput.getText().isEmpty() && !_lastnameInput.getText().isEmpty()){
+			_patientTabViewController.setTabLabelName(_firstnameInput.getText().charAt(0) + ". " + _lastnameInput.getText());
+		}
+		else if (!_lastnameInput.getText().isEmpty()) {
+			_patientTabViewController.setTabLabelName(_lastnameInput.getText());
+		}
+		else {
+			LangFacade facade = LangFacade.getInstance();
+			_patientTabViewController.setTabLabelName(facade.getString(LangKey.NEWPATIENT));
+		}
+	}
+
+	
 	public void loadPatientToFormular(String id){
-		_loading = true;
 		try {
 			_patientController.loadPatient(id);
 		} catch (ObjectNotFoundException e) {
 			e.printStackTrace();
 		}
 		setDataToFormular();
-		_loading = false;
+		setTabLabelNameIsUnmodified();
 	}
 	
 	
@@ -437,7 +532,7 @@ public class PatientViewController implements Initializable{
 	
 	private class CreatePatientTask extends Task<String> {
 
-	    @Override public String call() {
+		@Override public String call() {
 	    	try {
 				_patientController.savePatient();
 			} catch (IncompleteDataException e) {
@@ -449,7 +544,7 @@ public class PatientViewController implements Initializable{
 	    }
 	    
 	    @Override protected void succeeded() {
-	    	
+	    	setTabLabelNameIsUnmodified();
 	    }
 	    
 	    @Override protected void cancelled() {

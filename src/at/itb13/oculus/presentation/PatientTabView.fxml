@@ -20,7 +20,7 @@
                <graphic>
                   <ImageView fitHeight="27.0" fitWidth="27.0">
                      <image>
-                        <Image url="@../../../../../pic/addUser.png" />
+                        <Image url="@../../../../../res/addUser.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -32,7 +32,7 @@
                <graphic>
                   <ImageView fitHeight="27.0" fitWidth="27.0">
                      <image>
-                        <Image url="@../../../../../pic/search.png" />
+                        <Image url="@../../../../../res/search.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -49,7 +49,7 @@
             </Label>
          </items>
       </ToolBar>
-      <TabPane fx:id="_tabPane" stylesheets="/font.css">
+      <TabPane fx:id="_tabPane" stylesheets="@../../../../../res/font.css">
         <tabs>
           <Tab fx:id="_newPatient" closable="false" text="%newpatient">
                <content>
