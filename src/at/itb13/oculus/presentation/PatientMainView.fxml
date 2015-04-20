@@ -93,5 +93,6 @@
             <fx:include fx:id="_patientTabView" source="PatientTabView.fxml" />
         </items>
       </SplitPane>
+      <fx:include fx:id="_queueView" source="QueueView.fxml" />
    </children>
 </VBox>

@@ -41,8 +41,10 @@ public class QueueViewController implements Serializable, Consumer<Boolean>{
 	
 	public void initialize(){
 		_queueController = new QueueControllerImpl();
+		_queueController.getQueues();
+		
 		_queueEntryController = new QueueEntryControllerImpl();
-		_employees = fetchEmployees(_queueController);
+		_employees = _queueController.getEmployees();
 		
 		//fill comboBox with employee names
 		_queueViewEmployeeSelection = new ComboBox<String>();
@@ -57,13 +59,6 @@ public class QueueViewController implements Serializable, Consumer<Boolean>{
 		//TODO implement method
 	}
 	
-	//fetch employees to show in selection box
-	public List<String[]> fetchEmployees(QueueControllerImpl queueController){
-		List<String[]> employeesStr = new ArrayList<String[]>();
-		employeesStr = queueController.getEmployees();
-		return employeesStr;
-	}
-
 	@Override
 	public void accept(Boolean b) {
 		// TODO something with consumer from QueueEntryViewController
