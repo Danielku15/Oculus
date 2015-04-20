@@ -33,4 +33,19 @@ class AppointmentDAO extends GenericDAOImpl<Appointment, String> {
 		}
 		return list;
 	}
+	
+	@Override
+	public List<Appointment> search(String criteria) {		
+		return search(criteria,
+				"title",
+				"description",
+				"start",
+				"patient.firstname",
+				"patient.lastname",
+				"patient.address.street",
+				"patient.address.streetNumber",
+				"patient.address.zip",
+				"patient.address.city",
+				"patient.address.country");
+	}
 }
