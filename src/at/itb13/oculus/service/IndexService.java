@@ -134,7 +134,9 @@ public class IndexService {
 			default:
 				throw new InternalError("Undefined table: " + table);
 			}
-			_dbFacade.index(object);
+			if(object != null) {
+				_dbFacade.index(object);
+			}
 		}
 		
 		private void storeCurNumber() throws IOException {
