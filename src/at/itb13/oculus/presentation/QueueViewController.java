@@ -41,6 +41,8 @@ public class QueueViewController implements Serializable, Consumer<Boolean>{
 	
 	public void initialize(){
 		_queueController = new QueueControllerImpl();
+		_queueController.getQueues();
+		
 		_queueEntryController = new QueueEntryControllerImpl();
 		_employees = fetchEmployees(_queueController);
 		
