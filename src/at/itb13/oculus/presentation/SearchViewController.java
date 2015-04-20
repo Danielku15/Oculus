@@ -42,7 +42,7 @@ import at.itb13.oculus.util.GUIUtil;
  *
  * @param <T>
  */
-public abstract class SearchViewController<T extends PersistentObject & Searchable> {
+public class SearchViewController<T extends PersistentObject & Searchable> {
 
 	private static final Logger LOGGER = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 	private static final String SEARCHCONFIGSUFFIX = "search.properties";

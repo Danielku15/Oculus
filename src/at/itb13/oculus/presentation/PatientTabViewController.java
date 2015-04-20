@@ -22,11 +22,12 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import at.itb13.oculus.lang.LangFacade;
 import at.itb13.oculus.lang.LangKey;
+import at.itb13.oculus.model.Patient;
 
 public class PatientTabViewController implements Initializable{
 	
 	public static final String PATIENTVIEWXML = "PatientView.fxml";
-	public static final String PATIENTSEARCHVIEW = "PatientSearchView.fxml";
+	public static final String SEARCHVIEW = "SearchView.fxml";
 	private static final Color COLOR_FAIL = Color.RED;
 	private static final Color COLOR_SUCCESS = Color.web("0x333333ff");
 	
@@ -43,7 +44,7 @@ public class PatientTabViewController implements Initializable{
 	private Stage _searchViewStage;
 	
 	@SuppressWarnings("unused")
-	private PatientSearchViewController _patientSearchViewController;
+	private SearchViewController<Patient> _patientSearchViewController;
 	@FXML
 	private Button _createNewPatientButton;
 	@FXML
@@ -81,16 +82,19 @@ public class PatientTabViewController implements Initializable{
 		String query = _searchInput.getText();			
 		LangFacade facade = LangFacade.getInstance();
 		_searchViewStage = new Stage();
-		FXMLLoader loader = null;
+		FXMLLoader loader = null;		
+		SearchViewController<Patient> _patientSearchViewController = new SearchViewController<Patient>(Patient.class);
+		
 		Pane pane = null;
 		try {
 			loader = new FXMLLoader(this.getClass().getResource(
-					PATIENTSEARCHVIEW), facade.getResourceBundle());
-			pane = (Pane) loader.load();
+					SEARCHVIEW), facade.getResourceBundle());
+			loader.setController(_patientSearchViewController);
+			pane = (Pane) loader.load();			
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		}
-		PatientSearchViewController _patientSearchViewController = loader.<PatientSearchViewController> getController();
+		
 		_patientSearchViewController.addConsumer(new Consumer<String>() {
 			@Override
 			public void accept(String id) {

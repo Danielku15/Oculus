@@ -14,7 +14,6 @@ import at.itb13.oculus.model.QueueEntry;
  * @author Carola
  *
  */
-
 public class QueueControllerImpl extends Controller implements QueueController {
 	
 	public QueueControllerImpl() {
