@@ -1,6 +1,7 @@
 package at.itb13.oculus.presentation;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -125,7 +126,7 @@ public class SearchViewController<T extends PersistentObject & Searchable> {
 	@FXML
 	private void initialize() {
 		// initialize list of table columns
-		ObservableList<TableColumn<String[], String>> tableColumns = FXCollections.observableArrayList();
+		List<TableColumn<String[], String>> tableColumns = new ArrayList<TableColumn<String[], String>>(_fieldMap.size());
 		
 		// fill list with null values
 		for(int i = 0; i < (_fieldMap.size() - 1); ++i) {

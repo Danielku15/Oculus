@@ -5,18 +5,6 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.function.Consumer;
 
-<<<<<<< HEAD
-import org.hibernate.HibernateException;
-
-import at.itb13.oculus.application.QueueControllerImpl;
-import at.itb13.oculus.application.QueueEntryControllerImpl;
-import at.itb13.oculus.lang.LangFacade;
-import at.itb13.oculus.lang.LangKey;
-import at.itb13.oculus.model.Employee;
-import at.itb13.oculus.model.Patient;
-import at.itb13.oculus.model.Queue;
-=======
->>>>>>> origin/master
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
@@ -25,16 +13,12 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
-<<<<<<< HEAD
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-=======
 import at.itb13.oculus.application.QueueControllerImpl;
 import at.itb13.oculus.application.QueueEntryControllerImpl;
 import at.itb13.oculus.lang.LangFacade;
 import at.itb13.oculus.lang.LangKey;
->>>>>>> origin/master
-
 
 /**
  * @author Carola
