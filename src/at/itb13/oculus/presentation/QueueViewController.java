@@ -16,6 +16,7 @@ import at.itb13.oculus.model.Queue;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ComboBox;
@@ -32,6 +33,7 @@ public class QueueViewController implements Serializable, Consumer<Boolean>{
 
 	private QueueControllerImpl _queueController;
 	private QueueEntryControllerImpl _queueEntryController;
+	public static final String QUEUEENTRYVIEW = "QueueEntryView.fxml";
 	private List<String[]> _queues;
 	private List<String[]> _employees;
 	
@@ -80,6 +82,13 @@ public class QueueViewController implements Serializable, Consumer<Boolean>{
 			_queueViewListView.getItems().add(langInstance.getString(LangKey.PATIENTNAME) + ": " + queueEntry[5] + " " + queueEntry[6] + "\n" + langInstance.getString(LangKey.APPOINTMENTSTART) + ": " + queueEntry[8]);
 		}
 		
+	}
+	
+	public void loadQueueEntryView(){
+		FXMLLoader loader = null;
+		LangFacade facade = LangFacade.getInstance();
+		loader = new FXMLLoader(this.getClass().getResource(QUEUEENTRYVIEW),
+				facade.getResourceBundle());
 	}
 	
 	public void refresh(){
