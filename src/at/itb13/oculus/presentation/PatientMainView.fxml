@@ -31,9 +31,9 @@
       </MenuBar>
       <SplitPane dividerPositions="0.5" minWidth="-Infinity">
         <items>
-            <BorderPane maxWidth="400.0" minWidth="400.0" prefWidth="400.0">
-               <top>
-                  <AnchorPane BorderPane.alignment="CENTER">
+            <VBox maxWidth="400.0" minWidth="400.0" prefWidth="400.0">
+               <children>
+                  <AnchorPane>
                      <children>
                         <ToolBar prefHeight="49.0" prefWidth="400.0">
                           <items>
@@ -88,11 +88,11 @@
                         </ToolBar>
                      </children>
                   </AnchorPane>
-               </top>
-            </BorderPane>
+                  <fx:include source="QueueView.fxml" />
+               </children>
+            </VBox>
             <fx:include fx:id="_patientTabView" source="PatientTabView.fxml" />
         </items>
       </SplitPane>
-      <fx:include fx:id="_queueView" source="QueueView.fxml" />
    </children>
 </VBox>
