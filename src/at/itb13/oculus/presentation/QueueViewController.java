@@ -28,6 +28,7 @@ public class QueueViewController implements Serializable, Consumer<Boolean>{
 
 	private QueueControllerImpl _queueController;
 	private QueueEntryControllerImpl _queueEntryController;
+	private List<String[]> _queues;
 	private List<String[]> _employees;
 	
 	@FXML
@@ -41,17 +42,16 @@ public class QueueViewController implements Serializable, Consumer<Boolean>{
 	
 	public void initialize(){
 		_queueController = new QueueControllerImpl();
-		_queueController.getQueues();
-		
-		_queueEntryController = new QueueEntryControllerImpl();
-		_employees = _queueController.getEmployees();
+		_queues = _queueController.getQueues();
 		
 		//fill comboBox with employee names
 		_queueViewEmployeeSelection = new ComboBox<String>();
-		for(String[] employee: _employees){
-			String name = employee[1] + " " + employee[2];
-			_queueViewEmployeeSelection.getItems().add(name);
+		for(String[] queue: _queues){
+			_queueViewEmployeeSelection.getItems().add(queue[1]);
 		}
+		
+		_queueEntryController = new QueueEntryControllerImpl();
+		
 		//TODO finish stuff
 	}
 	
