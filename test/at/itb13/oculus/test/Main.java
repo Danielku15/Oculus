@@ -1,9 +1,6 @@
 package at.itb13.oculus.test;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-
 import at.itb13.oculus.database.DBFacade;
 import at.itb13.oculus.model.Appointment;
 
