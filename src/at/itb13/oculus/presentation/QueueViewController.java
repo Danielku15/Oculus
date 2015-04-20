@@ -16,7 +16,6 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import at.itb13.oculus.application.QueueControllerImpl;
-import at.itb13.oculus.application.QueueEntryControllerImpl;
 import at.itb13.oculus.lang.LangFacade;
 import at.itb13.oculus.lang.LangKey;
 
@@ -27,12 +26,14 @@ import at.itb13.oculus.lang.LangKey;
 
 public class QueueViewController implements Serializable, Consumer<Boolean>{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3311907797950844425L;
 	private QueueControllerImpl _queueController;
-	private QueueEntryControllerImpl _queueEntryController;
 	public static final String QUEUEENTRYVIEW = "QueueEntryView.fxml";
 	private Stage _queueEntryViewStage;
 	private List<String[]> _queues;
-	private List<String[]> _employees;
 	
 	@FXML
 	private Button _queueViewAddQEntryButton;
@@ -45,7 +46,6 @@ public class QueueViewController implements Serializable, Consumer<Boolean>{
 	
 	public void initialize(){
 		_queueController = new QueueControllerImpl();
-		_queueEntryController = new QueueEntryControllerImpl();
 		_queues = _queueController.getQueues();
 		
 		//fill comboBox with employee names

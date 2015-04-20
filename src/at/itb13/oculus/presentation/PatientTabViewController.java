@@ -11,6 +11,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -19,7 +20,9 @@ import javafx.scene.control.TabPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import at.itb13.oculus.lang.LangFacade;
 import at.itb13.oculus.lang.LangKey;
 import at.itb13.oculus.model.Patient;
@@ -151,7 +154,7 @@ public class PatientTabViewController implements Initializable{
 	public void init(PatientMainViewController patientMainViewController) {
 		_patientMainViewController = patientMainViewController;
 	}
-	
+
 	public void createFormular(String id){
 		LangFacade facade = LangFacade.getInstance();
 		FXMLLoader loader = null;
