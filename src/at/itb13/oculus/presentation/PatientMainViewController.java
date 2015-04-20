@@ -20,6 +20,8 @@ public class PatientMainViewController implements Initializable  {
 	private MenuItem _deleteItem;
 	@FXML
 	private MenuItem _aboutItem;
+	@FXML
+	private QueueViewController _queueViewController;
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {

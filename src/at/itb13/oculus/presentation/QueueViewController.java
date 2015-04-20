@@ -11,6 +11,8 @@ import at.itb13.oculus.application.QueueControllerImpl;
 import at.itb13.oculus.application.QueueEntryControllerImpl;
 import at.itb13.oculus.model.Employee;
 import at.itb13.oculus.model.Queue;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
@@ -28,6 +30,7 @@ public class QueueViewController implements Serializable, Consumer<Boolean>{
 
 	private QueueControllerImpl _queueController;
 	private QueueEntryControllerImpl _queueEntryController;
+	private List<String[]> _queues;
 	private List<String[]> _employees;
 	
 	@FXML
@@ -41,17 +44,24 @@ public class QueueViewController implements Serializable, Consumer<Boolean>{
 	
 	public void initialize(){
 		_queueController = new QueueControllerImpl();
-		_queueController.getQueues();
-		
-		_queueEntryController = new QueueEntryControllerImpl();
-		_employees = fetchEmployees(_queueController);
+		_queues = _queueController.getQueues();
 		
 		//fill comboBox with employee names
-		_queueViewEmployeeSelection = new ComboBox<String>();
-		for(String[] employee: _employees){
-			String name = employee[1] + " " + employee[2];
-			_queueViewEmployeeSelection.getItems().add(name);
+		//_queueViewEmployeeSelection = new ComboBox<String>();
+		for(String[] queue: _queues){
+			_queueViewEmployeeSelection.getItems().add(queue[1]);
 		}
+		_queueViewEmployeeSelection.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
+
+			@Override
+			public void changed(ObservableValue<? extends String> observable,
+					String oldValue, String newValue) {
+				//TODO
+			};
+		});
+		_queueViewEmployeeSelection.getSelectionModel().selectFirst();
+		_queueEntryController = new QueueEntryControllerImpl();
+		
 		//TODO finish stuff
 	}
 	
@@ -59,13 +69,6 @@ public class QueueViewController implements Serializable, Consumer<Boolean>{
 		//TODO implement method
 	}
 	
-	//fetch employees to show in selection box
-	public List<String[]> fetchEmployees(QueueControllerImpl queueController){
-		List<String[]> employeesStr = new ArrayList<String[]>();
-		employeesStr = queueController.getEmployees();
-		return employeesStr;
-	}
-
 	@Override
 	public void accept(Boolean b) {
 		// TODO something with consumer from QueueEntryViewController

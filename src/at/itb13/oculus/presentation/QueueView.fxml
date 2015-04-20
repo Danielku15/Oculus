@@ -18,7 +18,7 @@
                   <Insets />
                </VBox.margin>
             </Button>
-            <ComboBox fx:id="_queueViewEmployeeSelection" prefHeight="26.0" prefWidth="346.0" promptText="%queueViewEmployeeSelection">
+            <ComboBox fx:id="_queueViewEmployeeSelection" prefHeight="26.0" prefWidth="346.0">
                <VBox.margin>
                   <Insets />
                </VBox.margin>
