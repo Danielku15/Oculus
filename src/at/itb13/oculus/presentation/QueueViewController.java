@@ -1,26 +1,19 @@
 package at.itb13.oculus.presentation;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 
-import org.hibernate.HibernateException;
-
-import at.itb13.oculus.application.QueueControllerImpl;
-import at.itb13.oculus.application.QueueEntryControllerImpl;
-import at.itb13.oculus.lang.LangFacade;
-import at.itb13.oculus.lang.LangKey;
-import at.itb13.oculus.model.Employee;
-import at.itb13.oculus.model.Queue;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.ListView;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import at.itb13.oculus.application.QueueControllerImpl;
+import at.itb13.oculus.application.QueueEntryControllerImpl;
+import at.itb13.oculus.lang.LangFacade;
+import at.itb13.oculus.lang.LangKey;
 
 
 /**
