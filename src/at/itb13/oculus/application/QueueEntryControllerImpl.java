@@ -243,7 +243,7 @@ public class QueueEntryControllerImpl extends Controller implements QueueEntryCo
 			fieldNames.add("patient");
 		}
 		if(_queueEntry.getAppointment() == null) {
-			fieldNames.add("queueEntry");
+			fieldNames.add("appointment");
 		}
 		if(_queueEntry.getQueue() == null) {
 			fieldNames.add("queue");
