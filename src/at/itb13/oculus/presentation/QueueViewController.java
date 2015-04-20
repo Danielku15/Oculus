@@ -9,11 +9,14 @@ import org.hibernate.HibernateException;
 
 import at.itb13.oculus.application.QueueControllerImpl;
 import at.itb13.oculus.application.QueueEntryControllerImpl;
+import at.itb13.oculus.lang.LangFacade;
+import at.itb13.oculus.lang.LangKey;
 import at.itb13.oculus.model.Employee;
 import at.itb13.oculus.model.Queue;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ComboBox;
@@ -30,6 +33,7 @@ public class QueueViewController implements Serializable, Consumer<Boolean>{
 
 	private QueueControllerImpl _queueController;
 	private QueueEntryControllerImpl _queueEntryController;
+	public static final String QUEUEENTRYVIEW = "QueueEntryView.fxml";
 	private List<String[]> _queues;
 	private List<String[]> _employees;
 	
@@ -44,6 +48,7 @@ public class QueueViewController implements Serializable, Consumer<Boolean>{
 	
 	public void initialize(){
 		_queueController = new QueueControllerImpl();
+		_queueEntryController = new QueueEntryControllerImpl();
 		_queues = _queueController.getQueues();
 		
 		//fill comboBox with employee names
@@ -56,13 +61,34 @@ public class QueueViewController implements Serializable, Consumer<Boolean>{
 			@Override
 			public void changed(ObservableValue<? extends String> observable,
 					String oldValue, String newValue) {
-				//TODO
+				String queueId = _queueController.getIdOfQueue(newValue);
+				setListView(_queueController.getQueueEntries(queueId));
 			};
 		});
 		_queueViewEmployeeSelection.getSelectionModel().selectFirst();
-		_queueEntryController = new QueueEntryControllerImpl();
+		String[] firstQueue = _queues.get(0);
+		setListView(_queueController.getQueueEntries(firstQueue[0]));
 		
 		//TODO finish stuff
+	}
+	
+	public void setListView(List<String[]> queueEntries){
+
+		LangFacade langInstance = LangFacade.getInstance();
+		
+		_queueViewListView.getItems().clear();
+
+		for(String[] queueEntry: queueEntries){
+			_queueViewListView.getItems().add(langInstance.getString(LangKey.PATIENTNAME) + ": " + queueEntry[5] + " " + queueEntry[6] + "\n" + langInstance.getString(LangKey.APPOINTMENTSTART) + ": " + queueEntry[8]);
+		}
+		
+	}
+	
+	public void loadQueueEntryView(){
+		FXMLLoader loader = null;
+		LangFacade facade = LangFacade.getInstance();
+		loader = new FXMLLoader(this.getClass().getResource(QUEUEENTRYVIEW),
+				facade.getResourceBundle());
 	}
 	
 	public void refresh(){

@@ -6,5 +6,5 @@ import java.util.List;
 public interface QueueController extends AutoCloseable {
 	
 	List<String[]> getQueues();
-	List<String[]> getQueueEntries(String queueId, Date lowerBound);
+	List<String[]> getQueueEntries(String queueId);
 }

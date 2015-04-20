@@ -6,7 +6,7 @@ import javafx.scene.paint.Color;
 public class GUIUtil {
 	
 	private static final Color COLOR_FAIL = Color.RED;
-	private static final Color COLOR_SUCCESS = Color.BLACK;
+	private static final Color COLOR_SUCCESS = Color.web("0x333333ff");
 	
 	public static void validate(Label label, boolean valid) {
 		validate(label, valid, COLOR_SUCCESS, COLOR_FAIL);

@@ -44,13 +44,15 @@ public class QueueControllerImpl extends Controller implements QueueController {
 	}
 
 	@Override
-	public synchronized List<String[]> getQueueEntries(String queueId, Date lowerBound) {
+	public synchronized List<String[]> getQueueEntries(String queueId) {
 		List<String[]> queueEntriesStr = new ArrayList<String[]>();
 		List<QueueEntry> queueEntriesObj = new ArrayList<QueueEntry>();
+		Date now = new Date();
+		now.setHours(0);
 
 		try {
 			_database.beginTransaction();
-			queueEntriesObj = _database.getQueueEntriesByQueueId(queueId, lowerBound);
+			queueEntriesObj = _database.getQueueEntriesByQueueId(queueId, now);
 			_database.commitTransaction();
 
 			for (QueueEntry queueEntryObj : queueEntriesObj) {
@@ -99,5 +101,15 @@ public class QueueControllerImpl extends Controller implements QueueController {
 			throw e;
 		}
 		return employeesStr;
+	}
+	
+	public synchronized String getIdOfQueue(String queueName){
+		List<String[]> queues = getQueues();
+		for(String[] queue: queues){
+			if(queue[1] == queueName){
+				return queue[0];
+			}
+		}
+		return null;
 	}
 }
