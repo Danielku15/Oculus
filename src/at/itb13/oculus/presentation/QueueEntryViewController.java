@@ -12,7 +12,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.function.Consumer;
-
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -50,10 +49,9 @@ public class QueueEntryViewController implements Serializable, Initializable,
 	private String _queueID;
 	private List<Consumer<Boolean>> _consumers;
 
-
 	@FXML
 	private TextField _patientTbx;
-	
+
 	@FXML
 	private Button _searchBtn;
 
@@ -68,22 +66,19 @@ public class QueueEntryViewController implements Serializable, Initializable,
 
 	@FXML
 	private TextArea _descriptionTax;
-	
+
 	@FXML
 	private TextField _employeeTbx;
-	
+
 	@FXML
 	private ComboBox<String> _queueCbx;
-	
+
 	@FXML
 	private Button _cancelBtn;
 
 	@FXML
 	private Button _saveBtn;
 
-
-	
-	
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -92,7 +87,7 @@ public class QueueEntryViewController implements Serializable, Initializable,
 	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		
+
 		_consumers = new LinkedList<Consumer<Boolean>>();
 		_queueEntryController = new QueueEntryControllerImpl();
 		_queuesList = _queueEntryController.getQueues();
@@ -101,26 +96,33 @@ public class QueueEntryViewController implements Serializable, Initializable,
 			String nameQueue = array[1];
 			_queueCbx.getItems().add(nameQueue);
 		}
-		
-		_queueCbx.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
 
-			@Override
-			public void changed(ObservableValue<? extends String> observable,
-					String oldValue, String newValue) {
-				addQueueEntry();
-			};
-		});
+		_queueCbx.getSelectionModel().selectedItemProperty()
+				.addListener(new ChangeListener<String>() {
+
+					@Override
+					public void changed(
+							ObservableValue<? extends String> observable,
+							String oldValue, String newValue) {
+						addQueueEntry();
+					};
+				});
 		_queueCbx.getSelectionModel().selectFirst();
-		
 
 	}
-	
+
+	/**
+	 * @param consumer
+	 */
 	public void addConsumer(Consumer<Boolean> consumer) {
 		_consumers.add(consumer);
 	}
-	
+
+	/**
+	 * @param event
+	 */
 	public void addPatient(ActionEvent event) {
-		
+
 		String query = _patientTbx.getText();
 		_searchViewStage = new Stage();
 		FXMLLoader loader = null;
@@ -129,7 +131,8 @@ public class QueueEntryViewController implements Serializable, Initializable,
 
 		loader = new FXMLLoader(this.getClass().getResource(SEARCHVIEW),
 				facade.getResourceBundle());
-		SearchViewController<Patient> patientSearchViewController = new SearchViewController<Patient>(Patient.class);
+		SearchViewController<Patient> patientSearchViewController = new SearchViewController<Patient>(
+				Patient.class);
 		loader.setController(patientSearchViewController);
 		try {
 			pane = loader.load();
@@ -145,9 +148,40 @@ public class QueueEntryViewController implements Serializable, Initializable,
 			_searchViewStage.show();
 		}
 	}
-	
-	
-	public void addAppointment(){
+
+	/**
+	 * @param event
+	 */
+	public void addAppoinmentWithoutPatient(ActionEvent event) {
+
+		_searchViewStage = new Stage();
+		FXMLLoader loader = null;
+		Pane pane = null;
+		LangFacade facade = LangFacade.getInstance();
+
+		loader = new FXMLLoader(this.getClass().getResource(SEARCHVIEW),
+				facade.getResourceBundle());
+		SearchViewController<Patient> patientSearchViewController = new SearchViewController<Patient>(
+				Patient.class);
+		loader.setController(patientSearchViewController);
+		try {
+			pane = loader.load();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		patientSearchViewController.addConsumer(this);
+
+		patientSearchViewController.search(event);
+		_searchViewStage.setScene(new Scene(pane));
+		_searchViewStage.show();
+
+	}
+
+	/**
+	 * 
+	 */
+	public void addAppointment() {
 
 		for (String[] array : _appointmentList) {
 			String nameAppointment = array[3];
@@ -155,14 +189,14 @@ public class QueueEntryViewController implements Serializable, Initializable,
 		}
 		_appointmentCbx.getSelectionModel().selectFirst();
 	}
-	
+
 	public void fillAppoinmentData(ActionEvent event) {
-		
+
 		int index = _appointmentCbx.getSelectionModel().getSelectedIndex();
 		String[] appointment = _appointmentList.get(index);
 		_titleTbx.setText(appointment[1]);
 		_descriptionTax.setText(appointment[2]);
-		_employeeTbx.setText(appointment[4] + " " + appointment[5]);	
+		_employeeTbx.setText(appointment[4] + " " + appointment[5]);
 		try {
 			_queueEntryController.fetchAppointment(appointment[0]);
 		} catch (ObjectNotFoundException e) {
@@ -170,10 +204,9 @@ public class QueueEntryViewController implements Serializable, Initializable,
 			e.printStackTrace();
 		}
 	}
-	
 
 	public void addQueueEntry() {
-		
+
 		int index = _queueCbx.getSelectionModel().getSelectedIndex();
 		_queueID = _queuesList.get(index)[0];
 		try {
@@ -184,13 +217,12 @@ public class QueueEntryViewController implements Serializable, Initializable,
 		}
 	}
 
+	public void save(ActionEvent event) {
 
-	public void save(ActionEvent event){
-		
 		try {
 			_queueEntryController.saveQueueEntry();
-			
-			for(Consumer<Boolean> c : _consumers) {
+
+			for (Consumer<Boolean> c : _consumers) {
 				c.accept(true);
 			}
 		} catch (IncompleteDataException e) {
@@ -205,9 +237,9 @@ public class QueueEntryViewController implements Serializable, Initializable,
 		}
 	}
 
-	public void cancel(ActionEvent event){
-		
-		for(Consumer<Boolean> c : _consumers){
+	public void cancel(ActionEvent event) {
+
+		for (Consumer<Boolean> c : _consumers) {
 			c.accept(false);
 		}
 	}
