@@ -149,6 +149,13 @@ public class SearchViewController<T extends PersistentObject & Searchable> {
 					}
 				});
 				
+				// get the configuration for the current column
+				ColumnConfig columnConfig = _columnConfigMap.get(key);
+				// set the width property of the column according to the width in the column configuration
+				column.setPrefWidth(columnConfig.getWidth());
+				// set the visible property of the column according to the visibility in the column configuration
+				column.setVisible(columnConfig.isVisible());
+				
 				// add listener to column width property to save changes to search configuration
 				column.widthProperty().addListener(new ChangeListener<Number>() {
 					@Override
@@ -165,21 +172,17 @@ public class SearchViewController<T extends PersistentObject & Searchable> {
 						_columnConfigMap.get(key).setVisible(newVisibility);
 						saveSearchConfig();
 					}
-				});	
+				});
 				
-				// get the configuration for the current column
-				ColumnConfig columnConfig = _columnConfigMap.get(key);
-				// set the width property of the column according to the width in the column configuration
-				column.setPrefWidth(columnConfig.getWidth());
-				// set the visible property of the column according to the visibility in the column configuration
-				column.setVisible(columnConfig.isVisible());
 				// set the position of the column according to the index in the column configuration
 				tableColumns.set(columnConfig.getIndex(), column);
 			}
 		}
+		// add all columns to the table view
+		_tableView.getColumns().addAll(tableColumns);
 		
 		// add listener to columns to save column positions to search configuration
-		tableColumns.addListener(new ListChangeListener<TableColumn<String[], ?>>() {
+		_tableView.getColumns().addListener(new ListChangeListener<TableColumn<String[], ?>>() {
 			@Override
 			public void onChanged(ListChangeListener.Change<? extends TableColumn<String[], ?>> change) {
 			    while (change.next()) {
@@ -211,8 +214,6 @@ public class SearchViewController<T extends PersistentObject & Searchable> {
 				return row;
 			}
 		});
-		// add all columns to the table view
-		_tableView.getColumns().addAll(tableColumns);
 		
 		_searchInput.textProperty().addListener(new ChangeListener<String>() {
 		    @Override
