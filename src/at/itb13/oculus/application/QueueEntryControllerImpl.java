@@ -93,6 +93,12 @@ public class QueueEntryControllerImpl extends Controller implements QueueEntryCo
 		}
 		return null;
 	}
+	
+	@Override
+	public String getQueueName(){
+		
+		return _queueEntry.getQueue().getName();
+	}
 
 	@Override
 	public synchronized List<String[]> getQueues() {

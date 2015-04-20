@@ -17,6 +17,7 @@ public interface QueueEntryController extends AutoCloseable {
 	String getAppointmentTitle();
 	String getEmployeeFirstname();
 	String getEmployeeLastname();
+	String getQueueName();
 	
 	// operations
 	List<String[]> getQueues();

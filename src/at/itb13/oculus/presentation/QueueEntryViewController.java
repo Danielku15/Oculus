@@ -48,6 +48,7 @@ public class QueueEntryViewController implements Serializable, Initializable,
 	private List<String[]> _queuesList;
 	private List<String[]> _appointmentList;
 	private String _queueID;
+	private String _patientID;
 	private List<Consumer<Boolean>> _consumers;
 
 
@@ -81,8 +82,24 @@ public class QueueEntryViewController implements Serializable, Initializable,
 	@FXML
 	private Button _saveBtn;
 
-
 	
+	public QueueEntryViewController(){	
+		
+		_queueID = null;
+		_patientID = null;		
+	}
+
+	public QueueEntryViewController(String queueID) {
+		
+		_queueID = queueID;
+		_patientID = null;		
+	}
+	
+	public QueueEntryViewController(String queueID, String patientID) {
+		
+		_queueID = queueID;
+		_patientID = patientID;			
+	}
 	
 	/*
 	 * (non-Javadoc)
@@ -92,6 +109,20 @@ public class QueueEntryViewController implements Serializable, Initializable,
 	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		
+		if(_patientID != null){
+			
+			try {
+				_queueEntryController.fetchPatient(_patientID);
+				
+			} catch (ObjectNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			_patientTbx.setText(_queueEntryController.getPatientFirstname() + " " + _queueEntryController.getPatientLastname());
+		}
+		
+
 		
 		_consumers = new LinkedList<Consumer<Boolean>>();
 		_queueEntryController = new QueueEntryControllerImpl();
@@ -110,9 +141,21 @@ public class QueueEntryViewController implements Serializable, Initializable,
 				addQueueEntry();
 			};
 		});
-		_queueCbx.getSelectionModel().selectFirst();
 		
-
+		if(_queueID != null){
+			try {
+				
+				_queueEntryController.fetchQueue(_queueID);
+				_queueCbx.getSelectionModel().select(_queueEntryController.getQueueName());
+			
+			} catch (ObjectNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}else{
+			_queueCbx.getSelectionModel().selectFirst();
+		}
+		
 	}
 	
 	public void addConsumer(Consumer<Boolean> consumer) {
