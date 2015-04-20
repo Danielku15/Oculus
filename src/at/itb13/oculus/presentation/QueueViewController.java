@@ -11,6 +11,8 @@ import at.itb13.oculus.application.QueueControllerImpl;
 import at.itb13.oculus.application.QueueEntryControllerImpl;
 import at.itb13.oculus.model.Employee;
 import at.itb13.oculus.model.Queue;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
@@ -45,11 +47,19 @@ public class QueueViewController implements Serializable, Consumer<Boolean>{
 		_queues = _queueController.getQueues();
 		
 		//fill comboBox with employee names
-		_queueViewEmployeeSelection = new ComboBox<String>();
+		//_queueViewEmployeeSelection = new ComboBox<String>();
 		for(String[] queue: _queues){
 			_queueViewEmployeeSelection.getItems().add(queue[1]);
 		}
-		
+		_queueViewEmployeeSelection.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
+
+			@Override
+			public void changed(ObservableValue<? extends String> observable,
+					String oldValue, String newValue) {
+				//TODO
+			};
+		});
+		_queueViewEmployeeSelection.getSelectionModel().selectFirst();
 		_queueEntryController = new QueueEntryControllerImpl();
 		
 		//TODO finish stuff
