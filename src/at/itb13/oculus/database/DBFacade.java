@@ -208,6 +208,10 @@ public class DBFacade implements AutoCloseable {
 		return ((PatientDAO) _patientDAO).getBySocialSecurityNumber(socialSecurityNumber);
 	}
 	
+	public Queue getQueueByName(String name) {
+		return ((QueueDAO) _queueDAO).getByName(name);
+	}
+	
 	public List<QueueEntry> getQueueEntriesByQueueId(String queueId, Date lowerBound) {
 		return ((QueueEntryDAO) _queueEntryDAO).getByQueueId(queueId, lowerBound);
 	}

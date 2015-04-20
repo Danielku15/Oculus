@@ -9,6 +9,7 @@ import org.hibernate.HibernateException;
 import at.itb13.oculus.model.Employee;
 import at.itb13.oculus.model.Queue;
 import at.itb13.oculus.model.QueueEntry;
+import at.itb13.oculus.util.DateUtil;
 
 /**
  * @author Carola
@@ -47,12 +48,10 @@ public class QueueControllerImpl extends Controller implements QueueController {
 	public synchronized List<String[]> getQueueEntries(String queueId) {
 		List<String[]> queueEntriesStr = new ArrayList<String[]>();
 		List<QueueEntry> queueEntriesObj = new ArrayList<QueueEntry>();
-		Date now = new Date();
-		now.setHours(0);
 
 		try {
 			_database.beginTransaction();
-			queueEntriesObj = _database.getQueueEntriesByQueueId(queueId, now);
+			queueEntriesObj = _database.getQueueEntriesByQueueId(queueId, DateUtil.truncateHours(new Date()));
 			_database.commitTransaction();
 
 			for (QueueEntry queueEntryObj : queueEntriesObj) {
@@ -104,11 +103,17 @@ public class QueueControllerImpl extends Controller implements QueueController {
 	}
 	
 	public synchronized String getIdOfQueue(String queueName){
-		List<String[]> queues = getQueues();
-		for(String[] queue: queues){
-			if(queue[1] == queueName){
-				return queue[0];
-			}
+		Queue queue = null;
+		try {
+			_database.beginTransaction();
+			queue = _database.getQueueByName(queueName);
+			_database.commitTransaction();
+		} catch (HibernateException e) {
+			_database.rollbackTransaction();
+			throw e;
+		}
+		if(queue != null) {
+			return queue.getID();
 		}
 		return null;
 	}

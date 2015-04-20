@@ -119,6 +119,7 @@ public class QueueEntryViewController implements Serializable, Initializable,
 		_consumers.add(consumer);
 	}
 	
+	@FXML
 	public void addPatient(ActionEvent event) {
 		
 		String query = _patientTbx.getText();
@@ -156,6 +157,7 @@ public class QueueEntryViewController implements Serializable, Initializable,
 		_appointmentCbx.getSelectionModel().selectFirst();
 	}
 	
+	@FXML
 	public void fillAppoinmentData(ActionEvent event) {
 		
 		int index = _appointmentCbx.getSelectionModel().getSelectedIndex();
@@ -171,7 +173,7 @@ public class QueueEntryViewController implements Serializable, Initializable,
 		}
 	}
 	
-
+	@FXML
 	public void addQueueEntry() {
 		
 		int index = _queueCbx.getSelectionModel().getSelectedIndex();
@@ -184,7 +186,7 @@ public class QueueEntryViewController implements Serializable, Initializable,
 		}
 	}
 
-
+	@FXML
 	public void save(ActionEvent event){
 		
 		try {
@@ -236,5 +238,9 @@ public class QueueEntryViewController implements Serializable, Initializable,
 	public String getQueueID() {
 		return _queueID;
 	}
-
+	
+	@FXML
+	public void addAppoinmentWithoutPatient(ActionEvent e) {
+		
+	}
 }
