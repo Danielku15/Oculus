@@ -34,6 +34,7 @@ public class QueueViewController implements Serializable, Consumer<Boolean>{
 	public static final String QUEUEENTRYVIEW = "QueueEntryView.fxml";
 	private Stage _queueEntryViewStage;
 	private List<String[]> _queues;
+	private PatientMainViewController _patientMainViewController;
 	
 	@FXML
 	private Button _queueViewAddQEntryButton;
@@ -87,15 +88,24 @@ public class QueueViewController implements Serializable, Consumer<Boolean>{
 		FXMLLoader loader = null;
 		Pane pane = null;
 		LangFacade facade = LangFacade.getInstance();
-
-		loader = new FXMLLoader(this.getClass().getResource(QUEUEENTRYVIEW),
-				facade.getResourceBundle());
+		QueueEntryViewController _queueEntryViewController;
+		String queueId = _queueController.getIdOfQueue(_queueViewEmployeeSelection.getSelectionModel().getSelectedItem());
+		if(_patientMainViewController.getCurrentPatient() != null){
+			_queueEntryViewController = new QueueEntryViewController(queueId, _patientMainViewController.getCurrentPatient());
+		}else{
+			_queueEntryViewController = new QueueEntryViewController(queueId);
+		}
+		
 		try {
+			loader = new FXMLLoader(this.getClass().getResource(QUEUEENTRYVIEW),
+					facade.getResourceBundle());
+			loader.setController(_queueEntryViewController);
 			pane = loader.load();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 		_queueEntryViewStage.setScene(new Scene(pane));
 		_queueEntryViewStage.show();
 	}
@@ -113,5 +123,10 @@ public class QueueViewController implements Serializable, Consumer<Boolean>{
 			refresh();
 		}
 		_queueEntryViewStage.close();
+	}
+	
+	//init parent - PatientMainViewController
+	public void init(PatientMainViewController patientMainViewController) {
+		_patientMainViewController = patientMainViewController;
 	}
 }

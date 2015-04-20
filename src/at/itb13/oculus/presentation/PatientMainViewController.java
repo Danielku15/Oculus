@@ -6,13 +6,8 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Group;
-import javafx.scene.Scene;
 import javafx.scene.control.MenuItem;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.text.Text;
-import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
 public class PatientMainViewController implements Initializable  {
 
@@ -30,7 +25,8 @@ public class PatientMainViewController implements Initializable  {
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		_patientTabViewController.init(this);			
+		_patientTabViewController.init(this);
+		_queueViewController.init(this);
 	}
 	
 	// Event Listener on MenuItem[#_closeItem].onAction
@@ -61,5 +57,9 @@ public class PatientMainViewController implements Initializable  {
 	//init child - PatientTabViewController
 	public void init(PatientTabViewController patientTabViewController) {
 		_patientTabViewController = patientTabViewController;
+	}
+	
+	public String getCurrentPatient(){
+		return null;
 	}
 }
