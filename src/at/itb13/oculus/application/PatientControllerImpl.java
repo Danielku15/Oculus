@@ -189,7 +189,7 @@ public class PatientControllerImpl extends Controller implements PatientControll
 			try {
 				_database.beginTransaction();
 				Patient patient = _database.getPatientBySocialSecurityNumber(socialSecurityNumber);
-				if(patient != null) {
+				if((patient != null) && (!patient.equals(_patient))) {
 					throw new UniqueConstraintException("socialSecurityNumber", _patient, patient);
 				}
 				_database.commitTransaction();
