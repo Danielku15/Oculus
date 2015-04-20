@@ -86,7 +86,6 @@ public class QueueControllerImpl extends Controller implements QueueController {
 			_database.rollbackTransaction();
 			throw e;
 		}
-
 		return queueEntriesStr;
 	}
 	
