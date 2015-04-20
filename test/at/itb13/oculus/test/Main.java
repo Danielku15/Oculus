@@ -1,9 +1,5 @@
 package at.itb13.oculus.test;
 
-import java.text.SimpleDateFormat;
-import at.itb13.oculus.database.DBFacade;
-import at.itb13.oculus.model.Appointment;
-
 public class Main {
 	
 	public static void main(String[] args) {
@@ -15,8 +11,7 @@ public class Main {
 //		} catch (IOException e) {
 //			e.printStackTrace();
 //		}
-		
-		DBFacade dbFacade = new DBFacade();
+	
 //		try {
 //			dbFacade.indexAll();
 //		} catch (InterruptedException e) {
@@ -28,13 +23,12 @@ public class Main {
 //			System.out.println(res);
 //		};
 		
-		SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss");
-		System.out.println(sdf.format(null));
-		
-		for(Appointment appointment : dbFacade.getAppointmentsByPatientId("1c1312ca-d9de-11e4-97e5-f0def1808fa9", null)) {
-			System.out.println(appointment.getStart());
+		try {
+			System.out.println(Class.forName("at.itb13.oculus.model.Patient"));
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		dbFacade.close();
 		
 //		try {
 //			LangFacade.load();

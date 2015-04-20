@@ -12,17 +12,20 @@ import at.itb13.oculus.service.IndexService;
 import at.itb13.oculus.util.LoggerUtil;
 
 public class Main {
+	
+	private static IndexService _indexService;
 
 	public static void main(String[] args) {
-		new Main().init(args);
+		init(args);
 	}
 	
 	public static void exit(int status) {
+		_indexService.cancel();
 		LoggerUtil.close();
 		System.exit(status);
 	}
 	
-	public void init(String[] args) {
+	public static void init(String[] args) {
 		
 		// setup logger
 		Logger logger = null;
@@ -56,9 +59,14 @@ public class Main {
 		}
 		
 		//start index service
-		new IndexService().start();
+		_indexService = new IndexService();
+		_indexService.start();
 		
 		// start GUI
 		GUIApplication.main(args);
+	}
+	
+	public static IndexService getIndexService() {
+		return _indexService;
 	}
 }
