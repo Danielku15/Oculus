@@ -39,7 +39,9 @@ public enum LangKey {
 	DESCRIPTION("description"),
 	TITLE("title"),
 	START("start"),
-	SEARCH("search");
+	SEARCH("search"),
+	INCOMPLETEDATAHEADER("incompletedataheader"),
+	ERRORDIALOGTITEL("errordialogtitel");
 	
 	private String _key;
 	

@@ -3,14 +3,19 @@ package at.itb13.oculus.presentation;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
+
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.concurrent.Task;
+import javafx.concurrent.WorkerStateEvent;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Group;
 import javafx.scene.control.Accordion;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
@@ -349,7 +354,35 @@ public class PatientViewController implements Initializable{
 	// Event Listener on Button[#_saveButton].onAction
 	@FXML
 	public void save(ActionEvent event) {
-		new Thread(new CreatePatientTask()).start();
+		CreatePatientTask createPatientTask = new CreatePatientTask();
+		createPatientTask.setOnFailed(new EventHandler<WorkerStateEvent>() {
+		    @Override public void handle(WorkerStateEvent t) {
+		    	LangFacade facade = LangFacade.getInstance();
+		    	
+		    	String message = "";
+	
+				Alert errorDialog = new Alert(AlertType.ERROR);
+				errorDialog.setTitle(facade.getString(LangKey.ERRORDIALOGTITEL));
+				
+				if (createPatientTask.getException() instanceof IncompleteDataException){
+		    		IncompleteDataException ex = (IncompleteDataException) createPatientTask.getException();
+		    		errorDialog.setHeaderText(facade.getString(LangKey.INCOMPLETEDATAHEADER));
+		    		for (int i = 0; i < ex.getFieldNames().size(); i++){				
+						message += facade.getString(LangKey.valueOf(ex.getFieldNames().get(i).toUpperCase()));
+						if (i+1 < ex.getFieldNames().size()){
+							message += ", ";
+						}
+					}
+				}
+		    	else if (createPatientTask.getException() instanceof ObjectNotSavedException){
+		    		ObjectNotSavedException ex = (ObjectNotSavedException) createPatientTask.getException();
+		    		//TODO
+		    	}
+				errorDialog.setContentText(message);
+				errorDialog.show();
+			}
+		});
+		new Thread(createPatientTask).start();
 	}
 	
 	private void setTabLabelNameModified(){
@@ -532,25 +565,17 @@ public class PatientViewController implements Initializable{
 	
 	private class CreatePatientTask extends Task<String> {
 
-		@Override public String call() {
-	    	try {
-				_patientController.savePatient();
-			} catch (IncompleteDataException e) {
-				e.printStackTrace();
-			} catch (ObjectNotSavedException e) {
-				e.printStackTrace();
-			}	
-	    	return null;
+		@Override public String call() throws IncompleteDataException, ObjectNotSavedException {
+			_patientController.savePatient();
+			return null;
 	    }
 	    
 	    @Override protected void succeeded() {
 	    	setTabLabelNameIsUnmodified();
 	    }
 	    
-	    @Override protected void cancelled() {
-	    }
-	    
 	    @Override protected void failed() {
+	    	super.failed();
 	    }
 	}
 
