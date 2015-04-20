@@ -70,7 +70,7 @@
             </HBox>
             <HBox GridPane.columnIndex="1" GridPane.rowIndex="3">
                <children>
-                  <TextArea fx:id="_descriptionTax" editable="false" prefHeight="0.0" prefWidth="300.0" />
+                  <TextArea fx:id="_descriptionTax" disable="true" editable="false" prefHeight="0.0" prefWidth="300.0" />
                </children>
             </HBox>
             <HBox alignment="CENTER_RIGHT" GridPane.columnIndex="1" GridPane.rowIndex="4">
