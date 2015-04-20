@@ -88,7 +88,7 @@
                         </ToolBar>
                      </children>
                   </AnchorPane>
-                  <fx:include source="QueueView.fxml" />
+                  <fx:include fx:id="_queueView" source="QueueView.fxml" />
                </children>
             </VBox>
             <fx:include fx:id="_patientTabView" source="PatientTabView.fxml" />
