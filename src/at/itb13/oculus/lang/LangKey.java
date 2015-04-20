@@ -18,6 +18,8 @@ public enum LangKey {
 	EMAIL("email"),
 	ZIP("zip"),
 	CITY("city"),
+	PATIENTNAME("patientname"),
+	APPOINTMENTSTART("appointmentstart"),	
 	COUNTRY("country"),
 	STREET("street"),
 	STREETNUMBER("streetnumber"),

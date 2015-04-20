@@ -30,7 +30,7 @@
                   <TextField fx:id="_patientTbx" disable="false" prefHeight="25.0" prefWidth="214.0" GridPane.columnIndex="1" />
                   <Button fx:id="_searchBtn" mnemonicParsing="false" onAction="#addPatient" prefHeight="25.0" prefWidth="42.0">
                      <graphic>
-                        <ImageView fitHeight="16.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="18.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../../../../../res/search.png" />
                            </image>
@@ -41,7 +41,16 @@
             <Label text="%appointment" GridPane.rowIndex="1" />
             <HBox alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <children>
-                  <ComboBox fx:id="_appointmentCbx" onAction="#fillAppoinmentData" prefHeight="25.0" prefWidth="273.0" />
+                  <ComboBox fx:id="_appointmentCbx" onAction="#fillAppoinmentData" prefHeight="25.0" prefWidth="214.0" />
+                  <Button fx:id="_searchAppointmentBtn" mnemonicParsing="false" onAction="#addAppoinmentWithoutPatient" prefHeight="25.0" prefWidth="42.0">
+                     <graphic>
+                        <ImageView fitHeight="18.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../../../res/search.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
                </children>
             </HBox>
             <Label text="%queue" GridPane.rowIndex="5" />

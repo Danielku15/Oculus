@@ -1,6 +1,7 @@
 package at.itb13.oculus.presentation;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -42,7 +43,7 @@ import at.itb13.oculus.util.GUIUtil;
  *
  * @param <T>
  */
-public abstract class SearchViewController<T extends PersistentObject & Searchable> {
+public class SearchViewController<T extends PersistentObject & Searchable> {
 
 	private static final Logger LOGGER = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 	private static final String SEARCHCONFIGSUFFIX = "search.properties";
@@ -125,7 +126,7 @@ public abstract class SearchViewController<T extends PersistentObject & Searchab
 	@FXML
 	private void initialize() {
 		// initialize list of table columns
-		ObservableList<TableColumn<String[], String>> tableColumns = FXCollections.observableArrayList();
+		List<TableColumn<String[], String>> tableColumns = new ArrayList<TableColumn<String[], String>>(_fieldMap.size());
 		
 		// fill list with null values
 		for(int i = 0; i < (_fieldMap.size() - 1); ++i) {
@@ -149,6 +150,13 @@ public abstract class SearchViewController<T extends PersistentObject & Searchab
 					}
 				});
 				
+				// get the configuration for the current column
+				ColumnConfig columnConfig = _columnConfigMap.get(key);
+				// set the width property of the column according to the width in the column configuration
+				column.setPrefWidth(columnConfig.getWidth());
+				// set the visible property of the column according to the visibility in the column configuration
+				column.setVisible(columnConfig.isVisible());
+				
 				// add listener to column width property to save changes to search configuration
 				column.widthProperty().addListener(new ChangeListener<Number>() {
 					@Override
@@ -165,21 +173,17 @@ public abstract class SearchViewController<T extends PersistentObject & Searchab
 						_columnConfigMap.get(key).setVisible(newVisibility);
 						saveSearchConfig();
 					}
-				});	
+				});
 				
-				// get the configuration for the current column
-				ColumnConfig columnConfig = _columnConfigMap.get(key);
-				// set the width property of the column according to the width in the column configuration
-				column.setPrefWidth(columnConfig.getWidth());
-				// set the visible property of the column according to the visibility in the column configuration
-				column.setVisible(columnConfig.isVisible());
 				// set the position of the column according to the index in the column configuration
 				tableColumns.set(columnConfig.getIndex(), column);
 			}
 		}
+		// add all columns to the table view
+		_tableView.getColumns().addAll(tableColumns);
 		
 		// add listener to columns to save column positions to search configuration
-		tableColumns.addListener(new ListChangeListener<TableColumn<String[], ?>>() {
+		_tableView.getColumns().addListener(new ListChangeListener<TableColumn<String[], ?>>() {
 			@Override
 			public void onChanged(ListChangeListener.Change<? extends TableColumn<String[], ?>> change) {
 			    while (change.next()) {
@@ -211,8 +215,6 @@ public abstract class SearchViewController<T extends PersistentObject & Searchab
 				return row;
 			}
 		});
-		// add all columns to the table view
-		_tableView.getColumns().addAll(tableColumns);
 		
 		_searchInput.textProperty().addListener(new ChangeListener<String>() {
 		    @Override

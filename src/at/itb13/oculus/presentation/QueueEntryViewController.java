@@ -16,7 +16,6 @@ import java.util.function.Consumer;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -33,6 +32,7 @@ import at.itb13.oculus.application.ObjectNotFoundException;
 import at.itb13.oculus.application.ObjectNotSavedException;
 import at.itb13.oculus.application.QueueEntryControllerImpl;
 import at.itb13.oculus.lang.LangFacade;
+import at.itb13.oculus.model.Patient;
 
 /**
  * @author Manu
@@ -42,7 +42,7 @@ public class QueueEntryViewController implements Serializable, Initializable,
 		Consumer<String> {
 
 	private static final long serialVersionUID = 1L;
-	public static final String PATIENTSEARCHVIEW = "PatientSearchView.fxml";
+	public static final String SEARCHVIEW = "SearchView.fxml";
 	private QueueEntryControllerImpl _queueEntryController;
 	private Stage _searchViewStage;
 	private List<String[]> _queuesList;
@@ -119,6 +119,7 @@ public class QueueEntryViewController implements Serializable, Initializable,
 		_consumers.add(consumer);
 	}
 	
+	@FXML
 	public void addPatient(ActionEvent event) {
 		
 		String query = _patientTbx.getText();
@@ -127,22 +128,20 @@ public class QueueEntryViewController implements Serializable, Initializable,
 		Pane pane = null;
 		LangFacade facade = LangFacade.getInstance();
 
-		loader = new FXMLLoader(this.getClass().getResource(PATIENTSEARCHVIEW),
+		loader = new FXMLLoader(this.getClass().getResource(SEARCHVIEW),
 				facade.getResourceBundle());
-
+		SearchViewController<Patient> patientSearchViewController = new SearchViewController<Patient>(Patient.class);
+		loader.setController(patientSearchViewController);
 		try {
 			pane = loader.load();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		patientSearchViewController.addConsumer(this);
 
-		PatientSearchViewController _patientSearchViewController = loader
-				.<PatientSearchViewController> getController();
-		_patientSearchViewController.addConsumer(this);
-
-		if (_patientSearchViewController.setCriteria(query)) {
-			_patientSearchViewController.search(event);
+		if (patientSearchViewController.setCriteria(query)) {
+			patientSearchViewController.search(event);
 			_searchViewStage.setScene(new Scene(pane));
 			_searchViewStage.show();
 		}
@@ -158,6 +157,7 @@ public class QueueEntryViewController implements Serializable, Initializable,
 		_appointmentCbx.getSelectionModel().selectFirst();
 	}
 	
+	@FXML
 	public void fillAppoinmentData(ActionEvent event) {
 		
 		int index = _appointmentCbx.getSelectionModel().getSelectedIndex();
@@ -173,7 +173,7 @@ public class QueueEntryViewController implements Serializable, Initializable,
 		}
 	}
 	
-
+	@FXML
 	public void addQueueEntry() {
 		
 		int index = _queueCbx.getSelectionModel().getSelectedIndex();
@@ -186,7 +186,7 @@ public class QueueEntryViewController implements Serializable, Initializable,
 		}
 	}
 
-
+	@FXML
 	public void save(ActionEvent event){
 		
 		try {
@@ -238,5 +238,9 @@ public class QueueEntryViewController implements Serializable, Initializable,
 	public String getQueueID() {
 		return _queueID;
 	}
-
+	
+	@FXML
+	public void addAppoinmentWithoutPatient(ActionEvent e) {
+		
+	}
 }
