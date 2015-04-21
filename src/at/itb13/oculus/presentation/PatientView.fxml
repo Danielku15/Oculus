@@ -11,48 +11,77 @@
    <children>
       <AnchorPane prefHeight="1000.0">
          <children>
-            <ScrollPane fitToHeight="true" fitToWidth="true" minWidth="520.0" pannable="true" prefViewportHeight="160.0" prefViewportWidth="142.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <ScrollPane fitToHeight="true" fitToWidth="true" minWidth="900.0" pannable="true" prefViewportHeight="160.0" prefViewportWidth="142.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <content>
-                  <AnchorPane minWidth="520.0">
+                  <AnchorPane>
                      <children>
-                        <Accordion fx:id="_accordion" minWidth="520.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <Accordion fx:id="_accordion" minWidth="520.0" prefHeight="998.0" prefWidth="998.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <panes>
-                              <TitledPane fx:id="_patientMasterData" minWidth="520.0" text="%patientmasterdata">
+                              <TitledPane fx:id="_patientMasterData" text="%patientmasterdata">
                                  <content>
-                                    <AnchorPane minWidth="520.0" stylesheets="font.css">
+                                    <AnchorPane stylesheets="font.css">
                                        <children>
-                                          <GridPane hgap="20.0" minWidth="520.0" stylesheets="/font.css" vgap="10.0" AnchorPane.bottomAnchor="14.600000000000023" AnchorPane.leftAnchor="14.600000000000023" AnchorPane.rightAnchor="29.0" AnchorPane.topAnchor="0.0">
+                                          <GridPane hgap="20.0" prefHeight="919.0" prefWidth="996.0" vgap="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                            <columnConstraints>
+                                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="160.0" minWidth="160.0" prefWidth="160.0" />
+                                                <ColumnConstraints halignment="LEFT" hgrow="ALWAYS" minWidth="100.0" />
+                                                <ColumnConstraints halignment="LEFT" hgrow="ALWAYS" maxWidth="40.0" minWidth="40.0" prefWidth="40.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="100.0" minWidth="100.0" prefWidth="100.0" />
+                                              <ColumnConstraints halignment="LEFT" hgrow="ALWAYS" minWidth="100.0" />
+                                            </columnConstraints>
+                                            <rowConstraints>
+                                                <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                                              <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="10.0" vgrow="SOMETIMES" />
+                                            </rowConstraints>
                                              <children>
-                                                <Label fx:id="_firstnameLabel" text="%firstname">
-                                                   <font>
-                                                      <Font size="14.0" />
-                                                   </font>
-                                                </Label>
-                                                <TextField fx:id="_firstnameInput" GridPane.columnIndex="1">
+                                                <TextField fx:id="_firstnameInput" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                                    <font>
                                                       <Font size="14.0" />
                                                    </font>
                                                 </TextField>
-                                                <Label fx:id="_lastnameLabel" text="%lastname" GridPane.rowIndex="1">
-                                                   <font>
-                                                      <Font size="14.0" />
-                                                   </font>
-                                                </Label>
-                                                <TextField fx:id="_lastnameInput" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                                <TextField fx:id="_lastnameInput" GridPane.columnIndex="4" GridPane.rowIndex="1">
                                                    <font>
                                                       <Font size="14.0" />
                                                    </font>
                                                 </TextField>
+                                                <Label fx:id="_firstnameLabel" text="%firstname" GridPane.rowIndex="1">
+                                                   <font>
+                                                      <Font size="14.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label fx:id="_lastnameLabel" text="%lastname" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                                                   <font>
+                                                      <Font size="14.0" />
+                                                   </font>
+                                                </Label>
                                                 <Label fx:id="_birthdayLabel" text="%birthday" GridPane.rowIndex="2">
                                                    <font>
                                                       <Font size="14.0" />
                                                    </font>
                                                 </Label>
-                                                <AnchorPane GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                                <AnchorPane GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                                                    <children>
-                                                      <DatePicker fx:id="_birthdayInput" prefHeight="29.0" prefWidth="338.0" showWeekNumbers="true" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                                                      <DatePicker fx:id="_birthdayInput" layoutY="42.0" showWeekNumbers="true" AnchorPane.bottomAnchor="41.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="42.0" />
                                                    </children>
                                                 </AnchorPane>
+                                                <Label fx:id="_socialSecurityNumberLabel" text="%socialsecuritynumber">
+                                                   <font>
+                                                      <Font size="14.0" />
+                                                   </font>
+                                                </Label>
+                                                <TextField fx:id="_socialSecurityNumberInput" GridPane.columnIndex="1">
+                                                   <font>
+                                                      <Font size="14.0" />
+                                                   </font>
+                                                </TextField>
                                                 <Label fx:id="_genderLabel" text="%gender" GridPane.rowIndex="3">
                                                    <font>
                                                       <Font size="14.0" />
@@ -60,15 +89,15 @@
                                                 </Label>
                                                 <Group fx:id="_genderGroup" GridPane.columnIndex="1" GridPane.rowIndex="3">
                                                    <children>
-                                                      <RadioButton fx:id="_maleInput" layoutX="156.0" layoutY="71.0" mnemonicParsing="false" selected="true" text="%male" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                                      <RadioButton fx:id="_maleInput" layoutX="134.0" layoutY="72.0" mnemonicParsing="false" selected="true" text="%male" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                                         <toggleGroup>
+                                                            <ToggleGroup fx:id="_genderToggleGroup" />
+                                                         </toggleGroup>
                                                          <font>
                                                             <Font size="14.0" />
                                                          </font>
-                                                         <toggleGroup>
-                                                            <ToggleGroup fx:id="_genderToggleGroup1" />
-                                                         </toggleGroup>
                                                       </RadioButton>
-                                                      <RadioButton fx:id="_femaleInput" layoutX="324.0" layoutY="71.0" mnemonicParsing="false" selected="true" text="%female" toggleGroup="$_genderToggleGroup1" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                                      <RadioButton fx:id="_femaleInput" layoutX="237.0" layoutY="72.0" mnemonicParsing="false" selected="true" text="%female" toggleGroup="$_genderToggleGroup" GridPane.columnIndex="1" GridPane.rowIndex="2">
                                                          <font>
                                                             <Font size="14.0" />
                                                          </font>
@@ -80,132 +109,102 @@
                                                       <Font size="14.0" />
                                                    </font>
                                                 </Label>
-                                                <TextField fx:id="_phoneNumberInput" layoutX="156.0" layoutY="115.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                                                <TextField fx:id="_phoneNumberInput" GridPane.columnIndex="1" GridPane.rowIndex="4">
                                                    <font>
                                                       <Font size="14.0" />
                                                    </font>
                                                 </TextField>
-                                                <Label fx:id="_emailLabel" text="%email" GridPane.rowIndex="5">
+                                                <Label fx:id="_emailLabel" text="%email" GridPane.columnIndex="3" GridPane.rowIndex="4">
                                                    <font>
                                                       <Font size="14.0" />
                                                    </font>
                                                 </Label>
-                                                <TextField fx:id="_emailInput" layoutX="165.0" layoutY="146.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                                                <TextField fx:id="_emailInput" GridPane.columnIndex="4" GridPane.rowIndex="4">
                                                    <font>
                                                       <Font size="14.0" />
                                                    </font>
                                                 </TextField>
-                                                <Label fx:id="_streetLabel" text="%street" GridPane.rowIndex="6">
+                                                <Label fx:id="_streetLabel" text="%street" GridPane.rowIndex="5">
                                                    <font>
                                                       <Font size="14.0" />
                                                    </font>
                                                 </Label>
-                                                <TextField fx:id="_streetInput" layoutX="171.0" layoutY="257.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
+                                                <TextField fx:id="_streetInput" GridPane.columnIndex="1" GridPane.rowIndex="5">
                                                    <font>
                                                       <Font size="14.0" />
                                                    </font>
                                                 </TextField>
-                                                <Label fx:id="_streetNumberLabel" text="%streetnumber" GridPane.rowIndex="7">
+                                                <Label fx:id="_streetNumberLabel" text="%streetnumber" GridPane.columnIndex="3" GridPane.rowIndex="5">
                                                    <font>
                                                       <Font size="14.0" />
                                                    </font>
                                                 </Label>
-                                                <TextField fx:id="_streetNumberInput" layoutX="156.0" layoutY="302.0" GridPane.columnIndex="1" GridPane.rowIndex="7">
+                                                <TextField fx:id="_streetNumberInput" GridPane.columnIndex="4" GridPane.rowIndex="5">
                                                    <font>
                                                       <Font size="14.0" />
                                                    </font>
                                                 </TextField>
-                                                <Label fx:id="_zipLabel" text="%zip" GridPane.rowIndex="8">
+                                                <Label fx:id="_zipLabel" text="%zip" GridPane.rowIndex="6">
                                                    <font>
                                                       <Font size="14.0" />
                                                    </font>
                                                 </Label>
-                                                <TextField fx:id="_zipInput" GridPane.columnIndex="1" GridPane.rowIndex="8">
+                                                <TextField fx:id="_zipInput" GridPane.columnIndex="1" GridPane.rowIndex="6">
                                                    <font>
                                                       <Font size="14.0" />
                                                    </font>
                                                 </TextField>
-                                                <Label fx:id="_cityLabel" text="%city" GridPane.rowIndex="9">
+                                                <Label fx:id="_cityLabel" text="%city" GridPane.columnIndex="3" GridPane.rowIndex="6">
                                                    <font>
                                                       <Font size="14.0" />
                                                    </font>
                                                 </Label>
-                                                <TextField fx:id="_cityInput" GridPane.columnIndex="1" GridPane.rowIndex="9">
+                                                <TextField fx:id="_cityInput" GridPane.columnIndex="4" GridPane.rowIndex="6">
                                                    <font>
                                                       <Font size="14.0" />
                                                    </font>
                                                 </TextField>
-                                                <Label fx:id="_countryLabel" text="%country" GridPane.rowIndex="10">
+                                                <Label fx:id="_countryLabel" text="%country" GridPane.rowIndex="7">
                                                    <font>
                                                       <Font size="14.0" />
                                                    </font>
                                                 </Label>
-                                                <TextField fx:id="_countryInput" layoutX="162.0" layoutY="226.0" GridPane.columnIndex="1" GridPane.rowIndex="10">
+                                                <TextField fx:id="_countryInput" GridPane.columnIndex="1" GridPane.rowIndex="7">
                                                    <font>
                                                       <Font size="14.0" />
                                                    </font>
                                                 </TextField>
-                                                <Label fx:id="_socialSecurityNumberLabel" text="%socialsecuritynumber" GridPane.rowIndex="11">
+                                                <Label fx:id="_employerLabel" text="%employer" GridPane.rowIndex="8">
                                                    <font>
                                                       <Font size="14.0" />
                                                    </font>
                                                 </Label>
-                                                <TextField fx:id="_socialSecurityNumberInput" layoutX="142.0" layoutY="182.0" GridPane.columnIndex="1" GridPane.rowIndex="11">
+                                                <TextField fx:id="_employerInput" GridPane.columnIndex="1" GridPane.rowIndex="8">
                                                    <font>
                                                       <Font size="14.0" />
                                                    </font>
                                                 </TextField>
-                                                <Label fx:id="_employerLabel" text="%employer" GridPane.rowIndex="12">
-                                                   <font>
-                                                      <Font size="14.0" />
-                                                   </font>
-                                                </Label>
-                                                <TextField fx:id="_employerInput" layoutX="165.0" layoutY="372.0" GridPane.columnIndex="1" GridPane.rowIndex="12">
-                                                   <font>
-                                                      <Font size="14.0" />
-                                                   </font>
-                                                </TextField>
-                                                <Button fx:id="_clearButton" mnemonicParsing="false" onAction="#clear" text="%clear" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="14">
-                                                   <font>
-                                                      <Font size="14.0" />
-                                                   </font>
-                                                   <opaqueInsets>
-                                                      <Insets left="50.0" />
-                                                   </opaqueInsets>
-                                                </Button>
-                                                <Button fx:id="_saveButton" mnemonicParsing="false" onAction="#save" text="%save" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="14">
-                                                   <font>
-                                                      <Font size="14.0" />
-                                                   </font>
-                                                   <opaqueInsets>
-                                                      <Insets right="200.0" />
-                                                   </opaqueInsets>
-                                                </Button>
+                                                <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="50.0" GridPane.columnIndex="4" GridPane.rowIndex="9">
+                                                   <children>
+                                                      <Button fx:id="_clearButton" mnemonicParsing="false" onAction="#clear" text="%clear">
+                                                         <font>
+                                                            <Font size="14.0" />
+                                                         </font>
+                                                         <opaqueInsets>
+                                                            <Insets left="50.0" />
+                                                         </opaqueInsets>
+                                                      </Button>
+                                                      <Button fx:id="_saveButton" mnemonicParsing="false" onAction="#save" text="%save">
+                                                         <font>
+                                                            <Font size="14.0" />
+                                                         </font>
+                                                         <opaqueInsets>
+                                                            <Insets right="200.0" />
+                                                         </opaqueInsets>
+                                                      </Button>
+                                                   </children>
+                                                </HBox>
                                              </children>
-                                             <columnConstraints>
-                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="180.0" minWidth="180.0" prefWidth="180.0" />
-                                                <ColumnConstraints halignment="LEFT" hgrow="ALWAYS" />
-                                             </columnConstraints>
-                                             <padding>
-                                                <Insets left="20.0" top="30.0" />
-                                             </padding>
-                                             <rowConstraints>
-                                                <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-                                                <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-                                                <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-                                                <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-                                                <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-                                                <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-                                                <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-                                                <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-                                                <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-                                                <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                             </rowConstraints>
                                           </GridPane>
                                        </children>
                                     </AnchorPane>

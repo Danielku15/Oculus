@@ -1,8 +1,11 @@
 package at.itb13.oculus.service;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -16,6 +19,7 @@ import at.itb13.oculus.database.PersistentObject;
 import at.itb13.oculus.model.Appointment;
 import at.itb13.oculus.model.ChangeLog;
 import at.itb13.oculus.model.Patient;
+import at.itb13.oculus.model.Searchable;
 
 public class IndexService {
 	
@@ -23,6 +27,8 @@ public class IndexService {
 	
 	private Config _config;
 	private int _curNumber;
+	private Map<String, List<TableChangeListener>> _listenerMap;
+	
 	private IndexTask _indexTask;
 	private Timer _timer;
 	private boolean _running;
@@ -30,6 +36,22 @@ public class IndexService {
 	public IndexService() {
 		_config = ConfigFactory.getInstance().getConfig(ConfigFactory.CONFIGFILE);
 		_curNumber = Integer.valueOf(_config.getProperty(ConfigKey.INDEX_NUMBER.getKey()));
+		_listenerMap = new HashMap<String, List<TableChangeListener>>();
+	}
+	
+	public void addTableChangeListener(String table, TableChangeListener listener) {
+		table = table.toLowerCase();
+		if(!_listenerMap.containsKey(table)) {
+			_listenerMap.put(table, new LinkedList<TableChangeListener>());
+		}
+		_listenerMap.get(table).add(listener);
+	}
+	
+	public void removeTableChangeListener(String table, TableChangeListener listener) {
+		table = table.toLowerCase();
+		if(_listenerMap.containsKey(table)) {
+			_listenerMap.get(table).remove(listener);
+		}
 	}
 	
 	public synchronized void start() {
@@ -107,6 +129,7 @@ public class IndexService {
 						default:
 							throw new InternalError("Undefined mutation: " + changeLog.getMutation());
 						}
+						notifyListeners(changeLog);
 						curNumber = changeLog.getNumber();
 					}
 					_dbFacade.commitTransactionFulltext();
@@ -135,13 +158,24 @@ public class IndexService {
 				throw new InternalError("Undefined table: " + table);
 			}
 			if(object != null) {
-				_dbFacade.index(object);
+				if(object instanceof Searchable) {
+					_dbFacade.index(object);
+				}
 			}
 		}
 		
 		private void storeCurNumber() throws IOException {
 			_config.setProperty(ConfigKey.INDEX_NUMBER.getKey(), String.valueOf(_curNumber));
 			_config.save();
+		}
+		
+		private void notifyListeners(ChangeLog changeLog) {
+			List<TableChangeListener> listeners = _listenerMap.get(changeLog.getChangedTable().toLowerCase());
+			if(listeners != null) {
+				for(TableChangeListener listener : listeners) {
+					listener.onTableChange(new TableChangeEvent(changeLog.getChangedTable().toLowerCase(), changeLog.getChangedId(), changeLog.getModified()));
+				}
+			}
 		}
 	}
 }

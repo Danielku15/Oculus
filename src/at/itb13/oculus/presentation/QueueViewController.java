@@ -2,6 +2,7 @@ package at.itb13.oculus.presentation;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import java.util.function.Consumer;
 
@@ -18,6 +19,10 @@ import javafx.stage.Stage;
 import at.itb13.oculus.application.QueueControllerImpl;
 import at.itb13.oculus.lang.LangFacade;
 import at.itb13.oculus.lang.LangKey;
+import at.itb13.oculus.main.Main;
+import at.itb13.oculus.service.TableChangeEvent;
+import at.itb13.oculus.service.TableChangeListener;
+import at.itb13.oculus.util.DateUtil;
 
 /**
  * @author Carola
@@ -34,6 +39,7 @@ public class QueueViewController implements Serializable, Consumer<Boolean>{
 	public static final String QUEUEENTRYVIEW = "QueueEntryView.fxml";
 	private Stage _queueEntryViewStage;
 	private List<String[]> _queues;
+	private PatientMainViewController _patientMainViewController;
 	
 	@FXML
 	private Button _queueViewAddQEntryButton;
@@ -47,6 +53,15 @@ public class QueueViewController implements Serializable, Consumer<Boolean>{
 	public void initialize(){
 		_queueController = new QueueControllerImpl();
 		_queues = _queueController.getQueues();
+		
+		Main.getIndexService().addTableChangeListener("QueueEntry", new TableChangeListener() {
+			@Override
+			public void onTableChange(TableChangeEvent e) {
+				if(e.getModified().after(DateUtil.truncateHours(new Date()))) {
+					refresh();
+				}
+			}
+		});
 		
 		//fill comboBox with employee names
 		//_queueViewEmployeeSelection = new ComboBox<String>();
@@ -87,15 +102,24 @@ public class QueueViewController implements Serializable, Consumer<Boolean>{
 		FXMLLoader loader = null;
 		Pane pane = null;
 		LangFacade facade = LangFacade.getInstance();
-
-		loader = new FXMLLoader(this.getClass().getResource(QUEUEENTRYVIEW),
-				facade.getResourceBundle());
+		QueueEntryViewController _queueEntryViewController;
+		String queueId = _queueController.getIdOfQueue(_queueViewEmployeeSelection.getSelectionModel().getSelectedItem());
+		if(_patientMainViewController.getCurrentPatient() != null){
+			_queueEntryViewController = new QueueEntryViewController(queueId, _patientMainViewController.getCurrentPatient());
+		}else{
+			_queueEntryViewController = new QueueEntryViewController(queueId);
+		}
+		
 		try {
+			loader = new FXMLLoader(this.getClass().getResource(QUEUEENTRYVIEW),
+					facade.getResourceBundle());
+			loader.setController(_queueEntryViewController);
 			pane = loader.load();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 		_queueEntryViewStage.setScene(new Scene(pane));
 		_queueEntryViewStage.show();
 	}
@@ -113,5 +137,10 @@ public class QueueViewController implements Serializable, Consumer<Boolean>{
 			refresh();
 		}
 		_queueEntryViewStage.close();
+	}
+	
+	//init parent - PatientMainViewController
+	public void init(PatientMainViewController patientMainViewController) {
+		_patientMainViewController = patientMainViewController;
 	}
 }
