@@ -11,6 +11,7 @@ public interface QueueController extends AutoCloseable {
 	String getIdOfQueue(String queueName);
 	
 	// operations
+	String getQueueId();
 	void fetchQueue(String queueName);
 	void activate();
 }
