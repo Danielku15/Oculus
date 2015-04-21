@@ -26,11 +26,12 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import at.itb13.oculus.application.ControllerFactory;
 import at.itb13.oculus.application.DataMismatchException;
 import at.itb13.oculus.application.IncompleteDataException;
 import at.itb13.oculus.application.ObjectNotFoundException;
 import at.itb13.oculus.application.ObjectNotSavedException;
-import at.itb13.oculus.application.QueueEntryControllerImpl;
+import at.itb13.oculus.application.QueueEntryController;
 import at.itb13.oculus.lang.LangFacade;
 import at.itb13.oculus.model.Patient;
 
@@ -42,7 +43,7 @@ public class QueueEntryViewController implements Serializable, Initializable, Co
 
 	private static final long serialVersionUID = 1L;
 	public static final String SEARCHVIEW = "SearchView.fxml";
-	private QueueEntryControllerImpl _queueEntryController;
+	private QueueEntryController _queueEntryController;
 	private Stage _searchViewStage;
 	private List<String[]> _queuesList;
 	private List<String[]> _appointmentList;
@@ -124,7 +125,7 @@ public class QueueEntryViewController implements Serializable, Initializable, Co
 
 		
 		_consumers = new LinkedList<Consumer<Boolean>>();
-		_queueEntryController = new QueueEntryControllerImpl();
+		_queueEntryController = ControllerFactory.getQueueEntryController();
 		_queuesList = _queueEntryController.getQueues();
 
 		for (String[] array : _queuesList) {

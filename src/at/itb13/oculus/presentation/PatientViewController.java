@@ -25,10 +25,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.TitledPane;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.paint.Color;
+import at.itb13.oculus.application.ControllerFactory;
 import at.itb13.oculus.application.IncompleteDataException;
 import at.itb13.oculus.application.ObjectNotFoundException;
 import at.itb13.oculus.application.ObjectNotSavedException;
-import at.itb13.oculus.application.PatientControllerImpl;
+import at.itb13.oculus.application.PatientController;
 import at.itb13.oculus.application.UniqueConstraintException;
 import at.itb13.oculus.lang.LangFacade;
 import at.itb13.oculus.lang.LangKey;
@@ -40,7 +41,7 @@ public class PatientViewController implements Initializable{
 	private static final Color COLOR_SUCCESS = Color.web("0x333333ff");
 	
 	//application - PatientViewControllerImpl
-	private PatientControllerImpl _patientController;
+	private PatientController _patientController;
 
 	//parent - PatientTabViewController
 	@FXML
@@ -115,7 +116,7 @@ public class PatientViewController implements Initializable{
     private TextField _cityInput;
     
 	public PatientViewController() {
-		_patientController = new PatientControllerImpl();		
+		_patientController = ControllerFactory.getPatientController();		
 	}
 
 	@Override
