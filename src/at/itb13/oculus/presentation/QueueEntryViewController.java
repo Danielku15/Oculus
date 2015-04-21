@@ -38,8 +38,7 @@ import at.itb13.oculus.model.Patient;
  * @author Manu
  *
  */
-public class QueueEntryViewController implements Serializable, Initializable,
-		Consumer<String> {
+public class QueueEntryViewController implements Serializable, Initializable, Consumer<String> {
 
 	private static final long serialVersionUID = 1L;
 	public static final String SEARCHVIEW = "SearchView.fxml";
@@ -165,29 +164,8 @@ public class QueueEntryViewController implements Serializable, Initializable,
 	@FXML
 	public void addPatient(ActionEvent event) {
 		
-		String query = _patientTbx.getText();
-		_searchViewStage = new Stage();
-		FXMLLoader loader = null;
-		Pane pane = null;
-		LangFacade facade = LangFacade.getInstance();
+		openSearchView(event);
 
-		loader = new FXMLLoader(this.getClass().getResource(SEARCHVIEW),
-				facade.getResourceBundle());
-		SearchViewController<Patient> patientSearchViewController = new SearchViewController<Patient>(Patient.class);
-		loader.setController(patientSearchViewController);
-		try {
-			pane = loader.load();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		patientSearchViewController.addConsumer(this);
-
-		if (patientSearchViewController.setCriteria(query)) {
-			patientSearchViewController.search(event);
-			_searchViewStage.setScene(new Scene(pane));
-			_searchViewStage.show();
-		}
 	}
 	
 	
@@ -262,6 +240,7 @@ public class QueueEntryViewController implements Serializable, Initializable,
 	 * 
 	 * @see java.util.function.Consumer#accept(java.lang.Object)
 	 */
+
 	@Override
 	public void accept(String t) {
 		try {
@@ -282,8 +261,32 @@ public class QueueEntryViewController implements Serializable, Initializable,
 		return _queueID;
 	}
 	
-	@FXML
-	public void addAppoinmentWithoutPatient(ActionEvent e) {
-		
+	
+	private void openSearchView(ActionEvent event){		
+		String query = _patientTbx.getText();
+		_searchViewStage = new Stage();
+		FXMLLoader loader = null;
+		Pane pane = null;
+		LangFacade facade = LangFacade.getInstance();
+
+		loader = new FXMLLoader(this.getClass().getResource(SEARCHVIEW),
+				facade.getResourceBundle());
+		SearchViewController<Patient> patientSearchViewController = new SearchViewController<Patient>(Patient.class);
+		loader.setController(patientSearchViewController);
+		try {
+			pane = loader.load();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		patientSearchViewController.addConsumer(this);
+
+		if (patientSearchViewController.setCriteria(query)) {
+			patientSearchViewController.search(event);
+			_searchViewStage.setScene(new Scene(pane));
+			_searchViewStage.show();
+		}
 	}
+
+
 }
