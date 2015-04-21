@@ -9,6 +9,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.concurrent.Task;
 import javafx.concurrent.WorkerStateEvent;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -128,6 +129,8 @@ public class PatientViewController implements Initializable{
 		
 		_femaleInput.setSelected(false);
 		_maleInput.setSelected(false);
+		
+		
 		
 		_firstnameInput.focusedProperty().addListener(new ChangeListener<Boolean>() {
 			@Override

@@ -5,8 +5,11 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.function.Consumer;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -74,6 +77,15 @@ public class PatientTabViewController implements Initializable{
   	        }
           }
       });		
+		
+		_tabPane.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Tab>() {
+			@Override
+			public void changed(ObservableValue<? extends Tab> arg0, Tab arg1,
+					Tab arg2) {
+			
+				System.out.println("CurrentTab");
+			}
+        });
 	}
 	
     // open new window if succeeds, if not set searchLabel red
