@@ -9,7 +9,6 @@ import javafx.beans.value.ObservableValue;
 import javafx.concurrent.Task;
 import javafx.concurrent.WorkerStateEvent;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -37,7 +36,6 @@ import at.itb13.oculus.lang.LangKey;
 
 public class PatientViewController implements Initializable{
 	
-	public static final String ERRORDIALOGVIEW = "ErrorDialogView.fxml";
 	private static final Color COLOR_FAIL = Color.RED;
 	private static final Color COLOR_SUCCESS = Color.web("0x333333ff");
 	
@@ -363,15 +361,13 @@ public class PatientViewController implements Initializable{
 	@FXML
 	public void save(ActionEvent event) {
 		CreatePatientTask createPatientTask = new CreatePatientTask();
+		
 		createPatientTask.setOnFailed(new EventHandler<WorkerStateEvent>() {
 		    @Override public void handle(WorkerStateEvent t) {
 		    	LangFacade facade = LangFacade.getInstance();
-		    	
-		    	String message = "";
-	
-				Alert errorDialog = new Alert(AlertType.ERROR);
+		    	Alert errorDialog = new Alert(AlertType.ERROR);
 				errorDialog.setTitle(facade.getString(LangKey.ERRORDIALOGTITEL));
-				
+				String message = "";
 				if (createPatientTask.getException() instanceof IncompleteDataException){
 		    		IncompleteDataException ex = (IncompleteDataException) createPatientTask.getException();
 		    		errorDialog.setHeaderText(facade.getString(LangKey.INCOMPLETEDATAHEADER));
@@ -384,12 +380,14 @@ public class PatientViewController implements Initializable{
 				}
 		    	else if (createPatientTask.getException() instanceof ObjectNotSavedException){
 		    		ObjectNotSavedException ex = (ObjectNotSavedException) createPatientTask.getException();
-		    		//TODO
+		    		errorDialog.setHeaderText(facade.getString(LangKey.OBJECTNOTSAVEDHEADER));
+		    		message = LangKey.OBJECTNOTSAVEDCONTENT + ex.getPersistentObjectID();
 		    	}
 				errorDialog.setContentText(message);
 				errorDialog.show();
 			}
 		});
+		
 		new Thread(createPatientTask).start();
 	}
 	

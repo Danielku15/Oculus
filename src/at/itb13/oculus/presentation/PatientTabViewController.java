@@ -2,16 +2,12 @@ package at.itb13.oculus.presentation;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.function.Consumer;
-
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -29,7 +25,7 @@ import at.itb13.oculus.lang.LangFacade;
 import at.itb13.oculus.lang.LangKey;
 import at.itb13.oculus.model.Patient;
 
-public class PatientTabViewController implements Initializable{
+public class PatientTabViewController implements Initializable {
 	
 	public static final String PATIENTVIEWXML = "PatientView.fxml";
 	public static final String SEARCHVIEW = "SearchView.fxml";
