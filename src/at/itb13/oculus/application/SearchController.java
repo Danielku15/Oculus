@@ -3,11 +3,14 @@ package at.itb13.oculus.application;
 import java.util.List;
 import java.util.Map;
 
+import at.itb13.oculus.database.PersistentObject;
+import at.itb13.oculus.model.Searchable;
+
 /**
  * @author Patrick
  *
  */
-public interface SearchController {
+public interface SearchController<T extends PersistentObject & Searchable> {
 	
 	// getter
 	String getCriteria();

@@ -29,7 +29,8 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.util.Callback;
-import at.itb13.oculus.application.SearchControllerImpl;
+import at.itb13.oculus.application.ControllerFactory;
+import at.itb13.oculus.application.SearchController;
 import at.itb13.oculus.config.ConfigFactory;
 import at.itb13.oculus.config.ConfigFactory.Config;
 import at.itb13.oculus.database.PersistentObject;
@@ -51,7 +52,7 @@ public class SearchViewController<T extends PersistentObject & Searchable> {
 	// class of objects that is searched for
 	private Class<T> _type;
 	// controller that is responsible for searching
-	private SearchControllerImpl<T> _searchController;
+	private SearchController<T> _searchController;
 	// map that maps a unique column name (e.g. "firstname") to its associated index in the search result
 	private Map<String, Integer> _fieldMap;
 	// list of consumers that accept an id of a chosen record
@@ -70,7 +71,7 @@ public class SearchViewController<T extends PersistentObject & Searchable> {
 	
 	public SearchViewController(Class<T> type) {
 		_type = type;
-		_searchController = new SearchControllerImpl<T>(_type);
+		_searchController = ControllerFactory.getSearchController(type);
 		_fieldMap = _searchController.getFieldMap();
 		_consumers = new LinkedList<Consumer<String>>();
 		_searchConfig = loadSearchConfig();

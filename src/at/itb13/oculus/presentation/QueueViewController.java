@@ -16,7 +16,8 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import at.itb13.oculus.application.QueueControllerImpl;
+import at.itb13.oculus.application.ControllerFactory;
+import at.itb13.oculus.application.QueueController;
 import at.itb13.oculus.lang.LangFacade;
 import at.itb13.oculus.lang.LangKey;
 import at.itb13.oculus.main.Main;
@@ -35,7 +36,7 @@ public class QueueViewController implements Serializable, Consumer<Boolean>{
 	 * 
 	 */
 	private static final long serialVersionUID = -3311907797950844425L;
-	private QueueControllerImpl _queueController;
+	private QueueController _queueController;
 	public static final String QUEUEENTRYVIEW = "QueueEntryView.fxml";
 	private Stage _queueEntryViewStage;
 	private List<String[]> _queues;
@@ -51,7 +52,7 @@ public class QueueViewController implements Serializable, Consumer<Boolean>{
 	private ListView<String> _queueViewListView;
 	
 	public void initialize(){
-		_queueController = new QueueControllerImpl();
+		_queueController = ControllerFactory.getQueueController();
 		_queues = _queueController.getQueues();
 		
 		Main.getIndexService().addTableChangeListener("QueueEntry", new TableChangeListener() {
