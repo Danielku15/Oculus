@@ -76,6 +76,8 @@ public class QueueViewController implements Serializable, Consumer<Boolean>{
 					String oldValue, String newValue) {
 				String queueId = _queueController.getIdOfQueue(newValue);
 				setListView(_queueController.getQueueEntries(queueId));
+				_queueController.fetchQueue(newValue);
+				_queueController.activate();
 			};
 		});
 		_queueViewEmployeeSelection.getSelectionModel().selectFirst();
