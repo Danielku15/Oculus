@@ -41,7 +41,7 @@ public class PatientViewController implements Initializable{
 	private static final Color COLOR_FAIL = Color.RED;
 	private static final Color COLOR_SUCCESS = Color.web("0x333333ff");
 	
-	//application - PatientViewControllerImpl
+	//application - PatientViewController
 	private PatientController _patientController;
 
 	//parent - PatientTabViewController
@@ -456,11 +456,6 @@ public class PatientViewController implements Initializable{
 		_socialSecurityNumberInput.setText(_patientController.getSocialSecurityNumber());
 		_employerInput.setText(_patientController.getEmployer());
 				
-	}
-	
-	public String getLabelName(){
-		String string = _lastnameInput.getText();
-		return string;
 	}
 	
 	void setFirstname(String firstname) {

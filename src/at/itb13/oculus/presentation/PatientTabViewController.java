@@ -38,26 +38,14 @@ public class PatientTabViewController implements Initializable{
 	
 	//instance of PatientTabViewController
 	private static PatientTabViewController _instance;
-	//parent - PatientMainViewController
-	@FXML
-	private PatientMainViewController _patientMainViewController;	
-	//child - PatientViewController
-	@FXML
-	private PatientViewController _patientViewController;
+	
 	//window - PatientSearchViewController
-	
 	private Stage _searchViewStage;
-	
-	private Map<Tab, PatientViewController> _tabMap;
-	
-	@SuppressWarnings("unused")
-	private SearchViewController<Patient> _patientSearchViewController;
+
 	@FXML
 	private Button _createNewPatientButton;
 	@FXML
 	private TabPane _tabPane;
-	@FXML
-	private Tab _newPatient;
 	@FXML
     private Button _searchPatientButton;
     @FXML
@@ -67,30 +55,16 @@ public class PatientTabViewController implements Initializable{
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		_tabMap = new HashMap<>();
-		_tabMap.put(_newPatient, _patientViewController);
 		_instance = this;
-		
-		_patientViewController.init(this);
-		
-		ObservableList<Tab> tabs = _tabPane.getTabs();
+		_tabPane.getSelectionModel().clearSelection();
+		createNewTab();
 
-		// check if only one tab is shown and setCloseable to false
-		_newPatient.setOnClosed(new EventHandler<javafx.event.Event>() {
-			public void handle(javafx.event.Event e) {
-				if (tabs.size() <= 1) {
-					tabs.get(0).setClosable(false);
-				}
-				_tabMap.remove(_newPatient);		
-			}
-		});	
-		
 		_tabPane.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Tab>() {
 			@Override
 			public void changed(ObservableValue<? extends Tab> observable, Tab oldTab,
 					Tab newTab) {
-					PatientViewController patientViewController = _tabMap.get(newTab);
-					patientViewController.activate();
+				PatientViewController patientViewController = (PatientViewController) newTab.getUserData();	
+				patientViewController.activate();
 			}
         });
 	}
@@ -131,10 +105,13 @@ public class PatientTabViewController implements Initializable{
 		}
 	}
 
-    // creates new tab with formular included
 	// Event Listener on Button[#_createNewPatientButton].onAction
 	@FXML
-	public void createNewTab(ActionEvent event) {
+	public void newTab(ActionEvent event) {
+		createNewTab();
+	}
+
+	private void createNewTab(){
 		LangFacade facade = LangFacade.getInstance();
 		Tab tab = new Tab();
 		FXMLLoader loader = null;
@@ -150,19 +127,20 @@ public class PatientTabViewController implements Initializable{
 		PatientViewController patientViewController = loader
 				.<PatientViewController> getController();
 		
+		tab.setUserData(patientViewController);
 		tab.setText(facade.getString(LangKey.NEWPATIENT));
 		tab.setContent(pane);
-		tab.setClosable(true);
-		
-		_tabMap.put(tab, patientViewController);
+		tab.setClosable(false);
 		
 		_tabPane.getTabs().add(tab);
 		_tabPane.getSelectionModel().select(tab);
 
 		ObservableList<Tab> tabs = _tabPane.getTabs();
 
-		for (int i = 0; i < tabs.size(); i++) {
-			tabs.get(i).setClosable(true);
+		if (tabs.size() > 1){
+			for (int i = 0; i < tabs.size(); i++) {
+				tabs.get(i).setClosable(true);
+			}
 		}
 
 		// check if only one tab is shown and setCloseable to false
@@ -171,16 +149,11 @@ public class PatientTabViewController implements Initializable{
 				if (tabs.size() <= 1) {
 					tabs.get(0).setClosable(false);
 				}
-				_tabMap.remove(tab);
 			}
 		});
+
 	}
 	
-	//init parent - PatientMainViewController
-	public void init(PatientMainViewController patientMainViewController) {
-		_patientMainViewController = patientMainViewController;
-	}
-
 	public void createFormular(String id){
 		LangFacade facade = LangFacade.getInstance();
 		FXMLLoader loader = null;
@@ -193,15 +166,16 @@ public class PatientTabViewController implements Initializable{
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		}
-		PatientViewController loadPatient = loader
+		PatientViewController patientViewController = loader
 				.<PatientViewController> getController();
 		
+		tab.setUserData(patientViewController);
 		tab.setContent(pane);
 		tab.setClosable(true);
 		_tabPane.getTabs().add(tab);
 		_tabPane.getSelectionModel().select(tab);
 
-		loadPatient.loadPatientToFormular(id);
+		patientViewController.loadPatientToFormular(id);
 		
 		ObservableList<Tab> tabs = _tabPane.getTabs();
 
