@@ -138,4 +138,9 @@ class QueueControllerImpl extends Controller implements QueueController {
 	public void activate() {
 		MainController.getInstance().setQueueController(this);
 	}
+
+	@Override
+	public String getQueueId() {
+		return activeQueue.getID();
+	}
 }

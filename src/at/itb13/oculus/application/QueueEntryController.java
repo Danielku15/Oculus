@@ -29,4 +29,6 @@ public interface QueueEntryController extends AutoCloseable {
 	void fetchQueue(String queueId) throws ObjectNotFoundException;
 	boolean saveQueueEntry() throws IncompleteDataException, DataMismatchException, ObjectNotSavedException;
 	boolean validateData() throws IncompleteDataException, DataMismatchException;
+	String getQueueId();
+	String getPatientId();
 }
