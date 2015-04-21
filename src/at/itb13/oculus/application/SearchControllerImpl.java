@@ -1,5 +1,4 @@
 package at.itb13.oculus.application;
-
 import java.util.List;
 import java.util.Map;
 
@@ -13,7 +12,7 @@ import at.itb13.oculus.model.Searchable;
  *
  * @param <T>
  */
-class SearchControllerImpl<T extends PersistentObject & Searchable> extends Controller implements SearchController {
+class SearchControllerImpl<T extends PersistentObject & Searchable> extends Controller implements SearchController<T> {
 	
 	private Class<T> _type;
 	private SearchMap<T> _searchMap;
