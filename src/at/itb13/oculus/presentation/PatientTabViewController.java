@@ -2,6 +2,8 @@ package at.itb13.oculus.presentation;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.function.Consumer;
 
@@ -46,6 +48,8 @@ public class PatientTabViewController implements Initializable{
 	
 	private Stage _searchViewStage;
 	
+	private Map<Tab, PatientViewController> _tabMap;
+	
 	@SuppressWarnings("unused")
 	private SearchViewController<Patient> _patientSearchViewController;
 	@FXML
@@ -63,27 +67,30 @@ public class PatientTabViewController implements Initializable{
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		_tabMap = new HashMap<>();
+		_tabMap.put(_newPatient, _patientViewController);
 		_instance = this;
 		
 		_patientViewController.init(this);
 		
 		ObservableList<Tab> tabs = _tabPane.getTabs();
-		
-		 // check if only one tab is shown and setCloseable to false
-		_newPatient.setOnClosed(new EventHandler<javafx.event.Event>() {    
-			public void handle(javafx.event.Event e) {             
-          	if (tabs.size() <= 1){
-  	        	tabs.get(0).setClosable(false);
-  	        }
-          }
-      });		
+
+		// check if only one tab is shown and setCloseable to false
+		_newPatient.setOnClosed(new EventHandler<javafx.event.Event>() {
+			public void handle(javafx.event.Event e) {
+				if (tabs.size() <= 1) {
+					tabs.get(0).setClosable(false);
+				}
+				_tabMap.remove(_newPatient);		
+			}
+		});	
 		
 		_tabPane.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Tab>() {
 			@Override
-			public void changed(ObservableValue<? extends Tab> arg0, Tab arg1,
-					Tab arg2) {
-			
-				System.out.println("CurrentTab");
+			public void changed(ObservableValue<? extends Tab> observable, Tab oldTab,
+					Tab newTab) {
+					PatientViewController patientViewController = _tabMap.get(newTab);
+					patientViewController.activate();
 			}
         });
 	}
@@ -130,16 +137,25 @@ public class PatientTabViewController implements Initializable{
 	public void createNewTab(ActionEvent event) {
 		LangFacade facade = LangFacade.getInstance();
 		Tab tab = new Tab();
+		FXMLLoader loader = null;
 		Pane pane = null;
 		try {
-			pane = FXMLLoader.load(this.getClass().getResource(PATIENTVIEWXML),
+			loader = new FXMLLoader(this.getClass().getResource(PATIENTVIEWXML),
 					facade.getResourceBundle());
+			pane = (Pane) loader.load();
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		}
+		
+		PatientViewController patientViewController = loader
+				.<PatientViewController> getController();
+		
 		tab.setText(facade.getString(LangKey.NEWPATIENT));
 		tab.setContent(pane);
 		tab.setClosable(true);
+		
+		_tabMap.put(tab, patientViewController);
+		
 		_tabPane.getTabs().add(tab);
 		_tabPane.getSelectionModel().select(tab);
 
@@ -155,6 +171,7 @@ public class PatientTabViewController implements Initializable{
 				if (tabs.size() <= 1) {
 					tabs.get(0).setClosable(false);
 				}
+				_tabMap.remove(tab);
 			}
 		});
 	}

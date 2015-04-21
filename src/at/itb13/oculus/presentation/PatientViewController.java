@@ -120,6 +120,10 @@ public class PatientViewController implements Initializable{
 		_patientController = ControllerFactory.getPatientController();		
 	}
 
+	public void activate(){
+		_patientController.activate();
+	}
+	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		if (_patientTabViewController == null) {
