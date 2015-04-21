@@ -25,6 +25,10 @@ public class PatientControllerImpl extends Controller implements PatientControll
 		super();
 		createPatient();
 	}
+	
+	Patient getPatient() {
+		return _patient;
+	}
 
 	@Override
 	public String getID() {
