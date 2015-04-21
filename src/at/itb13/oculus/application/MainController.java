@@ -1,7 +1,6 @@
 package at.itb13.oculus.application;
 
-
-public final class MainController {
+final class MainController {
 
 	private static MainController _mainController;
 	

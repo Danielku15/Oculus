@@ -40,6 +40,7 @@ public interface PatientController extends AutoCloseable {
 	boolean setCountry(String country);
 	
 	// operations
+	void activate();
 	void createPatient();
 	void loadPatient(String patientId) throws ObjectNotFoundException;
 	void savePatient() throws IncompleteDataException, ObjectNotSavedException;

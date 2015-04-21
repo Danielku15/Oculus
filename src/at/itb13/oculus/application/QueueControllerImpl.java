@@ -17,7 +17,7 @@ import at.itb13.oculus.util.DateUtil;
  * @author Carola
  *
  */
-public class QueueControllerImpl extends Controller implements QueueController {
+class QueueControllerImpl extends Controller implements QueueController {
 	
 	public QueueControllerImpl() {
 		super();
@@ -126,5 +126,10 @@ public class QueueControllerImpl extends Controller implements QueueController {
 			return queue.getID();
 		}
 		return null;
+	}
+	
+	@Override
+	public void activate() {
+		MainController.getInstance().setQueueController(this);
 	}
 }

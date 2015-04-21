@@ -17,7 +17,7 @@ import at.itb13.oculus.model.Patient;
  * @author Patrick
  *
  */
-public class PatientControllerImpl extends Controller implements PatientController {
+class PatientControllerImpl extends Controller implements PatientController {
 	
 	private Patient _patient;
 	
@@ -286,6 +286,12 @@ public class PatientControllerImpl extends Controller implements PatientControll
 		return false;
 	}
 
+
+	@Override
+	public void activate() {
+		MainController.getInstance().setPatientController(this);
+	}
+	
 	@Override
 	public void createPatient() {
 		_patient = new Patient();

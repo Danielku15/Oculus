@@ -17,7 +17,7 @@ import at.itb13.oculus.util.DateUtil;
  * @author Patrick
  *
  */
-public class QueueEntryControllerImpl extends Controller implements QueueEntryController {
+class QueueEntryControllerImpl extends Controller implements QueueEntryController {
 
 	private Patient _patient;
 	private QueueEntry _queueEntry;
