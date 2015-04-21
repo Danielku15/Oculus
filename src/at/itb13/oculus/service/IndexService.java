@@ -40,6 +40,7 @@ public class IndexService {
 	}
 	
 	public void addTableChangeListener(String table, TableChangeListener listener) {
+		table = table.toLowerCase();
 		if(!_listenerMap.containsKey(table)) {
 			_listenerMap.put(table, new LinkedList<TableChangeListener>());
 		}
@@ -47,6 +48,7 @@ public class IndexService {
 	}
 	
 	public void removeTableChangeListener(String table, TableChangeListener listener) {
+		table = table.toLowerCase();
 		if(_listenerMap.containsKey(table)) {
 			_listenerMap.get(table).remove(listener);
 		}
@@ -127,6 +129,7 @@ public class IndexService {
 						default:
 							throw new InternalError("Undefined mutation: " + changeLog.getMutation());
 						}
+						notifyListeners(changeLog);
 						curNumber = changeLog.getNumber();
 					}
 					_dbFacade.commitTransactionFulltext();
@@ -158,7 +161,6 @@ public class IndexService {
 				if(object instanceof Searchable) {
 					_dbFacade.index(object);
 				}
-				notifyListeners(table, object);
 			}
 		}
 		
@@ -167,11 +169,11 @@ public class IndexService {
 			_config.save();
 		}
 		
-		private void notifyListeners(String table, PersistentObject object) {
-			List<TableChangeListener> listeners = _listenerMap.get(table);
+		private void notifyListeners(ChangeLog changeLog) {
+			List<TableChangeListener> listeners = _listenerMap.get(changeLog.getChangedTable().toLowerCase());
 			if(listeners != null) {
 				for(TableChangeListener listener : listeners) {
-					listener.onTableChange(new TableChangeEvent(table, object.getID()));
+					listener.onTableChange(new TableChangeEvent(changeLog.getChangedTable().toLowerCase(), changeLog.getChangedId(), changeLog.getModified()));
 				}
 			}
 		}

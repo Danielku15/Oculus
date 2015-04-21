@@ -2,6 +2,7 @@ package at.itb13.oculus.presentation;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import java.util.function.Consumer;
 
@@ -18,6 +19,10 @@ import javafx.stage.Stage;
 import at.itb13.oculus.application.QueueControllerImpl;
 import at.itb13.oculus.lang.LangFacade;
 import at.itb13.oculus.lang.LangKey;
+import at.itb13.oculus.main.Main;
+import at.itb13.oculus.service.TableChangeEvent;
+import at.itb13.oculus.service.TableChangeListener;
+import at.itb13.oculus.util.DateUtil;
 
 /**
  * @author Carola
@@ -48,6 +53,15 @@ public class QueueViewController implements Serializable, Consumer<Boolean>{
 	public void initialize(){
 		_queueController = new QueueControllerImpl();
 		_queues = _queueController.getQueues();
+		
+		Main.getIndexService().addTableChangeListener("QueueEntry", new TableChangeListener() {
+			@Override
+			public void onTableChange(TableChangeEvent e) {
+				if(e.getModified().after(DateUtil.truncateHours(new Date()))) {
+					refresh();
+				}
+			}
+		});
 		
 		//fill comboBox with employee names
 		//_queueViewEmployeeSelection = new ComboBox<String>();
