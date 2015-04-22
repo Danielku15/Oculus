@@ -55,6 +55,8 @@ public class QueueViewController implements Serializable, Consumer<Boolean>{
 		_queueController = ControllerFactory.getQueueController();
 		_queues = _queueController.getQueues();
 		
+		
+		
 		Main.getIndexService().addTableChangeListener("QueueEntry", new TableChangeListener() {
 			@Override
 			public void onTableChange(TableChangeEvent e) {
@@ -105,23 +107,21 @@ public class QueueViewController implements Serializable, Consumer<Boolean>{
 		FXMLLoader loader = null;
 		Pane pane = null;
 		LangFacade facade = LangFacade.getInstance();
-		QueueEntryViewController _queueEntryViewController;
+		QueueEntryViewController queueEntryViewController;
 		String queueId = _queueController.getIdOfQueue(_queueViewEmployeeSelection.getSelectionModel().getSelectedItem());
-		if(_patientMainViewController.getCurrentPatient() != null){
-			_queueEntryViewController = new QueueEntryViewController(queueId, _patientMainViewController.getCurrentPatient());
-		}else{
-			_queueEntryViewController = new QueueEntryViewController(queueId);
-		}
+		queueEntryViewController = new QueueEntryViewController();
 		
 		try {
 			loader = new FXMLLoader(this.getClass().getResource(QUEUEENTRYVIEW),
 					facade.getResourceBundle());
-			loader.setController(_queueEntryViewController);
+			loader.setController(queueEntryViewController);
 			pane = loader.load();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		queueEntryViewController.init(this);
 		
 		_queueEntryViewStage.setScene(new Scene(pane));
 		_queueEntryViewStage.setTitle("Create Queue Entry");
@@ -139,6 +139,7 @@ public class QueueViewController implements Serializable, Consumer<Boolean>{
 	@Override
 	public void accept(Boolean b) {
 		// TODO something with consumer from QueueEntryViewController
+		System.out.println("TESf");
 		if(b){
 			refresh();
 		}

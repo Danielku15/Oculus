@@ -56,7 +56,7 @@
             </VBox>
             <HBox alignment="BOTTOM_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="6">
                <children>
-                  <Button fx:id="_cancelBtn" alignment="BOTTOM_LEFT" contentDisplay="TOP" mnemonicParsing="false" text="%cancel" textAlignment="RIGHT" />
+                  <Button fx:id="_cancelBtn" alignment="BOTTOM_LEFT" contentDisplay="TOP" mnemonicParsing="false" onAction="#cancel" text="%cancel" textAlignment="RIGHT" />
                </children>
             </HBox>
             <HBox alignment="BOTTOM_RIGHT" prefHeight="59.0" prefWidth="314.0" GridPane.columnIndex="1" GridPane.rowIndex="6">

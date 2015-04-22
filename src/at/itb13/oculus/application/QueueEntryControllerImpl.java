@@ -275,8 +275,8 @@ class QueueEntryControllerImpl extends Controller implements QueueEntryControlle
 
 	@Override
 	public String getPatientId() {
-		// TODO Auto-generated method stub
-		return null;
+
+		return MainController.getInstance().getPatientController().getID();
 	}
 	
 }

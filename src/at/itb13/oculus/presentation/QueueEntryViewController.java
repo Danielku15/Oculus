@@ -51,6 +51,7 @@ public class QueueEntryViewController implements Serializable, Initializable, Co
 	private String _patientID;
 	private List<Consumer<Boolean>> _consumers;
 
+	private QueueViewController _queueViewController;
 
 	@FXML
 	private TextField _patientTbx;
@@ -84,21 +85,9 @@ public class QueueEntryViewController implements Serializable, Initializable, Co
 
 	
 	public QueueEntryViewController(){	
-		
-		_queueID = null;
-		_patientID = null;		
-	}
-
-	public QueueEntryViewController(String queueID) {
-		
-		_queueID = queueID;
-		_patientID = null;		
-	}
-	
-	public QueueEntryViewController(String queueID, String patientID) {
-		
-		_queueID = queueID;
-		_patientID = patientID;			
+		_queueEntryController = ControllerFactory.getQueueEntryController();
+		_queueID = _queueEntryController.getQueueId();
+		_patientID = _queueEntryController.getPatientId();		
 	}
 	
 	/*
@@ -114,7 +103,10 @@ public class QueueEntryViewController implements Serializable, Initializable, Co
 			
 			try {
 				_queueEntryController.fetchPatient(_patientID);
-				
+				_appointmentList = _queueEntryController.getAppointmentsByPatientId(_patientID);
+				addAppointment();
+				fillAppointmentDataForInitializeMethod();
+								
 			} catch (ObjectNotFoundException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -125,7 +117,7 @@ public class QueueEntryViewController implements Serializable, Initializable, Co
 
 		
 		_consumers = new LinkedList<Consumer<Boolean>>();
-		_queueEntryController = ControllerFactory.getQueueEntryController();
+		
 		_queuesList = _queueEntryController.getQueues();
 
 		for (String[] array : _queuesList) {
@@ -195,6 +187,23 @@ public class QueueEntryViewController implements Serializable, Initializable, Co
 		}
 	}
 	
+	
+	//Method without ActionEvent is for the initialize method
+	public void fillAppointmentDataForInitializeMethod(){
+		
+		int index = _appointmentCbx.getSelectionModel().getSelectedIndex();
+		String[] appointment = _appointmentList.get(index);
+		_titleTbx.setText(appointment[1]);
+		_descriptionTax.setText(appointment[2]);
+		_employeeTbx.setText(appointment[4] + " " + appointment[5]);	
+		try {
+			_queueEntryController.fetchAppointment(appointment[0]);
+		} catch (ObjectNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 	@FXML
 	public void addQueueEntry() {
 		
@@ -213,10 +222,8 @@ public class QueueEntryViewController implements Serializable, Initializable, Co
 		
 		try {
 			_queueEntryController.saveQueueEntry();
+			_queueViewController.accept(true);
 			
-			for(Consumer<Boolean> c : _consumers) {
-				c.accept(true);
-			}
 		} catch (IncompleteDataException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -229,11 +236,9 @@ public class QueueEntryViewController implements Serializable, Initializable, Co
 		}
 	}
 
+	@FXML
 	public void cancel(ActionEvent event){
-		
-		for(Consumer<Boolean> c : _consumers){
-			c.accept(false);
-		}
+		_queueViewController.accept(false);
 	}
 
 	/*
@@ -290,4 +295,9 @@ public class QueueEntryViewController implements Serializable, Initializable, Co
 	}
 
 
+
+	public void init(QueueViewController queueViewController){
+		_queueViewController = queueViewController;
+	}
+		
 }
