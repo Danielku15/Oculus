@@ -279,8 +279,11 @@ class QueueEntryControllerImpl extends Controller implements QueueEntryControlle
 
 	@Override
 	public String getPatientId() {
-
-		return MainController.getInstance().getPatientController().getID();
+		PatientController tempController = MainController.getInstance().getPatientController();
+		if(tempController != null){
+			return tempController.getID();
+		}
+		return null;
 	}
 	
 
