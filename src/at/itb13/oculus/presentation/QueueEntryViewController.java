@@ -176,6 +176,7 @@ public class QueueEntryViewController implements Serializable, Initializable, Co
 		
 		int index = _appointmentCbx.getSelectionModel().getSelectedIndex();
 		String[] appointment = _appointmentList.get(index);
+		//fill Fields
 		_titleTbx.setText(appointment[1]);
 		_descriptionTax.setText(appointment[2]);
 		_employeeTbx.setText(appointment[4] + " " + appointment[5]);	
@@ -255,7 +256,13 @@ public class QueueEntryViewController implements Serializable, Initializable, Co
 			_patientTbx.setText(_queueEntryController.getPatientFirstname() + " " + _queueEntryController.getPatientLastname());
 			_searchViewStage.close();
 			_appointmentList = _queueEntryController.getAppointmentsByPatientId(t);
+			//clear Fields
+			_appointmentCbx.getItems().clear();
+			_titleTbx.clear();
+			_descriptionTax.clear();
+			_employeeTbx.clear();
 			addAppointment();
+//			fillAppointmentDataForInitializeMethod();
 
 		} catch (ObjectNotFoundException e) {
 			// TODO Auto-generated catch block
