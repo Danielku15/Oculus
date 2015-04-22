@@ -69,21 +69,13 @@ public class SearchViewController<T extends PersistentObject & Searchable> {
 	@FXML
 	private TableView<String[]> _tableView;
 	
-	public SearchViewController(Class<T> type, SearchController<T> searchController) {
+	public SearchViewController(Class<T> type) {
 		_type = type;
-		if(searchController != null) {
-			_searchController = searchController;
-		} else {
-			_searchController = ControllerFactory.getInstance().getSearchController(type);
-		}
+		_searchController = ControllerFactory.getInstance().getSearchController(type);
 		_indexMap = _searchController.getIndexMap();
 		_consumers = new LinkedList<Consumer<String>>();
 		_searchConfig = loadSearchConfig();
 		_columnConfigMap = initColumnConfigMap();
-	}
-	
-	public SearchViewController(Class<T> type) {
-		this(type, null);
 	}
 	
 	/** Concatenates the simple name of the search class with the search configuration suffix
@@ -225,11 +217,15 @@ public class SearchViewController<T extends PersistentObject & Searchable> {
 			}
 		});
 		
-		_searchInput.textProperty().addListener(new ChangeListener<String>() {
-		    @Override
-		    public void changed(final ObservableValue<? extends String> observable, final String oldValue, final String newValue) {
-		    	GUIUtil.validate(_searchInputLabel, _searchController.setCriteria(newValue));
-		    }
+		_tableView.setPlaceholder(new Label(LangFacade.getInstance().getString(LangKey.NOSEARCHRESULT)));
+		
+		_searchInput.focusedProperty().addListener(new ChangeListener<Boolean>() {
+			@Override
+			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+				if(!newValue) {
+					GUIUtil.validate(_searchInputLabel, _searchController.setCriteria(_searchInput.getText()));
+				}
+			}
 		});
 		
 		_searchInput.addEventHandler(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
@@ -316,7 +312,9 @@ public class SearchViewController<T extends PersistentObject & Searchable> {
 	 */
 	public boolean setCriteria(String criteria) {
 		_searchInput.setText(criteria);
-		return _searchController.setCriteria(criteria);
+		boolean valid = _searchController.setCriteria(criteria);
+		GUIUtil.validate(_searchInputLabel, valid);
+		return valid;
 	}
 	
 	private class ColumnConfig {
@@ -408,7 +406,6 @@ public class SearchViewController<T extends PersistentObject & Searchable> {
 	    protected void succeeded() {
 	    	List<String[]> results = _searchController.getResults();
 	    	if((results != null) && (results.isEmpty())) {
-	    		// TODO: indicate that there are no search results
 	    		_tableView.setItems(null);
 	    	} else {
 	    		_tableView.setItems(FXCollections.observableList(results));
