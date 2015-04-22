@@ -10,25 +10,6 @@
 
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="at.itb13.oculus.presentation.PatientMainViewController">
    <children>
-      <MenuBar stylesheets="@../../../../../res/font.css">
-        <menus>
-          <Menu mnemonicParsing="false" text="%file">
-            <items>
-              <MenuItem fx:id="_closeItem" mnemonicParsing="false" onAction="#closeApplication" text="%close" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="%edit">
-            <items>
-              <MenuItem fx:id="_deleteItem" mnemonicParsing="false" text="%delete" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="%help">
-            <items>
-              <MenuItem fx:id="_aboutItem" mnemonicParsing="false" onAction="#openAboutDialog" text="%about" />
-            </items>
-          </Menu>
-        </menus>
-      </MenuBar>
       <SplitPane dividerPositions="0.5" minWidth="-Infinity">
         <items>
             <VBox maxWidth="400.0" minWidth="400.0" prefWidth="400.0">
