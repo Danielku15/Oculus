@@ -19,12 +19,13 @@ public class PatientMainViewController implements Initializable  {
 	private MenuItem _aboutItem;
 	@FXML
 	private QueueViewController _queueViewController;
+	@FXML
 	private PatientTabViewController _patientTapViewController;
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		_queueViewController.init(this);
-		_patientTapViewController.init(this);
+		//_patientTapViewController.init(this);
 	}
 	
 	// Event Listener on MenuItem[#_closeItem].onAction
