@@ -119,6 +119,7 @@ public class PatientTabViewController implements Initializable {
 			}
 		});
 		
+		GUIUtil.validate(_searchLabel, _patientSearchController.setCriteria(_searchInput.getText()));
 		patientSearchViewController.setCriteria(_patientSearchController.getCriteria());
 		patientSearchViewController.search(event);
 		_searchViewStage.initModality(Modality.APPLICATION_MODAL);
@@ -197,7 +198,7 @@ public class PatientTabViewController implements Initializable {
 		tab.setClosable(true);
 		_tabPane.getTabs().add(tab);
 		_tabPane.getSelectionModel().select(tab);
-
+		System.out.println(id);
 		patientViewController.loadPatientToFormular(id);
 		
 		ObservableList<Tab> tabs = _tabPane.getTabs();

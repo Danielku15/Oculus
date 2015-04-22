@@ -35,7 +35,7 @@ class SearchControllerImpl<T extends PersistentObject & Searchable> extends Cont
 	@Override
 	public boolean setCriteria(String criteria) {
 		_criteria = criteria;
-		return (((criteria != null) && criteria.trim().isEmpty()) || (criteria.trim().length() >= MINCRITERIALENGTH));
+		return ((criteria != null) && ((criteria.trim().isEmpty()) || (criteria.trim().length() >= MINCRITERIALENGTH)));
 	}
 
 	@Override

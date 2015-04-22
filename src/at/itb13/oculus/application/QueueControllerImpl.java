@@ -146,4 +146,17 @@ class QueueControllerImpl extends Controller implements QueueController {
 	public void fetchQueue(String queueName){
 		_activeQueue = _database.getQueueByName(queueName);
 	}
+	
+	public synchronized String getIdOfPatient(String queueEntryId){
+		QueueEntry queue = null;
+		try {
+			_database.beginTransaction();
+			queue = _database.getQueueEntryById(queueEntryId);
+			_database.commitTransaction();
+		} catch (HibernateException e) {
+			_database.rollbackTransaction();
+			throw e;
+		}
+		return queue.getAppointment().getPatient().getID();
+	}
 }

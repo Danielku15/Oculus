@@ -212,6 +212,10 @@ public class DBFacade implements AutoCloseable {
 		return ((QueueDAO) _queueDAO).getByName(name);
 	}
 	
+	public QueueEntry getQueueEntryById(String id){
+		return ((QueueEntryDAO) _queueEntryDAO).getById(id);
+	}
+	
 	public List<QueueEntry> getQueueEntriesByQueueId(String queueId, Date lowerBound) {
 		return ((QueueEntryDAO) _queueEntryDAO).getByQueueId(queueId, lowerBound);
 	}
