@@ -197,7 +197,7 @@ public class QueueViewController implements Serializable, Consumer<Boolean>{
 	}
 	
 	public void openPatient(String id){
-		_patientMainViewController.setNewTab(id);
+		_patientMainViewController.setNewTab(_queueController.getIdOfPatient(id));
 	}
 	
 	public void refresh(){

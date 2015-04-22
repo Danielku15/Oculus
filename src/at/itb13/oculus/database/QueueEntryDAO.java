@@ -11,6 +11,7 @@ import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 
+import at.itb13.oculus.model.Patient;
 import at.itb13.oculus.model.QueueEntry;
 
 /**
@@ -31,5 +32,10 @@ class QueueEntryDAO extends GenericDAOImpl<QueueEntry, String> {
 			list = getByCriterion("created", true, Restrictions.and(Restrictions.eq("queue.id", queueId), Restrictions.ge("created", lowerBound)));
 		}
 		return list;
+	}
+	
+	public QueueEntry getById(String id){
+		List<QueueEntry> list = getByCriterion(Restrictions.like("ID", id));
+		return (list.isEmpty()) ? null : list.get(0);
 	}
 }
