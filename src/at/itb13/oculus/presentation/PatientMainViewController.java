@@ -19,6 +19,7 @@ public class PatientMainViewController implements Initializable  {
 	private MenuItem _aboutItem;
 	@FXML
 	private QueueViewController _queueViewController;
+	@FXML
 	private PatientTabViewController _patientTabViewController;
 	
 	@Override
