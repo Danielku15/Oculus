@@ -28,16 +28,6 @@
                             <RowConstraints maxHeight="50.0" minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
-                              <TextField fx:id="_firstnameInput" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                                 <font>
-                                    <Font size="14.0" />
-                                 </font>
-                              </TextField>
-                              <TextField fx:id="_lastnameInput" GridPane.columnIndex="4" GridPane.rowIndex="1">
-                                 <font>
-                                    <Font size="14.0" />
-                                 </font>
-                              </TextField>
                               <Label fx:id="_firstnameLabel" text="%firstname" GridPane.rowIndex="1">
                                  <font>
                                     <Font size="14.0" />
@@ -53,11 +43,9 @@
                                     <Font size="14.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="_socialSecurityNumberInput" GridPane.columnIndex="1">
-                                 <font>
-                                    <Font size="14.0" />
-                                 </font>
-                              </TextField>
+                              <Label text="Label" GridPane.columnIndex="1" />
+                              <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <Label text="Label" GridPane.columnIndex="4" GridPane.rowIndex="1" />
                            </children>
                         </GridPane>
                         <Accordion fx:id="_accordion" layoutY="127.0" minWidth="520.0" prefHeight="871.0" prefWidth="898.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="127.0">
