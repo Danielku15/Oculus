@@ -1,5 +1,6 @@
 package at.itb13.oculus.application;
 
+import java.security.InvalidParameterException;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -24,10 +25,6 @@ class PatientControllerImpl extends Controller implements PatientController {
 	public PatientControllerImpl() {
 		super();
 		createPatient();
-	}
-	
-	Patient getPatient() {
-		return _patient;
 	}
 
 	@Override
@@ -130,20 +127,14 @@ class PatientControllerImpl extends Controller implements PatientController {
 
 	@Override
 	public boolean setFirstname(String firstname) {
-		if(isFirstnameValid(firstname)) {
-			_patient.setFirstname(firstname);
-			return true;
-		}
-		return false;
+		_patient.setFirstname(firstname);
+		return isFirstnameValid(firstname);
 	}
 
 	@Override
 	public boolean setLastname(String lastname) {
-		if(isLastnameValid(lastname)) {
-			_patient.setLastname(lastname);
-			return true;
-		}
-		return false;
+		_patient.setLastname(lastname);
+		return isLastnameValid(lastname);
 	}
 
 	@Override
@@ -152,9 +143,10 @@ class PatientControllerImpl extends Controller implements PatientController {
 			Instant instant = birthday.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant();
 			Date date = Date.from(instant);
 			_patient.setBirthday(date);
-			return true;
+		} else {
+			_patient.setBirthday(null);
 		}
-		return false;
+		return true;
 	}
 
 	@Override
@@ -163,45 +155,42 @@ class PatientControllerImpl extends Controller implements PatientController {
 			Gender g = Gender.valueOf(gender);
 			if(g != null) {
 				_patient.setGender(g);
-				return true;
+			} else {
+				throw new InvalidParameterException(gender + "is not a valid gender!");
 			}
+		} else {
+			_patient.setGender(null);
 		}
-		return false;
+		return true;
 	}
 
 	@Override
 	public boolean setPhoneNumber(String phoneNumber) {
-		if(phoneNumber != null) {
-			_patient.setPhoneNumber(phoneNumber);
-			return true;
-		}
-		return false;
+		_patient.setPhoneNumber(phoneNumber);
+		return true;
 	}
 
 	@Override
 	public boolean setEmail(String email) {
-		if(email != null) {
-			_patient.setEmail(email);
-			return true;
-		}
-		return false;
+		_patient.setEmail(email);
+		return true;
 	}
 
 	@Override
 	public synchronized boolean setSocialSecurityNumber(String socialSecurityNumber) throws UniqueConstraintException {
+		_patient.setSocialSecurityNumber(socialSecurityNumber);
 		if(isSocialSecurityNumberValid(socialSecurityNumber)) {
 			try {
 				_database.beginTransaction();
 				Patient patient = _database.getPatientBySocialSecurityNumber(socialSecurityNumber);
+				_database.commitTransaction();
 				if((patient != null) && (!patient.equals(_patient))) {
 					throw new UniqueConstraintException("socialSecurityNumber", _patient, patient);
 				}
-				_database.commitTransaction();
 			} catch(HibernateException e) {
 				_database.rollbackTransaction();
 				throw e;
 			}
-			_patient.setSocialSecurityNumber(socialSecurityNumber);
 			return true;
 		}
 		return false;
@@ -209,81 +198,63 @@ class PatientControllerImpl extends Controller implements PatientController {
 
 	@Override
 	public boolean setEmployer(String employer) {
-		if(employer != null) {
-			_patient.setEmployer(employer);
-			return true;
-		}
-		return false;
+		_patient.setEmployer(employer);
+		return true;
 	}
 
 	@Override
 	public boolean setStreet(String street) {
-		if(street != null) {
-			Address address = _patient.getAddress();
-			if(address == null) {
-				address = new Address();
-				_patient.setAddress(address);
-			}
-			address.setStreet(street);
-			return true;
+		Address address = _patient.getAddress();
+		if(address == null) {
+			address = new Address();
+			_patient.setAddress(address);
 		}
-		return false;
+		address.setStreet(street);
+		return true;
 	}
 
 	@Override
 	public boolean setStreetNumber(String streetNumber) {
-		if(streetNumber != null) {
-			Address address = _patient.getAddress();
-			if(address == null) {
-				address = new Address();
-				_patient.setAddress(address);
-			}
-			address.setStreetNumber(streetNumber);
-			return true;
+		Address address = _patient.getAddress();
+		if(address == null) {
+			address = new Address();
+			_patient.setAddress(address);
 		}
-		return false;
+		address.setStreetNumber(streetNumber);
+		return true;
 	}
 
 	@Override
 	public boolean setZip(String zip) {
-		if(zip != null) {
-			Address address = _patient.getAddress();
-			if(address == null) {
-				address = new Address();
-				_patient.setAddress(address);
-			}
-			address.setZip(zip);
-			return true;
+		Address address = _patient.getAddress();
+		if(address == null) {
+			address = new Address();
+			_patient.setAddress(address);
 		}
-		return false;
+		address.setZip(zip);
+		return true;
 	}
 
 	@Override
 	public boolean setCity(String city) {
-		if(city != null) {
-			Address address = _patient.getAddress();
-			if(address == null) {
-				address = new Address();
-				_patient.setAddress(address);
-			}
-			address.setCity(city);
-			return true;
+		Address address = _patient.getAddress();
+		if(address == null) {
+			address = new Address();
+			_patient.setAddress(address);
 		}
-		return false;
+		address.setCity(city);
+		return true;
 	}
 
 	@Override
 	public boolean setCountry(String country) {
-		if(country != null) {
-			Address address = _patient.getAddress();
-			if(address == null) {
-				address = new Address();
-				_patient.setAddress(address);
-			}
-			address.setCountry(country);
-			return true;
+		Address address = _patient.getAddress();
+		if(address == null) {
+			address = new Address();
+			_patient.setAddress(address);
 		}
-		return false;
+		address.setCountry(country);
+		return true;
 	}
 
 
