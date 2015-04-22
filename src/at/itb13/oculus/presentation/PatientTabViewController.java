@@ -98,7 +98,7 @@ public class PatientTabViewController implements Initializable {
 			_patientSearchViewController.search(event);
 			_searchViewStage.initModality(Modality.APPLICATION_MODAL);
 			_searchViewStage.setWidth(STAGEVIEWWIDTH);
-			_searchViewStage.setTitle(facade.getString(LangKey.SEARCH));
+			_searchViewStage.setTitle(facade.getString(LangKey.PATIENTSEARCHTITEL));
 			_searchViewStage.setScene(new Scene(pane));
 			_searchViewStage.show();
 		} else {
