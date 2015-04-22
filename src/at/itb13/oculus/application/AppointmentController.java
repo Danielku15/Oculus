@@ -15,6 +15,7 @@ public interface AppointmentController extends AutoCloseable{
 	String getFirstName();
 	String getLastName();
 	String getSocialSecurityNumber();
+	String getID();
 	
 	//setter
 	

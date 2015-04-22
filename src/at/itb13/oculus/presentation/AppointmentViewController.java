@@ -23,7 +23,7 @@ public class AppointmentViewController implements Initializable {
 
 	//Application Controller
 	private AppointmentController _appointmentController;
-	
+
 	
 	@FXML
 	private Label _firstnameLabel;
@@ -47,24 +47,19 @@ public class AppointmentViewController implements Initializable {
 	public AppointmentViewController(){
 		
 		_appointmentController = ControllerFactory.getAppointmentController();
+
 	}
 	
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		// TODO Auto-generated method stub		
+	
+		setPatientDataToFormular();
 	}
 	
-	public void loadPatientToFormular(String patientID){
-		try {
-			_appointmentController.loadPatient(patientID);
-		} catch (ObjectNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
 	
 	public void setPatientDataToFormular(){
+		
 		_firstnameLoadedLabel.setText(_appointmentController.getFirstName());
 		_lastnameLabel.setText(_appointmentController.getLastName());
 		_socialSecurityLoadedNumberLabel.setText(_appointmentController.getSocialSecurityNumber());
