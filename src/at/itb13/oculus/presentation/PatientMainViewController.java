@@ -19,12 +19,13 @@ public class PatientMainViewController implements Initializable  {
 	private MenuItem _aboutItem;
 	@FXML
 	private QueueViewController _queueViewController;
-	private PatientTabViewController _patientTapViewController;
+	@FXML
+	private PatientTabViewController _patientTabViewController;
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		_queueViewController.init(this);
-		_patientTapViewController.init(this);
+		_patientTabViewController.init(this);
 	}
 	
 	// Event Listener on MenuItem[#_closeItem].onAction
@@ -53,7 +54,7 @@ public class PatientMainViewController implements Initializable  {
 	}
 	
 	public void setNewTab(String id){
-		_patientTapViewController.createFormular(id);
+		_patientTabViewController.createFormular(id);
 	}
 	
 	public String getCurrentPatient(){

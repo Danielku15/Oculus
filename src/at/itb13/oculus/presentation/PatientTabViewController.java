@@ -19,6 +19,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -78,6 +80,15 @@ public class PatientTabViewController implements Initializable {
 			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
 				if(!newValue) {
 					GUIUtil.validate(_searchLabel, _patientSearchController.setCriteria(_searchInput.getText()));
+				}
+			}
+		});
+		
+		_searchInput.addEventHandler(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
+			@Override
+			public void handle(KeyEvent e) {
+				if(e.getCode().equals(KeyCode.ENTER)) {
+					searchPatient(null);
 				}
 			}
 		});
