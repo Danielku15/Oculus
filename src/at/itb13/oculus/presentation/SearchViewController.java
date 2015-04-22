@@ -36,7 +36,7 @@ import at.itb13.oculus.config.ConfigFactory.Config;
 import at.itb13.oculus.database.PersistentObject;
 import at.itb13.oculus.lang.LangFacade;
 import at.itb13.oculus.lang.LangKey;
-import at.itb13.oculus.model.Searchable;
+import at.itb13.oculus.search.Searchable;
 import at.itb13.oculus.util.GUIUtil;
 
 /**
@@ -71,7 +71,7 @@ public class SearchViewController<T extends PersistentObject & Searchable> {
 	
 	public SearchViewController(Class<T> type) {
 		_type = type;
-		_searchController = ControllerFactory.getSearchController(type);
+		_searchController = ControllerFactory.getInstance().getSearchController(type);
 		_fieldMap = _searchController.getFieldMap();
 		_consumers = new LinkedList<Consumer<String>>();
 		_searchConfig = loadSearchConfig();

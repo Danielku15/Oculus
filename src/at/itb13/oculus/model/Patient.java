@@ -18,6 +18,7 @@ import org.hibernate.search.annotations.Indexed;
 import org.hibernate.search.annotations.IndexedEmbedded;
 
 import at.itb13.oculus.database.PersistentObjectImpl;
+import at.itb13.oculus.search.Searchable;
 
 @Entity
 @Indexed

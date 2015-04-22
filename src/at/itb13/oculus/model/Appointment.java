@@ -15,6 +15,8 @@ import javax.persistence.Table;
 import org.hibernate.search.annotations.Indexed;
 import org.hibernate.search.annotations.IndexedEmbedded;
 
+import at.itb13.oculus.search.Searchable;
+
 @Entity
 @Indexed
 @Table(name = "appointment", catalog = "oculus_c")

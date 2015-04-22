@@ -3,9 +3,9 @@ import java.util.List;
 import java.util.Map;
 
 import at.itb13.oculus.database.PersistentObject;
-import at.itb13.oculus.model.SearchMap;
-import at.itb13.oculus.model.SearchResult;
-import at.itb13.oculus.model.Searchable;
+import at.itb13.oculus.search.SearchMap;
+import at.itb13.oculus.search.SearchResult;
+import at.itb13.oculus.search.Searchable;
 
 /**
  * @author Patrick

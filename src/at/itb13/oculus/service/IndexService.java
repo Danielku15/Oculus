@@ -19,7 +19,7 @@ import at.itb13.oculus.database.PersistentObject;
 import at.itb13.oculus.model.Appointment;
 import at.itb13.oculus.model.ChangeLog;
 import at.itb13.oculus.model.Patient;
-import at.itb13.oculus.model.Searchable;
+import at.itb13.oculus.search.Searchable;
 
 public class IndexService {
 	
