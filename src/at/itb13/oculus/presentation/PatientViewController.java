@@ -151,11 +151,19 @@ public class PatientViewController implements Initializable{
 		_lastnameInput.textProperty().addListener(new ChangeListener<String>() {
 		    @Override
 		    public void changed(final ObservableValue<? extends String> observable, final String oldValue, final String newValue) {
-		    	if (!newValue.isEmpty()){
-		    		setLastname(_lastnameInput.getText());
+		    	if (!newValue.isEmpty()){	
 			    	setTabLabelNameModified();
 		    	}
 		    }
+		});
+		
+		_lastnameInput.focusedProperty().addListener(new ChangeListener<Boolean>() {
+			@Override
+			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+				if(!newValue) {
+					setLastname(_lastnameInput.getText());
+				}
+			}
 		});
 		
 		_birthdayInput.valueProperty().addListener(new ChangeListener<LocalDate>() {
