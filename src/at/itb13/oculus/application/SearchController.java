@@ -21,5 +21,5 @@ public interface SearchController<T extends PersistentObject & Searchable> {
 	// operations
 	void search();
 	List<String[]> getResults();	
-	Map<String, Integer> getFieldMap();
+	Map<String, Integer> getIndexMap();
 }

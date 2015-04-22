@@ -17,11 +17,11 @@ public class SearchResult<T extends PersistentObject & Searchable> {
 	
 	private static final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
-	private SearchMap<T> _searchMap;
+	private FieldMap<T> _searchMap;
 	private List<T> _searchables;
 	private List<String[]> _results;
 	
-	public SearchResult(SearchMap<T> searchMap, List<T> searchables) {
+	public SearchResult(FieldMap<T> searchMap, List<T> searchables) {
 		_searchMap = searchMap;
 		_searchables = searchables;
 	}

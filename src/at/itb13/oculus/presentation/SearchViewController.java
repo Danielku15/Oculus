@@ -54,7 +54,7 @@ public class SearchViewController<T extends PersistentObject & Searchable> {
 	// controller that is responsible for searching
 	private SearchController<T> _searchController;
 	// map that maps a unique column name (e.g. "firstname") to its associated index in the search result
-	private Map<String, Integer> _fieldMap;
+	private Map<String, Integer> _indexMap;
 	// list of consumers that accept an id of a chosen record
 	private List<Consumer<String>> _consumers;
 	// user defined search configuration
@@ -69,13 +69,21 @@ public class SearchViewController<T extends PersistentObject & Searchable> {
 	@FXML
 	private TableView<String[]> _tableView;
 	
-	public SearchViewController(Class<T> type) {
+	public SearchViewController(Class<T> type, SearchController<T> searchController) {
 		_type = type;
-		_searchController = ControllerFactory.getInstance().getSearchController(type);
-		_fieldMap = _searchController.getFieldMap();
+		if(searchController != null) {
+			_searchController = searchController;
+		} else {
+			_searchController = ControllerFactory.getInstance().getSearchController(type);
+		}
+		_indexMap = _searchController.getIndexMap();
 		_consumers = new LinkedList<Consumer<String>>();
 		_searchConfig = loadSearchConfig();
 		_columnConfigMap = initColumnConfigMap();
+	}
+	
+	public SearchViewController(Class<T> type) {
+		this(type, null);
 	}
 	
 	/** Concatenates the simple name of the search class with the search configuration suffix
@@ -116,7 +124,7 @@ public class SearchViewController<T extends PersistentObject & Searchable> {
 	 */
 	private Map<String, ColumnConfig> initColumnConfigMap() {
 		Map<String, ColumnConfig> columnConfigMap = new HashMap<String, ColumnConfig>();
-		for(String key : _fieldMap.keySet()) {
+		for(String key : _indexMap.keySet()) {
 			if(!key.equals("id")) {
 				columnConfigMap.put(key, new ColumnConfig(key));
 			}
@@ -127,15 +135,15 @@ public class SearchViewController<T extends PersistentObject & Searchable> {
 	@FXML
 	private void initialize() {
 		// initialize list of table columns
-		List<TableColumn<String[], String>> tableColumns = new ArrayList<TableColumn<String[], String>>(_fieldMap.size());
+		List<TableColumn<String[], String>> tableColumns = new ArrayList<TableColumn<String[], String>>(_indexMap.size());
 		
 		// fill list with null values
-		for(int i = 0; i < (_fieldMap.size() - 1); ++i) {
+		for(int i = 0; i < (_indexMap.size() - 1); ++i) {
 			tableColumns.add(null);
 		}
 		
 		// initialize table view columns
-		for(String key : _fieldMap.keySet()) {			
+		for(String key : _indexMap.keySet()) {			
 			if(!key.equals("id")) {
 				
 				// initialize new table column with the appropriate column name
@@ -209,7 +217,7 @@ public class SearchViewController<T extends PersistentObject & Searchable> {
 					public void handle(MouseEvent e) {
 						if(e.getClickCount() >= 2) {
 							String[] result = row.getItem();
-							notifyConsumers(result[_fieldMap.get("id")]);			
+							notifyConsumers(result[_indexMap.get("id")]);			
 						}
 					}
 				});
@@ -270,7 +278,7 @@ public class SearchViewController<T extends PersistentObject & Searchable> {
 	 * @return
 	 */
 	private ReadOnlyStringWrapper mapColumn(CellDataFeatures<String[], String> cellData, String key) {
-		int i = _fieldMap.get(key);
+		int i = _indexMap.get(key);
 		if (cellData.getValue()[i] != null) {
 			return new ReadOnlyStringWrapper(cellData.getValue()[i]);
 		} else {
@@ -351,7 +359,7 @@ public class SearchViewController<T extends PersistentObject & Searchable> {
 		
 		private int getMaxColumnIndex() {
 			int maxColumnIndex = -1;
-			for(String key : _fieldMap.keySet()) {
+			for(String key : _indexMap.keySet()) {
 				String index = _searchConfig.getProperty(key + INDEXSUFFIX);
 				if(index != null) {
 					maxColumnIndex = Math.max(maxColumnIndex, Integer.valueOf(index));
@@ -401,6 +409,7 @@ public class SearchViewController<T extends PersistentObject & Searchable> {
 	    	List<String[]> results = _searchController.getResults();
 	    	if((results != null) && (results.isEmpty())) {
 	    		// TODO: indicate that there are no search results
+	    		_tableView.setItems(null);
 	    	} else {
 	    		_tableView.setItems(FXCollections.observableList(results));
 	    	}

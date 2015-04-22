@@ -3,7 +3,7 @@ import java.util.List;
 import java.util.Map;
 
 import at.itb13.oculus.database.PersistentObject;
-import at.itb13.oculus.search.SearchMap;
+import at.itb13.oculus.search.FieldMap;
 import at.itb13.oculus.search.SearchResult;
 import at.itb13.oculus.search.Searchable;
 
@@ -14,16 +14,17 @@ import at.itb13.oculus.search.Searchable;
  */
 class SearchControllerImpl<T extends PersistentObject & Searchable> extends Controller implements SearchController<T> {
 	
-	private Class<T> _type;
-	private SearchMap<T> _searchMap;
+	private static final int MINCRITERIALENGTH = 3;
 	
+	private Class<T> _type;
+	private FieldMap<T> _fieldMap;
 	private String _criteria;
 	private SearchResult<T> _searchResult;
 
 	public SearchControllerImpl(Class<T> type) {
 		super();
 		_type = type;
-		_searchMap = new SearchMap<T>(type);
+		_fieldMap = new FieldMap<T>(type);
 	}
 
 	@Override
@@ -33,7 +34,8 @@ class SearchControllerImpl<T extends PersistentObject & Searchable> extends Cont
 
 	@Override
 	public boolean setCriteria(String criteria) {
-		if(criteria != null) {
+		criteria = criteria.trim();
+		if(((criteria != null) && criteria.isEmpty()) || (criteria.length() >= MINCRITERIALENGTH)) {
 			_criteria = criteria;
 			return true;
 		}
@@ -43,7 +45,7 @@ class SearchControllerImpl<T extends PersistentObject & Searchable> extends Cont
 	@Override
 	public void search() {
 		if(_criteria != null) {
-			_searchResult = _database.search(_type, _searchMap, _criteria);
+			_searchResult = _database.search(_type, _fieldMap, _criteria);
 		}
 	}
 
@@ -56,7 +58,7 @@ class SearchControllerImpl<T extends PersistentObject & Searchable> extends Cont
 	}
 
 	@Override
-	public Map<String, Integer> getFieldMap() {
-		return _searchMap.getFieldMap();
+	public Map<String, Integer> getIndexMap() {
+		return _fieldMap.getIndexMap();
 	}
 }
