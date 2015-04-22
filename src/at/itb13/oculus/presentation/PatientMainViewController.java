@@ -56,8 +56,4 @@ public class PatientMainViewController implements Initializable  {
 	public void setNewTab(String id){
 		_patientTabViewController.createFormular(id);
 	}
-	
-	public String getCurrentPatient(){
-		return null;
-	}
 }

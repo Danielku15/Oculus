@@ -49,7 +49,6 @@ public class QueueEntryViewController implements Serializable, Initializable, Co
 	private List<String[]> _appointmentList;
 	private String _queueID;
 	private String _patientID;
-	private List<Consumer<Boolean>> _consumers;
 
 	private QueueViewController _queueViewController;
 
@@ -85,9 +84,9 @@ public class QueueEntryViewController implements Serializable, Initializable, Co
 
 	
 	public QueueEntryViewController(){	
-		_queueEntryController = ControllerFactory.getQueueEntryController();
+		_queueEntryController = ControllerFactory.getInstance().getQueueEntryController();
 		_queueID = _queueEntryController.getQueueId();
-		_patientID = _queueEntryController.getPatientId();		
+		_patientID = _queueEntryController.getPatientId();
 	}
 	
 	/*
@@ -100,7 +99,6 @@ public class QueueEntryViewController implements Serializable, Initializable, Co
 	public void initialize(URL location, ResourceBundle resources) {
 		
 		if(_patientID != null){
-			
 			try {
 				_queueEntryController.fetchPatient(_patientID);
 				_appointmentList = _queueEntryController.getAppointmentsByPatientId(_patientID);
@@ -113,12 +111,6 @@ public class QueueEntryViewController implements Serializable, Initializable, Co
 			}
 			_patientTbx.setText(_queueEntryController.getPatientFirstname() + " " + _queueEntryController.getPatientLastname());
 		}
-		
-
-		
-		_consumers = new LinkedList<Consumer<Boolean>>();
-
-		_queueEntryController = ControllerFactory.getInstance().getQueueEntryController();
 
 		_queuesList = _queueEntryController.getQueues();
 
@@ -150,10 +142,6 @@ public class QueueEntryViewController implements Serializable, Initializable, Co
 			_queueCbx.getSelectionModel().selectFirst();
 		}
 		
-	}
-	
-	public void addConsumer(Consumer<Boolean> consumer) {
-		_consumers.add(consumer);
 	}
 	
 	@FXML
@@ -224,8 +212,12 @@ public class QueueEntryViewController implements Serializable, Initializable, Co
 	public void save(ActionEvent event){
 		
 		try {
+			System.out.println(_queueEntryController.getPatientId());
+			System.out.println(_queueEntryController.getAppointmentTitle());
 			_queueEntryController.saveQueueEntry();
+			System.out.println("2");
 			_queueViewController.accept(true);
+			System.out.println("3");
 			
 		} catch (IncompleteDataException e) {
 			// TODO Auto-generated catch block

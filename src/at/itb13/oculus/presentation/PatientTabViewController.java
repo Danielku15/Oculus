@@ -198,7 +198,6 @@ public class PatientTabViewController implements Initializable {
 		tab.setClosable(true);
 		_tabPane.getTabs().add(tab);
 		_tabPane.getSelectionModel().select(tab);
-		System.out.println(id);
 		patientViewController.loadPatientToFormular(id);
 		
 		ObservableList<Tab> tabs = _tabPane.getTabs();
