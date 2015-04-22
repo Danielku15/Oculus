@@ -79,7 +79,7 @@
                                                 </Label>
                                                 <AnchorPane GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                                                    <children>
-                                                      <DatePicker fx:id="_birthdayInput" layoutY="27.0" showWeekNumbers="true" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                                                      <DatePicker fx:id="_birthdayInput" layoutY="27.0" showWeekNumbers="true" AnchorPane.bottomAnchor="26.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="27.0" />
                                                    </children>
                                                 </AnchorPane>
                                                 <Label fx:id="_genderLabel" text="%gender" GridPane.rowIndex="3">
