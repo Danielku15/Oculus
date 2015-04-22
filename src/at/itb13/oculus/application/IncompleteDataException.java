@@ -25,7 +25,7 @@ public class IncompleteDataException extends Exception {
 		strBuilder.append("The values of the following fields are invalid or missing: ");
 		for(String fieldName : _fieldNames) {
 			strBuilder.append(fieldName);
-			strBuilder.append(";");
+			strBuilder.append("; ");
 		}
 		return strBuilder.toString();
 	}
