@@ -37,6 +37,7 @@ public class PatientTabViewController implements Initializable {
 	
 	//instance of PatientTabViewController
 	private static PatientTabViewController _instance;
+	private PatientMainViewController _patientMainViewController;
 	
 	//window - PatientSearchViewController
 	private Stage _searchViewStage;
@@ -210,6 +211,10 @@ public class PatientTabViewController implements Initializable {
 	
 	public static PatientTabViewController getInstance(){
 		return _instance;
+	}
+
+	public void init(PatientMainViewController patientMainViewController) {
+		_patientMainViewController = patientMainViewController;
 	}
 	
 }
