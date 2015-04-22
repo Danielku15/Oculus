@@ -36,7 +36,7 @@ import at.itb13.oculus.config.ConfigFactory.Config;
 import at.itb13.oculus.database.PersistentObject;
 import at.itb13.oculus.lang.LangFacade;
 import at.itb13.oculus.lang.LangKey;
-import at.itb13.oculus.model.Searchable;
+import at.itb13.oculus.search.Searchable;
 import at.itb13.oculus.util.GUIUtil;
 
 /**

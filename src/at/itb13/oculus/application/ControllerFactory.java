@@ -1,7 +1,7 @@
 package at.itb13.oculus.application;
 
 import at.itb13.oculus.database.PersistentObject;
-import at.itb13.oculus.model.Searchable;
+import at.itb13.oculus.search.Searchable;
 
 public class ControllerFactory {
 	
