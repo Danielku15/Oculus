@@ -13,6 +13,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import at.itb13.oculus.application.AppointmentController;
 import at.itb13.oculus.application.ControllerFactory;
+import at.itb13.oculus.application.ObjectNotFoundException;
 
 /**
  * @author Manu
@@ -28,10 +29,19 @@ public class AppointmentViewController implements Initializable {
 	private Label _firstnameLabel;
 	
 	@FXML
+	private Label _firstnameLoadedLabel;
+	
+	@FXML
 	private Label _lastnameLabel;
 	
 	@FXML
+	private Label _lastnameLoadedLabel;
+	
+	@FXML
 	private Label _socialSecurityNumberLabel;
+	
+	@FXML
+	private Label _socialSecurityLoadedNumberLabel;
 
 
 	public AppointmentViewController(){
@@ -42,10 +52,23 @@ public class AppointmentViewController implements Initializable {
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		// TODO Auto-generated method stub
-		
+		// TODO Auto-generated method stub		
 	}
 	
+	public void loadPatientToFormular(String patientID){
+		try {
+			_appointmentController.loadPatient(patientID);
+		} catch (ObjectNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void setPatientDataToFormular(){
+		_firstnameLoadedLabel.setText(_appointmentController.getFirstName());
+		_lastnameLabel.setText(_appointmentController.getLastName());
+		_socialSecurityLoadedNumberLabel.setText(_appointmentController.getSocialSecurityNumber());
+	}
 
 	
 	
