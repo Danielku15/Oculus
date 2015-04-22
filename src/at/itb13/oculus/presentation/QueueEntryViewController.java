@@ -212,12 +212,8 @@ public class QueueEntryViewController implements Serializable, Initializable, Co
 	public void save(ActionEvent event){
 		
 		try {
-			System.out.println(_queueEntryController.getPatientId());
-			System.out.println(_queueEntryController.getAppointmentTitle());
 			_queueEntryController.saveQueueEntry();
-			System.out.println("2");
 			_queueViewController.accept(true);
-			System.out.println("3");
 			
 		} catch (IncompleteDataException e) {
 			// TODO Auto-generated catch block
