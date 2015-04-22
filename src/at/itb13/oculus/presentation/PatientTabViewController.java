@@ -37,6 +37,7 @@ public class PatientTabViewController implements Initializable {
 	
 	//instance of PatientTabViewController
 	private static PatientTabViewController _instance;
+	private PatientMainViewController _patientMainViewController;
 	
 	private SearchController<Patient> _patientSearchController;
 	//window - PatientSearchViewController
@@ -111,7 +112,7 @@ public class PatientTabViewController implements Initializable {
 		patientSearchViewController.search(event);
 		_searchViewStage.initModality(Modality.APPLICATION_MODAL);
 		_searchViewStage.setWidth(STAGEVIEWWIDTH);
-		_searchViewStage.setTitle(facade.getString(LangKey.SEARCH));
+		_searchViewStage.setTitle(facade.getString(LangKey.PATIENTSEARCHTITEL));
 		_searchViewStage.setScene(new Scene(pane));
 		_searchViewStage.show();
 	}
@@ -212,5 +213,9 @@ public class PatientTabViewController implements Initializable {
 	
 	public static PatientTabViewController getInstance(){
 		return _instance;
+	}
+	
+	public void init(PatientMainViewController patientMainViewController) {
+		_patientMainViewController = patientMainViewController;
 	}
 }

@@ -2,20 +2,27 @@ package at.itb13.oculus.presentation;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.function.Consumer;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 import at.itb13.oculus.application.ControllerFactory;
 import at.itb13.oculus.application.QueueController;
 import at.itb13.oculus.lang.LangFacade;
@@ -42,6 +49,7 @@ public class QueueViewController implements Serializable, Consumer<Boolean>{
 	private List<String[]> _queues;
 	private PatientMainViewController _patientMainViewController;
 	
+	
 	@FXML
 	private Button _queueViewAddQEntryButton;
 	
@@ -49,7 +57,32 @@ public class QueueViewController implements Serializable, Consumer<Boolean>{
 	private ComboBox<String> _queueViewEmployeeSelection;
 	
 	@FXML
-	private ListView<String> _queueViewListView;
+	private ListView<QueueEntryObj> _queueViewListView;
+	
+	class QueueEntryObj{
+        private String _id;
+        private String _patient;
+        private String _start;
+        
+         
+        QueueEntryObj(String id, String patient, String start){
+            _id = id;
+            _patient = patient;
+            _start = start;
+        }
+         
+        String getId(){
+            return _id;
+        }
+         
+        String getPatient(){
+            return _patient;
+        }
+        
+        String getStart(){
+        	return _start;
+        }
+    }
 	
 	public void initialize(){
 		_queueController = ControllerFactory.getInstance().getQueueController();
@@ -87,18 +120,6 @@ public class QueueViewController implements Serializable, Consumer<Boolean>{
 		//TODO finish stuff
 	}
 	
-	public void setListView(List<String[]> queueEntries){
-
-		LangFacade langInstance = LangFacade.getInstance();
-		
-		_queueViewListView.getItems().clear();
-
-		for(String[] queueEntry: queueEntries){
-			_queueViewListView.getItems().add(langInstance.getString(LangKey.PATIENTNAME) + ": " + queueEntry[5] + " " + queueEntry[6] + "\n" + langInstance.getString(LangKey.APPOINTMENTSTART) + ": " + queueEntry[8]);
-		}
-		
-	}
-	
 	@FXML
 	public void loadQueueEntryView(){		
 		_queueEntryViewStage = new Stage();
@@ -128,6 +149,55 @@ public class QueueViewController implements Serializable, Consumer<Boolean>{
 		//TODO name of Stage --> Language german/english
 		_queueEntryViewStage.setResizable(false);
 		_queueEntryViewStage.show();
+	}
+	
+	private void setListView(List<String[]> queueEntries){
+
+		LangFacade langInstance = LangFacade.getInstance();
+	    List<QueueEntryObj> myList = new ArrayList<>();
+		
+		_queueViewListView.getItems().clear();
+		
+    	for(String[] queueEntry: queueEntries){
+    		myList.add(new QueueEntryObj(queueEntry[0], queueEntry[5] + " " + queueEntry[6], queueEntry[8]));
+    	}
+ 
+        ListView<QueueEntryObj> listView = new ListView<>();
+        ObservableList<QueueEntryObj> myObservableList = FXCollections.observableList(myList);
+        _queueViewListView.setItems(myObservableList);
+         
+        _queueViewListView.setCellFactory(new Callback<ListView<QueueEntryObj>, ListCell<QueueEntryObj>>(){
+ 
+            @Override
+            public ListCell<QueueEntryObj> call(ListView<QueueEntryObj> p) {
+                 
+                ListCell<QueueEntryObj> cell = new ListCell<QueueEntryObj>(){
+ 
+                    @Override
+                    protected void updateItem(QueueEntryObj t, boolean bln) {
+                        super.updateItem(t, bln);
+                        if (t != null) {
+                        	setText(langInstance.getString(LangKey.PATIENTNAME) + ": " + t.getPatient()+ "\n" + langInstance.getString(LangKey.APPOINTMENTSTART) + ": " + t.getStart());
+                        	setOnMouseClicked(new EventHandler<MouseEvent>() {
+            					@Override
+            					public void handle(MouseEvent e) {
+            						if(e.getClickCount() >= 2) {
+            							openPatient(t.getId());
+            						}
+            					}
+            				});
+                        }
+                    }
+ 
+                };
+                 
+                return cell;
+            }
+        });
+	}
+	
+	public void openPatient(String id){
+		_patientMainViewController.setNewTab(id);
 	}
 	
 	public void refresh(){
