@@ -25,6 +25,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.TitledPane;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import at.itb13.oculus.application.ControllerFactory;
 import at.itb13.oculus.application.IncompleteDataException;
 import at.itb13.oculus.application.ObjectNotFoundException;
@@ -124,16 +125,14 @@ public class PatientViewController implements Initializable{
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		if (_patientTabViewController == null) {
-			_patientTabViewController = PatientTabViewController.getInstance();
-		}
+		_patientTabViewController = PatientTabViewController.getInstance();
 			
 		_accordion.setExpandedPane(_patientMasterData);
 		
 		_femaleInput.setSelected(false);
 		_maleInput.setSelected(false);
 		
-		
+		_birthdayInput.getEditor().setFont(Font.font(14));
 		
 		_firstnameInput.focusedProperty().addListener(new ChangeListener<Boolean>() {
 			@Override
