@@ -116,7 +116,7 @@ public class PatientViewController implements Initializable{
     private TextField _cityInput;
     
 	public PatientViewController() {
-		_patientController = ControllerFactory.getPatientController();		
+		_patientController = ControllerFactory.getInstance().getPatientController();		
 	}
 
 	public void activate(){

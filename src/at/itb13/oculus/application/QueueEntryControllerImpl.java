@@ -96,14 +96,18 @@ class QueueEntryControllerImpl extends Controller implements QueueEntryControlle
 	
 	@Override
 	public String getQueueName(){
-		
-		return _queueEntry.getQueue().getName();
+		Queue queue = _queueEntry.getQueue();
+		if(queue != null) {
+			return queue.getName();
+		}
+		return null;
 	}
 
 	@Override
 	public synchronized List<String[]> getQueues() {
 		List<String[]> queuesStr = new ArrayList<String[]>();
 		List<Queue> queuesObj = new ArrayList<Queue>();
+		
 		try {
 			_database.beginTransaction();
 			queuesObj = _database.getAll(Queue.class);
@@ -155,7 +159,6 @@ class QueueEntryControllerImpl extends Controller implements QueueEntryControlle
 	@Override
 	public void createQueueEntry() {
 		_queueEntry = new QueueEntry();
-		_queueEntry.setCreated(new Date());
 	}
 	
 	@Override
@@ -229,6 +232,7 @@ class QueueEntryControllerImpl extends Controller implements QueueEntryControlle
 	@Override
 	public synchronized boolean saveQueueEntry() throws IncompleteDataException, DataMismatchException, ObjectNotSavedException {
 		if(validateData()) {
+			_queueEntry.setCreated(new Date());
 			try {
 				_database.beginTransaction();
 				_database.createOrUpdate(_queueEntry);
@@ -267,16 +271,4 @@ class QueueEntryControllerImpl extends Controller implements QueueEntryControlle
 		}
 		return true;
 	}
-
-	@Override
-	public String getQueueId() {
-		return MainController.getInstance().getQueueController().getQueueId();
-	}
-
-	@Override
-	public String getPatientId() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
 }

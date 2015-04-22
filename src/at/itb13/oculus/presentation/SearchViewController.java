@@ -71,7 +71,7 @@ public class SearchViewController<T extends PersistentObject & Searchable> {
 	
 	public SearchViewController(Class<T> type) {
 		_type = type;
-		_searchController = ControllerFactory.getSearchController(type);
+		_searchController = ControllerFactory.getInstance().getSearchController(type);
 		_fieldMap = _searchController.getFieldMap();
 		_consumers = new LinkedList<Consumer<String>>();
 		_searchConfig = loadSearchConfig();

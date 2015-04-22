@@ -19,7 +19,7 @@ import at.itb13.oculus.util.DateUtil;
  */
 class QueueControllerImpl extends Controller implements QueueController {
 	
-	private Queue activeQueue;
+	private Queue _activeQueue;
 	
 	public QueueControllerImpl() {
 		super();
@@ -67,20 +67,23 @@ class QueueControllerImpl extends Controller implements QueueController {
 					Employee employee = appointment.getEmployee();
 					if(employee != null) {
 						// employee id, firstname, lastname
-						queueEntryStr[1] = queueEntryObj.getAppointment().getEmployee().getID();
-						queueEntryStr[2] = queueEntryObj.getAppointment().getEmployee().getFirstname();
-						queueEntryStr[3] = queueEntryObj.getAppointment().getEmployee().getLastname();
+						queueEntryStr[1] = employee.getID();
+						queueEntryStr[2] = employee.getFirstname();
+						queueEntryStr[3] = employee.getLastname();
 					}
 					Patient patient = appointment.getPatient();
 					if(patient != null) {
 						// patient id, firstname, lastname, svn
-						queueEntryStr[4] = queueEntryObj.getAppointment().getPatient().getID();
-						queueEntryStr[5] = queueEntryObj.getAppointment().getPatient().getFirstname();
-						queueEntryStr[6] = queueEntryObj.getAppointment().getPatient().getLastname();
-						queueEntryStr[7] = queueEntryObj.getAppointment().getPatient().getSocialSecurityNumber();
+						queueEntryStr[4] = patient.getID();
+						queueEntryStr[5] = patient.getFirstname();
+						queueEntryStr[6] = patient.getLastname();
+						queueEntryStr[7] = patient.getSocialSecurityNumber();
 					}
-					// appointment start
-					queueEntryStr[8] = queueEntryObj.getAppointment().getStart().toString();
+					Date start = appointment.getStart();
+					if(start != null) {
+						// appointment start
+						queueEntryStr[8] = start.toString();
+					}
 				}
 				queueEntriesStr.add(queueEntryStr);
 			}
@@ -130,17 +133,17 @@ class QueueControllerImpl extends Controller implements QueueController {
 		return null;
 	}
 	
-	public void fetchQueue(String queueName){
-		activeQueue = _database.getQueueByName(queueName);
+	@Override
+	public String getQueueId() {
+		return _activeQueue.getID();
 	}
 	
 	@Override
 	public void activate() {
 		MainController.getInstance().setQueueController(this);
 	}
-
-	@Override
-	public String getQueueId() {
-		return activeQueue.getID();
+	
+	public void fetchQueue(String queueName){
+		_activeQueue = _database.getQueueByName(queueName);
 	}
 }
