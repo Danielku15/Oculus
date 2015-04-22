@@ -103,8 +103,6 @@ public class PatientViewController implements Initializable{
 	@FXML
 	private TextField _employerInput;
 	@FXML
-	private Button _clearButton;
-	@FXML
 	private Button _saveButton;
 	@FXML
 	private Accordion _accordion;
@@ -335,25 +333,6 @@ public class PatientViewController implements Initializable{
 		    		setTabLabelNameModified();
 		    }
 		});
-	}
-	
-	// Event Listener on Button[#_clearButton].onAction
-	@FXML
-	public void clear(ActionEvent event) {
-		_firstnameInput.setText("");
-		_lastnameInput.setText("");
-		_birthdayInput.setValue(null);
-		_maleInput.setSelected(false);
-		_femaleInput.setSelected(false);
-		_phoneNumberInput.setText("");
-		_emailInput.setText("");
-		_zipInput.setText("");
-		_countryInput.setText("");
-		_streetInput.setText("");
-		_cityInput.setText("");
-		_streetNumberInput.setText("");
-		_socialSecurityNumberInput.setText("");
-		_employerInput.setText("");
 	}
 	
 	// Event Listener on Button[#_saveButton].onAction

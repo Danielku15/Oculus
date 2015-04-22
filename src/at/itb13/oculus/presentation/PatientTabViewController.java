@@ -20,25 +20,26 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
-import at.itb13.oculus.application.ControllerFactory;
-import at.itb13.oculus.application.SearchController;
 import at.itb13.oculus.lang.LangFacade;
 import at.itb13.oculus.lang.LangKey;
 import at.itb13.oculus.model.Patient;
-import at.itb13.oculus.util.GUIUtil;
 
 public class PatientTabViewController implements Initializable {
 	
 	public static final String PATIENTVIEWXML = "PatientView.fxml";
 	public static final String SEARCHVIEW = "SearchView.fxml";
+	private static final Color COLOR_FAIL = Color.RED;
+	private static final Color COLOR_SUCCESS = Color.web("0x333333ff");
+	private static final int STAGEVIEWWIDTH = 830;
 	
 	//instance of PatientTabViewController
 	private static PatientTabViewController _instance;
 	
 	//window - PatientSearchViewController
 	private Stage _searchViewStage;
-	private SearchController<Patient> _patientSearchController;
 
 	@FXML
 	private Button _createNewPatientButton;
@@ -51,10 +52,6 @@ public class PatientTabViewController implements Initializable {
     @FXML
     private Label _searchLabel;
 	
-    public PatientTabViewController() {
-    	_patientSearchController = ControllerFactory.getInstance().getSearchController(Patient.class);
-    }
-    
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		_instance = this;
@@ -69,29 +66,21 @@ public class PatientTabViewController implements Initializable {
 				patientViewController.activate();
 			}
         });
-		
-		_searchInput.focusedProperty().addListener(new ChangeListener<Boolean>() {
-			@Override
-			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-				if(!newValue) {
-					GUIUtil.validate(_searchLabel, _patientSearchController.setCriteria(_searchInput.getText()));
-				}
-			}
-		});
 	}
 	
     // open new window if succeeds, if not set searchLabel red
     @FXML
     void searchPatient(ActionEvent event) {
-    	LangFacade langFacade = LangFacade.getInstance();
+		String query = _searchInput.getText();			
+		LangFacade facade = LangFacade.getInstance();
 		_searchViewStage = new Stage();
-		FXMLLoader loader = null;
-		SearchViewController<Patient> _patientSearchViewController = new SearchViewController<Patient>(Patient.class, _patientSearchController);
+		FXMLLoader loader = null;		
+		SearchViewController<Patient> _patientSearchViewController = new SearchViewController<Patient>(Patient.class);
 		
 		Pane pane = null;
 		try {
 			loader = new FXMLLoader(this.getClass().getResource(
-					SEARCHVIEW), langFacade.getResourceBundle());
+					SEARCHVIEW), facade.getResourceBundle());
 			loader.setController(_patientSearchViewController);
 			pane = (Pane) loader.load();			
 		} catch (IOException ex) {
@@ -104,12 +93,17 @@ public class PatientTabViewController implements Initializable {
 				createFormular(id);
 			}
 		});
-		
-		_patientSearchViewController.setCriteria(_searchInput.getText());
-		_patientSearchViewController.search(event);
-		_searchViewStage.setTitle(langFacade.getString(LangKey.SEARCH));
-		_searchViewStage.setScene(new Scene(pane));
-		_searchViewStage.show();
+		if (_patientSearchViewController.setCriteria(query)) {
+			setSuccessToSearchLabel();
+			_patientSearchViewController.search(event);
+			_searchViewStage.initModality(Modality.APPLICATION_MODAL);
+			_searchViewStage.setWidth(STAGEVIEWWIDTH);
+			_searchViewStage.setTitle(facade.getString(LangKey.SEARCH));
+			_searchViewStage.setScene(new Scene(pane));
+			_searchViewStage.show();
+		} else {
+			setFailToSearchLabel();
+		}
 	}
 
 	// Event Listener on Button[#_createNewPatientButton].onAction
@@ -206,7 +200,16 @@ public class PatientTabViewController implements Initializable {
 		_tabPane.getSelectionModel().getSelectedItem().setText(name);
 	}
 	
+	private void setFailToSearchLabel() {
+		_searchLabel.setTextFill(COLOR_FAIL);
+	}
+
+	private void setSuccessToSearchLabel() {
+		_searchLabel.setTextFill(COLOR_SUCCESS);
+	}
+	
 	public static PatientTabViewController getInstance(){
 		return _instance;
 	}
+	
 }

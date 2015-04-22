@@ -184,26 +184,14 @@
                                                       <Font size="14.0" />
                                                    </font>
                                                 </TextField>
-                                                <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="50.0" GridPane.columnIndex="4" GridPane.rowIndex="9">
-                                                   <children>
-                                                      <Button fx:id="_clearButton" mnemonicParsing="false" onAction="#clear" text="%clear">
-                                                         <font>
-                                                            <Font size="14.0" />
-                                                         </font>
-                                                         <opaqueInsets>
-                                                            <Insets left="50.0" />
-                                                         </opaqueInsets>
-                                                      </Button>
-                                                      <Button fx:id="_saveButton" mnemonicParsing="false" onAction="#save" text="%save">
-                                                         <font>
-                                                            <Font size="14.0" />
-                                                         </font>
-                                                         <opaqueInsets>
-                                                            <Insets right="200.0" />
-                                                         </opaqueInsets>
-                                                      </Button>
-                                                   </children>
-                                                </HBox>
+                                                <Button fx:id="_saveButton" mnemonicParsing="false" onAction="#save" text="%save" GridPane.columnIndex="4" GridPane.halignment="RIGHT" GridPane.rowIndex="9">
+                                                   <font>
+                                                      <Font size="14.0" />
+                                                   </font>
+                                                   <opaqueInsets>
+                                                      <Insets right="200.0" />
+                                                   </opaqueInsets>
+                                                </Button>
                                              </children>
                                           </GridPane>
                                        </children>
