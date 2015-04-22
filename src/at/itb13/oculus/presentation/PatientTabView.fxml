@@ -13,7 +13,7 @@
    <children>
       <ToolBar nodeOrientation="RIGHT_TO_LEFT">
          <items>
-            <Button fx:id="_createNewPatientButton" mnemonicParsing="false" onAction="#createNewTab">
+            <Button fx:id="_createNewPatientButton" mnemonicParsing="false" onAction="#newTab">
                <font>
                   <Font size="18.0" />
                </font>
@@ -51,15 +51,8 @@
       </ToolBar>
       <TabPane fx:id="_tabPane" stylesheets="@../../../../../res/font.css">
         <tabs>
-          <Tab fx:id="_newPatient" closable="false" text="%newpatient">
-               <content>
-                  <fx:include fx:id="_patientView" source="PatientView.fxml" />
-               </content>
-            </Tab>
+          
         </tabs>
-         <VBox.margin>
-            <Insets />
-         </VBox.margin>
       </TabPane>
    </children>
 </VBox>

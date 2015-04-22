@@ -124,6 +124,9 @@ public class QueueViewController implements Serializable, Consumer<Boolean>{
 		}
 		
 		_queueEntryViewStage.setScene(new Scene(pane));
+		_queueEntryViewStage.setTitle("Create Queue Entry");
+		//TODO name of Stage --> Language german/english
+		_queueEntryViewStage.setResizable(false);
 		_queueEntryViewStage.show();
 	}
 	
