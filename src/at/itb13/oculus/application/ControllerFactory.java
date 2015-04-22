@@ -16,8 +16,14 @@ public class ControllerFactory {
 	public static QueueEntryController getQueueEntryController(){
 		return new QueueEntryControllerImpl();
 	}
+	
+	public static AppointmentController getAppointmentController(){
+		return new AppointmentControllerImpl();
+	}
 
 	public static <T extends PersistentObject & Searchable> SearchController<T> getSearchController(Class<T> type){
 		return new SearchControllerImpl<T>(type);
 	}
+	
+
 }
