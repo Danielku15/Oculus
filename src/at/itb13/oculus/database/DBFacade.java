@@ -27,13 +27,13 @@ import at.itb13.oculus.model.Queue;
 import at.itb13.oculus.model.QueueEntry;
 import at.itb13.oculus.model.Receptionist;
 import at.itb13.oculus.model.Referral;
-import at.itb13.oculus.model.SearchMap;
-import at.itb13.oculus.model.SearchResult;
-import at.itb13.oculus.model.Searchable;
 import at.itb13.oculus.model.SickNote;
 import at.itb13.oculus.model.User;
 import at.itb13.oculus.model.UserRight;
 import at.itb13.oculus.model.UserRole;
+import at.itb13.oculus.search.FieldMap;
+import at.itb13.oculus.search.SearchResult;
+import at.itb13.oculus.search.Searchable;
 
 public class DBFacade implements AutoCloseable {
 	
@@ -191,7 +191,7 @@ public class DBFacade implements AutoCloseable {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public <T extends PersistentObject & Searchable> SearchResult<T> search(Class<T> type, SearchMap<T> searchMap, String criteria) {	
+	public <T extends PersistentObject & Searchable> SearchResult<T> search(Class<T> type, FieldMap<T> searchMap, String criteria) {	
 		List<T> result = (List<T>) _daoMap.get(type).search(criteria);
 		return new SearchResult<T>(searchMap, result);
 	}

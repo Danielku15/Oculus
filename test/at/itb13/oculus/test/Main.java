@@ -1,34 +1,36 @@
 package at.itb13.oculus.test;
 
+import java.io.IOException;
+
+import at.itb13.oculus.config.ConfigFactory;
+import at.itb13.oculus.database.DBFacade;
+
 public class Main {
 	
 	public static void main(String[] args) {
 		
 ////		GUIApplication.main(args);		
-//
-//		try {
-//			ConfigFacade.load();
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
+
+		try {
+			ConfigFactory.getInstance().getConfig(ConfigFactory.CONFIGFILE).load();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	
-//		try {
-//			dbFacade.indexAll();
-//		} catch (InterruptedException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
+		DBFacade dbFacade = new DBFacade();
+		
+		try {
+			dbFacade.indexAll();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		dbFacade.close();
+		
 //		SearchResult<Patient> searchResult = dbFacade.search(Patient.class, new SearchMap<>(Patient.class), "Pat");
 //		for(String[] res : searchResult.getResults()) {
 //			System.out.println(res);
 //		};
-		
-		try {
-			System.out.println(Class.forName("at.itb13.oculus.model.Patient"));
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		
 //		try {
 //			LangFacade.load();

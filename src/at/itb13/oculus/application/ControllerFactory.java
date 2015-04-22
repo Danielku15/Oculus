@@ -1,15 +1,26 @@
 package at.itb13.oculus.application;
 
 import at.itb13.oculus.database.PersistentObject;
-import at.itb13.oculus.model.Searchable;
+import at.itb13.oculus.search.Searchable;
 
 public class ControllerFactory {
+	
+	private static ControllerFactory _controllerFactory;
+	
+	private ControllerFactory() {}
+	
+	public static ControllerFactory getInstance() {
+		if(_controllerFactory == null) {
+			_controllerFactory = new ControllerFactory();
+		}
+		return _controllerFactory;
+	}
 
-	public static PatientController getPatientController(){
+	public PatientController getPatientController(){
 		return new PatientControllerImpl();
 	}
 	
-	public static QueueController getQueueController(){
+	public QueueController getQueueController(){
 		return new QueueControllerImpl();
 	}
 	
@@ -21,7 +32,7 @@ public class ControllerFactory {
 		return new AppointmentControllerImpl();
 	}
 
-	public static <T extends PersistentObject & Searchable> SearchController<T> getSearchController(Class<T> type){
+	public <T extends PersistentObject & Searchable> SearchController<T> getSearchController(Class<T> type){
 		return new SearchControllerImpl<T>(type);
 	}
 	

@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import at.itb13.oculus.database.PersistentObject;
-import at.itb13.oculus.model.Searchable;
+import at.itb13.oculus.search.Searchable;
 
 /**
  * @author Patrick
@@ -21,5 +21,5 @@ public interface SearchController<T extends PersistentObject & Searchable> {
 	// operations
 	void search();
 	List<String[]> getResults();	
-	Map<String, Integer> getFieldMap();
+	Map<String, Integer> getIndexMap();
 }

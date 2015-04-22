@@ -1,4 +1,4 @@
-package at.itb13.oculus.model;
+package at.itb13.oculus.search;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -18,14 +18,14 @@ import at.itb13.oculus.database.PersistentObject;
  *
  * @param <T>
  */
-public class SearchMap<T extends PersistentObject & Searchable> {
+public class FieldMap<T extends PersistentObject & Searchable> {
 	
-	private Map<String, Integer> _fieldMap;
+	private Map<String, Integer> _indexMap;
 	private Map<String, List<Method>> _methodMap;
 	
-	public SearchMap(Class<T> type) {
+	public FieldMap(Class<T> type) {
 		initMethodMap(type);
-		initFieldMap();
+		initIndexMap();
 	}
 	
 	private void initMethodMap(Class<T> type) {
@@ -76,18 +76,18 @@ public class SearchMap<T extends PersistentObject & Searchable> {
 		return methodName.replaceFirst("(?i)^get", "").replaceFirst("\\(\\)", "").toLowerCase();
 	}
 	
-	private void initFieldMap() {
-		_fieldMap = new HashMap<String, Integer>();
+	private void initIndexMap() {
+		_indexMap = new HashMap<String, Integer>();
 		
 		int index = 0;
-		_fieldMap.put("id", index++);
+		_indexMap.put("id", index++);
 		for(String key : _methodMap.keySet()) {
-			_fieldMap.put(key, index++);
+			_indexMap.put(key, index++);
 		}
 	}
 	
-	public Map<String, Integer> getFieldMap() {
-		return _fieldMap;
+	public Map<String, Integer> getIndexMap() {
+		return _indexMap;
 	}
 	
 	public Map<String, List<Method>> getMethodMap() {

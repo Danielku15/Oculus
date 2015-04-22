@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.function.Consumer;
+
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
@@ -20,6 +21,7 @@ import javafx.scene.control.TabPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import at.itb13.oculus.lang.LangFacade;
 import at.itb13.oculus.lang.LangKey;
@@ -31,6 +33,7 @@ public class PatientTabViewController implements Initializable {
 	public static final String SEARCHVIEW = "SearchView.fxml";
 	private static final Color COLOR_FAIL = Color.RED;
 	private static final Color COLOR_SUCCESS = Color.web("0x333333ff");
+	private static final int STAGEVIEWWIDTH = 830;
 	
 	//instance of PatientTabViewController
 	private static PatientTabViewController _instance;
@@ -93,7 +96,9 @@ public class PatientTabViewController implements Initializable {
 		if (_patientSearchViewController.setCriteria(query)) {
 			setSuccessToSearchLabel();
 			_patientSearchViewController.search(event);
-			_searchViewStage.setTitle(facade.getString(LangKey.SEARCH));
+			_searchViewStage.initModality(Modality.APPLICATION_MODAL);
+			_searchViewStage.setWidth(STAGEVIEWWIDTH);
+			_searchViewStage.setTitle(facade.getString(LangKey.PATIENTSEARCHTITEL));
 			_searchViewStage.setScene(new Scene(pane));
 			_searchViewStage.show();
 		} else {

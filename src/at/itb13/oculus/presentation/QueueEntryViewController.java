@@ -117,7 +117,9 @@ public class QueueEntryViewController implements Serializable, Initializable, Co
 
 		
 		_consumers = new LinkedList<Consumer<Boolean>>();
-		
+
+		_queueEntryController = ControllerFactory.getInstance().getQueueEntryController();
+
 		_queuesList = _queueEntryController.getQueues();
 
 		for (String[] array : _queuesList) {
@@ -300,8 +302,6 @@ public class QueueEntryViewController implements Serializable, Initializable, Co
 			_searchViewStage.show();
 		}
 	}
-
-
 
 	public void init(QueueViewController queueViewController){
 		_queueViewController = queueViewController;

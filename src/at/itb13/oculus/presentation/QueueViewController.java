@@ -52,7 +52,7 @@ public class QueueViewController implements Serializable, Consumer<Boolean>{
 	private ListView<String> _queueViewListView;
 	
 	public void initialize(){
-		_queueController = ControllerFactory.getQueueController();
+		_queueController = ControllerFactory.getInstance().getQueueController();
 		_queues = _queueController.getQueues();
 		
 		
