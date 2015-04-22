@@ -119,6 +119,7 @@ public class PatientTabViewController implements Initializable {
 			}
 		});
 		
+		GUIUtil.validate(_searchLabel, _patientSearchController.setCriteria(_searchInput.getText()));
 		patientSearchViewController.setCriteria(_patientSearchController.getCriteria());
 		patientSearchViewController.search(event);
 		_searchViewStage.initModality(Modality.APPLICATION_MODAL);
