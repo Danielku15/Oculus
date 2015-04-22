@@ -45,7 +45,8 @@ public enum LangKey {
 	INCOMPLETEDATAHEADER("incompletedataheader"),
 	ERRORDIALOGTITEL("errordialogtitel"),
 	OBJECTNOTSAVEDCONTENT("objectnotsavedcontent"),
-	OBJECTNOTSAVEDHEADER("objectnotsavedheader");
+	OBJECTNOTSAVEDHEADER("objectnotsavedheader"),
+	NOSEARCHRESULT("nosearchresult");
 	
 	private String _key;
 	
