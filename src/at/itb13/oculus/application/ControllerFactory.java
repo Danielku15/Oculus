@@ -17,7 +17,7 @@ public class ControllerFactory {
 		return new QueueEntryControllerImpl();
 	}
 
-	public static <T extends PersistentObject & Searchable> SearchController getSearchController(Class<T> type){
+	public static <T extends PersistentObject & Searchable> SearchController<T> getSearchController(Class<T> type){
 		return new SearchControllerImpl<T>(type);
 	}
 }
