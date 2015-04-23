@@ -13,25 +13,10 @@ import javafx.scene.Scene;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+import at.itb13.oculus.application.ControllerFactory;
 import at.itb13.oculus.lang.LangFacade;
 
 public class GUIApplication extends Application {
-	
-	public enum MainView {
-		PATIENTMAINVIEW("PatientMainView.fxml"),
-		TREATMENTMAINVIEW("TreatmentMainView.fxml"),
-		CALENDARMAINVIEW("CalendarMainView.fxml");
-		
-		private String _fxmlFile;
-		
-		private MainView(String fxmlFile) {
-			_fxmlFile = fxmlFile;
-		}
-		
-		public String getFxmlFile() {
-			return _fxmlFile;
-		}
-	}
 	
 	public static final String OCULUSTITEL = "Oculus";
 	private static Map<MainView, Scene> _sceneMap;
@@ -82,6 +67,7 @@ public class GUIApplication extends Application {
 	
 	public static void setScene(MainView mainView) {
 		if(mainView != null) {
+			ControllerFactory.getInstance().getMainController().setMainView(mainView);
     		_stage.setScene(_sceneMap.get(mainView));
 		}
 	}

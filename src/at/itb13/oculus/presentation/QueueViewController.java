@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.function.Consumer;
 
@@ -49,6 +50,7 @@ public class QueueViewController implements Serializable, Consumer<Boolean>{
 	private List<String[]> _queues;
 	private PatientMainViewController _patientMainViewController;
 	
+	private List<QueueEntryChosenListener> _listeners;
 	
 	@FXML
 	private Button _queueViewAddQEntryButton;
@@ -59,28 +61,43 @@ public class QueueViewController implements Serializable, Consumer<Boolean>{
 	@FXML
 	private ListView<QueueEntryObj> _queueViewListView;
 	
+	public QueueViewController() {
+		_listeners = new LinkedList<QueueEntryChosenListener>();
+	}
+	
 	class QueueEntryObj{
         private String _id;
-        private String _patient;
+        private String _patientId;
+        private String _patientName;
         private String _start;
-        
+        private String _appointmentId;
          
-        QueueEntryObj(String id, String patient, String start){
+        QueueEntryObj(String id, String patientId, String patientName, String start, String appointmentId){
             _id = id;
-            _patient = patient;
+            _patientId = patientId;
+            _patientName = patientName;
             _start = start;
+            _appointmentId = appointmentId;
         }
          
         String getId(){
             return _id;
         }
+        
+        String getPatientId(){
+        	return _patientId;
+        }
          
-        String getPatient(){
-            return _patient;
+        String getPatientName(){
+            return _patientName;
         }
         
         String getStart(){
         	return _start;
+        }
+        
+        String getAppointmentId() {
+        	return _appointmentId;
         }
     }
 	
@@ -157,7 +174,7 @@ public class QueueViewController implements Serializable, Consumer<Boolean>{
 		_queueViewListView.getItems().clear();
 		
     	for(String[] queueEntry: queueEntries){
-    		myList.add(new QueueEntryObj(queueEntry[0], queueEntry[5] + " " + queueEntry[6], queueEntry[8]));
+    		myList.add(new QueueEntryObj(queueEntry[0], queueEntry[4], queueEntry[5] + " " + queueEntry[6], queueEntry[8], queueEntry[9]));
     	}
  
         ListView<QueueEntryObj> listView = new ListView<>();
@@ -175,12 +192,12 @@ public class QueueViewController implements Serializable, Consumer<Boolean>{
                     protected void updateItem(QueueEntryObj t, boolean bln) {
                         super.updateItem(t, bln);
                         if (t != null) {
-                        	setText(langInstance.getString(LangKey.PATIENTNAME) + ": " + t.getPatient()+ "\n" + langInstance.getString(LangKey.APPOINTMENTSTART) + ": " + t.getStart());
+                        	setText(langInstance.getString(LangKey.PATIENTNAME) + ": " + t.getPatientName()+ "\n" + langInstance.getString(LangKey.APPOINTMENTSTART) + ": " + t.getStart());
                         	setOnMouseClicked(new EventHandler<MouseEvent>() {
             					@Override
             					public void handle(MouseEvent e) {
             						if(e.getClickCount() >= 2) {
-            							openPatient(t.getId());
+            							notifyListeners(t.getId(), t.getPatientId(), t.getAppointmentId());
             						}
             					}
             				});
@@ -192,6 +209,10 @@ public class QueueViewController implements Serializable, Consumer<Boolean>{
                 return cell;
             }
         });
+	}
+	
+	public void openTreatment(String id){
+		_patientMainViewController.setNewTab(_queueController.getIdOfPatient(id));
 	}
 	
 	public void openPatient(String id){
@@ -212,6 +233,21 @@ public class QueueViewController implements Serializable, Consumer<Boolean>{
 			refresh();
 		}
 		_queueEntryViewStage.close();
+	}
+
+	private void notifyListeners(String queueEntryId, String patientId, String appointmentId) {
+		QueueEntryChosenEvent e = new QueueEntryChosenEvent(this, queueEntryId, patientId, appointmentId);
+		for(QueueEntryChosenListener listener : _listeners) {
+			listener.queueEntryChosen(e);
+		}
+	}
+
+	public void addQueueEntryChosenListener(QueueEntryChosenListener listener) {
+		_listeners.add(listener);
+	}
+	
+	public void removeQueueEntryChosenListener(QueueEntryChosenListener listener) {
+		_listeners.remove(listener);
 	}
 	
 	//init parent - PatientMainViewController
