@@ -83,7 +83,7 @@ class QueueControllerImpl extends Controller implements QueueController {
 			_database.commitTransaction();
 
 			for (QueueEntry queueEntryObj : queueEntriesObj) {
-				String[] queueEntryStr = new String[9];
+				String[] queueEntryStr = new String[10];
 				// queueEntryId
 				queueEntryStr[0] = queueEntryObj.getID();
 				Appointment appointment = queueEntryObj.getAppointment();
@@ -108,6 +108,7 @@ class QueueControllerImpl extends Controller implements QueueController {
 						// appointment start
 						queueEntryStr[8] = start.toString();
 					}
+					queueEntryStr[9] = appointment.getID();
 				}
 				queueEntriesStr.add(queueEntryStr);
 			}
