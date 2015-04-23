@@ -24,6 +24,20 @@ public class ControllerFactory {
 		}
 		return _controllerFactory;
 	}
+	/**
+	 * Getter {@link ControllerFactory#getMainController()} 
+	 * @return {@link MainController}
+	 * Getter {@link ControllerFactory#getPatientController()}
+	 * @return {@link PatientController}
+	 * Getter {@link ControllerFactory#getQueueController()}
+	 * @return {@link QueueController}
+	 * Getter {@link ControllerFactory#getQueueEntryController()}
+	 * @return {@link QueueEntryController}
+	 * Getter {@link ControllerFactory#getTreatmentController()} 
+	 * @return {@link TreatmentController}
+	 * Getter {@link ControllerFactory#getSearchController()} 
+	 * @return {@link SearchController}
+	 */
 	
 	public MainController getMainController() {
 		return MainController.getInstance();

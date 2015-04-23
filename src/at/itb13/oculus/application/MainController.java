@@ -13,6 +13,7 @@ public class MainController {
 	
 	private PatientController _patientController;
 	private QueueController _queueController;
+	private TreatmentController _treatmentController;
 	private MainView _mainView;
 	
 	private MainController() {}
@@ -29,6 +30,10 @@ public class MainController {
 		return _mainController;
 	}
 	
+	/**
+	 * changes the mainView reference
+	 * @param mainView enumeration for the three view modes
+	 */
 	public void setMainView(MainView mainView) {
 		_mainView = mainView;
 	}
@@ -51,5 +56,13 @@ public class MainController {
 	
 	public QueueController getQueueController() {
 		return _queueController;
+	}
+	
+	public void setTreatmentController(TreatmentController treatmentController) {
+		_treatmentController = treatmentController;
+	}
+	
+	public TreatmentController getTreatmentController() {
+		return _treatmentController;
 	}
 }

@@ -263,6 +263,10 @@ class PatientControllerImpl extends Controller implements PatientController {
 	}
 	
 	
+	/**
+	 * @see at.itb13.oculus.application.PatientController#activate()
+	 * update open {@link PatientController}
+	 */
 	@Override
 	public void activate() {
 		MainController.getInstance().setPatientController(this);
