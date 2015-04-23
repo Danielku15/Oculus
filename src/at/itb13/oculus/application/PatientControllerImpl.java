@@ -15,12 +15,17 @@ import at.itb13.oculus.model.Gender;
 import at.itb13.oculus.model.Patient;
 
 /**
- * @author Patrick
+ * 
+ * The PatientController business logic of patient operations
  *
  */
 class PatientControllerImpl extends Controller implements PatientController {
 	
+	/**
+	 * Saves active patient in {@link PatientControllerImpl#_patient} variable {@link Patient}
+	 */
 	private Patient _patient;
+	
 	
 	public PatientControllerImpl() {
 		super();
@@ -256,17 +261,26 @@ class PatientControllerImpl extends Controller implements PatientController {
 		address.setCountry(country);
 		return true;
 	}
-
+	
+	
 	@Override
 	public void activate() {
 		MainController.getInstance().setPatientController(this);
 	}
 	
+	/**
+	 * @see at.itb13.oculus.application.PatientController#createPatient()
+	 * creates new {@link Patient} object in {@link PatientControllerImpl#_patient}
+	 */
 	@Override
 	public void createPatient() {
 		_patient = new Patient();
 	}
 	
+	/**
+	 * @see at.itb13.oculus.application.PatientController#loadPatient(java.lang.String)
+	 * @param patientId ID of patient which will be load from database in {@link PatientControllerImpl#_patient} variable
+	 */
 	@Override
 	public synchronized void loadPatient(String patientId) throws ObjectNotFoundException {
 		Patient patient = null;
@@ -284,7 +298,11 @@ class PatientControllerImpl extends Controller implements PatientController {
 			throw e;
 		}
 	}
-
+	
+	/**
+	 * @see at.itb13.oculus.application.PatientController#savePatient()
+	 * saves active patient of {@link PatientControllerImpl#_patient} variable
+	 */
 	@Override
 	public synchronized void savePatient() throws IncompleteDataException, ObjectNotSavedException {
 		if(validateData()) {
@@ -299,6 +317,10 @@ class PatientControllerImpl extends Controller implements PatientController {
 		}
 	}
 	
+	/** 
+	 * @see at.itb13.oculus.application.PatientController#validateData()
+	 * @return true if the data is valid
+	 */
 	@Override
 	public boolean validateData() throws IncompleteDataException {
 		List<String> fieldNames = new ArrayList<String>();
@@ -317,14 +339,29 @@ class PatientControllerImpl extends Controller implements PatientController {
 		return true;
 	}
 	
+	/**
+	 * checks if first name is valid
+	 * @param firstname testing variable
+	 * @return {@link Boolean} true or false
+	 */
 	private boolean isFirstnameValid(String firstname) {
 		return (firstname != null) && (!firstname.trim().isEmpty());
 	}
-	
+
+	/**
+	 * checks if last name is valid
+	 * @param lastname testing variable
+	 * @return {@link Boolean} true or false
+	 */
 	private boolean isLastnameValid(String lastname) {
 		return (lastname != null) && (!lastname.trim().isEmpty());
 	}
-	
+
+	/**
+	 * checks if social security number is valid
+	 * @param social security number testing variable
+	 * @return {@link Boolean} true or false
+	 */
 	private boolean isSocialSecurityNumberValid(String socialSecurityNumber) {
 		if(socialSecurityNumber != null) {
 			String regExp = "^[0-9]{10}$";

@@ -9,3 +9,4 @@ appointmentsearch.properties
 log*.txt*
 *.lck
 /bin/
+/doc/*
