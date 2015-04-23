@@ -9,11 +9,11 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox minWidth="520.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="at.itb13.oculus.presentation.PatientTabViewController">
+<VBox minWidth="520.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="at.itb13.oculus.presentation.TreatmentTabViewController">
    <children>
       <ToolBar nodeOrientation="RIGHT_TO_LEFT">
          <items>
-            <Button fx:id="_createNewPatientButton" mnemonicParsing="false" onAction="#newTab">
+            <Button mnemonicParsing="false" onAction="#newTab">
                <font>
                   <Font size="18.0" />
                </font>
