@@ -46,7 +46,7 @@ public class AppointmentViewController implements Initializable {
 
 	public AppointmentViewController(){
 		
-		_appointmentController = ControllerFactory.getAppointmentController();
+		_appointmentController = ControllerFactory.getInstance().getAppointmentController();
 	}
 	
 	

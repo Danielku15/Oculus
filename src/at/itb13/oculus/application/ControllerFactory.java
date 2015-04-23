@@ -24,11 +24,11 @@ public class ControllerFactory {
 		return new QueueControllerImpl();
 	}
 	
-	public static QueueEntryController getQueueEntryController(){
+	public QueueEntryController getQueueEntryController(){
 		return new QueueEntryControllerImpl();
 	}
 	
-	public static AppointmentController getAppointmentController(){
+	public AppointmentController getAppointmentController(){
 		return new AppointmentControllerImpl();
 	}
 
