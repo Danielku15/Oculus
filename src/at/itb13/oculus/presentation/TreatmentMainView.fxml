@@ -8,7 +8,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="at.itb13.oculus.presentation.PatientMainViewController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="at.itb13.oculus.presentation.TreatmentMainViewController">
    <children>
       <SplitPane fx:id="_splitPane" dividerPositions="0.5" minWidth="-Infinity">
         <items>
@@ -17,7 +17,7 @@
                   <fx:include fx:id="_queueView" source="QueueView.fxml" />
                </children>
             </VBox>
-			<fx:include fx:id="_patientTabView" source="PatientTabView.fxml" />
+			<Pane />
         </items>
       </SplitPane>
       <AnchorPane VBox.vgrow="ALWAYS">
