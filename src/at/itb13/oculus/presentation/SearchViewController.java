@@ -24,9 +24,6 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.util.Callback;
 import at.itb13.oculus.application.ControllerFactory;
@@ -37,7 +34,6 @@ import at.itb13.oculus.database.PersistentObject;
 import at.itb13.oculus.lang.LangFacade;
 import at.itb13.oculus.lang.LangKey;
 import at.itb13.oculus.search.Searchable;
-import at.itb13.oculus.util.GUIUtil;
 
 /**
  * @author Patrick
@@ -63,9 +59,7 @@ public class SearchViewController<T extends PersistentObject & Searchable> {
 	private Map<String, ColumnConfig> _columnConfigMap;
 	
 	@FXML
-	private Label _searchInputLabel;
-	@FXML
-	private TextField _searchInput;
+	private SearchPanelController _searchPanelController;
 	@FXML
 	private TableView<String[]> _tableView;
 	
@@ -219,21 +213,17 @@ public class SearchViewController<T extends PersistentObject & Searchable> {
 		
 		_tableView.setPlaceholder(new Label(LangFacade.getInstance().getString(LangKey.NOSEARCHRESULT)));
 		
-		_searchInput.focusedProperty().addListener(new ChangeListener<Boolean>() {
+		_searchPanelController.setOnSearchAction(new EventHandler<ActionEvent>() {
 			@Override
-			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-				if(!newValue) {
-					GUIUtil.validate(_searchInputLabel, _searchController.setCriteria(_searchInput.getText()));
-				}
+			public void handle(ActionEvent e) {
+				search();
 			}
 		});
 		
-		_searchInput.addEventHandler(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
+		_searchPanelController.addCriteriaChangeListener(new CriteriaChangeListener(){
 			@Override
-			public void handle(KeyEvent e) {
-				if(e.getCode().equals(KeyCode.ENTER)) {
-					search(null);
-				}
+			public void onCriteriaChange(CriteriaChangeEvent e) {
+				_searchController.setCriteria(e.getCriteria());
 			}
 		});
 	}
@@ -264,8 +254,8 @@ public class SearchViewController<T extends PersistentObject & Searchable> {
 	 * @param event
 	 */
 	@FXML
-	public void search(ActionEvent event) {
-		GUIUtil.validate(_searchInputLabel, _searchController.setCriteria(_searchInput.getText()));
+	public void search() {
+		//GUIUtil.validate(_searchInputLabel, _searchController.setCriteria(_searchInput.getText()));
 		new Thread(new SearchTask()).start();
 	}
 	
@@ -312,10 +302,7 @@ public class SearchViewController<T extends PersistentObject & Searchable> {
 	 * @return true if the search criteria was valid, false if the search criteria was not valid
 	 */
 	public boolean setCriteria(String criteria) {
-		_searchInput.setText(criteria);
-		boolean valid = _searchController.setCriteria(criteria);
-		GUIUtil.validate(_searchInputLabel, valid);
-		return valid;
+		return _searchPanelController.setCriteria(criteria);
 	}
 	
 	private class ColumnConfig {

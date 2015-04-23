@@ -35,14 +35,19 @@ class SearchControllerImpl<T extends PersistentObject & Searchable> extends Cont
 	@Override
 	public boolean setCriteria(String criteria) {
 		_criteria = criteria;
-		return ((criteria != null) && ((criteria.trim().isEmpty()) || (criteria.trim().length() >= MINCRITERIALENGTH)));
+		return isCriteriaValid(criteria);
 	}
 
+	private boolean isCriteriaValid(String criteria) {
+		return ((criteria != null) && ((criteria.trim().isEmpty()) || (criteria.trim().length() >= MINCRITERIALENGTH)));
+	}
+	
 	@Override
 	public void search() {
-		if(_criteria != null) {
-			_searchResult = _database.search(_type, _fieldMap, _criteria);
+		if(_criteria == null) {
+			_criteria = "";
 		}
+		_searchResult = _database.search(_type, _fieldMap, _criteria);
 	}
 
 	@Override

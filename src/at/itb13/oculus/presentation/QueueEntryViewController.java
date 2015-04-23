@@ -285,7 +285,7 @@ public class QueueEntryViewController implements Serializable, Initializable, Co
 		patientSearchViewController.addConsumer(this);
 
 		if (patientSearchViewController.setCriteria(query)) {
-			patientSearchViewController.search(event);
+			patientSearchViewController.search();
 			_searchViewStage.setScene(new Scene(pane));
 			_searchViewStage.show();
 		}
