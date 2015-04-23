@@ -14,12 +14,21 @@ import at.itb13.oculus.model.QueueEntry;
 import at.itb13.oculus.util.DateUtil;
 
 /**
- * @author Patrick
+ * 
+ * QueueEntryController is responsible for the single queue entries
  *
  */
 class QueueEntryControllerImpl extends Controller implements QueueEntryController {
 
+	/**
+	 * @see QueueEntryControllerImpl#_patient
+	 * saves actual selected patient
+	 */
 	private Patient _patient;
+	/**
+	 * @see QueueEntryControllerImpl#_patient
+	 * saves assigned queue entry
+	 */
 	private QueueEntry _queueEntry;
 
 	public QueueEntryControllerImpl() {
@@ -103,6 +112,15 @@ class QueueEntryControllerImpl extends Controller implements QueueEntryControlle
 		return null;
 	}
 
+
+	/** 
+	 * @see at.itb13.oculus.application.QueueEntryController#getQueues()
+	 * This method loads all queues for database and fills them into a {@link List}
+	 * The information of the queue are saved in a {@link String} {@link Array}
+	 * Position 0 contains queue id
+	 * Position 1 contains queue name
+	 * @return {@link List} with {@link String} {@link Array} from {@link Queue}
+	 */
 	@Override
 	public synchronized List<String[]> getQueues() {
 		List<String[]> queuesStr = new ArrayList<String[]>();
@@ -126,6 +144,18 @@ class QueueEntryControllerImpl extends Controller implements QueueEntryControlle
 		return queuesStr;
 	}
 
+	/**
+	 * @see at.itb13.oculus.application.QueueEntryController#getAppointmentsByPatientId(java.lang.String)
+	 * This method loads all appointments for database and fills them into a {@link List}
+	 * The information of the appointment are saved in a {@link String} {@link Array}
+	 * Position 0 contains appointment id
+	 * Position 1 contains appointment title
+	 * Position 2 contains appointment description
+	 * Position 3 contains appointment start
+	 * Position 4 contains employee	first name
+	 * Position 5 contains employee last name
+	 * @return {@link List} with {@link String} {@link Array} from {@link Appointment} by {@link Patient}
+	 */
 	@Override
 	public synchronized List<String[]> getAppointmentsByPatientId(String patientId) {
 		List<String[]> appointmentsStr = new ArrayList<String[]>();
@@ -156,11 +186,20 @@ class QueueEntryControllerImpl extends Controller implements QueueEntryControlle
 		return appointmentsStr;
 	}
 	
+	/**
+	 * @see at.itb13.oculus.application.QueueEntryController#createQueueEntry()
+	 * saves this queue entry into the database
+	 */
 	@Override
 	public void createQueueEntry() {
 		_queueEntry = new QueueEntry();
 	}
 	
+	/**
+	 * @see at.itb13.oculus.application.QueueEntryController#loadQueueEntry(java.lang.String)
+	 * loads the right queue entry into the {@link QueueEntryControllerImpl#_queueEntry} {@link QueueEntry}
+	 * @param queueEntryId the id of the required queue entry
+	 */
 	@Override
 	public synchronized void loadQueueEntry(String queueEntryId) throws ObjectNotFoundException {
 		try {
@@ -178,6 +217,11 @@ class QueueEntryControllerImpl extends Controller implements QueueEntryControlle
 		}
 	}
 	
+	/**
+	 * @see at.itb13.oculus.application.QueueEntryController#fetchPatient(java.lang.String)
+	 * loads the selected patient into the {@link QueueEntryControllerImpl#_patient} {@link Patient}
+	 * @param patientId the id of the selected patient {@link Patient}
+	 */
 	@Override
 	public synchronized void fetchPatient(String patientId) throws ObjectNotFoundException {
 		try {
@@ -195,6 +239,11 @@ class QueueEntryControllerImpl extends Controller implements QueueEntryControlle
 		}
 	}
 	
+	/**
+	 * @see at.itb13.oculus.application.QueueEntryController#fetchAppointment(java.lang.String)
+	 * loads the selected appointment into {@link QueueEntryControllerImpl#_queueEntry} by {@link QueueEntry#setAppointment(Appointment)}
+	 * @param appointmentId the id of the selected appointment
+	 */
 	@Override
 	public synchronized void fetchAppointment(String appointmentId) throws ObjectNotFoundException {
 		try {
@@ -212,6 +261,11 @@ class QueueEntryControllerImpl extends Controller implements QueueEntryControlle
 		}
 	}	
 	
+	/**
+	 * @see at.itb13.oculus.application.QueueEntryController#fetchQueue(java.lang.String)
+	 * loads the selected queue into {@link QueueEntryControllerImpl#_queueEntry} by {@link QueueEntry#setQueue(Queue)}
+	 * @param queueId the id of the selected queue
+	 */
 	@Override
 	public synchronized void fetchQueue(String queueId) throws ObjectNotFoundException {
 		try {
@@ -229,6 +283,10 @@ class QueueEntryControllerImpl extends Controller implements QueueEntryControlle
 		}
 	}
 	
+	/**
+	 * @see at.itb13.oculus.application.QueueEntryController#saveQueueEntry()
+	 * saves this queue entry from {@link QueueEntryControllerImpl#_queueEntry} into the database
+	 */
 	@Override
 	public synchronized boolean saveQueueEntry() throws IncompleteDataException, DataMismatchException, ObjectNotSavedException {
 		if(validateData()) {
@@ -246,6 +304,11 @@ class QueueEntryControllerImpl extends Controller implements QueueEntryControlle
 		return false;
 	}
 
+	/**
+	 * @see at.itb13.oculus.application.QueueEntryController#validateData()
+	 * checks if all data is set and valid
+	 * @return {@link Boolean} success or failure
+	 */
 	@Override
 	public boolean validateData() throws IncompleteDataException, DataMismatchException {
 		List<String> fieldNames = new ArrayList<String>();
@@ -272,11 +335,19 @@ class QueueEntryControllerImpl extends Controller implements QueueEntryControlle
 		return true;
 	}
 
+	/**
+	 * @see at.itb13.oculus.application.QueueEntryController#getQueueId()
+	 * @return the selected queue id as {@link String} at {@link at.itb13.oculus.presentation.QueueViewController} from {@link MainController} by controller {@link MainController#getQueueController()}
+	 */
 	@Override
 	public String getQueueId() {
 		return MainController.getInstance().getQueueController().getQueueId();
 	}
 
+	/**
+	 * @see at.itb13.oculus.application.QueueEntryController#getPatientId()
+	 * @return the selected patient id as {@link String} at {@link at.itb13.oculus.presentation.PatientTabViewController} from {@link MainController} by controller {@link MainController#getPatientController()}
+	 */
 	@Override
 	public String getPatientId() {
 		PatientController tempController = MainController.getInstance().getPatientController();

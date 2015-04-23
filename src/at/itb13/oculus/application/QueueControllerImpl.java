@@ -14,7 +14,8 @@ import at.itb13.oculus.model.QueueEntry;
 import at.itb13.oculus.util.DateUtil;
 
 /**
- * @author Carola
+ * 
+ * The QueueController is responsible for operating with queues
  *
  */
 class QueueControllerImpl extends Controller implements QueueController {
@@ -25,6 +26,14 @@ class QueueControllerImpl extends Controller implements QueueController {
 		super();
 	}
 
+	/** 
+	 * @see at.itb13.oculus.application.QueueController#getQueues()
+	 * This method loads all queues for database and fills them into a {@link List}
+	 * The information of the queue are saved in a {@link String} {@link Array}
+	 * Position 0 contains queue id
+	 * Position 1 contains queue name
+	 * @return {@link List} with {@link String} {@link Array} from {@link Queue}
+	 */
 	@Override
 	public synchronized List<String[]> getQueues() {
 		List<String[]> queuesStr = new ArrayList<String[]>();
@@ -48,6 +57,21 @@ class QueueControllerImpl extends Controller implements QueueController {
 		return queuesStr;
 	}
 
+	/**
+	 * @see at.itb13.oculus.application.QueueController#getQueueEntries(java.lang.String)
+	 * This method loads all queues entries for database and fills them into a {@link List}
+	 * @param queueId is id from queue where the entries are saved
+	 * The information of the queue entries are saved in a {@link String} {@link Array}
+	 * Position 0 contains queue entry id
+	 * Position 1 contains employee id
+	 * Position 2 contains employee first name
+	 * Position 3 contains employee last name
+	 * Position 4 contains patient id
+	 * Position 5 contains patient first name
+	 * Position 6 contains patient last name
+	 * Position 7 contains patient social security number
+	 * @return {@link List} with {@link String} {@link Array} from {@link QueueEntry}
+	 */
 	@Override
 	public synchronized List<String[]> getQueueEntries(String queueId) {
 		List<String[]> queueEntriesStr = new ArrayList<String[]>();
@@ -94,29 +118,12 @@ class QueueControllerImpl extends Controller implements QueueController {
 		return queueEntriesStr;
 	}
 	
-	public synchronized List<String[]> getEmployees() {
-		List<String[]> employeesStr = new ArrayList<String[]>();
-		List<Employee> employeesObj = new ArrayList<Employee>();
-
-		try {
-			_database.beginTransaction();
-			employeesObj = _database.getAll(Employee.class);
-			_database.commitTransaction();
-
-			for (Employee employeeObj : employeesObj) {
-				String[] employeeStr = new String[3];
-				employeeStr[0] = employeeObj.getID();
-				employeeStr[1] = employeeObj.getFirstname();
-				employeeStr[2] = employeeObj.getLastname();
-				employeesStr.add(employeeStr);
-			}
-		} catch (HibernateException e) {
-			_database.rollbackTransaction();
-			throw e;
-		}
-		return employeesStr;
-	}
-	
+	/**
+	 * @see at.itb13.oculus.application.QueueController#getIdOfQueue(java.lang.String)
+	 * loads the id of queue by name from database
+	 * @param queueName name of queue
+	 * @return id of queue
+	 */
 	public synchronized String getIdOfQueue(String queueName){
 		Queue queue = null;
 		try {
@@ -133,20 +140,38 @@ class QueueControllerImpl extends Controller implements QueueController {
 		return null;
 	}
 	
+	/**
+	 * @see at.itb13.oculus.application.QueueController#getQueueId()
+	 * @return id of active queue saved in {@link QueueControllerImpl#_activeQueue}
+	 */
 	@Override
 	public String getQueueId() {
 		return _activeQueue.getID();
 	}
 	
+	/**
+	 * @see at.itb13.oculus.application.QueueController#activate()
+	 * activates queue controller in {@link MainController} by {@link MainController#setQueueController(QueueController)}
+	 */
 	@Override
 	public void activate() {
 		MainController.getInstance().setQueueController(this);
 	}
 	
+	/**
+	 * @see at.itb13.oculus.application.QueueController#fetchQueue()
+	 * activates queue by saving into {@link QueueControllerImpl#_activeQueue}
+	 */
 	public void fetchQueue(String queueName){
 		_activeQueue = _database.getQueueByName(queueName);
 	}
 	
+	/**
+	 * @see at.itb13.oculus.application.QueueController#getIdOfPatient(java.lang.String)
+	 * loads the id of patient by name from database
+	 * @param queueEntryId id of queue entry where the patient is referenced
+	 * @return id of patient from queue entry
+	 */
 	public synchronized String getIdOfPatient(String queueEntryId){
 		QueueEntry queue = null;
 		try {
