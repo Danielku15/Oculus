@@ -97,24 +97,16 @@ public class QueueEntryViewController implements Serializable, Initializable, Co
 	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		
-		if(_patientID != null){
-			try {
-				_queueEntryController.fetchPatient(_patientID);
-				_appointmentList = _queueEntryController.getAppointmentsByPatientId(_patientID);
-				addAppointment();
-				fillAppointmentDataForInitializeMethod();
-								
-			} catch (ObjectNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			if(_queueEntryController.getPatientFirstname() != null && _queueEntryController.getPatientLastname() != null){
-				_patientTbx.setText(_queueEntryController.getPatientFirstname() + " " + _queueEntryController.getPatientLastname());
-			}
-
-
-
+	
+		try {
+			_queueEntryController.fetchPatient(_patientID);
+			_appointmentList = _queueEntryController.getAppointmentsByPatientId(_patientID);
+			addAppointment();
+			fillAppointmentDataForInitializeMethod();
+			_patientTbx.setText(_queueEntryController.getPatientFirstname() + " " + _queueEntryController.getPatientLastname());
+		} catch (ObjectNotFoundException e) {
+			// TODO Auto-generated catch block
+			//e.printStackTrace();
 		}
 
 		_queuesList = _queueEntryController.getQueues();
