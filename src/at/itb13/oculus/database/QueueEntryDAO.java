@@ -11,7 +11,6 @@ import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 
-import at.itb13.oculus.model.Patient;
 import at.itb13.oculus.model.QueueEntry;
 
 /**
