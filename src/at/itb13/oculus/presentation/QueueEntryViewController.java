@@ -110,9 +110,8 @@ public class QueueEntryViewController implements Serializable, Initializable, Co
 				e.printStackTrace();
 			}
 			
-			if(_queueEntryController.getPatientFirstname() != null && _queueEntryController.getPatientLastname() != null){
 				_patientTbx.setText(_queueEntryController.getPatientFirstname() + " " + _queueEntryController.getPatientLastname());
-			}
+
 
 		}
 
