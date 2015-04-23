@@ -10,9 +10,13 @@
 <?import javafx.scene.layout.*?>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 <VBox minWidth="520.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="at.itb13.oculus.presentation.AppointmentViewController">
 =======
 <VBox minWidth="520.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" >
+>>>>>>> branch 'master' of https://github.com/DomKB/Oculus.git
+=======
+<VBox minWidth="520.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="at.itb13.oculus.presentation.AppointmentTabViewController">
 >>>>>>> branch 'master' of https://github.com/DomKB/Oculus.git
    <children>
       <ToolBar nodeOrientation="RIGHT_TO_LEFT">

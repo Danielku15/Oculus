@@ -38,13 +38,10 @@ public class AppointmentTabViewController {
 	
 	@FXML
     void searchPatient(ActionEvent event) {	
-		
 	}
 
 	// Event Listener on Button[#_createNewPatientButton].onAction
 	@FXML
-	public void newTab(ActionEvent event) {
-		
+	public void newTab(ActionEvent event) {	
 	}
-
 }
