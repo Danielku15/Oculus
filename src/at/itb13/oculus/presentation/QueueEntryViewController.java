@@ -20,10 +20,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import at.itb13.oculus.application.ControllerFactory;
@@ -106,8 +108,11 @@ public class QueueEntryViewController implements Serializable, Initializable, Co
 				fillAppointmentDataForInitializeMethod();
 								
 			} catch (ObjectNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				Alert errorMessage = new Alert(AlertType.ERROR);
+				errorMessage.setTitle("Tesr");
+				errorMessage.setHeaderText("test");
+				errorMessage.setContentText("Test");
+				errorMessage.showAndWait();
 			}
 			if(_queueEntryController.getPatientFirstname() != null && _queueEntryController.getPatientLastname() != null){
 				_patientTbx.setText(_queueEntryController.getPatientFirstname() + " " + _queueEntryController.getPatientLastname());
