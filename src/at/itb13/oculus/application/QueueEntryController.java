@@ -4,7 +4,8 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * @author Patrick
+ * 
+ * Queue entry controller interface
  *
  */
 public interface QueueEntryController extends AutoCloseable {

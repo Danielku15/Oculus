@@ -1,7 +1,10 @@
 package at.itb13.oculus.config;
 
-/** Represents an entry in the configuration file that can be access with a specified key
- * @author Patrick
+/** 
+ * 
+ * Represents an entry in the configuration file that can be access with a specified key
+ * @category enumeration
+ * 
  */
 public enum ConfigKey {
 	LANGUAGE("language"),

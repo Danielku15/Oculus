@@ -11,11 +11,16 @@ import java.util.Map;
 import java.util.Properties;
 
 /**
- * @author Patrick
+ * 
+ * ConfigFactory is a singleton class
+ * The factory creates and saves configurations
  *
  */
 public class ConfigFactory {
-
+	
+	/**
+	 * name of the default configuration file
+	 */
 	public static final String CONFIGFILE = "config.properties";
 	
 	private static ConfigFactory _configFactory;
@@ -25,6 +30,9 @@ public class ConfigFactory {
 		_configMap = new HashMap<String, Config>();
 	}
 	
+	/**
+	 * @return instance of the singleton factory
+	 */
 	public static ConfigFactory getInstance() {
 		if(_configFactory == null) {
 			_configFactory = new ConfigFactory();
@@ -39,17 +47,28 @@ public class ConfigFactory {
 		return _configMap.get(filePath);
 	}
 	
+	/**
+	 * 
+	 * inner class with additional configuration information storage
+	 *
+	 */
 	public class Config {
 		
 		private String _filePath;
 		private Properties _properties;
 		private boolean _loaded;
 		
+		/**
+		 * @param filePath path of configuration file
+		 */
 		private Config(String filePath) {
 			_filePath = filePath;
 			_properties = new Properties();
 		}
 		
+		/**
+		 * loads the file from path and saves dem into {@link Config#_properties} {@link Properties}
+		 */
 		public void load() throws IOException {
 			InputStream in = null;
 			try {
@@ -63,6 +82,9 @@ public class ConfigFactory {
 			}
 		}
 		
+		/**
+		 * writes changes and additions into file by file path
+		 */
 		public void save() throws IOException {		
 			OutputStream out = null;
 			try {

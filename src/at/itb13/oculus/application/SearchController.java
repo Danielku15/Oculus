@@ -6,8 +6,10 @@ import java.util.Map;
 import at.itb13.oculus.database.PersistentObject;
 import at.itb13.oculus.search.Searchable;
 
+
 /**
- * @author Patrick
+ * 
+ * Search controller interface
  *
  */
 public interface SearchController<T extends PersistentObject & Searchable> {
