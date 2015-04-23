@@ -1,7 +1,8 @@
 package at.itb13.oculus.database;
 
 /**
- * @author Patrick
+ * 
+ * Interface for PersistentObject
  *
  */
 public interface PersistentObject {

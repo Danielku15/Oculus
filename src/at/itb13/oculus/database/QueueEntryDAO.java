@@ -1,18 +1,17 @@
-/**
- * Autor: Manu Ljubicic
- * Projekt: Oculus
- * Datum: 03.04.2015
- */
 package at.itb13.oculus.database;
 
 import java.util.Date;
 import java.util.List;
+
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
+
 import at.itb13.oculus.model.QueueEntry;
 
 /**
- * @author Manu
+ * 
+ * DAO (Data Access Object) of all {@link QueueEntry}
+ * @category DAO
  *
  */
 class QueueEntryDAO extends GenericDAOImpl<QueueEntry, String> {

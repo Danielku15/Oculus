@@ -24,7 +24,8 @@ import org.hibernate.search.annotations.TokenizerDef;
 import at.itb13.oculus.util.IdGenerator;
 
 /**
- * @author Patrick
+ * 
+ * implements {@link PersistentObject} and describes the search functionality and search algorithms
  *
  */
 @AnalyzerDefs({

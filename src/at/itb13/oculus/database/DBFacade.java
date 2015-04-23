@@ -35,6 +35,13 @@ import at.itb13.oculus.search.FieldMap;
 import at.itb13.oculus.search.SearchResult;
 import at.itb13.oculus.search.Searchable;
 
+/**
+ * 
+ * Facade for database access
+ * contains all DAOs and {@link Session}
+ * @category DAO
+ *
+ */
 public class DBFacade implements AutoCloseable {
 	
 	private Session _session;
@@ -124,26 +131,44 @@ public class DBFacade implements AutoCloseable {
 		_daoMap.put(UserRole.class, _userRoleDAO);
 	}
 	
+	/**
+	 * @category Transaction	
+	 */
 	public void beginTransaction() {
 		_session.beginTransaction();
 	}
 	
+	/**
+	 * @category Transaction	
+	 */
 	public void commitTransaction() {
 		_session.getTransaction().commit();
 	}
 	
+	/**
+	 * @category Transaction	
+	 */
 	public void rollbackTransaction() {
 		_session.getTransaction().rollback();
 	}
 	
+	/**
+	 * @category Transaction	
+	 */
 	public void beginTransactionFulltext() {
 		_fullTextSession.beginTransaction();
 	}
 	
+	/**
+	 * @category Transaction	
+	 */
 	public void commitTransactionFulltext() {
 		_fullTextSession.getTransaction().commit();
 	}
 	
+	/**
+	 * @category Transaction	
+	 */
 	public void rollbackTransactionFulltext() {
 		_fullTextSession.getTransaction().rollback();
 	}
@@ -196,6 +221,7 @@ public class DBFacade implements AutoCloseable {
 		return new SearchResult<T>(searchMap, result);
 	}
 	
+	//getter
 	public List<ChangeLog> getChangeLogsGreaterThan(int number, int maxResults) {
 		return ((ChangeLogDAO) _changeLogDAO).getGreaterThan(number, maxResults);
 	}
@@ -223,7 +249,10 @@ public class DBFacade implements AutoCloseable {
 	public List<Appointment> getAppointmentsByPatientId(String patientId, Date lowerBound) {
 		return ((AppointmentDAO) _appointmentDAO).getByPatientId(patientId, lowerBound);
 	}
-		
+	
+	/**
+	 * closes session
+	 */
 	@Override
 	public void close() {
 		_session.close();

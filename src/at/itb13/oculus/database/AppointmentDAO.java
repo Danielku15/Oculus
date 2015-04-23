@@ -1,8 +1,3 @@
-/**
- * Autor: Manu Ljubicic
- * Projekt: Oculus
- * Datum: 03.04.2015
- */
 package at.itb13.oculus.database;
 
 import java.util.ArrayList;
@@ -15,7 +10,9 @@ import org.hibernate.criterion.Restrictions;
 import at.itb13.oculus.model.Appointment;
 
 /**
- * @author Manu
+ * 
+ * DAO (Data Access Object) of all {@link Appointment}
+ * @category DAO
  *
  */
 class AppointmentDAO extends GenericDAOImpl<Appointment, String> {
@@ -24,6 +21,11 @@ class AppointmentDAO extends GenericDAOImpl<Appointment, String> {
 		super(Appointment.class, session);
 	}
 	
+	/**
+	 * @param patientId criteria appointments of patient with this id
+	 * @param lowerBound criteria not older than today
+	 * @return {@link List} of {@link Appointment}
+	 */
 	public List<Appointment> getByPatientId(String patientId, Date lowerBound) {
 		List<Appointment> list = new ArrayList<Appointment>();
 		if(lowerBound == null) {
@@ -34,6 +36,12 @@ class AppointmentDAO extends GenericDAOImpl<Appointment, String> {
 		return list;
 	}
 	
+	/**
+	 * @see at.itb13.oculus.database.GenericDAOImpl#search(java.lang.String)
+	 * search of {@link Appointment} depending on parameter
+	 * @param criteria for the search
+	 * @return {@link List} of search results
+	 */
 	@Override
 	public List<Appointment> search(String criteria) {		
 		return search(criteria,

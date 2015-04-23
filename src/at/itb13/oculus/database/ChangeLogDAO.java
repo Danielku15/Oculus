@@ -1,8 +1,3 @@
-/**
- * Autor: Manu Ljubicic
- * Projekt: Oculus
- * Datum: 03.04.2015
- */
 package at.itb13.oculus.database;
 
 import java.util.List;
@@ -13,7 +8,9 @@ import org.hibernate.criterion.Restrictions;
 import at.itb13.oculus.model.ChangeLog;
 
 /**
- * @author Patrick
+ * 
+ * DAO (Data Access Object) of all {@link ChangeLog}
+ * @category DAO
  *
  */
 class ChangeLogDAO extends GenericDAOImpl<ChangeLog, String> {

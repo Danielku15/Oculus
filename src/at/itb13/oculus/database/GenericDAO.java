@@ -6,10 +6,10 @@ import java.util.List;
 import org.hibernate.criterion.Criterion;
 
 /**
- * @author Patrick
- *
+ * generic DAO (Data Access Object) interface
  * @param <T> type of persistent object
  * @param <PK> type of primary key
+ * @category DAO
  */
 interface GenericDAO<T extends PersistentObject, PK extends Serializable> {
 	

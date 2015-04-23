@@ -1,15 +1,13 @@
-/**
- * Autor: Manu Ljubicic
- * Projekt: Oculus
- * Datum: 03.04.2015
- */
 package at.itb13.oculus.database;
 
 import org.hibernate.Session;
+
 import at.itb13.oculus.model.Insurance;
 
 /**
- * @author Manu
+ * 
+ * DAO (Data Access Object) of all {@link Insurance}
+ * @category DAO
  *
  */
 class InsuranceDAO extends GenericDAOImpl<Insurance, String> {

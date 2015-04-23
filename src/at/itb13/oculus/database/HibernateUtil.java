@@ -6,6 +6,11 @@ import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 
+/**
+ * 
+ * This class creates a SessionFactory object which in turn can open up new Session's.
+ *
+ */
 public final class HibernateUtil {
 		
 	private static SessionFactory _sessionFactory;

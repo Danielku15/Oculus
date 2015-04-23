@@ -1,8 +1,3 @@
-/**
- * Autor: Manu Ljubicic
- * Projekt: Oculus
- * Datum: 31.03.2015
- */
 package at.itb13.oculus.database;
 
 import java.util.List;
@@ -13,7 +8,9 @@ import org.hibernate.criterion.Restrictions;
 import at.itb13.oculus.model.Patient;
 
 /**
- * @author Manu
+ * 
+ * DAO (Data Access Object) of all {@link Patient}
+ * @category DAO
  *
  */
 class PatientDAO extends GenericDAOImpl<Patient, String> {
@@ -23,7 +20,7 @@ class PatientDAO extends GenericDAOImpl<Patient, String> {
 	}	
 	
 	/**
-	 * Returns a list of patients where firstname OR lastname LIKE name.
+	 * Returns a list of patients where first name OR last name LIKE name.
 	 * @param name of patients to search for
 	 * @return list of patients
 	 */
@@ -31,6 +28,12 @@ class PatientDAO extends GenericDAOImpl<Patient, String> {
 		return getByCriterion(Restrictions.or(Restrictions.like("firstname", name), Restrictions.like("lastname", name)));
 	}
 	
+	/**
+	 * @see at.itb13.oculus.database.GenericDAOImpl#search(java.lang.String)
+	 * search of {@link Patient} depending on parameter
+	 * @param criteria for the search
+	 * @return {@link List} of search results
+	 */
 	@Override
 	public List<Patient> search(String criteria) {		
 		return search(criteria,

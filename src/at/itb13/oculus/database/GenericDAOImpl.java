@@ -12,10 +12,11 @@ import org.hibernate.search.Search;
 import org.hibernate.search.query.dsl.QueryBuilder;
 
 /**
- * @author Patrick
- *
- * @param <T>
- * @param <PK>
+ * generic DAO (Data Access Object) superclass for all DAO classes
+ * implements general functions for all DAO classes
+ * @param <T> type of persistent object
+ * @param <PK> type of primary key
+ * @category DAO
  */
 abstract class GenericDAOImpl<T extends PersistentObject, PK extends Serializable> implements GenericDAO<T, PK> {
 
@@ -69,7 +70,13 @@ abstract class GenericDAOImpl<T extends PersistentObject, PK extends Serializabl
 		}
         return crit.list();
 	}
-	
+
+	/**
+	 * search of object depending on parameter
+	 * @param criteria for the search
+	 * @param fields for search
+	 * @return {@link List} of search results
+	 */
 	@SuppressWarnings("unchecked")
 	public List<T> search(String criteria, String... fields) {
 		FullTextSession fullTextSession = Search.getFullTextSession(_session);
@@ -83,7 +90,12 @@ abstract class GenericDAOImpl<T extends PersistentObject, PK extends Serializabl
 		org.hibernate.Query fullTextQuery = fullTextSession.createFullTextQuery(luceneQuery, _type);
 		return (List<T>) fullTextQuery.list();
 	}
-	
+
+	/**
+	 * search of object depending on parameter
+	 * @param criteria for the search
+	 * @return {@link List} of search results
+	 */
 	public List<T> search(String criteria) {
 		throw new UnsupportedOperationException("Method has to be implemented in subclass!");
 	}
@@ -94,17 +106,29 @@ abstract class GenericDAOImpl<T extends PersistentObject, PK extends Serializabl
         return _session.createCriteria(_type).list();
 	}
 	
+	/**
+	 * @see at.itb13.oculus.database.GenericDAO#createOrUpdate(at.itb13.oculus.database.PersistentObject)
+	 * creates or updates object by hibernate into database
+	 */
 	@Override
 	public void createOrUpdate(T object) {
 		// TODO: prüfen ob saveOrUpdate für alle Fälle geeignet ist!
 		_session.saveOrUpdate(object);
 	}
 
+	/**
+	 * @see at.itb13.oculus.database.GenericDAO#update(at.itb13.oculus.database.PersistentObject)
+	 * updates object by hibernate into database
+	 */
 	@Override
 	public void update(T object) {
 		_session.update(object);
 	}
 
+	/**
+	 * @see at.itb13.oculus.database.GenericDAO#delete(at.itb13.oculus.database.PersistentObject)
+	 * deletes object by hibernate from database
+	 */
 	@Override
 	public void delete(T object) {
 		_session.delete(object);
