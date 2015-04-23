@@ -7,10 +7,8 @@ package at.itb13.oculus.database;
 
 import java.util.Date;
 import java.util.List;
-
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
-
 import at.itb13.oculus.model.QueueEntry;
 
 /**
