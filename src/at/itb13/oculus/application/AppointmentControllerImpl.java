@@ -17,14 +17,8 @@ public class AppointmentControllerImpl extends Controller implements Appointment
 
 	private Patient _patient;
 	
-	public AppointmentControllerImpl(String patientID){
-
-		try {
-			loadPatient(patientID);
-		} catch (ObjectNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	public AppointmentControllerImpl(){
+		createPatient();
 	}
 
 	private void createPatient() {
