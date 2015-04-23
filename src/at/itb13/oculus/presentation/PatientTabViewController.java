@@ -15,21 +15,14 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
-import javafx.scene.control.TextField;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import at.itb13.oculus.application.ControllerFactory;
-import at.itb13.oculus.application.SearchController;
 import at.itb13.oculus.lang.LangFacade;
 import at.itb13.oculus.lang.LangKey;
 import at.itb13.oculus.model.Patient;
-import at.itb13.oculus.util.GUIUtil;
 
 public class PatientTabViewController implements Initializable {
 	
@@ -41,24 +34,15 @@ public class PatientTabViewController implements Initializable {
 	private static PatientTabViewController _instance;
 	private PatientMainViewController _patientMainViewController;
 	
-	private SearchController<Patient> _patientSearchController;
 	//window - PatientSearchViewController
 	private Stage _searchViewStage;
 
 	@FXML
 	private Button _createNewPatientButton;
 	@FXML
-	private TabPane _tabPane;
+	private SearchPanelController _searchPanelController;
 	@FXML
-    private Button _searchPatientButton;
-    @FXML
-    private TextField _searchInput;
-    @FXML
-    private Label _searchLabel;
-	
-    public PatientTabViewController() {
-    	_patientSearchController = ControllerFactory.getInstance().getSearchController(Patient.class);
-    }
+	private TabPane _tabPane;
     
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -75,28 +59,16 @@ public class PatientTabViewController implements Initializable {
 			}
         });
 		
-		_searchInput.focusedProperty().addListener(new ChangeListener<Boolean>() {
+		_searchPanelController.setOnSearchAction(new EventHandler<ActionEvent>() {
 			@Override
-			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-				if(!newValue) {
-					GUIUtil.validate(_searchLabel, _patientSearchController.setCriteria(_searchInput.getText()));
-				}
-			}
-		});
-		
-		_searchInput.addEventHandler(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
-			@Override
-			public void handle(KeyEvent e) {
-				if(e.getCode().equals(KeyCode.ENTER)) {
-					searchPatient(null);
-				}
+			public void handle(ActionEvent e) {
+				searchPatient();
 			}
 		});
 	}
 	
     // open new window if succeeds, if not set searchLabel red
-    @FXML
-    void searchPatient(ActionEvent event) {	
+    void searchPatient() {	
 		LangFacade facade = LangFacade.getInstance();
 		_searchViewStage = new Stage();
 		FXMLLoader loader = null;		
@@ -119,9 +91,8 @@ public class PatientTabViewController implements Initializable {
 			}
 		});
 		
-		GUIUtil.validate(_searchLabel, _patientSearchController.setCriteria(_searchInput.getText()));
-		patientSearchViewController.setCriteria(_patientSearchController.getCriteria());
-		patientSearchViewController.search(event);
+		patientSearchViewController.setCriteria(_searchPanelController.getCriteria());
+		patientSearchViewController.search();
 		_searchViewStage.initModality(Modality.APPLICATION_MODAL);
 		_searchViewStage.setWidth(STAGEVIEWWIDTH);
 		_searchViewStage.setTitle(facade.getString(LangKey.PATIENTSEARCHTITEL));
