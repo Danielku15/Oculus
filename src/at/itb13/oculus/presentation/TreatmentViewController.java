@@ -49,7 +49,7 @@ public class TreatmentViewController {
 	
 	private void setDataToForm() {
 		_firstnameLoadedLabel.setText(_treatmentController.getPatientFirstname());
-		_lastnameLabel.setText(_treatmentController.getPatientLastname());
+		_lastnameLoadedLabel.setText(_treatmentController.getPatientLastname());
 		_socialSecurityLoadedNumberLabel.setText(_treatmentController.getPatientSocialSecurityNumber());
 	}
 	
