@@ -128,20 +128,18 @@ public class QueueViewController implements Serializable, Consumer<Boolean>{
 		FXMLLoader loader = null;
 		Pane pane = null;
 		LangFacade facade = LangFacade.getInstance();
-		QueueEntryViewController queueEntryViewController;
 		String queueId = _queueController.getIdOfQueue(_queueViewEmployeeSelection.getSelectionModel().getSelectedItem());
-		queueEntryViewController = new QueueEntryViewController();
 		
 		try {
 			loader = new FXMLLoader(this.getClass().getResource(QUEUEENTRYVIEW),
 					facade.getResourceBundle());
-			loader.setController(queueEntryViewController);
 			pane = loader.load();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
+		QueueEntryViewController queueEntryViewController = loader.getController();
 		queueEntryViewController.init(this);
 		
 		_queueEntryViewStage.setScene(new Scene(pane));
