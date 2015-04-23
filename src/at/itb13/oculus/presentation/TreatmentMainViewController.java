@@ -10,9 +10,16 @@ public class TreatmentMainViewController implements Initializable  {
 	
 	@FXML
 	private QueueViewController _queueViewController;
+	@FXML
+	private TreatmentTabViewController _treatmentTabViewController;
 
 	@Override
-	public void initialize(URL arg0, ResourceBundle arg1) {
-		//_queueViewController.init(this);
+	public void initialize(URL url, ResourceBundle resBundle) {
+		_queueViewController.addQueueEntryChosenListener(new QueueEntryChosenListener() {
+			@Override
+			public void queueEntryChosen(QueueEntryChosenEvent e) {
+				_treatmentTabViewController.createFormular(e.getAppointmentId());
+			}
+		});
 	}
 }

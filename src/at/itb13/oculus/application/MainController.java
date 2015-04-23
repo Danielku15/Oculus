@@ -1,15 +1,19 @@
 package at.itb13.oculus.application;
+
+import at.itb13.oculus.presentation.MainView;
+
 /**
  * 
  * The MainController saves all the active controllers and provides quick access to open views.
  *
  */
-class MainController {
+public class MainController {
 
 	private static MainController _mainController;
 	
 	private PatientController _patientController;
 	private QueueController _queueController;
+	private MainView _mainView;
 	
 	private MainController() {}
 	
@@ -23,6 +27,14 @@ class MainController {
 			_mainController = new MainController();
 		}
 		return _mainController;
+	}
+	
+	public void setMainView(MainView mainView) {
+		_mainView = mainView;
+	}
+	
+	public MainView getMainView() {
+		return _mainView;
 	}
 	
 	public void setPatientController(PatientController patientController) {

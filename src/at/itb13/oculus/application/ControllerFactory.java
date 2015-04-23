@@ -24,6 +24,10 @@ public class ControllerFactory {
 		}
 		return _controllerFactory;
 	}
+	
+	public MainController getMainController() {
+		return MainController.getInstance();
+	}
 
 	public PatientController getPatientController(){
 		return new PatientControllerImpl();

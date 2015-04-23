@@ -17,6 +17,13 @@ public class PatientMainViewController implements Initializable  {
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		_queueViewController.init(this);
 		_patientTabViewController.init(this);
+
+		_queueViewController.addQueueEntryChosenListener(new QueueEntryChosenListener() {
+			@Override
+			public void queueEntryChosen(QueueEntryChosenEvent e) {
+				_patientTabViewController.createFormular(e.getPatientId());
+			}
+		});
 	}
 
 	public void setNewTab(String id){
