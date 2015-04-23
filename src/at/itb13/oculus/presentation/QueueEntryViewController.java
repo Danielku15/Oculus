@@ -109,7 +109,11 @@ public class QueueEntryViewController implements Serializable, Initializable, Co
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			_patientTbx.setText(_queueEntryController.getPatientFirstname() + " " + _queueEntryController.getPatientLastname());
+			
+			if(_queueEntryController.getPatientFirstname() != null && _queueEntryController.getPatientLastname() != null){
+				_patientTbx.setText(_queueEntryController.getPatientFirstname() + " " + _queueEntryController.getPatientLastname());
+			}
+
 		}
 
 		_queuesList = _queueEntryController.getQueues();
