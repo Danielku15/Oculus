@@ -39,7 +39,7 @@ class AppointmentDAO extends GenericDAOImpl<Appointment, String> {
 		return search(criteria,
 				"title",
 				"description",
-				"start",
+				//"start",
 				"patient.firstname",
 				"patient.lastname",
 				"patient.address.street",

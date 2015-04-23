@@ -7,7 +7,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox minWidth="520.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="at.itb13.oculus.presentation.AppointmentViewController">
+<VBox minWidth="520.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="at.itb13.oculus.presentation.TreatmentViewController">
    <children>
       <AnchorPane prefHeight="1000.0">
          <children>
@@ -43,9 +43,9 @@
                                     <Font size="14.0" />
                                  </font>
                               </Label>
-                              <Label fx:id="_firstnameLoadedLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                              <Label fx:id="_lastnameLoadedLabel" text="Label" GridPane.columnIndex="4" GridPane.rowIndex="1" />
-                              <Label fx:id="_socialSecurityLoadedNumberLabel" text="Label" GridPane.columnIndex="1" />
+                              <Label fx:id="_firstnameLoadedLabel" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <Label fx:id="_lastnameLoadedLabel" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+                              <Label fx:id="_socialSecurityLoadedNumberLabel" GridPane.columnIndex="1" />
                            </children>
                         </GridPane>
                         <Accordion fx:id="_accordion" layoutY="127.0" minWidth="520.0" prefHeight="871.0" prefWidth="898.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="127.0">

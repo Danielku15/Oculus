@@ -28,8 +28,8 @@ public class ControllerFactory {
 		return new QueueEntryControllerImpl();
 	}
 	
-	public AppointmentController getAppointmentController(){
-		return new AppointmentControllerImpl();
+	public TreatmentController getTreatmentController(){
+		return new TreatmentControllerImpl();
 	}
 
 	public <T extends PersistentObject & Searchable> SearchController<T> getSearchController(Class<T> type){

@@ -257,7 +257,6 @@ class PatientControllerImpl extends Controller implements PatientController {
 		return true;
 	}
 
-
 	@Override
 	public void activate() {
 		MainController.getInstance().setPatientController(this);
