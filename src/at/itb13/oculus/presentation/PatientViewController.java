@@ -24,7 +24,7 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TitledPane;
 import javafx.scene.control.ToggleGroup;
-import javafx.scene.paint.Color;
+//import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import at.itb13.oculus.application.ControllerFactory;
 import at.itb13.oculus.application.IncompleteDataException;
@@ -38,8 +38,8 @@ import at.itb13.oculus.util.GUIUtil;
 
 public class PatientViewController implements Initializable{
 	
-	private static final Color COLOR_FAIL = Color.RED;
-	private static final Color COLOR_SUCCESS = Color.web("0x333333ff");
+//	private static final Color COLOR_FAIL = Color.RED;
+//	private static final Color COLOR_SUCCESS = Color.web("0x333333ff");
 	
 	//application - PatientViewController
 	private PatientController _patientController;
