@@ -1,7 +1,8 @@
 package at.itb13.oculus.lang;
 
 /**
- * @author Patrick
+ * 
+ * Enumeration for the possible language options
  *
  */
 public enum Lang {

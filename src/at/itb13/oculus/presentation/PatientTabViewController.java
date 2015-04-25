@@ -88,7 +88,7 @@ public class PatientTabViewController implements Initializable {
 		patientSearchViewController.addConsumer(new Consumer<String>() {
 			@Override
 			public void accept(String id) {
-				createFormular(id);
+				createForm(id);
 			}
 		});
 		
@@ -150,7 +150,7 @@ public class PatientTabViewController implements Initializable {
 
 	}
 	
-	public void createFormular(String id){
+	public void createForm(String id){
 		LangFacade facade = LangFacade.getInstance();
 		FXMLLoader loader = null;
 		Pane pane = null;

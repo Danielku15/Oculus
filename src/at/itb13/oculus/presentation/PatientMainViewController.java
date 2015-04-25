@@ -20,12 +20,12 @@ public class PatientMainViewController implements Initializable  {
 		_queueViewController.addQueueEntryChosenListener(new QueueEntryChosenListener() {
 			@Override
 			public void queueEntryChosen(QueueEntryChosenEvent e) {
-				_patientTabViewController.createFormular(e.getPatientId());
+				_patientTabViewController.createForm(e.getPatientId());
 			}
 		});
 	}
 
 	public void setNewTab(String id){
-		_patientTabViewController.createFormular(id);
+		_patientTabViewController.createForm(id);
 	}
 }

@@ -9,7 +9,9 @@ import at.itb13.oculus.config.ConfigFactory.Config;
 import at.itb13.oculus.config.ConfigKey;
 
 /**
- * @author Patrick
+ * 
+ * Facade for the correct structure of the interface of all texts
+ * It builds a class for easy access and defines the right language and language file
  *
  */
 public class LangFacade {
@@ -31,10 +33,19 @@ public class LangFacade {
 		return _langFacade;
 	}
 	
+	/**
+	 * static method which runs the private load method with the {@link LangFacade#BASENAME} as parameter
+	 * @throws MissingResourceException if the {@link LangFacade#BASENAME} language not exists
+	 */
 	public static void load() throws MissingResourceException {
 		_langFacade.load(BASENAME);
 	}
 	
+	/**
+	 * loads all important configurations into the {@link ConfigFactory} instance
+	 * @param fileName language
+	 * @throws MissingResourceException if the {@link LangFacade#BASENAME} language not exists
+	 */
 	private void load(String fileName) throws MissingResourceException {
 		ConfigFactory configFactory = ConfigFactory.getInstance();
 		Config config = configFactory.getConfig(ConfigFactory.CONFIGFILE);

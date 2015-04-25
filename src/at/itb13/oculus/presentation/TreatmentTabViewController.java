@@ -78,7 +78,7 @@ public class TreatmentTabViewController implements Initializable {
 		appointmentSearchViewController.addConsumer(new Consumer<String>() {
 			@Override
 			public void accept(String id) {
-				createFormular(id);
+				createForm(id);
 			}
 		});
 		
@@ -139,7 +139,7 @@ public class TreatmentTabViewController implements Initializable {
 		return treatmentViewController;
 	}
 	
-	public void createFormular(String id){
+	public void createForm(String id){
 		TreatmentViewController treatmentViewController = createNewTab();
 		treatmentViewController.loadAppointmentToForm(id);
 		if(_searchViewStage != null) {

@@ -34,6 +34,7 @@ import at.itb13.oculus.application.PatientController;
 import at.itb13.oculus.application.UniqueConstraintException;
 import at.itb13.oculus.lang.LangFacade;
 import at.itb13.oculus.lang.LangKey;
+import at.itb13.oculus.util.GUIUtil;
 
 public class PatientViewController implements Initializable{
 	
@@ -410,12 +411,12 @@ public class PatientViewController implements Initializable{
 		} catch (ObjectNotFoundException e) {
 			e.printStackTrace();
 		}
-		setDataToFormular();
+		setDataToForm();
 		setTabLabelNameIsUnmodified();
 	}
 	
 	
-	public void setDataToFormular(){
+	public void setDataToForm(){
 		_firstnameInput.setText(_patientController.getFirstname());
 		_lastnameInput.setText(_patientController.getLastname());
 		
@@ -438,104 +439,103 @@ public class PatientViewController implements Initializable{
 		_cityInput.setText(_patientController.getCity());
 		_countryInput.setText(_patientController.getCountry());
 		_socialSecurityNumberInput.setText(_patientController.getSocialSecurityNumber());
-		_employerInput.setText(_patientController.getEmployer());
-				
+		_employerInput.setText(_patientController.getEmployer());			
 	}
 	
 	void setFirstname(String firstname) {
 		if (!_patientController.setFirstname(firstname)) {
-			_firstnameLabel.setTextFill(COLOR_FAIL);
+			GUIUtil.validate(_firstnameLabel, false);
 		} else {
-			_firstnameLabel.setTextFill(COLOR_SUCCESS);
+			GUIUtil.validate(_firstnameLabel, true);
 		}
 	}
 
 	void setLastname(String lastname) {
 		if (!_patientController.setLastname(lastname)) {
-			_lastnameLabel.setTextFill(COLOR_FAIL);
+			GUIUtil.validate(_lastnameLabel, false);
 		} else {
-			_lastnameLabel.setTextFill(COLOR_SUCCESS);
+			GUIUtil.validate(_lastnameLabel, true);
 		}
 	}
 
 	void setBirthday(LocalDate birthday) {
 		if (!_patientController.setBirthday(birthday)) {
-			_birthdayLabel.setTextFill(COLOR_FAIL);
+			GUIUtil.validate(_birthdayLabel, false);
 		} else {
-			_birthdayLabel.setTextFill(COLOR_SUCCESS);
+			GUIUtil.validate(_birthdayLabel, true);
 		}
 	}
 
 	void setGender(String gender) {
 		if (!_patientController.setGender(gender)) {
-			_genderLabel.setTextFill(COLOR_FAIL);
+			GUIUtil.validate(_genderLabel, false);
 		} else {
-			_genderLabel.setTextFill(COLOR_SUCCESS);
+			GUIUtil.validate(_genderLabel, true);
 		}
 	}
 
 	void setPhoneNumber(String phonenumber) {
 		if (!_patientController.setPhoneNumber(phonenumber)) {
-			_phoneNumberLabel.setTextFill(COLOR_FAIL);
+			GUIUtil.validate(_phoneNumberLabel, false);
 		} else {
-			_phoneNumberLabel.setTextFill(COLOR_SUCCESS);
+			GUIUtil.validate(_phoneNumberLabel, true);
 		}
 	}
 
 	void setEmail(String email) {
 		if (!_patientController.setEmail(email)) {
-			_emailLabel.setTextFill(COLOR_FAIL);
+			GUIUtil.validate(_emailLabel, false);
 		} else {
-			_emailLabel.setTextFill(COLOR_SUCCESS);
+			GUIUtil.validate(_emailLabel, true);
 		}
 	}
 
 	void setZip(String zip) {
 		if (!_patientController.setZip(zip)) {
-			_zipLabel.setTextFill(COLOR_FAIL);
+			GUIUtil.validate(_zipLabel, false);
 		} else {
-			_zipLabel.setTextFill(COLOR_SUCCESS);
+			GUIUtil.validate(_zipLabel, true);
 		}
 	}
 
 	void setCountry(String country) {
 		if (!_patientController.setCountry(country)) {
-			_countryLabel.setTextFill(COLOR_FAIL);
+			GUIUtil.validate(_countryLabel, false);
 		} else {
-			_countryLabel.setTextFill(COLOR_SUCCESS);
+			GUIUtil.validate(_countryLabel, true);
 		}
 	}
 
 	void setStreet(String street) {
 		if (!_patientController.setStreet(street)) {
-			_streetLabel.setTextFill(COLOR_FAIL);
+			GUIUtil.validate(_streetLabel, false);
 		} else {
-			_streetLabel.setTextFill(COLOR_SUCCESS);
+			GUIUtil.validate(_streetLabel, true);
 		}
 	}
 
 	void setStreetNumber(String streetnumber) {
 		if (!_patientController.setStreetNumber(streetnumber)) {
-			_streetNumberLabel.setTextFill(COLOR_FAIL);
+			GUIUtil.validate(_streetNumberLabel, false);
 		} else {
-			_streetNumberLabel.setTextFill(COLOR_SUCCESS);
+			GUIUtil.validate(_streetNumberLabel, true);
 		}
 	}
 	
 	void setCity(String city) {
 		if (!_patientController.setCity(city)) {
-			_streetNumberLabel.setTextFill(COLOR_FAIL);
+			GUIUtil.validate(_cityLabel, false);
 		} else {
-			_streetNumberLabel.setTextFill(COLOR_SUCCESS);
+			GUIUtil.validate(_cityLabel, true);
 		}
 	}
 
 	void setSocialSecurityNumber(String socialsecuritynumber) {
 		try {
 			if (!_patientController.setSocialSecurityNumber(socialsecuritynumber)) {
-				_socialSecurityNumberLabel.setTextFill(COLOR_FAIL);
+				GUIUtil.validate(_socialSecurityNumberLabel, false);
 			} else {
-				_socialSecurityNumberLabel.setTextFill(COLOR_SUCCESS);
+				GUIUtil.validate(_socialSecurityNumberLabel, true);
 			}
 		} catch (UniqueConstraintException e) {
 			e.printStackTrace();
@@ -544,9 +544,9 @@ public class PatientViewController implements Initializable{
 
 	void setEmployer(String employer) {
 		if (!_patientController.setEmployer(employer)) {
-			_employerLabel.setTextFill(COLOR_FAIL);
+			GUIUtil.validate(_employerLabel, false);
 		} else {
-			_employerLabel.setTextFill(COLOR_SUCCESS);
+			GUIUtil.validate(_employerLabel, true);
 		}
 	}
 	
