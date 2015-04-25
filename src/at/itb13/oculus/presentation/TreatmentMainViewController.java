@@ -18,7 +18,7 @@ public class TreatmentMainViewController implements Initializable  {
 		_queueViewController.addQueueEntryChosenListener(new QueueEntryChosenListener() {
 			@Override
 			public void queueEntryChosen(QueueEntryChosenEvent e) {
-				_treatmentTabViewController.createFormular(e.getAppointmentId());
+				_treatmentTabViewController.createForm(e.getAppointmentId());
 			}
 		});
 	}
