@@ -121,7 +121,6 @@ public class QueueViewController implements Serializable {
 		_queueController.activate();
 		QueueEntryViewController queueEntryViewController = GUIUtil.showView(View.QUEUEENTRYVIEW, _queueEntryViewStage, "Create Queue Entry");
 		queueEntryViewController.init(this);
-		MainController mainController = ControllerFactory.getInstance().getMainController();
 	}
 	
 	public void closeQueueViewEntry() {
