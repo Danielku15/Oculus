@@ -141,7 +141,9 @@ public class TreatmentTabViewController implements Initializable {
 	
 	public void createForm(String id){
 		TreatmentViewController treatmentViewController = createNewTab();
-		treatmentViewController.loadAppointmentToForm(id);		
-		_searchViewStage.close();
+		treatmentViewController.loadAppointmentToForm(id);
+		if(_searchViewStage != null) {
+			_searchViewStage.close();
+		}
 	}
 }

@@ -58,7 +58,6 @@ public class PatientTabViewController implements Initializable {
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		_instance = this;
 		_tabPane.getSelectionModel().clearSelection();
-		createNewTab();
 
 		_tabPane.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Tab>() {
 			@Override
@@ -75,6 +74,8 @@ public class PatientTabViewController implements Initializable {
 				searchPatient();
 			}
 		});
+		
+		createNewTab();
 	}
 	
     /**

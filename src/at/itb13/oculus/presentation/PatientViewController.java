@@ -584,10 +584,6 @@ public class PatientViewController implements Initializable{
 	    @Override protected void succeeded() {
 	    	setTabLabelNameIsUnmodified();
 	    }
-	    
-	    @Override protected void failed() {
-	    	super.failed();
-	    }
 	}
 
 	public void init(PatientTabViewController patientTabViewController) {

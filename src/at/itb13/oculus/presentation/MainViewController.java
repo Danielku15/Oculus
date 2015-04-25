@@ -27,7 +27,7 @@ public class MainViewController implements Initializable  {
 	@FXML
 	private AnchorPane _content;
 	
-	public MainViewController() {
+	static {
 		_contentMap = new HashMap<MainViewContent, Node>();
 	}
 	
