@@ -8,7 +8,8 @@ import java.util.logging.Logger;
 
 import at.itb13.oculus.database.PersistentObject;
 
-/** Represents the result of a search
+/**
+ * Represents the result of a search
  * @author Patrick
  * 
  * @param <T> type of search result
@@ -17,12 +18,12 @@ public class SearchResult<T extends PersistentObject & Searchable> {
 	
 	private static final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
-	private FieldMap<T> _searchMap;
+	private FieldMap<T> _fieldMap;
 	private List<T> _searchables;
 	private List<String[]> _results;
 	
 	public SearchResult(FieldMap<T> searchMap, List<T> searchables) {
-		_searchMap = searchMap;
+		_fieldMap = searchMap;
 		_searchables = searchables;
 	}
 
@@ -54,7 +55,7 @@ public class SearchResult<T extends PersistentObject & Searchable> {
 	
 	private void initResults() {
 		_results = new ArrayList<String[]>(_searchables.size());
-		Map<String, List<Method>> methodMap = _searchMap.getMethodMap();
+		Map<String, List<Method>> methodMap = _fieldMap.getMethodMap();
 		for(Searchable searchable : _searchables) {
 			int i = 0;
 			String[] result = new String[methodMap.size() + 1]	;

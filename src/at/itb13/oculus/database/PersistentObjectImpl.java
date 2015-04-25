@@ -5,6 +5,7 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.MappedSuperclass;
+import javax.persistence.Transient;
 import javax.persistence.Version;
 
 import org.apache.lucene.analysis.core.KeywordTokenizerFactory;
@@ -82,6 +83,7 @@ public abstract class PersistentObjectImpl implements PersistentObject {
     	_version = version;
     }
     
+    @Transient
     public boolean isCreation() {
     	return (_version == null);
     }

@@ -1,6 +1,6 @@
 package at.itb13.oculus.application;
 
-import at.itb13.oculus.presentation.MainView;
+import at.itb13.oculus.presentation.MainViewContent;
 /**
  * 
  * The MainController references all active controllers and therefore simplifies communication between the controllers.
@@ -13,7 +13,7 @@ class MainControllerImpl implements MainController {
 	private PatientController _patientController;
 	private QueueController _queueController;
 	private TreatmentController _treatmentController;
-	private MainView _mainView;
+	private MainViewContent _mainView;
 	
 	private MainControllerImpl() {}
 	
@@ -32,11 +32,11 @@ class MainControllerImpl implements MainController {
 	 * sets the MainView reference
 	 * @param mainView enumeration for the different main views
 	 */
-	public void setMainView(MainView mainView) {
+	public void setMainView(MainViewContent mainView) {
 		_mainView = mainView;
 	}
 	
-	public MainView getMainView() {
+	public MainViewContent getMainView() {
 		return _mainView;
 	}
 	

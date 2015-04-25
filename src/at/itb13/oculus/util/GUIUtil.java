@@ -3,7 +3,7 @@ package at.itb13.oculus.util;
 import javafx.scene.control.Label;
 import javafx.scene.paint.Color;
 
-public class GUIUtil {
+public final class GUIUtil {
 	
 	private static final Color COLOR_FAIL = Color.RED;
 	private static final Color COLOR_SUCCESS = Color.web("0x333333ff");

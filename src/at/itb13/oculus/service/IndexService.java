@@ -21,6 +21,11 @@ import at.itb13.oculus.model.ChangeLog;
 import at.itb13.oculus.model.Patient;
 import at.itb13.oculus.search.Searchable;
 
+/**
+ * Service that is responsible for updating the clients search indexes
+ * @author Patrick
+ *
+ */
 public class IndexService {
 	
 	private static final int BATCHSIZE = 100;
@@ -172,8 +177,9 @@ public class IndexService {
 		private void notifyListeners(ChangeLog changeLog) {
 			List<TableChangeListener> listeners = _listenerMap.get(changeLog.getChangedTable().toLowerCase());
 			if(listeners != null) {
+				TableChangeEvent e = new TableChangeEvent(changeLog.getChangedTable().toLowerCase(), changeLog.getChangedId(), changeLog.getModified());
 				for(TableChangeListener listener : listeners) {
-					listener.onTableChange(new TableChangeEvent(changeLog.getChangedTable().toLowerCase(), changeLog.getChangedId(), changeLog.getModified()));
+					listener.onTableChange(e);
 				}
 			}
 		}

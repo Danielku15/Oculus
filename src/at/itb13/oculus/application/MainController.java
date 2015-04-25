@@ -1,6 +1,6 @@
 package at.itb13.oculus.application;
 
-import at.itb13.oculus.presentation.MainView;
+import at.itb13.oculus.presentation.MainViewContent;
 /**
  * 
  * Main controller interface
@@ -9,13 +9,13 @@ import at.itb13.oculus.presentation.MainView;
 public interface MainController {
 	
 	// getter
-	MainView getMainView();
+	MainViewContent getMainView();
 	PatientController getPatientController();
 	QueueController getQueueController();
 	TreatmentController getTreatmentController();
 	
 	// setter
-	void setMainView(MainView mainView);
+	void setMainView(MainViewContent mainView);
 	void setPatientController(PatientController patientController);
 	void setQueueController(QueueController queueController);
 	void setTreatmentController(TreatmentController treatmentController);

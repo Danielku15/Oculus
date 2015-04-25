@@ -53,7 +53,7 @@ public class Main {
 		try {
 			LangFacade.load();
 		} catch (MissingResourceException e) {
-			// could not load 
+			// could not load language file
 			logger.severe(e.getMessage());
 			Main.exit(3);
 		}

@@ -10,10 +10,9 @@
 
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="at.itb13.oculus.presentation.CalendarMainViewController">
    <children>
-      <SplitPane fx:id="_splitPane" dividerPositions="0.5" minWidth="-Infinity">
+      <SplitPane dividerPositions="0.5" minWidth="-Infinity">
         <items>
-            <VBox>
-            </VBox>
+            <VBox></VBox>
 			<Pane />
         </items>
       </SplitPane>

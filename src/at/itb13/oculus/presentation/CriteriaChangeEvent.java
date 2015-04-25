@@ -3,7 +3,6 @@ package at.itb13.oculus.presentation;
 import java.util.EventObject;
 
 public class CriteriaChangeEvent extends EventObject {
-
 	private static final long serialVersionUID = -7814738022601043251L;
 
 	private String _criteria;

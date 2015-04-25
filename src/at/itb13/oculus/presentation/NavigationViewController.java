@@ -7,16 +7,16 @@ public class NavigationViewController {
 
 	@FXML
 	public void openTreatmentMainView(ActionEvent event) {
-		GUIApplication.setScene(MainView.TREATMENTMAINVIEW);
+		GUIApplication.setScene(MainViewContent.TREATMENTMAINVIEW);
 	}
 	
 	@FXML
 	public void openPatientMainView(ActionEvent event) {
-		GUIApplication.setScene(MainView.PATIENTMAINVIEW);
+		GUIApplication.setScene(MainViewContent.PATIENTMAINVIEW);
 	}
 	
 	@FXML
 	public void openCalendarMainView(ActionEvent event) {
-		GUIApplication.setScene(MainView.CALENDARMAINVIEW);
+		GUIApplication.setScene(MainViewContent.CALENDARMAINVIEW);
 	}
 }
