@@ -7,40 +7,46 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane fx:id="_queueViewContainer" minHeight="500.0" minWidth="360.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="at.itb13.oculus.presentation.QueueViewController">
-   <children>
-      <VBox fx:id="_queueViewVbox" prefHeight="500.0" prefWidth="360.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <padding>
-            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-         </padding>
-         <children>
-            <HBox alignment="CENTER_RIGHT">
-               <children>
-                  <Button fx:id="_queueViewAddQEntryButton" graphicTextGap="0.0" mnemonicParsing="false" onAction="#loadQueueEntryView" textAlignment="CENTER">
-                     <graphic>
-                        <ImageView>
-                           <image>
-                              <Image url="@../../../../../res/addQueueEntry.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Button>
-               </children>
-            </HBox>
-            <AnchorPane prefHeight="25.0" prefWidth="340.0">
-               <children>
-                  <ComboBox fx:id="_queueViewEmployeeSelection" prefHeight="25.0" prefWidth="340.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
-               </children>
-            </AnchorPane>
-            <ListView fx:id="_queueViewListView">
-               <VBox.margin>
-                  <Insets bottom="10.0" top="10.0" />
-               </VBox.margin>
-            </ListView>
-         </children>
-      </VBox>
-   </children>
+<AnchorPane minWidth="350.0" xmlns="http://javafx.com/javafx/8"
+	xmlns:fx="http://javafx.com/fxml/1" fx:controller="at.itb13.oculus.presentation.QueueViewController">
+	<children>
+		<VBox spacing="10.0" AnchorPane.bottomAnchor="0.0"
+			AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+			AnchorPane.topAnchor="0.0">
+			<padding>
+				<Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+			</padding>
+			<children>
+				<HBox alignment="CENTER_RIGHT">
+					<children>
+						<Button fx:id="_queueViewAddQEntryButton" graphicTextGap="0.0"
+							mnemonicParsing="false" onAction="#loadQueueEntryView"
+							textAlignment="CENTER">
+							<graphic>
+								<ImageView>
+									<image>
+										<Image url="@../../../../../res/addQueueEntry.png" />
+									</image>
+								</ImageView>
+							</graphic>
+							<font>
+								<Font size="18.0" />
+							</font>
+						</Button>
+					</children>
+				</HBox>
+				<AnchorPane>
+					<children>
+						<ComboBox fx:id="_queueViewEmployeeSelection"
+							AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+					</children>
+				</AnchorPane>
+				<ListView fx:id="_queueViewListView" VBox.vgrow="ALWAYS">
+					<VBox.margin>
+						<Insets bottom="10.0" />
+					</VBox.margin>
+				</ListView>
+			</children>
+		</VBox>
+	</children>
 </AnchorPane>

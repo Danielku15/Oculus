@@ -9,27 +9,28 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox minWidth="520.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="at.itb13.oculus.presentation.TreatmentTabViewController">
-   <children>
-      <ToolBar nodeOrientation="RIGHT_TO_LEFT">
-         <items>
-            <Button mnemonicParsing="false" onAction="#newTab">
-               <font>
-                  <Font size="18.0" />
-               </font>
-               <graphic>
-                  <ImageView fitHeight="27.0" fitWidth="27.0">
-                     <image>
-                        <Image url="@../../../../../res/addUser.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
- 			<fx:include fx:id="_searchPanel" source="SearchPanel.fxml" />
-         </items>
-      </ToolBar>
-      <TabPane fx:id="_tabPane" stylesheets="@../../../../../res/font.css">
-        <tabs></tabs>
-      </TabPane>
-   </children>
+<VBox minWidth="520.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+	fx:controller="at.itb13.oculus.presentation.TreatmentTabViewController">
+	<children>
+		<ToolBar nodeOrientation="RIGHT_TO_LEFT">
+			<items>
+				<Button mnemonicParsing="false" onAction="#newTab">
+					<font>
+						<Font size="18.0" />
+					</font>
+					<graphic>
+						<ImageView fitHeight="27.0" fitWidth="27.0">
+							<image>
+								<Image url="@../../../../../res/addUser.png" />
+							</image>
+						</ImageView>
+					</graphic>
+				</Button>
+				<fx:include fx:id="_searchPanel" source="SearchPanel.fxml" />
+			</items>
+		</ToolBar>
+		<TabPane fx:id="_tabPane" stylesheets="@../../../../../res/font.css">
+			<tabs></tabs>
+		</TabPane>
+	</children>
 </VBox>

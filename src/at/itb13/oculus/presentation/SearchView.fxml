@@ -9,32 +9,39 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="400.0" prefWidth="550.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-      <HBox alignment="CENTER_RIGHT" prefHeight="50.0" prefWidth="550.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
-         <children>
-      	  <fx:include fx:id="_searchPanel" source="SearchPanel.fxml" />
-         </children>
-         <padding>
-            <Insets right="5.0" />
-         </padding>
-      </HBox>
-      <AnchorPane layoutY="40.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0">
-         <children>
-            <TableView fx:id="_tableView" editable="false" stylesheets="@../../../../../res/font.css" tableMenuButtonVisible="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-              <columns>
-              </columns>
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
-               <effect>
-                  <Blend />
-               </effect>
-            </TableView>
-         </children>
-         <padding>
-            <Insets top="10.0" />
-         </padding>
-      </AnchorPane>
-   </children>
+<AnchorPane prefHeight="400.0" prefWidth="550.0"
+	xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+	<children>
+		<HBox alignment="CENTER_RIGHT" prefHeight="50.0" prefWidth="550.0"
+			AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+			<children>
+				<fx:include fx:id="_searchPanel" source="SearchPanel.fxml" />
+			</children>
+			<padding>
+				<Insets right="5.0" />
+			</padding>
+		</HBox>
+		<AnchorPane layoutY="40.0" AnchorPane.bottomAnchor="0.0"
+			AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+			AnchorPane.topAnchor="40.0">
+			<children>
+				<TableView fx:id="_tableView" editable="false"
+					stylesheets="@../../../../../res/font.css" tableMenuButtonVisible="true"
+					AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+					AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+					<columns>
+					</columns>
+					<opaqueInsets>
+						<Insets />
+					</opaqueInsets>
+					<effect>
+						<Blend />
+					</effect>
+				</TableView>
+			</children>
+			<padding>
+				<Insets top="10.0" />
+			</padding>
+		</AnchorPane>
+	</children>
 </AnchorPane>

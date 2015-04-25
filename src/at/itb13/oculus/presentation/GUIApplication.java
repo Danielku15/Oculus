@@ -16,6 +16,8 @@ public class GUIApplication extends Application {
 	public static final String OCULUSTITEL = "Oculus";
 	private static final String MAINVIEW = "MainView.fxml";
 	
+	public static MainViewController _mainViewController;
+	
 	public static void main(String[] args) {
 		launch(args);
 	}
@@ -31,9 +33,8 @@ public class GUIApplication extends Application {
 		});
     	
 		FXMLLoader loader = new FXMLLoader(getClass().getResource(MAINVIEW), LangFacade.getInstance().getResourceBundle());
-		MainViewController mainViewController = loader.<MainViewController>getController();
-		//mainViewController.setContent(node);
 		Parent mainView = (Parent) loader.load();
+		_mainViewController = loader.getController();
 		stage.setScene(new Scene(mainView));
 		
         Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
@@ -47,5 +48,9 @@ public class GUIApplication extends Application {
 	
 	private void onClose() {
 		System.out.println("Stage closing");
+	}
+	
+	public static void setMainViewContent(MainViewContent content) {
+		_mainViewController.setContent(content);
 	}
 }

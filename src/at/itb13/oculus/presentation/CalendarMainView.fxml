@@ -8,22 +8,9 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="at.itb13.oculus.presentation.CalendarMainViewController">
-   <children>
-      <SplitPane dividerPositions="0.5" minWidth="-Infinity">
-        <items>
-            <VBox></VBox>
-			<Pane />
-        </items>
-      </SplitPane>
-      <AnchorPane VBox.vgrow="ALWAYS">
-         <children>
-            <HBox alignment="BOTTOM_LEFT" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
-               <children>
-                  <fx:include source="NavigationView.fxml" />
-               </children>
-            </HBox>
-         </children>
-      </AnchorPane>
-   </children>
+<VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+	AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0"
+	xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+	fx:controller="at.itb13.oculus.presentation.CalendarMainViewController">
+	<children></children>
 </VBox>

@@ -8,26 +8,20 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="at.itb13.oculus.presentation.PatientMainViewController">
-   <children>
-      <SplitPane fx:id="_splitPane" dividerPositions="0.5" minWidth="-Infinity">
-        <items>
-            <VBox fx:id="_vBox" maxWidth="400.0" minWidth="400.0" prefWidth="400.0">
-               <children>
-                  <fx:include fx:id="_queueView" source="QueueView.fxml" />
-               </children>
-            </VBox>
-			<fx:include fx:id="_patientTabView" source="PatientTabView.fxml" />
-        </items>
-      </SplitPane>
-      <AnchorPane VBox.vgrow="ALWAYS">
-         <children>
-            <HBox alignment="BOTTOM_LEFT" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
-               <children>
-                  <fx:include source="NavigationView.fxml" />
-               </children>
-            </HBox>
-         </children>
-      </AnchorPane>
-   </children>
+<VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+	AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0"
+	xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+	fx:controller="at.itb13.oculus.presentation.PatientMainViewController">
+	<children>
+		<SplitPane dividerPositions="0.5">
+			<items>
+				<VBox maxWidth="350.0" minWidth="350.0" prefWidth="350.0">
+					<children>
+						<fx:include fx:id="_queueView" source="QueueView.fxml" />
+					</children>
+				</VBox>
+				<fx:include fx:id="_patientTabView" source="PatientTabView.fxml" />
+			</items>
+		</SplitPane>
+	</children>
 </VBox>
