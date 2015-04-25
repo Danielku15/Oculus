@@ -10,7 +10,6 @@ import org.hibernate.criterion.Property;
 import org.hibernate.search.FullTextSession;
 import org.hibernate.search.Search;
 import org.hibernate.search.query.dsl.QueryBuilder;
-
 /**
  * generic DAO (Data Access Object) superclass for all DAO classes
  * implements general functions for all DAO classes
@@ -112,8 +111,11 @@ abstract class GenericDAOImpl<T extends PersistentObject, PK extends Serializabl
 	 */
 	@Override
 	public void createOrUpdate(T object) {
-		// TODO: prüfen ob saveOrUpdate für alle Fälle geeignet ist!
-		_session.saveOrUpdate(object);
+		if (object.isCreation()) {
+			_session.saveOrUpdate(object);
+		} else {
+			_session.merge(object);
+		}
 	}
 
 	/**

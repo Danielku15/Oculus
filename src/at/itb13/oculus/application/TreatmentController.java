@@ -1,6 +1,4 @@
 package at.itb13.oculus.application;
-
-
 /**
  * 
  * Treatment controller interface

@@ -9,11 +9,10 @@ import java.io.OutputStream;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
-
 /**
  * 
- * ConfigFactory is a singleton class
- * The factory creates and saves configurations
+ * ConfigFactory is a singleton class.
+ * The factory instantiates and manages config objects.
  *
  */
 public class ConfigFactory {

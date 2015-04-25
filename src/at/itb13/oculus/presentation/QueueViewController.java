@@ -126,7 +126,7 @@ public class QueueViewController implements Serializable, Consumer<Boolean>{
 			@Override
 			public void changed(ObservableValue<? extends String> observable,
 					String oldValue, String newValue) {
-				String queueId = _queueController.getIdOfQueue(newValue);
+				String queueId = _queueController.getQueueIdByName(newValue);
 				setListView(_queueController.getQueueEntries(queueId));
 				_queueController.fetchQueue(newValue);
 				_queueController.activate();
@@ -145,7 +145,7 @@ public class QueueViewController implements Serializable, Consumer<Boolean>{
 		FXMLLoader loader = null;
 		Pane pane = null;
 		LangFacade facade = LangFacade.getInstance();
-		String queueId = _queueController.getIdOfQueue(_queueViewEmployeeSelection.getSelectionModel().getSelectedItem());
+		String queueId = _queueController.getQueueIdByName(_queueViewEmployeeSelection.getSelectionModel().getSelectedItem());
 		
 		try {
 			loader = new FXMLLoader(this.getClass().getResource(QUEUEENTRYVIEW),
@@ -212,16 +212,16 @@ public class QueueViewController implements Serializable, Consumer<Boolean>{
 	}
 	
 	public void openTreatment(String id){
-		_patientMainViewController.setNewTab(_queueController.getIdOfPatient(id));
+		_patientMainViewController.setNewTab(_queueController.getPatientIdByQueueEntryId(id));
 	}
 	
 	public void openPatient(String id){
-		_patientMainViewController.setNewTab(_queueController.getIdOfPatient(id));
+		_patientMainViewController.setNewTab(_queueController.getPatientIdByQueueEntryId(id));
 	}
 	
 	public void refresh(){
 		//TODO implement method
-		String queueId = _queueController.getIdOfQueue(_queueViewEmployeeSelection.getSelectionModel().getSelectedItem());
+		String queueId = _queueController.getQueueIdByName(_queueViewEmployeeSelection.getSelectionModel().getSelectedItem());
 		setListView(_queueController.getQueueEntries(queueId));
 	}
 	

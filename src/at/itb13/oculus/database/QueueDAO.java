@@ -6,7 +6,6 @@ import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 
 import at.itb13.oculus.model.Queue;
-
 /**
  * 
  * DAO (Data Access Object) of all {@link Queue}

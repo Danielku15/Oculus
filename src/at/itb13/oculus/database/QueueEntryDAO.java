@@ -7,7 +7,6 @@ import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 
 import at.itb13.oculus.model.QueueEntry;
-
 /**
  * 
  * DAO (Data Access Object) of all {@link QueueEntry}
@@ -31,7 +30,7 @@ class QueueEntryDAO extends GenericDAOImpl<QueueEntry, String> {
 	}
 	
 	public QueueEntry getById(String id){
-		List<QueueEntry> list = getByCriterion(Restrictions.like("ID", id));
+		List<QueueEntry> list = getByCriterion(Restrictions.eq("ID", id));
 		return (list.isEmpty()) ? null : list.get(0);
 	}
 }

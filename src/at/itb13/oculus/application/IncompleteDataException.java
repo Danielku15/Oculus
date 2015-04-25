@@ -1,8 +1,8 @@
 package at.itb13.oculus.application;
 
 import java.util.List;
-
 /**
+ * Is thrown when the systems expected input is incomplete or missing
  * @author Patrick
  *
  */

@@ -8,7 +8,6 @@ import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 
 import at.itb13.oculus.model.Appointment;
-
 /**
  * 
  * DAO (Data Access Object) of all {@link Appointment}
@@ -37,8 +36,8 @@ class AppointmentDAO extends GenericDAOImpl<Appointment, String> {
 	}
 	
 	/**
-	 * @see at.itb13.oculus.database.GenericDAOImpl#search(java.lang.String)
 	 * search of {@link Appointment} depending on parameter
+	 * @see at.itb13.oculus.database.GenericDAOImpl#search(java.lang.String)
 	 * @param criteria for the search
 	 * @return {@link List} of search results
 	 */

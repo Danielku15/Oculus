@@ -1,4 +1,5 @@
 package at.itb13.oculus.application;
+
 import java.util.List;
 import java.util.Map;
 
@@ -6,7 +7,6 @@ import at.itb13.oculus.database.PersistentObject;
 import at.itb13.oculus.search.FieldMap;
 import at.itb13.oculus.search.SearchResult;
 import at.itb13.oculus.search.Searchable;
-
 /**
  * 
  * Generic full text SearchController
@@ -19,8 +19,8 @@ class SearchControllerImpl<T extends PersistentObject & Searchable> extends Cont
 	
 	private Class<T> _type;
 	/**
+	 * Maps an indexed field to its associated value in the search result
 	 * @see SearchControllerImpl#_fieldMap
-	 * List of local indexes
 	 */
 	private FieldMap<T> _fieldMap;
 	private String _criteria;
@@ -70,9 +70,9 @@ class SearchControllerImpl<T extends PersistentObject & Searchable> extends Cont
 	}
 	
 	/**
+	 * loads the search results from database depending on {@link SearchControllerImpl#_searchResult}, {@link SearchControllerImpl#_fieldMap} and {@link SearchControllerImpl#_criteria}
 	 * @see at.itb13.oculus.application.SearchController#search()
 	 * @category MainMethod
-	 * loads the search results from database dependent from {@link SearchControllerImpl#_searchResult}, {@link SearchControllerImpl#_fieldMap} and {@link SearchControllerImpl#_criteria}
 	 */
 	@Override
 	public void search() {

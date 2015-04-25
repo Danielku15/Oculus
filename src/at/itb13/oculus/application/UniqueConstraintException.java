@@ -3,6 +3,7 @@ package at.itb13.oculus.application;
 import at.itb13.oculus.database.PersistentObject;
 
 /**
+ * Is thrown when a unique constraint has been violated
  * @author Patrick
  *
  */

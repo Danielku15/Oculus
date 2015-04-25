@@ -5,8 +5,6 @@ import java.util.Map;
 
 import at.itb13.oculus.database.PersistentObject;
 import at.itb13.oculus.search.Searchable;
-
-
 /**
  * 
  * Search controller interface

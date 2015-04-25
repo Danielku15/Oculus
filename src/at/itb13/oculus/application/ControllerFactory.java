@@ -5,7 +5,7 @@ import at.itb13.oculus.search.Searchable;
 /**
  * 
  * The ControllerFactory provides the access to controllers of the application layer.
- * His task is to instance controllers and returns the controller with limited methods defined in its interface.
+ * Its responsibility is to instantiate and return a controller with limited methods defined in its associated interface.
  *
  */
 public class ControllerFactory {
@@ -16,7 +16,7 @@ public class ControllerFactory {
 	
 	/**
 	 * The ControllerFactory is a singleton class.
-	 * @return singleton instance of class
+	 * @return singleton instance of ControllerFactory
 	 */
 	public static ControllerFactory getInstance() {
 		if(_controllerFactory == null) {
@@ -24,9 +24,10 @@ public class ControllerFactory {
 		}
 		return _controllerFactory;
 	}
+	
 	/**
 	 * Getter {@link ControllerFactory#getMainController()} 
-	 * @return {@link MainController}
+	 * @return {@link MainControllerImpl}
 	 * Getter {@link ControllerFactory#getPatientController()}
 	 * @return {@link PatientController}
 	 * Getter {@link ControllerFactory#getQueueController()}
@@ -40,7 +41,7 @@ public class ControllerFactory {
 	 */
 	
 	public MainController getMainController() {
-		return MainController.getInstance();
+		return MainControllerImpl.getInstance();
 	}
 
 	public PatientController getPatientController(){
@@ -62,6 +63,4 @@ public class ControllerFactory {
 	public <T extends PersistentObject & Searchable> SearchController<T> getSearchController(Class<T> type){
 		return new SearchControllerImpl<T>(type);
 	}
-	
-
 }

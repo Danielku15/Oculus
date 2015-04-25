@@ -13,7 +13,6 @@ import org.hibernate.HibernateException;
 import at.itb13.oculus.model.Address;
 import at.itb13.oculus.model.Gender;
 import at.itb13.oculus.model.Patient;
-
 /**
  * 
  * The PatientController business logic of patient operations
@@ -262,19 +261,18 @@ class PatientControllerImpl extends Controller implements PatientController {
 		return true;
 	}
 	
-	
 	/**
-	 * @see at.itb13.oculus.application.PatientController#activate()
 	 * update open {@link PatientController}
+	 * @see at.itb13.oculus.application.PatientController#activate()
 	 */
 	@Override
 	public void activate() {
-		MainController.getInstance().setPatientController(this);
+		MainControllerImpl.getInstance().setPatientController(this);
 	}
 	
 	/**
-	 * @see at.itb13.oculus.application.PatientController#createPatient()
 	 * creates new {@link Patient} object in {@link PatientControllerImpl#_patient}
+	 * @see at.itb13.oculus.application.PatientController#createPatient()
 	 */
 	@Override
 	public void createPatient() {
@@ -304,8 +302,8 @@ class PatientControllerImpl extends Controller implements PatientController {
 	}
 	
 	/**
-	 * @see at.itb13.oculus.application.PatientController#savePatient()
 	 * saves active patient of {@link PatientControllerImpl#_patient} variable
+	 * @see at.itb13.oculus.application.PatientController#savePatient()
 	 */
 	@Override
 	public synchronized void savePatient() throws IncompleteDataException, ObjectNotSavedException {

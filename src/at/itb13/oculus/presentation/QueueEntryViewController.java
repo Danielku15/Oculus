@@ -88,8 +88,8 @@ public class QueueEntryViewController implements Serializable, Initializable,
 	public QueueEntryViewController() {
 		_queueEntryController = ControllerFactory.getInstance()
 				.getQueueEntryController();
-		_queueID = _queueEntryController.getQueueId();
-		_patientID = _queueEntryController.getPatientId();
+		_queueID = _queueEntryController.getActiveQueueId();
+		_patientID = _queueEntryController.getActivePatientId();
 	}
 
 	/*

@@ -1,5 +1,4 @@
 package at.itb13.oculus.database;
-
 /**
  * 
  * Interface for PersistentObject
@@ -11,7 +10,9 @@ public interface PersistentObject {
 	
 	void setID(String id);
 	
-	int getVersion();
+	Integer getVersion();
 	
-	void setVersion(int version);
+	void setVersion(Integer version);
+	
+	boolean isCreation();
 }

@@ -34,7 +34,7 @@ import at.itb13.oculus.model.UserRole;
 import at.itb13.oculus.search.FieldMap;
 import at.itb13.oculus.search.SearchResult;
 import at.itb13.oculus.search.Searchable;
-
+import at.itb13.oculus.util.HibernateUtil;
 /**
  * 
  * Facade for database access
@@ -224,10 +224,6 @@ public class DBFacade implements AutoCloseable {
 	//getter
 	public List<ChangeLog> getChangeLogsGreaterThan(int number, int maxResults) {
 		return ((ChangeLogDAO) _changeLogDAO).getGreaterThan(number, maxResults);
-	}
-	
-	public List<Patient> getSearchedPatient(String name){
-		return ((PatientDAO) _patientDAO).getSearchedPatient(name);
 	}
 	
 	public Patient getPatientBySocialSecurityNumber(String socialSecurityNumber){

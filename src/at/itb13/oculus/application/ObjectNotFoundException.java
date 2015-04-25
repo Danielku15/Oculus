@@ -1,6 +1,6 @@
 package at.itb13.oculus.application;
-
 /**
+ * Is thrown if the object with the passed id was not found in the underlying persistence layer
  * @author Patrick
  *
  */

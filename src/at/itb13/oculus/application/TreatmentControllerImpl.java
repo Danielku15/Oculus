@@ -4,7 +4,6 @@ import org.hibernate.HibernateException;
 
 import at.itb13.oculus.model.Appointment;
 import at.itb13.oculus.model.Patient;
-
 /**
  * 
  * The TreatmentController operates with {@link Appointment}
@@ -46,17 +45,17 @@ public class TreatmentControllerImpl extends Controller implements TreatmentCont
 	}
 	
 	/**
-	 * @see at.itb13.oculus.application.TreatmentController#activate()
 	 * update open {@link TreatmentController}
+	 * @see at.itb13.oculus.application.TreatmentController#activate()
 	 */
 	@Override
 	public void activate() {
-		MainController.getInstance().setTreatmentController(this);
+		MainControllerImpl.getInstance().setTreatmentController(this);
 	}
 	
 	/**
-	 * @see at.itb13.oculus.application.TreatmentController#createAppointment()
 	 * creates a new {@link Appointment} objekt and saves it in the {@link TreatmentControllerImpl#_appointment} variable
+	 * @see at.itb13.oculus.application.TreatmentController#createAppointment()
 	 */
 	@Override
 	public void createAppointment() {
@@ -64,8 +63,8 @@ public class TreatmentControllerImpl extends Controller implements TreatmentCont
 	}
 	
 	/**
+	 * loads {@link Appointment} from database depending on the appointment id
 	 * @see at.itb13.oculus.application.TreatmentController#loadAppointment(java.lang.String)
-	 * loads {@link Appointment} from database depending on the parameter
 	 * @param appointmentId id of selected appointment
 	 */
 	@Override
@@ -87,8 +86,8 @@ public class TreatmentControllerImpl extends Controller implements TreatmentCont
 	}
 
 	/**
+	 * saves the {@link TreatmentControllerImpl#_appointment} in the database
 	 * @see at.itb13.oculus.application.TreatmentController#saveAppointment()
-	 * saves the {@link TreatmentControllerImpl#_appointment} into the database
 	 * {@code not implemented yet}
 	 */
 	@Override
@@ -96,10 +95,9 @@ public class TreatmentControllerImpl extends Controller implements TreatmentCont
 		// TODO method for saving the appointment into the database 
 	}
 
-
 	/**
-	 * @see at.itb13.oculus.application.TreatmentController#saveAppointment()
 	 * validates the data of {@link TreatmentControllerImpl#_appointment}
+	 * @see at.itb13.oculus.application.TreatmentController#saveAppointment()
 	 * @return {@link Boolean} valid or invalid
 	 * {@code not implemented yet}
 	 */

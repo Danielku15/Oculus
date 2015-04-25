@@ -22,7 +22,6 @@ import org.hibernate.search.annotations.TokenFilterDef;
 import org.hibernate.search.annotations.TokenizerDef;
 
 import at.itb13.oculus.util.IdGenerator;
-
 /**
  * 
  * implements {@link PersistentObject} and describes the search functionality and search algorithms
@@ -61,7 +60,7 @@ import at.itb13.oculus.util.IdGenerator;
 public abstract class PersistentObjectImpl implements PersistentObject {
 	
     private String _id = IdGenerator.createId();
-	private int _version;
+	private Integer _version = null;
 
 	@Id
 	@Column(name = "id", unique = true, nullable = false, length = 36)
@@ -75,12 +74,16 @@ public abstract class PersistentObjectImpl implements PersistentObject {
 
 	@Version
 	@Column(name = "version")
-    public int getVersion() {
+    public Integer getVersion() {
     	return _version;
     }
     
-    public void setVersion(int version) {
+    public void setVersion(Integer version) {
     	_version = version;
+    }
+    
+    public boolean isCreation() {
+    	return (_version == null);
     }
 
     @Override

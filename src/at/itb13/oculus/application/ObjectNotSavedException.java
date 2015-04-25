@@ -1,8 +1,8 @@
 package at.itb13.oculus.application;
 
 import at.itb13.oculus.database.PersistentObject;
-
 /**
+ * Is thrown when an exception occured while trying to save an object
  * @author Patrick
  *
  */

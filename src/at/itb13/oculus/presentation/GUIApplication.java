@@ -57,7 +57,7 @@ public class GUIApplication extends Application {
 	private void initScenes() {
 		for(MainView mainView : MainView.values()) {
 	    	try {
-	    		Parent root = FXMLLoader.load(GUIApplication.class.getResource(mainView.getFxmlFile()), LangFacade.getInstance().getResourceBundle());		 
+	    		Parent root = FXMLLoader.load(getClass().getResource(mainView.getFxmlFile()), LangFacade.getInstance().getResourceBundle());		 
 	    		_sceneMap.put(mainView, new Scene(root));			    	
 			} catch (IOException e) {
 				e.printStackTrace();

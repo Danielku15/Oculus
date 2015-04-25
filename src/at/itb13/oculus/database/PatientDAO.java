@@ -6,7 +6,6 @@ import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 
 import at.itb13.oculus.model.Patient;
-
 /**
  * 
  * DAO (Data Access Object) of all {@link Patient}
@@ -29,8 +28,8 @@ class PatientDAO extends GenericDAOImpl<Patient, String> {
 	}
 	
 	/**
-	 * @see at.itb13.oculus.database.GenericDAOImpl#search(java.lang.String)
 	 * search of {@link Patient} depending on parameter
+	 * @see at.itb13.oculus.database.GenericDAOImpl#search(java.lang.String)
 	 * @param criteria for the search
 	 * @return {@link List} of search results
 	 */
@@ -44,12 +43,6 @@ class PatientDAO extends GenericDAOImpl<Patient, String> {
 				"address.zip",
 				"address.city",
 				"address.country");
-	}
-
-	public List<Patient> getSearchedPatient(String name) {
-		List<Patient> list = getByCriterion(Restrictions.or(Restrictions.like("firstname", name), Restrictions.like("lastname", name), Restrictions.like("socialSecurityNumber", name)));
-		return list;
-//				return getByCriterion(Restrictions.or(Restrictions.like("firstname", name), Restrictions.like("lastname", name), Restrictions.like("socialSecurityNumber", name)));
 	}
 	
 	public Patient getBySocialSecurityNumber(String socialSecurityNumber) {

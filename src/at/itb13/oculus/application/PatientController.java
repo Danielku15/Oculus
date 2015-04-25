@@ -1,7 +1,6 @@
 package at.itb13.oculus.application;
 
 import java.time.LocalDate;
-
 /**
  * 
  * Patient controller interface
