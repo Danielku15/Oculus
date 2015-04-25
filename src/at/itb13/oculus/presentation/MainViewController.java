@@ -14,6 +14,12 @@ import javafx.scene.Node;
 import javafx.scene.layout.AnchorPane;
 import at.itb13.oculus.lang.LangFacade;
 
+/**
+ * 
+ * MainViewController saves all the main views and its status
+ * @category ViewController
+ *
+ */
 public class MainViewController implements Initializable  {
 
 	private static Map<MainViewContent, Node> _contentMap;

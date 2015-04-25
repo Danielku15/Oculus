@@ -11,6 +11,12 @@ import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import at.itb13.oculus.lang.LangFacade;
 
+/**
+ * 
+ * Controller for the main construct of this application
+ * @category ViewController
+ *
+ */
 public class GUIApplication extends Application {
 	
 	public static final String OCULUSTITEL = "Oculus";

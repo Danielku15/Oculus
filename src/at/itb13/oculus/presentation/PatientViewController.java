@@ -28,6 +28,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import at.itb13.oculus.application.ControllerFactory;
 import at.itb13.oculus.application.IncompleteDataException;
+import at.itb13.oculus.application.MainController;
 import at.itb13.oculus.application.ObjectNotFoundException;
 import at.itb13.oculus.application.ObjectNotSavedException;
 import at.itb13.oculus.application.PatientController;
@@ -36,15 +37,25 @@ import at.itb13.oculus.lang.LangFacade;
 import at.itb13.oculus.lang.LangKey;
 import at.itb13.oculus.util.GUIUtil;
 
+/**
+ * 
+ * Controller for the view of a patient
+ * @category ViewController
+ *
+ */
 public class PatientViewController implements Initializable{
 	
 	private static final Color COLOR_FAIL = Color.RED;
 	private static final Color COLOR_SUCCESS = Color.web("0x333333ff");
 	
-	//application - PatientViewController
+	/**
+	 * application - {@link PatientViewController}
+	 */
 	private PatientController _patientController;
 
-	//parent - PatientTabViewController
+	/**
+	 * parent - {@link PatientTabViewController}
+	 */
 	@FXML
 	private PatientTabViewController _patientTabViewController;
 	@FXML
@@ -114,14 +125,24 @@ public class PatientViewController implements Initializable{
     @FXML
     private TextField _cityInput;
     
+	/**
+	 * gets {@link PatientViewController} instance of {@link ControllerFactory}
+	 */
 	public PatientViewController() {
 		_patientController = ControllerFactory.getInstance().getPatientController();		
 	}
 
+	/**
+	 * activates {@link PatientController} on action into the {@link MainController}
+	 */
 	public void activate(){
 		_patientController.activate();
 	}
 	
+	/**
+	 * @see javafx.fxml.Initializable#initialize(java.net.URL, java.util.ResourceBundle)
+	 * initiates all the input fields with their events and properties
+	 */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		_patientTabViewController = PatientTabViewController.getInstance();
@@ -344,7 +365,10 @@ public class PatientViewController implements Initializable{
 		});
 	}
 	
-	// Event Listener on Button[#_saveButton].onAction
+	/**
+	 * Event Listener on Button[#_saveButton].onAction
+	 * @param event
+	 */
 	@FXML
 	public void save(ActionEvent event) {
 		CreatePatientTask createPatientTask = new CreatePatientTask();

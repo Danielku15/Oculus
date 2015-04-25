@@ -1,5 +1,10 @@
 package at.itb13.oculus.presentation;
 
+/**
+ * 
+ * Enumeration for all main views and its FXML files
+ *
+ */
 public enum MainViewContent {
 	PATIENTMAINVIEW("PatientMainView.fxml"),
 	TREATMENTMAINVIEW("TreatmentMainView.fxml"),

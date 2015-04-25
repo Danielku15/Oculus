@@ -11,6 +11,11 @@ import at.itb13.oculus.presentation.GUIApplication;
 import at.itb13.oculus.service.IndexService;
 import at.itb13.oculus.util.LoggerUtil;
 
+/**
+ * 
+ * main class which initializes the foundation of this application
+ *
+ */
 public class Main {
 	
 	private static IndexService _indexService;
@@ -58,7 +63,7 @@ public class Main {
 			Main.exit(3);
 		}
 		
-		//start index service
+		// start index service
 		_indexService = new IndexService();
 		_indexService.start();
 		

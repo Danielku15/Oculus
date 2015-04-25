@@ -24,17 +24,27 @@ import at.itb13.oculus.lang.LangFacade;
 import at.itb13.oculus.lang.LangKey;
 import at.itb13.oculus.model.Patient;
 
+/**
+ * 
+ * controller which controls all tabs and there functions
+ * @category ViewController
+ *
+ */
 public class PatientTabViewController implements Initializable {
 	
 	public static final String PATIENTVIEWXML = "PatientView.fxml";
 	public static final String SEARCHVIEW = "SearchView.fxml";
 	private static final int STAGEVIEWWIDTH = 830;
 	
-	//instance of PatientTabViewController
+	/**
+	 * instance of PatientTabViewController
+	 */
 	private static PatientTabViewController _instance;
 	private PatientMainViewController _patientMainViewController;
 	
-	//window - PatientSearchViewController
+	/**
+	 * window - PatientSearchViewController
+	 */
 	private Stage _searchViewStage;
 
 	@FXML
@@ -67,7 +77,11 @@ public class PatientTabViewController implements Initializable {
 		});
 	}
 	
-    // open new window if succeeds, if not set searchLabel red
+    /**
+     * 
+     * open new window if succeeds, if not set searchLabel red
+     * 
+     */
     void searchPatient() {	
 		LangFacade facade = LangFacade.getInstance();
 		_searchViewStage = new Stage();
@@ -100,12 +114,18 @@ public class PatientTabViewController implements Initializable {
 		_searchViewStage.show();
 	}
 
-	// Event Listener on Button[#_createNewPatientButton].onAction
+	/**
+	 * Event Listener on Button[#_createNewPatientButton].onAction
+	 * @param event
+	 */
 	@FXML
 	public void newTab(ActionEvent event) {
 		createNewTab();
 	}
 
+	/**
+	 * creates a new tab with the {@link PatientTabViewController} in it
+	 */
 	private void createNewTab(){
 		LangFacade facade = LangFacade.getInstance();
 		Tab tab = new Tab();
@@ -149,6 +169,10 @@ public class PatientTabViewController implements Initializable {
 
 	}
 	
+	/**
+	 * creates the concrete {@link PatientViewController} and his view by FXML
+	 * @param id
+	 */
 	public void createForm(String id){
 		LangFacade facade = LangFacade.getInstance();
 		FXMLLoader loader = null;

@@ -5,6 +5,12 @@ import java.util.ResourceBundle;
 
 import javafx.fxml.Initializable;
 
+/**
+ * 
+ * Controller for the main view of the calendar
+ * @category ViewController
+ *
+ */
 public class CalendarMainViewController implements Initializable  {
 
 	@Override

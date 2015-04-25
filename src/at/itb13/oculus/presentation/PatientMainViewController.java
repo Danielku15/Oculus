@@ -6,6 +6,12 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 
+/**
+ * 
+ * Main controller of the patient view
+ * @category ViewController
+ *
+ */
 public class PatientMainViewController implements Initializable  {
 	
 	@FXML
