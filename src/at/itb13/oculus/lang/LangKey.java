@@ -1,8 +1,9 @@
 package at.itb13.oculus.lang;
 
 /**
+ * 
  * Represents an entry in the language file that can be access with a specified key
- * @author Patrick
+ * 
  */
 public enum LangKey {
 	ID("id"),
