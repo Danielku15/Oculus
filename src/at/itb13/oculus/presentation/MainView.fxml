@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.effect.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+	fx:controller="at.itb13.oculus.presentation.MainViewController">
+	<children>
+		<AnchorPane fx:id="_content">
+			<children></children>
+		</AnchorPane>
+		<AnchorPane VBox.vgrow="ALWAYS">
+			<children>
+				<HBox alignment="BOTTOM_LEFT" AnchorPane.bottomAnchor="0.0"
+					AnchorPane.topAnchor="0.0">
+					<children>
+						<fx:include source="NavigationView.fxml" />
+					</children>
+				</HBox>
+			</children>
+		</AnchorPane>
+	</children>
+</VBox>
