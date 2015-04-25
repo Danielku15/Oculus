@@ -144,6 +144,28 @@ class QueueEntryControllerImpl extends Controller implements QueueEntryControlle
 	}
 	
 	/**
+	 * loads the id of queue by name from database
+	 * @see at.itb13.oculus.application.QueueEntryController#getQueueIdByName(java.lang.String)
+	 * @param queueName name of queue
+	 * @return id of queue
+	 */
+	public synchronized String getQueueIdByName(String queueName){
+		Queue queue = null;
+		try {
+			_database.beginTransaction();
+			queue = _database.getQueueByName(queueName);
+			_database.commitTransaction();
+		} catch (HibernateException e) {
+			_database.rollbackTransaction();
+			throw e;
+		}
+		if(queue != null) {
+			return queue.getID();
+		}
+		return null;
+	}
+	
+	/**
 	 * @see at.itb13.oculus.application.QueueEntryController#getActiveQueueId()
 	 * @return the selected queue id as {@link String} at {@link at.itb13.oculus.presentation.QueueViewController} from {@link MainControllerImpl} by controller {@link MainControllerImpl#getQueueController()}
 	 */

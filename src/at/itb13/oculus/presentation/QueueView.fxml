@@ -19,8 +19,8 @@
 			<children>
 				<HBox alignment="CENTER_RIGHT">
 					<children>
-						<Button fx:id="_queueViewAddQEntryButton" graphicTextGap="0.0"
-							mnemonicParsing="false" onAction="#loadQueueEntryView"
+						<Button fx:id="_addQueueEntryBtn" graphicTextGap="0.0"
+							mnemonicParsing="false" onAction="#showQueueEntryView"
 							textAlignment="CENTER">
 							<graphic>
 								<ImageView>
@@ -37,11 +37,11 @@
 				</HBox>
 				<AnchorPane>
 					<children>
-						<ComboBox fx:id="_queueViewEmployeeSelection"
+						<ComboBox fx:id="_queueCbx"
 							AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
 					</children>
 				</AnchorPane>
-				<ListView fx:id="_queueViewListView" VBox.vgrow="ALWAYS">
+				<ListView fx:id="_queueEntryListView" VBox.vgrow="ALWAYS">
 					<VBox.margin>
 						<Insets bottom="10.0" />
 					</VBox.margin>

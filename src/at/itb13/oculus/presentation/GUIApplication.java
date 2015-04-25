@@ -1,5 +1,7 @@
 package at.itb13.oculus.presentation;
 
+import java.io.IOException;
+
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -32,10 +34,7 @@ public class GUIApplication extends Application {
 			}
 		});
     	
-		FXMLLoader loader = new FXMLLoader(getClass().getResource(MAINVIEW), LangFacade.getInstance().getResourceBundle());
-		Parent mainView = (Parent) loader.load();
-		_mainViewController = loader.getController();
-		stage.setScene(new Scene(mainView));
+		initMainView(stage);
 		
         Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
         stage.setTitle(OCULUSTITEL);
@@ -48,6 +47,19 @@ public class GUIApplication extends Application {
 	
 	private void onClose() {
 		System.out.println("Stage closing");
+	}
+	
+	private void initMainView(Stage stage) {
+		FXMLLoader loader = null;
+		try {
+			loader = new FXMLLoader(getClass().getResource(MAINVIEW), LangFacade.getInstance().getResourceBundle());
+			Parent mainView = (Parent) loader.load();
+			_mainViewController = loader.getController();
+			_mainViewController.setContent(MainViewContent.PATIENTMAINVIEW);
+			stage.setScene(new Scene(mainView));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public static void setMainViewContent(MainViewContent content) {
