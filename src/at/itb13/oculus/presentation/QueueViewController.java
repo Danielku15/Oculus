@@ -34,7 +34,9 @@ import at.itb13.oculus.util.DateUtil;
 import at.itb13.oculus.util.GUIUtil;
 
 /**
- * @author Carola
+ * 
+ * The QueueViewController controls the view of one queue, but can be changed by a selection
+ * @category ViewController
  *
  */
 public class QueueViewController implements Serializable {
@@ -198,6 +200,10 @@ public class QueueViewController implements Serializable {
 	    }
 	}
 	
+	/**
+	 * this inner class contains important informations about queue entries
+	 * this objects are getting listed at the queue view
+	 */
 	private class QueueEntryObj {
 		
         private String _id;

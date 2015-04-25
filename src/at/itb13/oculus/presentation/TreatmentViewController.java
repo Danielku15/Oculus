@@ -12,7 +12,9 @@ import at.itb13.oculus.application.ObjectNotFoundException;
 import at.itb13.oculus.application.TreatmentController;
 
 /**
- * @author Manu
+ * 
+ * Controller for the view of treatments
+ * @category ViewController
  *
  */
 public class TreatmentViewController {

@@ -36,8 +36,8 @@ import at.itb13.oculus.lang.LangKey;
 import at.itb13.oculus.search.Searchable;
 
 /**
- * @author Patrick
- *
+ * This controller is responsible for the search view
+ * @category ViewController
  * @param <T>
  */
 public class SearchViewController<T extends PersistentObject & Searchable> {

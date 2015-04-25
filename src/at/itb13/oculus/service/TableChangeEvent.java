@@ -3,6 +3,9 @@ package at.itb13.oculus.service;
 import java.util.Date;
 import java.util.EventObject;
 
+/**
+ * Event for the {@link TableChangeListener}
+ */
 public class TableChangeEvent extends EventObject {
 	private static final long serialVersionUID = 342226452742973653L;
 	

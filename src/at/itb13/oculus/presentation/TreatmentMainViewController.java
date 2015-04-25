@@ -6,6 +6,11 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 
+/**
+ * 
+ * Controller for the main view of treatments
+ *
+ */
 public class TreatmentMainViewController implements Initializable  {
 	
 	@FXML

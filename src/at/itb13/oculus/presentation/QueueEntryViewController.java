@@ -30,7 +30,11 @@ import at.itb13.oculus.lang.LangKey;
 import at.itb13.oculus.model.Patient;
 import at.itb13.oculus.util.GUIUtil;
 /**
- * @author Manu
+ * 
+ * Controller from the view of the queue entries
+ * each view is responsible for his queue entry
+ * the view is a form where queue entries can be edited or created
+ * @category ViewController
  *
  */
 public class QueueEntryViewController implements Serializable, Initializable {

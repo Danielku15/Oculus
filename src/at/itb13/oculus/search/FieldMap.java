@@ -15,7 +15,6 @@ import at.itb13.oculus.database.PersistentObject;
 
 /**
  * Maps an indexed field to its associated value in the search result
- * @author Patrick
  * @param <T> class that is searched for
  */
 public class FieldMap<T extends PersistentObject & Searchable> {

@@ -2,6 +2,11 @@ package at.itb13.oculus.presentation;
 
 import java.util.EventObject;
 
+/**
+ * 
+ * this class defines the event for the {@link QueueEntryChosenListener}
+ *
+ */
 public class QueueEntryChosenEvent extends EventObject {
 	private static final long serialVersionUID = 2756292301739450558L;
 	

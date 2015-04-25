@@ -23,6 +23,12 @@ import at.itb13.oculus.lang.LangFacade;
 import at.itb13.oculus.lang.LangKey;
 import at.itb13.oculus.model.Appointment;
 
+/**
+ * 
+ * Controller of all the tabs of treatments
+ * @category ViewController
+ *
+ */
 public class TreatmentTabViewController implements Initializable {
 	
 	public static final String TREATMENTVIEWXML = "TreatmentView.fxml";

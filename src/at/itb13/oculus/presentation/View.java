@@ -1,5 +1,8 @@
 package at.itb13.oculus.presentation;
 
+/**
+ * Enumeration of views
+ */
 public enum View {
 	QUEUEENTRYVIEW("QueueEntryView.fxml"),
 	SEARCHVIEW("SearchView.fxml");

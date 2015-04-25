@@ -23,7 +23,6 @@ import at.itb13.oculus.search.Searchable;
 
 /**
  * Service that is responsible for updating the clients search indexes
- * @author Patrick
  *
  */
 public class IndexService {

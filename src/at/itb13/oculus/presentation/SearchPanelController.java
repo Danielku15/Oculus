@@ -13,6 +13,11 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import at.itb13.oculus.util.GUIUtil;
 
+/**
+ * This controller is not responsible for the search view
+ * It is responsible for the field, for quick access to the search view
+ *
+ */
 public class SearchPanelController {
 	
 	private static final int MINCRITERIALENGTH = 3;

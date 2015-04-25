@@ -9,9 +9,7 @@ import java.util.logging.Logger;
 import at.itb13.oculus.database.PersistentObject;
 
 /**
- * Represents the result of a search
- * @author Patrick
- * 
+ * Represents the result of a search 
  * @param <T> type of search result
  */
 public class SearchResult<T extends PersistentObject & Searchable> {
