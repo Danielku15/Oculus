@@ -598,3 +598,4 @@ public class PatientViewController implements Initializable{
 		this._patientTabViewController = _patientTabViewController;
 	}
 }
+
