@@ -2,11 +2,13 @@ package at.itb13.oculus.search;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
 
 import at.itb13.oculus.database.PersistentObject;
+import at.itb13.oculus.util.DateUtil;
 
 /**
  * Represents the result of a search 
@@ -61,7 +63,11 @@ public class SearchResult<T extends PersistentObject & Searchable> {
 			for(List<Method> methodList : methodMap.values()) {
 				Object object = invokeRecursive(methodList, searchable, 0);
 				if(object != null) {
-					result[i++] = object.toString();
+					if(object instanceof Date) {
+						result[i++] = DateUtil.format((Date) object);
+					} else {
+						result[i++] = object.toString();
+					}
 				} else {
 					result[i++] = "";
 				}

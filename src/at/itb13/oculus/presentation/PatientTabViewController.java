@@ -13,16 +13,15 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.Pane;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 import at.itb13.oculus.lang.LangFacade;
 import at.itb13.oculus.lang.LangKey;
 import at.itb13.oculus.model.Patient;
+import at.itb13.oculus.util.GUIUtil;
 
 /**
  * 
@@ -34,7 +33,6 @@ public class PatientTabViewController implements Initializable {
 	
 	public static final String PATIENTVIEWXML = "PatientView.fxml";
 	public static final String SEARCHVIEW = "SearchView.fxml";
-	private static final int STAGEVIEWWIDTH = 830;
 	
 	/**
 	 * instance of PatientTabViewController
@@ -83,22 +81,10 @@ public class PatientTabViewController implements Initializable {
      * open new window if succeeds, if not set searchLabel red
      * 
      */
-    void searchPatient() {	
-		LangFacade facade = LangFacade.getInstance();
-		_searchViewStage = new Stage();
-		FXMLLoader loader = null;		
+    void searchPatient() {
+    	_searchViewStage = new Stage();
+    	
 		SearchViewController<Patient> patientSearchViewController = new SearchViewController<Patient>(Patient.class);
-		
-		Pane pane = null;
-		try {
-			loader = new FXMLLoader(this.getClass().getResource(
-					SEARCHVIEW), facade.getResourceBundle());
-			loader.setController(patientSearchViewController);
-			pane = (Pane) loader.load();			
-		} catch (IOException ex) {
-			ex.printStackTrace();
-		}
-		
 		patientSearchViewController.addConsumer(new Consumer<String>() {
 			@Override
 			public void accept(String id) {
@@ -106,13 +92,9 @@ public class PatientTabViewController implements Initializable {
 			}
 		});
 		
+		GUIUtil.showView(patientSearchViewController, View.SEARCHVIEW, _searchViewStage);
 		patientSearchViewController.setCriteria(_searchPanelController.getCriteria());
 		patientSearchViewController.search();
-		_searchViewStage.initModality(Modality.APPLICATION_MODAL);
-		_searchViewStage.setWidth(STAGEVIEWWIDTH);
-		_searchViewStage.setTitle(facade.getString(LangKey.PATIENTSEARCHTITLE));
-		_searchViewStage.setScene(new Scene(pane));
-		_searchViewStage.show();
 	}
 
 	/**

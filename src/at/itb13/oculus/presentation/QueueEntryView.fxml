@@ -42,7 +42,7 @@
 						<TextField fx:id="_patientTbx" disable="false"
 							prefHeight="25.0" prefWidth="301.0" GridPane.columnIndex="1" />
 						<Button fx:id="_searchBtn" mnemonicParsing="false"
-							onAction="#searchPatient" prefHeight="25.0" prefWidth="42.0">
+							prefHeight="25.0" prefWidth="42.0">
 							<graphic>
 								<ImageView fitHeight="18.0" fitWidth="23.0"
 									pickOnBounds="true" preserveRatio="true">
@@ -57,8 +57,8 @@
 				<HBox alignment="TOP_CENTER" GridPane.columnIndex="1"
 					GridPane.rowIndex="1">
 					<children>
-						<ComboBox fx:id="_appointmentCbx" 
-							prefHeight="25.0" prefWidth="338.0" />
+						<ComboBox fx:id="_appointmentCbx" prefHeight="25.0"
+							prefWidth="338.0" />
 					</children>
 				</HBox>
 				<Label text="%queue" GridPane.rowIndex="5" />
@@ -71,8 +71,7 @@
 				<VBox alignment="CENTER_RIGHT" prefHeight="15.0" prefWidth="248.0"
 					GridPane.columnIndex="1" GridPane.rowIndex="5">
 					<children>
-						<ComboBox fx:id="_queueCbx"
-							prefHeight="25.0" prefWidth="357.0" />
+						<ComboBox fx:id="_queueCbx" prefHeight="25.0" prefWidth="357.0" />
 					</children>
 				</VBox>
 				<HBox alignment="BOTTOM_LEFT" prefHeight="100.0" prefWidth="200.0"

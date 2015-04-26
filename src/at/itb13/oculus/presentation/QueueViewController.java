@@ -22,7 +22,6 @@ import javafx.stage.Stage;
 import javafx.util.Callback;
 import at.itb13.oculus.application.ControllerFactory;
 import at.itb13.oculus.application.IncompleteDataException;
-import at.itb13.oculus.application.MainController;
 import at.itb13.oculus.application.ObjectNotSavedException;
 import at.itb13.oculus.application.QueueController;
 import at.itb13.oculus.lang.LangFacade;
@@ -116,12 +115,9 @@ public class QueueViewController implements Serializable {
 	
 	@FXML
 	public void showQueueEntryView(ActionEvent e) {
-		if(_queueEntryViewStage == null) {
-			_queueEntryViewStage = new Stage();
-			_queueEntryViewStage.setResizable(false);
-		}
+		_queueEntryViewStage = new Stage();
 		_queueController.activate();
-		QueueEntryViewController queueEntryViewController = GUIUtil.showView(View.QUEUEENTRYVIEW, _queueEntryViewStage, "Create Queue Entry");
+		QueueEntryViewController queueEntryViewController = GUIUtil.showView(View.QUEUEENTRYVIEW, _queueEntryViewStage);
 		queueEntryViewController.init(this);
 	}
 	

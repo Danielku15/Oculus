@@ -255,7 +255,6 @@ public class SearchViewController<T extends PersistentObject & Searchable> {
 	 */
 	@FXML
 	public void search() {
-		//GUIUtil.validate(_searchInputLabel, _searchController.setCriteria(_searchInput.getText()));
 		new Thread(new SearchTask()).start();
 	}
 	

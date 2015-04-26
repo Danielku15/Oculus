@@ -11,6 +11,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -72,7 +73,17 @@ public class QueueEntryViewController implements Serializable, Initializable {
 	}
 
 	@Override
-	public void initialize(URL url, ResourceBundle resBundle) {		
+	public void initialize(URL url, ResourceBundle resBundle) {
+		// event handler for patient search
+		EventHandler<ActionEvent> searchEventHandler = new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				openPatientSearchView();
+			}
+		};
+		_patientTbx.setOnAction(searchEventHandler);
+		_searchBtn.setOnAction(searchEventHandler);
+		
 		// add listener to fetch appointment when another appointment is selected
 		_appointmentCbx.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<AppointmentObj>() {
 			@Override
@@ -92,7 +103,7 @@ public class QueueEntryViewController implements Serializable, Initializable {
 				}
 			};
 		});
-		
+	
 		// get queues and fill combobox
 		getQueues();
 		
@@ -105,11 +116,6 @@ public class QueueEntryViewController implements Serializable, Initializable {
 		if(queueId != null) {
 			fetchQueue(queueId);
 		}
-	}
-
-	@FXML
-	public void searchPatient(ActionEvent event) {
-		openPatientSearchView();
 	}
 	
 	@FXML
@@ -187,14 +193,11 @@ public class QueueEntryViewController implements Serializable, Initializable {
 			for (String[] queue : queues) {
 				_queueCbx.getItems().add(new QueueObj(queue));
 			}
-			_queueCbx.getSelectionModel().selectFirst();
 		}
 	}
 
 	private void openPatientSearchView() {
-		if(_searchViewStage == null) {
-			_searchViewStage = new Stage();
-		}
+		_searchViewStage = new Stage();
 		
 		SearchViewController<Patient> patientSearchViewController = new SearchViewController<Patient>(Patient.class);
 		patientSearchViewController.addConsumer(new Consumer<String>() {
@@ -204,7 +207,7 @@ public class QueueEntryViewController implements Serializable, Initializable {
 			}
 		});
 		
-		GUIUtil.showView(patientSearchViewController, View.SEARCHVIEW, _searchViewStage, LangFacade.getInstance().getString(LangKey.PATIENTSEARCHTITLE));
+		GUIUtil.showView(patientSearchViewController, View.SEARCHVIEW, _searchViewStage);
 		patientSearchViewController.setCriteria(_patientTbx.getText());
 		patientSearchViewController.search();
 	}

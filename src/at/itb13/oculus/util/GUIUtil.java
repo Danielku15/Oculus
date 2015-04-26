@@ -8,6 +8,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.paint.Color;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import at.itb13.oculus.lang.LangFacade;
 import at.itb13.oculus.presentation.View;
@@ -31,35 +32,54 @@ public final class GUIUtil {
 		}
 	}
 	
-	public static <T> T showView(View view, Stage stage, String title) {
+	public static <T> T showView(View view, Stage stage) {
 		if((view != null) && (stage != null)) {
 			try {
 				FXMLLoader loader = new FXMLLoader(View.class.getResource(view.getFxmlFile()), LangFacade.getInstance().getResourceBundle());
 				Parent root = loader.load();
+				prepareStage(view, stage);
 				stage.setScene(new Scene(root));
-				stage.setTitle(title);
 				stage.show();
 				return loader.getController();
 			} catch (IOException e) {
 				LOGGER.severe(e.getMessage());
-				e.printStackTrace();
 			}
 		}
 		return null;
 	}
 	
-	public static <T> void showView(T controller, View view, Stage stage, String title) {
+	public static <T> void showView(T controller, View view, Stage stage) {
 		if((view != null) && (stage != null)) {
 			try {
 				FXMLLoader loader = new FXMLLoader(View.class.getResource(view.getFxmlFile()), LangFacade.getInstance().getResourceBundle());
 				loader.setController(controller);
 				Parent root = loader.load();
+				prepareStage(view, stage);
 				stage.setScene(new Scene(root));
-				stage.setTitle(title);
 				stage.show();
 			} catch (IOException e) {
 				LOGGER.severe(e.getMessage());
 			}
+		}
+	}
+	
+	private static void prepareStage(View view, Stage stage) {
+		String title = view.getTitle();
+		if(title != null) {
+			stage.setTitle(title);	
+		}
+		Integer width = view.getWidth();
+		if(width != null) {
+			stage.setWidth(width);
+		}
+		Integer height = view.getHeight();
+		if(height != null) {
+			stage.setHeight(height);
+		}
+		stage.setResizable(view.isResizeable());
+		Modality modality = view.getModality();
+		if(modality != null) {
+			stage.initModality(modality);
 		}
 	}
 }
