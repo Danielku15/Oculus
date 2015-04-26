@@ -10,3 +10,4 @@ log*.txt*
 *.lck
 /bin/
 /doc/*
+/dist/
