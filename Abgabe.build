@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project default="create_run_jar" name="Create Runnable Jar for Project Oculus with libraries in sub-folder">
+    <!--this file was created by Eclipse Runnable JAR Export Wizard-->
+    <!--ANT 1.7 is required                                        -->
+    <!--define folder properties-->
+    <property name="dir.buildfile" value="."/>
+    <property name="dir.workspace" value="${dir.buildfile}"/>
+    <property name="dir.jarfile" value="${dir.workspace}/dist"/>
+    <target name="create_run_jar">
+        <jar destfile="${dir.jarfile}/OculusTeamC.jar">
+            <manifest>
+                <attribute name="Main-Class" value="at.itb13.oculus.main.Main"/>
+                <attribute name="Class-Path" value=". OculusTeamC_lib/junit.jar OculusTeamC_lib/org.hamcrest.core_1.3.0.v201303031735.jar OculusTeamC_lib/antlr-2.7.7.jar OculusTeamC_lib/dom4j-1.6.1.jar OculusTeamC_lib/hibernate-commons-annotations-4.0.5.Final.jar OculusTeamC_lib/hibernate-core-4.3.8.Final.jar OculusTeamC_lib/hibernate-jpa-2.1-api-1.0.0.Final.jar OculusTeamC_lib/hibernate-search-engine-5.1.1.Final.jar OculusTeamC_lib/hibernate-search-orm-5.1.1.Final.jar OculusTeamC_lib/jandex-1.1.0.Final.jar OculusTeamC_lib/javassist-3.18.1-GA.jar OculusTeamC_lib/javax.servlet-api.jar OculusTeamC_lib/jboss-logging-3.1.3.GA.jar OculusTeamC_lib/jboss-logging-annotations-1.2.0.Beta1.jar OculusTeamC_lib/jboss-transaction-api_1.2_spec-1.0.0.Final.jar OculusTeamC_lib/jfxrt.jar OculusTeamC_lib/lucene-analyzers-common-4.10.4.jar OculusTeamC_lib/lucene-core-4.10.4.jar OculusTeamC_lib/mysql-connector-java-5.1.34-bin.jar OculusTeamC_lib/xml-apis-1.3.03.jar"/>
+            </manifest>
+            <fileset dir="${dir.workspace}/bin"/>
+            <zipfileset dir="${dir.workspace}/res" includes="**/*" prefix="res" />
+        </jar>
+        <delete dir="${dir.jarfile}/OculusTeamC_lib"/>
+        <mkdir dir="${dir.jarfile}/OculusTeamC_lib"/>
+        <mkdir dir="${dir.jarfile}/log"/>
+        <copy file="${dir.workspace}/lib/junit.jar" todir="${dir.jarfile}/OculusTeamC_lib"/>
+        <copy file="${dir.workspace}/lib/org.hamcrest.core_1.3.0.v201303031735.jar" todir="${dir.jarfile}/OculusTeamC_lib"/>
+        <copy file="${dir.workspace}/lib/antlr-2.7.7.jar" todir="${dir.jarfile}/OculusTeamC_lib"/>
+        <copy file="${dir.workspace}/lib/dom4j-1.6.1.jar" todir="${dir.jarfile}/OculusTeamC_lib"/>
+        <copy file="${dir.workspace}/lib/hibernate-commons-annotations-4.0.5.Final.jar" todir="${dir.jarfile}/OculusTeamC_lib"/>
+        <copy file="${dir.workspace}/lib/hibernate-core-4.3.8.Final.jar" todir="${dir.jarfile}/OculusTeamC_lib"/>
+        <copy file="${dir.workspace}/lib/hibernate-jpa-2.1-api-1.0.0.Final.jar" todir="${dir.jarfile}/OculusTeamC_lib"/>
+        <copy file="${dir.workspace}/lib/hibernate-search-engine-5.1.1.Final.jar" todir="${dir.jarfile}/OculusTeamC_lib"/>
+        <copy file="${dir.workspace}/lib/hibernate-search-orm-5.1.1.Final.jar" todir="${dir.jarfile}/OculusTeamC_lib"/>
+        <copy file="${dir.workspace}/lib/jandex-1.1.0.Final.jar" todir="${dir.jarfile}/OculusTeamC_lib"/>
+        <copy file="${dir.workspace}/lib/javassist-3.18.1-GA.jar" todir="${dir.jarfile}/OculusTeamC_lib"/>
+        <copy file="${dir.workspace}/lib/javax.servlet-api.jar" todir="${dir.jarfile}/OculusTeamC_lib"/>
+        <copy file="${dir.workspace}/lib/jboss-logging-3.1.3.GA.jar" todir="${dir.jarfile}/OculusTeamC_lib"/>
+        <copy file="${dir.workspace}/lib/jboss-logging-annotations-1.2.0.Beta1.jar" todir="${dir.jarfile}/OculusTeamC_lib"/>
+        <copy file="${dir.workspace}/lib/jboss-transaction-api_1.2_spec-1.0.0.Final.jar" todir="${dir.jarfile}/OculusTeamC_lib"/>
+        <copy file="${dir.workspace}/lib/jfxrt.jar" todir="${dir.jarfile}/OculusTeamC_lib"/>
+        <copy file="${dir.workspace}/lib/lucene-analyzers-common-4.10.4.jar" todir="${dir.jarfile}/OculusTeamC_lib"/>
+        <copy file="${dir.workspace}/lib/lucene-core-4.10.4.jar" todir="${dir.jarfile}/OculusTeamC_lib"/>
+        <copy file="${dir.workspace}/lib/mysql-connector-java-5.1.34-bin.jar" todir="${dir.jarfile}/OculusTeamC_lib"/>
+        <copy file="${dir.workspace}/lib/xml-apis-1.3.03.jar" todir="${dir.jarfile}/OculusTeamC_lib"/>
+        <copy file="${dir.workspace}/appointmentsearch.properties" todir="${dir.jarfile}"/>
+        <copy file="${dir.workspace}/config.properties" todir="${dir.jarfile}"/>
+        <copy file="${dir.workspace}/patientsearch.properties" todir="${dir.jarfile}"/>
+    </target>
+</project>
