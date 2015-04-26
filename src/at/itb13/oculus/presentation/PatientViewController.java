@@ -74,7 +74,7 @@ public class PatientViewController implements Initializable{
 	@FXML
 	private RadioButton _maleInput;
 	@FXML
-	private ToggleGroup _genderToggleGroup1;
+	private ToggleGroup _genderToggleGroup;
 	@FXML
 	private RadioButton _femaleInput;
 	@FXML
