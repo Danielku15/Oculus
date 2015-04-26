@@ -106,7 +106,7 @@ class QueueControllerImpl extends Controller implements QueueController {
 					Date start = appointment.getStart();
 					if(start != null) {
 						// appointment start
-						queueEntryStr[8] = start.toString();
+						queueEntryStr[8] = DateUtil.format(start);
 					}
 					queueEntryStr[9] = appointment.getID();
 				}
