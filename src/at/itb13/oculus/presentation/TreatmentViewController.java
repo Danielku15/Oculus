@@ -6,10 +6,14 @@
 package at.itb13.oculus.presentation;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
+import javafx.scene.control.Alert.AlertType;
 import at.itb13.oculus.application.ControllerFactory;
 import at.itb13.oculus.application.ObjectNotFoundException;
 import at.itb13.oculus.application.TreatmentController;
+import at.itb13.oculus.lang.LangFacade;
+import at.itb13.oculus.lang.LangKey;
 
 /**
  * 
@@ -21,7 +25,11 @@ public class TreatmentViewController {
 
 	//Application Controller
 	private TreatmentController _treatmentController;
-	
+	/**
+	 * parent - {@link TreatmentTabViewController}
+	 */
+	@FXML
+	private TreatmentTabViewController _treatmentTabViewController;
 	@FXML
 	private Label _firstnameLabel;
 	@FXML
@@ -37,16 +45,31 @@ public class TreatmentViewController {
 
 	public TreatmentViewController(){
 		_treatmentController = ControllerFactory.getInstance().getTreatmentController();
+		_treatmentTabViewController = TreatmentTabViewController.getInstance();
 	}
 	
 	public void loadAppointmentToForm(String appointmentId){
 		try {
 			_treatmentController.loadAppointment(appointmentId);
 		} catch (ObjectNotFoundException e) {
-			e.printStackTrace();
+			LangFacade facade = LangFacade.getInstance();
+			Alert errorDialog = new Alert(AlertType.ERROR);
+			errorDialog.setTitle(facade.getString(LangKey.ERRORDIALOGTITEL));
+			errorDialog.setHeaderText(facade.getString(LangKey.OBJECTNOTFOUNDHEADER));
+			errorDialog.setContentText(facade.getString(LangKey.OBJECTNOTFOUNDCONTENT) + " " + appointmentId);
+			errorDialog.showAndWait();
 		}
 		setDataToForm();
-		//setTabLabelNameIsUnmodified();
+		setTabLabelNameModified(false);
+	}
+	
+	private void setTabLabelNameModified(boolean isModified){
+		String tabLabelName = "";
+		if (isModified){
+			tabLabelName = "*";
+		}	
+		tabLabelName += _treatmentController.getPatientFirstname().charAt(0) + ". " + _treatmentController.getPatientLastname();
+		_treatmentTabViewController.setTabLabelName(tabLabelName);
 	}
 	
 	private void setDataToForm() {

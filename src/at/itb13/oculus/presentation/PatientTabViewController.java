@@ -144,7 +144,7 @@ public class PatientTabViewController implements Initializable {
 				.<PatientViewController> getController();
 		
 		tab.setUserData(patientViewController);
-		tab.setText(facade.getString(LangKey.NEWPATIENT));
+		tab.setText("*" + facade.getString(LangKey.NEWPATIENT));
 		tab.setContent(pane);
 		tab.setClosable(false);
 		
@@ -194,7 +194,7 @@ public class PatientTabViewController implements Initializable {
 		tab.setClosable(true);
 		_tabPane.getTabs().add(tab);
 		_tabPane.getSelectionModel().select(tab);
-		patientViewController.loadPatientToFormular(id);
+		patientViewController.loadPatientToForm(id);
 		
 		ObservableList<Tab> tabs = _tabPane.getTabs();
 
@@ -218,11 +218,23 @@ public class PatientTabViewController implements Initializable {
 		_tabPane.getSelectionModel().getSelectedItem().setText(name);
 	}
 	
+	public void setCurrentUserObject(PatientViewController patientViewController){
+		_tabPane.getSelectionModel().getSelectedItem().setUserData(patientViewController);
+	}
+	
 	public static PatientTabViewController getInstance(){
 		return _instance;
 	}
 	
 	public void init(PatientMainViewController patientMainViewController) {
+		setPatientMainViewController(patientMainViewController);
+	}
+
+	public PatientMainViewController getPatientMainViewController() {
+		return _patientMainViewController;
+	}
+
+	public void setPatientMainViewController(PatientMainViewController patientMainViewController) {
 		_patientMainViewController = patientMainViewController;
 	}
 }

@@ -37,7 +37,9 @@ public class TreatmentTabViewController implements Initializable {
 	
 	//window - PatientSearchViewController
 	private Stage _searchViewStage;
-
+	
+	private static TreatmentTabViewController _instance;
+	
 	@FXML
 	private SearchPanelController _searchPanelController;
 	@FXML
@@ -45,8 +47,9 @@ public class TreatmentTabViewController implements Initializable {
 	
 	@Override
 	public void initialize(URL url, ResourceBundle resBundle) {
+		_instance = this;
+		
 		_tabPane.getSelectionModel().clearSelection();
-		createNewTab();
 
 		_tabPane.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Tab>() {
 			@Override
@@ -62,6 +65,8 @@ public class TreatmentTabViewController implements Initializable {
 				searchTreatment();
 			}
 		});
+		
+		createNewTab();
 	}
 	
     // open new window if succeeds, if not set searchLabel red
@@ -118,7 +123,7 @@ public class TreatmentTabViewController implements Initializable {
 		
 		TreatmentViewController treatmentViewController = loader.<TreatmentViewController>getController();
 		tab.setUserData(treatmentViewController);
-		tab.setText(facade.getString(LangKey.NEWTREATMENT));
+		tab.setText("*" + facade.getString(LangKey.NEWTREATMENT));
 		tab.setContent(pane);
 		tab.setClosable(false);
 		
@@ -145,11 +150,19 @@ public class TreatmentTabViewController implements Initializable {
 		return treatmentViewController;
 	}
 	
+	public void setTabLabelName(String name){
+		_tabPane.getSelectionModel().getSelectedItem().setText(name);
+	}
+	
 	public void createForm(String id){
 		TreatmentViewController treatmentViewController = createNewTab();
 		treatmentViewController.loadAppointmentToForm(id);
 		if(_searchViewStage != null) {
 			_searchViewStage.close();
 		}
+	}
+	
+	public static TreatmentTabViewController getInstance(){
+		return _instance;
 	}
 }

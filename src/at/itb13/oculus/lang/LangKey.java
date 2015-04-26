@@ -48,9 +48,12 @@ public enum LangKey {
 	TREATMENTSEARCHTITLE("treatmentsearchtitle"),
 	INCOMPLETEDATAHEADER("incompletedataheader"),
 	ERRORDIALOGTITEL("errordialogtitel"),
-	OBJECTNOTSAVEDCONTENT("objectnotsavedcontent"),
+	INFORMATIONDIALOGTITEL("informationdialogtitel"),
 	OBJECTNOTSAVEDHEADER("objectnotsavedheader"),
-	NOSEARCHRESULT("nosearchresult");
+	OBJECTNOTSAVEDCONTENT("objectnotsavedcontent"),
+	NOSEARCHRESULT("nosearchresult"),
+	OBJECTNOTFOUNDHEADER("objectnotfoundheader"),
+	OBJECTNOTFOUNDCONTENT("objectnotfoundcontent");
 	
 	private String _key;
 	

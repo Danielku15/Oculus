@@ -91,7 +91,7 @@
 																	<children>
 																		<RadioButton fx:id="_maleInput" layoutX="134.0" layoutY="72.0" mnemonicParsing="false" selected="true" text="%male" GridPane.columnIndex="1" GridPane.rowIndex="2">
                                                          <toggleGroup>
-                                                            <ToggleGroup fx:id="_genderToggleGroup" />
+                                                            <ToggleGroup />
                                                          </toggleGroup>
 																			<font>
 																				<Font size="14.0" />
