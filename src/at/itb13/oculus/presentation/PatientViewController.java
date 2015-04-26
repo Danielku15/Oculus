@@ -3,6 +3,7 @@ package at.itb13.oculus.presentation;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
+
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.concurrent.Task;
@@ -43,6 +44,9 @@ import at.itb13.oculus.util.GUIUtil;
  */
 public class PatientViewController implements Initializable{
 	
+	private static final String MALE = "MALE";
+	private static final String FEMALE = "FEMALE";
+	
 	/**
 	 * application - {@link PatientViewController}
 	 */
@@ -74,7 +78,7 @@ public class PatientViewController implements Initializable{
 	@FXML
 	private RadioButton _maleInput;
 	@FXML
-	private ToggleGroup _genderToggleGroup1;
+	private ToggleGroup _genderToggleGroup;
 	@FXML
 	private RadioButton _femaleInput;
 	@FXML
@@ -201,7 +205,7 @@ public class PatientViewController implements Initializable{
 			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
 				if (!newValue){
 					setTabLabelNameModified(true);
-					setGender(_maleInput.getText().toUpperCase());
+					setGender(MALE);
 				}
 			}
 		});
@@ -211,7 +215,7 @@ public class PatientViewController implements Initializable{
 			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
 				if (!newValue){
 					setTabLabelNameModified(true);
-					setGender(_femaleInput.getText().toUpperCase());			
+					setGender(FEMALE);			
 				}
 			}
 		});
@@ -443,7 +447,7 @@ public class PatientViewController implements Initializable{
 		
 		String gender = _patientController.getGender();
 		if (gender != null) {
-			if(gender.equals("MALE")){
+			if(gender.equals(MALE)){
 				_maleInput.setSelected(true);
 			} else{
 				_femaleInput.setSelected(true);

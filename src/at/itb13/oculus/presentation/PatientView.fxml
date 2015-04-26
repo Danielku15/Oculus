@@ -90,12 +90,12 @@
 																<Group fx:id="_genderGroup" GridPane.columnIndex="1" GridPane.rowIndex="3">
 																	<children>
 																		<RadioButton fx:id="_maleInput" layoutX="134.0" layoutY="72.0" mnemonicParsing="false" selected="true" text="%male" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                                                         <toggleGroup>
-                                                            <ToggleGroup />
-                                                         </toggleGroup>
 																			<font>
 																				<Font size="14.0" />
 																			</font>
+                                                         <toggleGroup>
+                                                            <ToggleGroup fx:id="_genderToggleGroup" />
+                                                         </toggleGroup>
 																		</RadioButton>
 																		<RadioButton fx:id="_femaleInput" layoutX="237.0" layoutY="72.0" mnemonicParsing="false" selected="true" text="%female" toggleGroup="$_genderToggleGroup" GridPane.columnIndex="1" GridPane.rowIndex="2">
 																			<font>

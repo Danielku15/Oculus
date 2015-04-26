@@ -74,7 +74,7 @@ public class PatientTabViewController implements Initializable {
 				searchPatient();
 			}
 		});
-		
+
 		createNewTab();
 	}
 	
