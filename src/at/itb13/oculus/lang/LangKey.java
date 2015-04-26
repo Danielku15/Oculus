@@ -46,6 +46,7 @@ public enum LangKey {
 	START("start"),
 	PATIENTSEARCHTITLE("patientsearchtitle"),
 	TREATMENTSEARCHTITLE("treatmentsearchtitle"),
+	QUEUEENTRYTITLE("queueentrytitle"),
 	INCOMPLETEDATAHEADER("incompletedataheader"),
 	ERRORDIALOGTITEL("errordialogtitel"),
 	INFORMATIONDIALOGTITEL("informationdialogtitel"),

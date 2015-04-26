@@ -11,12 +11,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import org.hibernate.search.annotations.Analyze;
-import org.hibernate.search.annotations.DateBridge;
 import org.hibernate.search.annotations.Field;
-import org.hibernate.search.annotations.Index;
 import org.hibernate.search.annotations.Indexed;
-import org.hibernate.search.annotations.Resolution;
 
 import at.itb13.oculus.database.PersistentObjectImpl;
 import at.itb13.oculus.search.Searchable;
@@ -75,12 +71,11 @@ public class CalendarEntry extends PersistentObjectImpl implements java.io.Seria
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "start", length = 19)
-	@Field(index=Index.YES, analyze=Analyze.NO)
-    @DateBridge(resolution=Resolution.MINUTE)
+	@Field
 	public Date getStart() {
 		return _start;
 	}
-
+	
 	public void setStart(Date start) {
 		_start = start;
 	}

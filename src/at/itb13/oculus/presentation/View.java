@@ -8,7 +8,7 @@ import at.itb13.oculus.lang.LangKey;
  * Enumeration of views
  */
 public enum View {
-	QUEUEENTRYVIEW("QueueEntryView.fxml", null, null, null, false, Modality.APPLICATION_MODAL),
+	QUEUEENTRYVIEW("QueueEntryView.fxml", LangKey.QUEUEENTRYTITLE, null, null, false, Modality.APPLICATION_MODAL),
 	SEARCHVIEW("SearchView.fxml", LangKey.PATIENTSEARCHTITLE, 830, null, true, Modality.APPLICATION_MODAL);
 	
 	private String _fxmlFile;

@@ -1,5 +1,6 @@
 package at.itb13.oculus.util;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -28,5 +29,9 @@ public final class DateUtil {
 			return SDF.format(date);
 		}
 		return null;
+	}
+	
+	public static Date parse(String dateStr) throws ParseException {
+		return SDF.parse(dateStr);
 	}
 }

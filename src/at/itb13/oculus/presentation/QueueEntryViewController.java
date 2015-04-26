@@ -26,8 +26,6 @@ import at.itb13.oculus.application.MainController;
 import at.itb13.oculus.application.ObjectNotFoundException;
 import at.itb13.oculus.application.ObjectNotSavedException;
 import at.itb13.oculus.application.QueueEntryController;
-import at.itb13.oculus.lang.LangFacade;
-import at.itb13.oculus.lang.LangKey;
 import at.itb13.oculus.model.Patient;
 import at.itb13.oculus.util.GUIUtil;
 /**
