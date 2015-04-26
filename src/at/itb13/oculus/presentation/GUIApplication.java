@@ -53,6 +53,7 @@ public class GUIApplication extends Application {
 	
 	private void onClose() {
 		System.out.println("Stage closing");
+		System.exit(0);
 	}
 	
 	private void initMainView(Stage stage) {
